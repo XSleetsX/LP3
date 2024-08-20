@@ -1,0 +1,45 @@
+package lab01;
+import java.util.Random;
+
+public class prop3 {
+	public static void main(String[] args) {
+		Random random = new Random();
+		int[] frec1 = new int[20000];
+		int[] frec2 = new int[20000];
+		int[] frec3 = new int[20000];
+		int[] frec4 = new int[20000];
+		int[] frec5 = new int[20000];
+		int[] frec6 = new int[20000];
+		int cont = 0;
+		while (cont < 20000) {
+			int num = random.nextInt(6) + 1;
+			switch (num) {
+				case 0:{
+					frec1[num]++;
+					break;
+				}
+				case 1:{
+					frec2[num]++;
+					break;
+				}
+				case 2:{
+					frec3[num]++;
+					break;
+				}
+				case 3:{
+					frec4[num]++;
+					break;
+				}
+				case 4:{
+					frec5[num]++;
+					break;
+				}
+				case 5:{
+					frec6[num]++;
+					break;
+				}
+			}
+			cont ++;
+		}
+	}
+}
