@@ -41,5 +41,11 @@ public class prop3 {
 			}
 			cont ++;
 		}
+		System.out.println("N° cara 1: " + frec1.lenght());
+		System.out.println("N° cara 2: " + frec2.lenght());
+		System.out.println("N° cara 3: " + frec3.lenght());
+		System.out.println("N° cara 4: " + frec4.lenght());
+		System.out.println("N° cara 5: " + frec5.lenght());
+		System.out.println("N° cara 6: " + frec6.lenght());
 	}
 }
