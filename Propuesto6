@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class prop6 {
 	public static void main (String[] args) {
-		int horas, minutos, segundos;
+		int horas, minutos, segundos, total;
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Ingrese el número de horas: ");
 		horas = scan.nextInt();
@@ -11,7 +11,7 @@ public class prop6 {
 		minutos = scan.nextInt();
 		System.out.println("Ingrese el número de segundos: ");
 		segundos = scan.nextInt();
-		
-		
+		total = (horas * 3600) + (minutos * 60) + segundos;
+		System.out.println("Los segundos totales son: " + total);
 	}
 }
