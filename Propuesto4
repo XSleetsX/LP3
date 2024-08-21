@@ -1,1 +1,32 @@
+package LP3;
+import java.util.Scanner;
+
+public class prop4 {
+	public static float mayor(float num1, float num2, float num3) {
+		float mayor = 0;
+		if (num1 > num2 && num1 > num3) {
+			mayor = num1;
+		} else {
+			if (num2 > num1 && num2 > num3) {
+				mayor = num2;
+			} else {
+				if (num3 > num1 && num3 > num2) {
+					mayor = num3;
+				}
+			}
+		}
+		return mayor;
+	}
+	public static void main (String[] args) {
+		float n1,n2,n3;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Ingrese el primer número decimal: ");
+		n1 = scan.nextFloat();
+		System.out.println("Ingrese el segundo número decimal: ");
+		n2 = scan.nextFloat();
+		System.out.println("Ingrese el tercer número decimal: ");
+		n3 = scan.nextFloat();
+		System.out.println("El número mayor es: " + mayor(n1, n2, n3));
+	}
+}
 
