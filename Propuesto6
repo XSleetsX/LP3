@@ -1,0 +1,17 @@
+package LP3;
+import java.util.Scanner;
+
+public class prop6 {
+	public static void main (String[] args) {
+		int horas, minutos, segundos;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Ingrese el número de horas: ");
+		horas = scan.nextInt();
+		System.out.println("Ingrese el número de minutos: ");
+		minutos = scan.nextInt();
+		System.out.println("Ingrese el número de segundos: ");
+		segundos = scan.nextInt();
+		
+		
+	}
+}
