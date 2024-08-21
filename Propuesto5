@@ -1,0 +1,19 @@
+package LP3;
+import java.util.Scanner;
+
+public class prop5 {
+	public static void main (String[] args) {
+		double num_horas, cargo;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Ingrese el número de horas: ");
+		num_horas = scan.nextInt();
+		if (num_horas < 19) {
+			cargo = 3.0 + ((num_horas - 1) * 0.50);
+			System.out.println("El cargo es: " + cargo + " soles");
+		} else {
+			if (num_horas >= 19) {
+				System.out.println("El cargo es: 12 soles");
+			}
+		}
+	}
+}
