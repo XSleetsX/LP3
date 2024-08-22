@@ -1,0 +1,87 @@
+//Clase
+package lab02;
+
+public class Coche {
+	public String color;
+	private String modelo;
+	private int velocidadMaxima;
+	private int potenciaMotor;
+	private boolean enMarcha;
+	
+	private String marca;
+	private int anio_fabric;
+	private double precio;
+	
+	public Coche(String modelo, int velocidadMaxima, int potenciaMotor) {
+		this.modelo = modelo;
+		this.velocidadMaxima = velocidadMaxima;
+		this.potenciaMotor = potenciaMotor;
+		this.enMarcha = false;
+	}
+	
+	public Coche() {}
+	
+	public Coche(String marca, String modelo, int anio_fabric, double precio) {
+		this.marca = marca;
+		this.modelo = modelo;
+		this.anio_fabric = anio_fabric;
+		this.precio = precio;
+		
+	}
+	
+	public void aplicarDescuento() {
+		if (anio_fabric < 2010) {
+			precio = precio * 0.8;
+			System.out.println("Se aplicó el descuento");
+		} else {
+			System.out.println("El carro no aplica para el descuento");
+		}
+	}
+	
+	public void acelerar() {
+		if (enMarcha) {
+			System.out.println("El coche " + modelo + " está acelerando.");
+		} else {
+			System.out.println("Primero enciende el coche.");
+		}
+	}
+	
+	public void frenar() {
+		if (enMarcha) {
+			System.out.println("El coche " + modelo + " esta frenando.");
+		} else {
+			System.out.println("El coche esta apagado, no se puede frenar.");
+		}
+	}
+	
+	public void encender() {
+		enMarcha = true;
+		System.out.println("El coche " + modelo + " se ha encendido.");
+	}
+		
+	public void apagar() {
+		enMarcha = false;
+		System.out.println("El coche " + modelo + " se ha apagado.");
+	}
+	
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+	
+	public String getModelo() {
+		return modelo;
+	}
+}
+
+//Main
+package lab02;
+
+public class Prueba {
+	public static void main(String[] args) {
+		Coche coche1 = new Coche("Chevrolet", "Camaro", 2011, 50000);
+		coche1.aplicarDescuento();
+		Coche coche2 = new Coche("Ferrari", "California", 2008, 50000);
+		coche2.aplicarDescuento();
+	}
+
+}
