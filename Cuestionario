@@ -1,1 +1,7 @@
+package lab01;
 
+public class cuest {
+	public static void main(String[] args) {
+    System.out.println("Bienvenido a Java, Luis Ricardo Arizaga Usnayo");
+  }
+}
