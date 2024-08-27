@@ -1,34 +1,60 @@
-//Clase
+/*Clase*/
 package lab02;
 
 public class Coche {
-	public String color;
-	private String modelo;
-	private int velocidadMaxima;
-	private int potenciaMotor;
-	private boolean enMarcha;
-	
+	/*Atributos*/
 	private String marca;
+	private String modelo;
 	private int anio_fabric;
 	private double precio;
+	private boolean enMarcha;
 	
-	public Coche(String modelo, int velocidadMaxima, int potenciaMotor) {
-		this.modelo = modelo;
-		this.velocidadMaxima = velocidadMaxima;
-		this.potenciaMotor = potenciaMotor;
+	/*Constructores*/
+	public Coche() {
+		this.marca = " ";
+		this.modelo = " ";
+		this.anio_fabric = 0;
+		this.precio = 0.0;
 		this.enMarcha = false;
-	}
-	
-	public Coche() {}
-	
+		System.out.println("Se creó un objeto de Coche.");
+	}	
 	public Coche(String marca, String modelo, int anio_fabric, double precio) {
 		this.marca = marca;
 		this.modelo = modelo;
 		this.anio_fabric = anio_fabric;
 		this.precio = precio;
-		
+		System.out.println("Se creó un objeto de Coche.");
 	}
 	
+	/*Setters*/
+	public void setMarca(String marc) {
+		marca = marc;
+	}
+	public void setModelo(String mod) {
+		modelo = mod;
+	}
+	public void setAnioFabric(int anfa) {
+		anio_fabric = anfa;
+	}
+	public void setPrecio(double pre) {
+		precio = pre;
+	}
+	
+	/*Getters*/
+	public String getMarca() {
+		return marca;
+	}
+	public String getModelo() {
+		return modelo;
+	}
+	public int getAnioFabric() {
+		return anio_fabric;
+	}
+	public double getPrecio() {
+		return precio;
+	}
+	
+	/*Métodos*/
 	public void aplicarDescuento() {
 		if (anio_fabric < 2010) {
 			precio = precio * 0.8;
@@ -40,7 +66,7 @@ public class Coche {
 	
 	public void acelerar() {
 		if (enMarcha) {
-			System.out.println("El coche " + modelo + " está acelerando.");
+			System.out.println("El coche " + marca + " " + modelo + " está acelerando.");
 		} else {
 			System.out.println("Primero enciende el coche.");
 		}
@@ -48,7 +74,7 @@ public class Coche {
 	
 	public void frenar() {
 		if (enMarcha) {
-			System.out.println("El coche " + modelo + " esta frenando.");
+			System.out.println("El coche " + marca + " " + modelo + " esta frenando.");
 		} else {
 			System.out.println("El coche esta apagado, no se puede frenar.");
 		}
@@ -56,32 +82,33 @@ public class Coche {
 	
 	public void encender() {
 		enMarcha = true;
-		System.out.println("El coche " + modelo + " se ha encendido.");
+		System.out.println("El coche " + marca + " " + modelo + " se ha encendido.");
 	}
 		
 	public void apagar() {
 		enMarcha = false;
-		System.out.println("El coche " + modelo + " se ha apagado.");
-	}
-	
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-	
-	public String getModelo() {
-		return modelo;
+		System.out.println("El coche " + marca + " " + modelo + " se ha apagado.");
 	}
 }
 
-//Main
+/*Main*/
 package lab02;
 
-public class Prueba {
+public class Main {
 	public static void main(String[] args) {
-		Coche coche1 = new Coche("Chevrolet", "Camaro", 2011, 50000);
-		coche1.aplicarDescuento();
-		Coche coche2 = new Coche("Ferrari", "California", 2008, 50000);
-		coche2.aplicarDescuento();
+		Coche cocheDeportivo = new Coche("Porsche", "911", 2011, 50000.0);
+		cocheDeportivo.encender();
+		cocheDeportivo.acelerar();
+		cocheDeportivo.frenar();
+		cocheDeportivo.apagar();
+		cocheDeportivo.aplicarDescuento();
+		
+		Coche cocheTodoTerreno = new Coche("Toyota", "Land Cruiser", 2008, 50000.0);
+		cocheTodoTerreno.encender();
+		cocheTodoTerreno.acelerar();
+		cocheTodoTerreno.frenar();
+		cocheTodoTerreno.apagar();
+		cocheTodoTerreno.aplicarDescuento();
 	}
-
 }
+
