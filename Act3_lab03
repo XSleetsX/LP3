@@ -34,3 +34,33 @@ public class Juego{
 		System.out.println("Daño de arco: " + bow.calculateDamage(5));
 	}
 }
+
+package lab03;
+
+public class Sword extends Weapon implements DamageCalculator {
+	private int level;
+	
+	public Sword(String type, int baseDamage, int level) {
+		super(type, baseDamage);
+		this.level = level;
+	}
+	
+	public double calculateDamage(int level) {
+		return getBaseDamage() + (level * 5);
+	}
+}
+
+package lab03;
+
+public class Bow extends Weapon implements DamageCalculator{
+	private int level;
+	
+	public Bow(String type, int baseDamage, int level) {
+		super(type, baseDamage);
+		this.level = level;
+	}
+	
+	public double calculateDamage(int level) {
+		return getBaseDamage() + (level * 3);
+	}
+}
