@@ -1,0 +1,82 @@
+package lab02;
+public class Coche {
+	/*Atributos*/
+	private String marca;
+	private String modelo;
+	private int anio_fabric;
+	private double precio;
+	private boolean enMarcha;
+	/*Constructores*/
+	public Coche() {
+		this.marca = " ";
+		this.modelo = " ";
+		this.anio_fabric = 0;
+		this.precio = 0.0;
+		this.enMarcha = false;
+		System.out.println("Se creó un objeto de Coche.");
+	}	
+	public Coche(String marca, String modelo, int anio_fabric, double precio) {
+		this.marca = marca;
+		this.modelo = modelo;
+		this.anio_fabric = anio_fabric;
+		this.precio = precio;
+		System.out.println("Se creó un objeto de Coche.");
+	}
+	/*Setters*/
+	public void setMarca(String marc) {
+		marca = marc;
+	}
+	public void setModelo(String mod) {
+		modelo = mod;
+	}
+	public void setAnioFabric(int anfa) {
+		anio_fabric = anfa;
+	}
+	public void setPrecio(double pre) {
+		precio = pre;
+	}
+	/*Getters*/
+	public String getMarca() {
+		return marca;
+	}
+	public String getModelo() {
+		return modelo;
+	}
+	public int getAnioFabric() {
+		return anio_fabric;
+	}
+	public double getPrecio() {
+		return precio;
+	}
+	/*Métodos*/
+	public void aplicarDescuento() {
+		if (anio_fabric < 2010) {
+			precio = precio * 0.8;
+			System.out.println("Se aplicó el descuento");
+		} else {
+			System.out.println("El carro no aplica para el descuento");
+		}
+	}
+	public void acelerar() {
+		if (enMarcha) {
+			System.out.println("El coche " + marca + " " + modelo + " está acelerando.");
+		} else {
+			System.out.println("Primero enciende el coche.");
+		}
+	}
+	public void frenar() {
+		if (enMarcha) {
+			System.out.println("El coche " + marca + " " + modelo + " esta frenando.");
+		} else {
+			System.out.println("El coche esta apagado, no se puede frenar.");
+		}
+	}
+	public void encender() {
+		enMarcha = true;
+		System.out.println("El coche " + marca + " " + modelo + " se ha encendido.");
+	}
+	public void apagar() {
+		enMarcha = false;
+		System.out.println("El coche " + marca + " " + modelo + " se ha apagado.");
+	}
+}
