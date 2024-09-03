@@ -1,0 +1,51 @@
+package lab03;
+
+public class Entity {
+	private int life;
+	private double baseDamage;
+	private String name;
+		
+	public Entity(int life, double baseDamage, String name) {
+		this.life = life;
+		this.baseDamage = baseDamage;
+		this.name = name;
+	}
+	
+	public void setLife(int life) { this.life = life; }
+	public void setBaseDamage(int baseDamage) { this.baseDamage = baseDamage; }
+	public void setName(String name) { this.name = name; }
+	
+	public void makeSound() {
+		System.out.println("Sound");
+	}
+}
+
+package lab03;
+
+public class Player extends Entity, Weapon {
+	private double speed;
+	private int level;
+	
+	public Player(int life, double baseDamage, String name, double speed, int level) {
+		super(life, baseDamage, name);
+		this.speed = speed;
+		this.level = level;
+	}
+	
+	public void makeSound() {
+		System.out.println("El tamaño no lo es todo.");
+	}
+}
+
+package lab03;
+
+public class Esqueleto extends Entity, Weapon {
+	
+	public Esqueleto(int life, double baseDamage, String name) {
+		super(life, baseDamage, name);
+	}
+	
+	public void makeSound() {
+		System.out.println("Bone sounds.");
+	}
+}
