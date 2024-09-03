@@ -80,3 +80,22 @@ public class Coche {
 		System.out.println("El coche " + marca + " " + modelo + " se ha apagado.");
 	}
 }
+
+package lab02;
+public class Main {
+	public static void main(String[] args) {
+		Coche cocheDeportivo = new Coche("Porsche", "911", 2011, 50000.0);
+		cocheDeportivo.encender();
+		cocheDeportivo.acelerar();
+		cocheDeportivo.frenar();
+		cocheDeportivo.apagar();
+		cocheDeportivo.aplicarDescuento();
+		
+		Coche cocheTodoTerreno = new Coche("Toyota", "Land Cruiser", 2008, 50000.0);
+		cocheTodoTerreno.encender();
+		cocheTodoTerreno.acelerar();
+		cocheTodoTerreno.frenar();
+		cocheTodoTerreno.apagar();
+		cocheTodoTerreno.aplicarDescuento();
+	}
+}
