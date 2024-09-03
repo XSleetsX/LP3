@@ -1,0 +1,150 @@
+/*Clase Cuenta*/
+package LAB02;
+public class Cuenta {
+  private int numero;
+  private double saldo;
+  public Cuenta(int numero, double saldo) {
+      this.numero = numero;
+      this.saldo = saldo;
+  }
+  public Cuenta(int numero){
+      this (numero,0);
+  }
+  public void setNumero(int numero){ this.numero = numero; }
+  public void setSaldo(double saldo){ this.saldo = saldo; }
+  public int getNumero(){ return numero; }
+  public double getSaldo(){ return saldo; }
+  public void depositar(double monto) { saldo += monto; }
+  public void retirar(double monto) { saldo -= monto; }
+  public void consultar() {}
+  public String toString(){
+      return "Número: " + numero + "\nSaldo: " + saldo;
+  }
+}
+
+
+/*Clase CuentaAhorros*/
+package LAB02;
+public class CuentaAhorros extends Cuenta {
+  private double tasa_interes;
+  private double min_saldo;
+  public CuentaAhorros(int numero, double saldo, double tasa_interes, double min_saldo) {
+      super(numero, saldo);
+      this.tasa_interes = tasa_interes;
+      this.min_saldo = min_saldo;
+  }
+ 
+  public void setTasaInteres(double interes) {
+	   this.tasa_interes = interes;
+  }
+  public void retirar(int numero, double monto) {
+      super.retirar(monto);
+      double saldo = getSaldo();
+      if (saldo < min_saldo) {
+   	   min_saldo = saldo;
+      }
+  }
+  public void consultar(){
+	   System.out.println("Número de cuenta: " + getNumero()
+			+ "\nSaldo: " + getSaldo()
+			+ "\nTasa de interés: " + tasa_interes
+			+ "\nSaldo mínimo: " + min_saldo);
+	   double interes = min_saldo * tasa_interes / 100;
+	   depositar(interes);
+	   min_saldo = getSaldo();
+  }
+}
+
+
+/*Clase CuentaCorriente*/
+package LAB02;
+public class CuentaCorriente extends Cuenta{
+  private int num_retiros;
+  public CuentaCorriente(int numero, double saldo) {
+      super(numero, saldo);
+      this.num_retiros = 0;
+  }
+ 
+  public void retirar(int numero, double importe) {
+      final int libre_retiros = 3;
+      final double tarifa_transaccion = 3.5;
+      super.retirar(importe);
+      num_retiros ++;
+      if (num_retiros > libre_retiros) {
+   	   super.retirar(tarifa_transaccion);
+      }
+  }
+  public void consultar(){
+	   System.out.println("Número de cuenta: " + getNumero()
+	   						+ "\nSaldo: " + getSaldo()
+	   						+ "\nNúmero de retiros: " + num_retiros);
+  }
+}
+
+
+/*Clase AppBanco*/
+package LAB02;
+import java.util.Scanner;
+public class AppBanco {
+	public static void main(String[] args) {
+		Cuenta[] cuentas = {new CuentaAhorros(1001, 5000, 0.03, 1000), new CuentaAhorros(1002, 10000, 0.04, 1000)
+							, new CuentaAhorros(1003, 15000, 0.05, 1000), new CuentaAhorros(1004, 20000, 0.06, 1000)
+							, new CuentaCorriente(1005, 1000), new CuentaCorriente(1006, 2000)
+							, new CuentaCorriente(1007, 3000), new CuentaCorriente(1008, 4000)};
+		Scanner scan = new Scanner(System.in);
+		boolean cont = false;
+		while (!cont) {
+			System.out.println("1. Depositar\n2. Retirar\n3. Consultar\n4. Salir");
+			int opc = scan.nextInt();
+			while (opc < 1 || opc > 5) {
+				System.out.println("Opción no válida.\nIngrese nuevamente: ");
+				opc = scan.nextInt();
+			}
+			if (opc == 1 || opc == 2) {
+				System.out.println("Ingrese el número de cuenta: ");
+				int num = 0;
+				boolean encontrado = false;
+				do {
+					num = scan.nextInt();
+					for (int i = 0; i < cuentas.length; i++) {
+						if (cuentas[i].getNumero() == num) {
+							encontrado = true;
+							break;
+						}
+					}
+					if (encontrado == false) {
+						System.out.println("Número de cuenta no encontrado.\nIngrese nuevamente: ");
+					}
+				} while (!encontrado);
+				System.out.println("Ingrese el monto: ");
+				double monto = scan.nextDouble();
+				while (monto < 1) {
+					System.out.println("Monto no válido, ingrese un monto mayor a cero.");
+					monto = scan.nextDouble();
+				}
+				if (opc == 1) {
+					for (int i = 0; i < cuentas.length; i++) {
+						if (cuentas[i].getNumero() == num) {
+							cuentas[i].depositar(monto);
+							System.out.println("Saldo: " + cuentas[i].getSaldo());
+						}
+					}	
+				} else {
+					for (int i = 0; i < cuentas.length; i++) {
+						if (cuentas[i].getNumero() == num) {
+							cuentas[i].retirar(monto);
+							System.out.println("Saldo: " + cuentas[i].getSaldo());
+						}
+					}
+				}
+			} else if (opc == 3) {
+				for (int i = 0; i < cuentas.length; i++) {
+					cuentas[i].consultar();
+					System.out.println(i + " " + cuentas[i].getSaldo());
+				}
+			} else if (opc == 4) {
+				cont = true;
+			}
+		}
+	}
+}
