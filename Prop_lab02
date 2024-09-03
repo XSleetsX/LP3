@@ -1,0 +1,91 @@
+CLASE ESTUDIANTE:
+package gestioncursos;
+import java.util.ArrayList;
+import java.util.List;
+class Estu {
+   private String nom;
+   private String id;
+   private List<Cur> cursos;
+   public Estu(String nom, String id) {
+       this.nom = nom;
+       this.id = id;
+       this.cursos = new ArrayList<>();
+   }
+   public void inscribir(Cur cur) {
+       cursos.add(cur);
+       cur.inscribirEstu(this);  // Inscribir el estudiante en el curso
+   }
+   public void mostrarInfo() {
+       System.out.println("Estudiante: " + nom + ", ID: " + id);
+       System.out.println("Cursos inscritos: ");
+       for (Cur c : cursos) {
+           System.out.println(" - " + c.getNom());
+       }
+   }
+}
+
+CLASE PROFESOR:
+package gestioncursos;
+class Profe {
+   private String nom;  // Cambiado a private
+   private String id;
+   public Profe(String nom, String id) {
+       this.nom = nom;
+       this.id = id;
+   }
+   public String getNom() {
+       return nom;
+   }
+   public void mostrarInfo() {
+       System.out.println("Profesor: " + nom + ", ID: " + id);
+   }
+}
+
+CLASE CURSO:
+package gestioncursos;
+import java.util.ArrayList;
+class Cur {
+   private String nom;
+   private Profe prof;
+   private List<Estu> estus;
+   public Cur(String nom) {
+       this.nom = nom;
+       this.estus = new ArrayList<>();
+   }
+   public void inscribirEstu(Estu estu) {
+       estus.add(estu);
+   }
+   public String getNom() {
+       return nom; // Getter para nom
+   }
+   public void setProf(Profe prof) {
+       this.prof = prof;
+   }
+   public void mostrarInfo() {
+       System.out.println("Curso: " + nom);
+       System.out.println("Profesor: " + (prof != null ? prof.getNom() : "No asignado"));
+       System.out.println("Estudiantes inscritos: " + estus.size());
+   }
+}
+
+CLASE SISTEMA DE GESTION:
+package gestioncursos;
+public class SistemaGestion {
+   public static void main(String[] args) {
+       // Crear estudiantes
+       Estu e1 = new Estu("Santiago", "E001");
+       Estu e2 = new Estu("Luis", "E002");
+       // Crear profesor
+       Profe p1 = new Profe("Ing. Iquira", "P001");
+       // Crear curso
+       Cur c1 = new Cur("Lenguaje de Programacion III");
+       c1.setProf(p1);
+       // Inscribir estudiantes en el curso
+       e1.inscribir(c1); // Cambiado a usar el método correcto
+       e2.inscribir(c1); // Cambiado a usar el método correcto
+       // Mostrar información del curso y estudiantes
+       c1.mostrarInfo();
+       e1.mostrarInfo();
+       e2.mostrarInfo();
+   }
+}
