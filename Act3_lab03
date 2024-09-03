@@ -1,0 +1,36 @@
+package lab03;
+
+public class Weapon {
+	private String type;
+	private int baseDamage;
+	
+	public Weapon(String type, int baseDamage) {
+		this.type = type;
+		this.baseDamage = baseDamage;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public int getBaseDamage() {
+		return baseDamage;
+	}
+}
+
+package lab03;
+
+interface DamageCalculator {
+	double calculateDamage(int level);
+}
+
+package lab03;
+
+public class Juego{
+	public static void main(String[] args) {
+		Sword sword = new Sword("arma corta", 50, 1);
+		Bow bow = new Bow("arma a distancia", 30, 1);
+		System.out.println("Daño de espada: " + sword.calculateDamage(5));
+		System.out.println("Daño de arco: " + bow.calculateDamage(5));
+	}
+}
