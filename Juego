@@ -1,0 +1,46 @@
+package LP3;
+
+abstract class ElementalDamage {
+	private int baseElementalDamage = 5;
+	
+	abstract double calculateElementalDamage();
+	
+	public int getBaseElementalDamage() {
+		return baseElementalDamage;
+	}
+}
+
+package LP3;
+
+abstract class PhysicalDamage {
+	private int basePhysicalDamage;
+	
+	abstract double calculatePhysicalDamage();
+	
+	public int getBasePhysicalDamage() {
+		return basePhysicalDamage;
+	}
+}
+
+package LP3;
+
+abstract class PhysicalDamage {
+	private int basePhysicalDamage;
+	private double criticalDamage;
+	private double criticalChance;
+	
+	abstract double calculatePhysicalDamage();
+	
+	public int getBasePhysicalDamage() {
+		return basePhysicalDamage;
+	}
+	
+	public double getCriticalDamage() {
+		
+	}
+	
+	public double getCriticalDamage() {
+		
+	}
+}
+
