@@ -1,0 +1,85 @@
+//Clase Habitacion
+package LAB03;
+
+public class Habitacion {
+	//Atributos
+	private int numero;
+	private String estado;
+	private double precio_base;
+	private GestorDisponibilidadHabitacion gdh;
+	
+	//Constructor
+	public Habitacion(int numero, String estado, double precio_base, GestorDisponibilidadHabitacion gdh) {
+		this.numero = numero;
+		this.estado = "Disponible";
+		this.precio_base = precio_base;
+		this.gdh = gdh;
+	}
+	
+	//Setters
+	public void setNumero(int numero) { this.numero = numero; }
+	public void setEstado(String estado) { this.estado = estado; }
+	public void setPrecioBase(double precio_base) { this.precio_base = precio_base; }
+	
+	//Getters
+	public int getNumero() { return numero; }
+	public String getEstado() { return estado; }
+	public double getPrecioBase() { return precio_base; }
+	
+	//Métodos
+	public void verificarDisponibilidad() {
+		gdh.estaDisponible(this);
+	}
+	public void reservar() {}
+	public void liberar() {}
+	public void generarInforme() {}
+	public double obtenerPrecioTotal() {
+		return gdh.calcularPrecio();
+	}
+}
+
+//Clase GestorDisponibilidadHabitacion
+package LAB03;
+
+public class GestorDisponibilidadHabitacion {
+	//Atributos
+	private List<Reserva> reservas;
+	
+	//Constructor
+	public GestorDisponibilidadHabitacion (List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+	
+	//Métodos
+	public void estaDisponible(Habitacion habitacion) {
+		if (habitacion.getEstado() == "Disponible") {
+			System.out.println("La habitación está disponible.");
+		} else {
+			System.out.println("La habitación no está disponible.");
+		}
+	}
+	public void cambiarDisponibilidad(Habitacion habitacion, boolean est) {
+		if (est == true) {
+			habitacion.setEstado("Disponible");
+		} else {
+			habitacion.setEstado("No disponible");
+		}
+	}
+	
+	public double calcularPrecio() {}
+}
+
+//Clase ControladorHabitacion
+package LAB03;
+
+public class ControladorHabitacion {
+	private List<Habitacion> habitaciones;
+	private GestorDisponibilidadHabitacion gdh;
+	
+	public ControladorHabitacion(List<Habitacion> habitaciones, GestorDisponibilidadHabitacion gdh) {
+		this.habitaciones = habitaciones;
+		this.gdh = gdh;
+	}
+	
+	public void crearReserva() {}
+}
