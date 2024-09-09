@@ -1,0 +1,48 @@
+//Clase padre Vehiculo
+package Luis;
+
+public class Vehiculo {
+    public void acelerar() {
+        System.out.println("El vehículo está acelerando.");
+    }
+}
+
+//Clase hija Coche
+package Luis;
+
+public class Coche extends Vehiculo {
+    public void acelerar() {
+        System.out.println("El coche acelera usando el motor.");
+    }
+}
+
+//Clase hija Bicicleta
+package Luis;
+
+public class Bicicleta extends Vehiculo{
+    public void acelerar() {
+        System.out.println("La bicicleta acelera usando los pedales.");
+    }
+}
+
+//Main
+package Luis;
+
+public class Main {
+    public static void main(String[] args) {
+        //Se crean las instancias de clase para las clases hijas y para la clase padre
+        Vehiculo vehiculo1 = new Coche();
+        Vehiculo vehiculo2 = new Bicicleta();
+        Vehiculo vehiculo3 = new Vehiculo();
+
+        //Se llama a los métodos de las instancias de las clases hijas y de la clase padre
+        vehiculo1.acelerar();
+        vehiculo2.acelerar();
+        vehiculo3.acelerar();
+    }
+}
+
+//Pantalla
+El coche acelera usando el motor.
+La bicicleta acelera usando los pedales.
+El vehículo está acelerando.
