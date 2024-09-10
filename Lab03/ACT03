@@ -1,0 +1,74 @@
+package Lab03;
+
+public interface Weapon {
+	String getType();
+	int calculateDamage(int level);
+}
+
+public class DamageCalculator {
+	public int calculateDamage(Weapon weapon, int level) {
+        return weapon.calculateDamage(level);
+    }
+}
+
+public class Sword implements Weapon {
+	private int baseDamage;
+	public Sword(int baseDamage) {
+		this.baseDamage = baseDamage;
+	}
+	@Override
+	public String getType() {
+		return "espada";
+	}
+	@Override
+	public int calculateDamage(int level) {
+		return baseDamage + (level * 5);
+	}
+}
+
+public class Bow  implements Weapon {
+	private int baseDamage;
+    public Bow(int baseDamage) {
+        this.baseDamage = baseDamage;
+    }
+    @Override
+    public String getType() {
+        return "arco";
+    }
+    @Override
+    public int calculateDamage(int level) {
+        return baseDamage + (level * 3);
+    }
+}
+
+public class Axe implements Weapon {
+	private int baseDamage;
+    public Axe(int baseDamage) {
+        this.baseDamage = baseDamage;
+    }
+    @Override
+    public String getType() {
+        return "hacha";
+    }
+    @Override
+    public int calculateDamage(int level) {
+        return baseDamage + (level * 4);
+    }
+}
+
+public class Juego {
+	public static void main(String[] args) {
+        Weapon sword = new Sword(50);
+        Weapon bow = new Bow(30);
+        Weapon axe = new Axe(40);
+        DamageCalculator calculator = new DamageCalculator();
+        
+        int swordDamage = calculator.calculateDamage(sword, 10);
+        int bowDamage = calculator.calculateDamage(bow, 10);
+        int axeDamage = calculator.calculateDamage(axe, 10);
+        
+        System.out.println("Daño de espada: " + swordDamage);
+        System.out.println("Daño de arco: " + bowDamage);
+        System.out.println("Daño de hacha: " + axeDamage);
+    }
+}
