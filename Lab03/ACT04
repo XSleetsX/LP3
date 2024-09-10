@@ -1,0 +1,147 @@
+package Actividad04;
+
+public interface Weapon {
+    String getType();
+    int calculateDamage();
+    String getElement();
+}
+
+public class Sword implements Weapon {
+    private int baseDamage;
+    private String element;
+    public Sword(int baseDamage, String element) {
+        this.baseDamage = baseDamage;
+        this.element = element;
+    }
+    @Override
+    public String getType() {
+        return "espada";
+    }
+    @Override
+    public int calculateDamage() {
+        return baseDamage + (Math.random() < 0.2 ? baseDamage : 0); // 20% de crítico
+    }
+    @Override
+    public String getElement() {
+        return element;
+    }
+}
+
+public class Bow implements Weapon {
+    private int baseDamage;
+    private String element;
+    public Bow(int baseDamage, String element) {
+        this.baseDamage = baseDamage;
+        this.element = element;
+    }
+    @Override
+    public String getType() {
+        return "arco";
+    }
+    @Override
+    public int calculateDamage() {
+        return baseDamage + (Math.random() < 0.2 ? baseDamage : 0); // 20% de crítico
+    }
+    @Override
+    public String getElement() {
+        return element;
+    }
+}
+
+public class Axe implements Weapon {
+    private int baseDamage;
+    private String element;
+    public Axe(int baseDamage, String element) {
+        this.baseDamage = baseDamage;
+        this.element = element;
+    }
+    @Override
+    public String getType() {
+        return "hacha";
+    }
+    @Override
+    public int calculateDamage() {
+        return baseDamage + (Math.random() < 0.2 ? baseDamage : 0); // 20% de crítico
+    }
+    @Override
+    public String getElement() {
+        return element;
+    }
+}
+
+public abstract class Character {
+    protected String name;
+    protected int health;
+    protected Weapon weapon;
+    public Character(String name, int health, Weapon weapon) {
+        this.name = name;
+        this.health = health;
+        this.weapon = weapon;
+    }
+    public abstract void attack(Character target);
+    public void receiveAttack(int damage) {
+        health -= damage;
+        if (health < 0) health = 0;
+    }
+    public boolean isAlive() {
+        return health > 0;
+    }
+    public String getName() {
+        return name;
+    }
+    public int getHealth() {
+        return health;
+    }
+}
+
+public class Player extends Character {
+    public Player(String name, int health, Weapon weapon) {
+        super(name, health, weapon);
+    }
+    @Override
+    public void attack(Character target) {
+        int damage = weapon.calculateDamage();
+        System.out.println(name + " ataca a " + target.getName() + " con " + weapon.getType() + 
+                           " elemental de " + weapon.getElement() + " causando " + damage + " de daño.");
+        target.receiveAttack(damage);
+    }
+}
+
+public class Enemy extends Character {
+    public Enemy(String name, int health, Weapon weapon) {
+        super(name, health, weapon);
+    }
+    @Override
+    public void attack(Character target) {
+        int damage = weapon.calculateDamage();
+        System.out.println(name + " contraataca a " + target.getName() + " con " + weapon.getType() + 
+                           " elemental de " + weapon.getElement() + " causando " + damage + " de daño.");
+        target.receiveAttack(damage);
+    }
+}
+
+public class Combat {
+    public static void battle(Player player, Enemy enemy) {
+        System.out.println("¡Comienza el combate entre " + player.getName() + " y " + enemy.getName() + "!"); 
+        while (player.isAlive() && enemy.isAlive()) {
+            player.attack(enemy);
+            if (enemy.isAlive()) {
+                enemy.attack(player);
+            }
+            System.out.println(player.getName() + " HP: " + player.getHealth() + " | " + 
+                               enemy.getName() + " HP: " + enemy.getHealth());
+        }
+        String winner = player.isAlive() ? player.getName() : enemy.getName();
+        System.out.println("¡" + winner + " ha ganado el combate!");
+    }
+}
+
+public class Juego {
+	public static void main(String[] args) {
+        Weapon playerAxe = new Axe(50, "fuego");
+        Player player = new Player("Héroe", 100, playerAxe);
+        Weapon enemyAxe = new Sword(40, "hielo");
+        Enemy enemy = new Enemy("Esqueleto", 80, enemyAxe);
+        Combat.battle(player, enemy);
+    }
+}
