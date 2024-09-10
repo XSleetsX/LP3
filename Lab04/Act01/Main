@@ -1,0 +1,38 @@
+package Lab04;
+
+public class Main {
+	public static void main(String[] args) {
+		try {
+			CuentaBancaria c1 = new CuentaBancaria(11111111, "Luis", 5000);
+			System.out.println("Cuenta creada con éxito.");
+			CuentaBancaria c2 = new CuentaBancaria(11111112, "Santiago", -3000);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e);
+		}
+		
+		try {
+			CuentaBancaria c3 = new CuentaBancaria(11111113, "Camila", 10000);
+			c3.depositar(500);
+			System.out.println(c3.getSaldo());
+			c3.depositar(-500);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e);
+		}
+		
+		try {
+			CuentaBancaria c4 = new CuentaBancaria(11111113, "Juanita", 200);
+			c4.retirar(100);
+			System.out.println(c4.getSaldo());
+			c4.retirar(-1000);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e);
+		}
+		
+		try {
+			CuentaBancaria c5 = new CuentaBancaria(11111113, "Diego", 2000);
+			c5.retirar(10000);
+		} catch (SaldoInsuficienteException e) {
+			System.out.println(e);
+		}
+	}
+}
