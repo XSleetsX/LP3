@@ -1,9 +1,7 @@
-package Lab04;
+package EXP1;
 
-public class SaldoInsuficienteException extends IllegalArgumentException{
-	public SaldoInsuficienteException () {}
-	
+public class SaldoInsuficienteException extends IllegalArgumentException {
 	public SaldoInsuficienteException(String mensaje) {
-		super(mensaje);
-	}
+        super(mensaje);
+    }
 }
