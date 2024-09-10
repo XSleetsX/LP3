@@ -1,0 +1,73 @@
+package Propuesto03;
+
+import java.util.Date;
+public class SistemaReservas {
+    public void reservarHabitacion(Habitacion habitacion, Date fechaInicio, Date fechaFin) {
+        if (habitacion.estaDisponible(fechaInicio, fechaFin)) {
+            double precio = habitacion.calcularPrecio();
+            System.out.println("Reserva realizada. Precio: " + precio);
+            // Lógica adicional para realizar la reserva
+        } else {
+            System.out.println("La habitación no está disponible para las fechas seleccionadas.");
+        }
+    }
+}
+
+import java.util.Date;
+public abstract class Habitacion {
+    protected int numero;
+    protected double precioBase;
+
+    public Habitacion(int numero, double precioBase) {
+        this.numero = numero;
+        this.precioBase = precioBase;
+    }
+
+    public abstract double calcularPrecio();
+
+    public boolean estaDisponible(Date fechaInicio, Date fechaFin) {
+        // Lógica para verificar disponibilidad
+        return true; // Simplificado para este ejemplo
+    }
+}
+
+public class HabitacionEstandar extends Habitacion {
+    public HabitacionEstandar(int numero, double precioBase) {
+        super(numero, precioBase);
+    }
+
+    @Override
+    public double calcularPrecio() {
+        return precioBase;
+    }
+}
+
+public class HabitacionDeLujo extends Habitacion {
+    private double factorLujo;
+
+    public HabitacionDeLujo(int numero, double precioBase, double factorLujo) {
+        super(numero, precioBase);
+        this.factorLujo = factorLujo;
+    }
+
+    @Override
+    public double calcularPrecio() {
+        return precioBase * factorLujo;
+    }
+}
+
+import java.util.Date;
+public class Main {
+    public static void main(String[] args) {
+        Habitacion habitacionEstandar = new HabitacionEstandar(101, 100.0);
+        Habitacion habitacionDeLujo = new HabitacionDeLujo(201, 200.0, 1.5);
+
+        SistemaReservas sistema = new SistemaReservas();
+
+        Date fechaInicio = new Date(); // Fecha actual
+        Date fechaFin = new Date(fechaInicio.getTime() + 86400000); // Un día después
+
+        sistema.reservarHabitacion(habitacionEstandar, fechaInicio, fechaFin);
+        sistema.reservarHabitacion(habitacionDeLujo, fechaInicio, fechaFin);
+    }
+}
