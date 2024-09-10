@@ -1,0 +1,167 @@
+//Clase Habitacion
+package LAB03;
+
+public class Habitacion {
+	//Atributos
+	private int numero;
+	private String estado;
+	private double precio_base;
+	private GestorDisponibilidadHabitacion gdh;
+	
+	//Constructor
+	public Habitacion(int numero, String estado, double precio_base, GestorDisponibilidadHabitacion gdh) {
+		this.numero = numero;
+		this.estado = "Disponible";
+		this.precio_base = precio_base;
+		this.gdh = gdh;
+	}
+	
+	//Setters
+	public void setNumero(int numero) { this.numero = numero; }
+	public void setEstado(String estado) { this.estado = estado; }
+	public void setPrecioBase(double precio_base) { this.precio_base = precio_base; }
+	
+	//Getters
+	public int getNumero() { return numero; }
+	public String getEstado() { return estado; }
+	public double getPrecioBase() { return precio_base; }
+	
+	//Métodos
+	public void verificarDisponibilidad() {
+		gdh.estaDisponible(this);
+	}
+	public double obtenerPrecioTotal() {
+		return gdh.calcularPrecio();
+	}
+}
+
+//Clase Reserva
+package LAB03;
+import java.time.*;
+
+public class Reserva {
+	//Atributos
+	private LocalDateTime fechaInicio;
+	private LocalDateTime ahora;
+	private double montoTotal;
+	private PoliticaCancelacion polcan;
+	
+	//Constructor
+	public Reserva(LocalDateTime fechaInicio, LocalDateTime ahora, double montoTotal, PoliticaCancelacion polcan) {
+		this.fechaInicio = fechaInicio;
+		this.ahora = ahora;
+		this.montoTotal = montoTotal;
+		this.polcan = polcan;
+	}
+	
+	//Setters
+	public void setMontoTotal(double montoTotal) { this.montoTotal = montoTotal; }
+	public void setPolCan(PoliticaCancelacion polcan) { this.polcan = polcan; }
+	
+	//Getters
+	public LocalDateTime getFechaInicio() { return fechaInicio; }
+	public LocalDateTime getAhora() { return ahora; }
+	public double getMontoTotal() { return montoTotal; }
+	public PoliticaCancelacion getPolCan() { return polcan; }
+	
+	//Métodos
+	public boolean cancelar() {
+		if (polcan.puedeCancelar(this)) {
+			double penalizacion = polcan.calcularPenalizacion(this);
+			System.out.println("Cancelado exitosamente. Con penalizacion de: " + penalizacion);
+			return true;
+		} else {
+			System.out.println("No se puede cancelar esta reserva según la política.");
+			return false;
+		}
+	}	
+}
+
+//Interfaz PoliticaCancelacion
+package LAB03;
+
+public interface PoliticaCancelacion {
+	boolean puedeCancelar(Reserva reserva);
+	double calcularPenalizacion(Reserva reserva);
+}
+
+//Clase PoliticaCancelacionFlexible
+package LAB03;
+
+public class PoliticaCancelacionFlexible implements PoliticaCancelacion{
+	@Override
+	public boolean puedeCancelar(Reserva reserva) {
+		return (reserva.getAhora() - reserva.getFechaInicio()) < 24;
+	}
+	
+	@Override
+	public double calcularPenalizacion(Reserva reserva) {
+		return 0;
+	}
+}
+
+//Clase PoliticaCancelacionModerada
+package LAB03;
+
+public class PoliticaCancelacionModerada implements PoliticaCancelacion{
+	@Override
+	public boolean puedeCancelar(Reserva reserva) {
+		return (reserva.getAhora() - reserva.getFechaInicio()) < 72;
+	}
+	
+	@Override
+	public double calcularPenalizacion(Reserva reserva) {
+		return reserva.getMontoTotal() * 0.5;
+	}
+}
+
+//Clase PoliticaCancelacionEstricta
+package LAB03;
+
+public class PoliticaCancelacionEstricta implements PoliticaCancelacion{
+	@Override
+	public boolean puedeCancelar(Reserva reserva) {
+		return false;
+	}
+	
+	@Override
+	public double calcularPenalizacion(Reserva reserva) {
+		return reserva.getMontoTotal();
+	}
+}
+
+//ControladorReserva
+package LAB03;
+import java.time.*;
+
+public class ControladorReserva {
+	public Reserva crearReserva(LocalDateTime fechaInicio, LocalDateTime ahora, double montoTotal, String tipoPolitica) {
+        PoliticaCancelacion polcan;
+
+        switch (tipoPolitica) {
+            case "Flexible":
+                polcan = new PoliticaCancelacionFlexible();
+                break;
+            case "Moderada":
+                polcan = new PoliticaCancelacionModerada();
+                break;
+            case "Estricta":
+                polcan = new PoliticaCancelacionEstricta();
+                break;
+            default:
+                System.out.println("Tipo de política no válido.");
+                break;
+        }
+
+        return new Reserva(fechaInicio, ahora, montoTotal, polcan);
+    }
+
+    public void cancelarReserva(Reserva reserva) {
+        boolean resultado = reserva.cancelar();
+        if (resultado) {
+            System.out.println("Reserva cancelada con éxito.");
+        } else {
+            System.out.println("No se pudo cancelar la reserva.");
+        }
+    }
+}
