@@ -1,0 +1,35 @@
+package Lab04;
+
+public class CuentaBancaria {
+	private int numeroCuenta;
+	private String titular;
+	private double saldo;
+	
+	public CuentaBancaria(int numeroCuenta, String titular, double saldo) {
+		this.numeroCuenta = numeroCuenta;
+		this.titular = titular;
+		if (saldo < 1) {
+			throw new IllegalArgumentException("El saldo debe ser positivo.");
+		}
+		this.saldo = saldo;
+	}
+	
+	public double getSaldo() { return saldo; }
+	
+	public void depositar(double monto) {
+		if (monto < 1) {
+			throw new IllegalArgumentException("El monto a depositar debe ser positivo.");
+		}
+		saldo = saldo + monto;
+	}
+	
+	public void retirar(double monto) {
+		if (monto < 1) {
+			throw new IllegalArgumentException("El monto a retirar debe ser positivo.");
+		}
+		if (monto > saldo) {
+			throw new SaldoInsuficienteException("Saldo insuficiente.");
+		}
+		saldo = saldo - monto;
+	}
+}
