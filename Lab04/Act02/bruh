@@ -1,7 +1,8 @@
 package Lab04;
+import java.util.*;
 
 public class Banco {
-	private CuentaBancaria[] cuentas;
+	private List<CuentaBancaria> cuentas;
 	private String nombre;
 	
 	public Banco(CuentaBancaria[] cuentas, String nombre) {
@@ -9,9 +10,12 @@ public class Banco {
 		this.nombre = nombre;
 	}
 	
-	public void agregarCuenta(CuentaBancaria cuenta) {
-		for (int i = 0; i < cuentas.length; i++) {
-			
+	public void agregarCuenta(CuentaBancaria nueva) {
+		for (CuentaBancaria cuenta : cuentas) {
+			if (cuenta.getNumeroCuenta() == nueva.getNumeroCuenta()) {
+				
+			}
 		}
+		cuentas.
 	}
 }
