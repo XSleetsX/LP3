@@ -1,0 +1,35 @@
+package LAB04;
+
+public class Main {
+    public static void main(String[] args) {
+    	// Crear cuentas con datos válidos
+    	CuentaBancaria cuenta1 = new CuentaBancaria(111111, "Santiago", 1000);
+    	CuentaBancaria cuenta2 = new CuentaBancaria(111112, "Luis", 500);
+    	CuentaBancaria cuenta3 = new CuentaBancaria(111113, "Juan Pérez", 0);
+    	
+    	System.out.println("Saldo cuenta 1 antes: " + cuenta1.getSaldo());
+    	System.out.println("Saldo cuenta 2 antes: " + cuenta2.getSaldo());
+    	cuenta1.transferir(cuenta2, 500);
+    	System.out.println("Saldo cuenta 1 después: " + cuenta1.getSaldo());
+    	System.out.println("Saldo cuenta 2 después: " + cuenta2.getSaldo());
+    	
+    	try {
+        	cuenta1.transferir(cuenta2, 1500);
+        } catch (SaldoInsuficienteException e) {
+        	System.out.println(e);
+        }
+    	
+    	try {
+        	cuenta1.transferir(null, 250);
+        } catch (CuentaNoEncontradaException e) {
+        	System.out.println(e);
+        }
+    	
+    	try {
+        	cuenta2.cerrarCuenta();
+        } catch (SaldoNoCeroException e) {
+        	System.out.println(e);
+        }
+    }
+}
+
