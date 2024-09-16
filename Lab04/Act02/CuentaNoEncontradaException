@@ -1,1 +1,7 @@
+package LAB04;
 
+public class CuentaNoEncontradaException extends NullPointerException {
+	public CuentaNoEncontradaException(String mensaje) {
+		super(mensaje);
+	}
+}
