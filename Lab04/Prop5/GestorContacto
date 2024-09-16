@@ -1,0 +1,52 @@
+package Prop5;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class GestorContacto {
+    private List<Contacto> contactos;
+
+    public GestorContacto() {
+        this.contactos = new ArrayList<>();
+    }
+
+    public void agregarContacto(Contacto contacto) {
+        contactos.add(contacto);
+        System.out.println("Contacto agregado: " + contacto);
+    }
+
+    public Optional<Contacto> buscarContacto(String nombre) {
+        return contactos.stream().filter(c -> c.getNombre().equalsIgnoreCase(nombre)).findFirst();
+    }
+
+    public void modificarContacto(String nombre, String nuevoEmail, Direccion nuevaDireccion, Telefono nuevoTelefono) {
+        Optional<Contacto> contactoOpt = buscarContacto(nombre);
+        if (contactoOpt.isPresent()) {
+            Contacto contacto = contactoOpt.get();
+            contacto.setEmail(nuevoEmail);
+            contacto.setDireccion(nuevaDireccion);
+            contacto.setTelefono(nuevoTelefono);
+            System.out.println("Contacto modificado: " + contacto);
+        } else {
+            System.out.println("Contacto no encontrado.");
+        }
+    }
+
+    public void eliminarContacto(String nombre) {
+        Optional<Contacto> contactoOpt = buscarContacto(nombre);
+        if (contactoOpt.isPresent()) {
+            contactos.remove(contactoOpt.get());
+            System.out.println("Contacto eliminado: " + nombre);
+        } else {
+            System.out.println("Contacto no encontrado.");
+        }
+    }
+
+    public void listarContactos() {
+        if (contactos.isEmpty()) {
+            System.out.println("No hay contactos registrados.");
+        } else {
+            contactos.forEach(System.out::println);
+        }
+    }
+}
