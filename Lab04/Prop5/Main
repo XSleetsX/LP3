@@ -1,0 +1,53 @@
+package Prop5;
+
+public class Main {
+	public static void main(String[] args) {
+        GestorContacto gestor = new GestorContacto();
+        
+        try {
+        Direccion direccion1 = new Direccion("Urb. Campiña Dorada D-1", "Arequipa", "04001");
+        Telefono telefono1 = new Telefono("952424969");
+        Contacto contacto1 = new Contacto("Luis Arizaga", "luis.arizaga@ucsm.edu.pe", direccion1, telefono1);
+        } catch (IllegalArgumentException e) {
+        	System.out.println(e);
+        }
+        
+        try {
+        	Direccion direccion2 = new Direccion("Calle Falsa", "Ciudad Falsa", "00000");
+            Telefono telefono2 = new Telefono("6789");
+            Contacto contacto2 = new Contacto("Cesar Arizaga", "sdada@ucsm.edu.pe", direccion2, telefono2);
+        } catch (IllegalArgumentException e) {
+        	System.out.println(e);
+        }
+        
+        try {
+        	Direccion direccion3 = new Direccion("Tercera Calle", "TerceraCiudad", "33333");
+            Telefono telefono3 = new Telefono("123456789");
+        	Contacto contacto3 = new Contacto("", "", direccion3, telefono3);
+        } catch (IllegalArgumentException e) {
+        	System.out.println(e);
+        }
+        
+        //Probando los otros métodos
+        Direccion direccion1 = new Direccion("Urb. Campiña Dorada D-1", "Arequipa", "04001");
+        Telefono telefono1 = new Telefono("952424969");
+        Contacto contacto1 = new Contacto("Luis Arizaga", "luis.arizaga@ucsm.edu.pe", direccion1, telefono1);
+        
+        Direccion direccion2 = new Direccion("Calle Falsa", "Ciudad Falsa", "00000");
+        Telefono telefono2 = new Telefono("123456789");
+        Contacto contacto2 = new Contacto("Cesar Arizaga", "sdada@ucsm.edu.pe", direccion2, telefono2);
+        
+        gestor.agregarContacto(contacto1);
+        gestor.agregarContacto(contacto2);
+
+        gestor.listarContactos();
+
+        Direccion nuevaDireccion = new Direccion("Calle Nueva", "Cusco", "11111");
+        Telefono nuevoTelefono = new Telefono("999888777");
+        gestor.modificarContacto("Ricardo Arizaga", "ricardo.arizaga@ucsm.edu.pe", nuevaDireccion, nuevoTelefono);
+
+        gestor.eliminarContacto("Cesar Arizaga");
+
+        gestor.listarContactos();
+    }
+}
