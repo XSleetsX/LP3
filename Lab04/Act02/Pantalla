@@ -1,0 +1,7 @@
+Saldo cuenta 1 antes: 1000.0
+Saldo cuenta 2 antes: 500.0
+Saldo cuenta 1 después: 500.0
+Saldo cuenta 2 después: 1000.0
+LAB04.SaldoInsuficienteException: Saldo insuficiente para realizar el retiro.
+LAB04.CuentaNoEncontradaException: La cuenta de destino no existe.
+LAB04.SaldoNoCeroException: La cuenta aún tiene saldo.
