@@ -1,0 +1,63 @@
+package LAB04;
+
+public class CuentaBancaria {
+	private int numeroCuenta;
+	private String titular;
+	private double saldo;
+	
+	public CuentaBancaria(int numeroCuenta, String titular, double saldoInicial) {
+		if (saldoInicial < 0) {
+			throw new IllegalArgumentException("El saldo inicial no puede ser negativo.");
+		}
+		this.numeroCuenta = numeroCuenta;
+		this.titular = titular;
+		this.saldo = saldoInicial;
+	}
+	
+	public int getNumeroCuenta() {
+		return numeroCuenta;
+	}
+	
+	public String getTitular() {
+		return titular;
+	}
+	
+	public double getSaldo() {
+		return saldo;
+	}
+	
+	public void depositar(double monto) {
+		if (monto <= 0) {
+			throw new IllegalArgumentException("La cantidad a depositar debe ser positiva.");
+		}
+		saldo += monto;
+	}
+	
+	public void retirar(double monto) throws SaldoInsuficienteException {
+		if (monto <= 0) {
+			throw new IllegalArgumentException("La cantidad a depositar debe ser positiva.");
+		}
+		if (monto > saldo) {
+			throw new SaldoInsuficienteException("Saldo insuficiente para realizar el retiro.");
+		}
+		saldo -= monto;
+	}
+	
+	public void transferir(CuentaBancaria destino, double monto) throws CuentaNoEncontradaException {
+		if (monto > saldo) {
+			throw new SaldoInsuficienteException("Saldo insuficiente para realizar el retiro.");
+		}
+		if (destino == null) {
+			throw new CuentaNoEncontradaException("La cuenta de destino no existe.");
+		}
+		saldo -= monto;
+		destino.depositar(monto);
+	}
+	
+	public void cerrarCuenta() throws SaldoNoCeroException {
+		if (saldo > 0) {
+			throw new SaldoNoCeroException("La cuenta aún tiene saldo.");
+		}
+		System.out.println("La cuenta: " + numeroCuenta + " ha sido cerrada exitosamente.");
+	}
+}
