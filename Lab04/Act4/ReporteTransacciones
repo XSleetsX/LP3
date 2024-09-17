@@ -1,0 +1,35 @@
+package Act4;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ReporteTransacciones {
+    public static void generarReporte(CuentaBancaria cuenta, String archivo) throws IOException, HistorialVacioException {
+        if (cuenta == null) {
+            throw new IllegalArgumentException("La cuenta no puede ser nula.");
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
+            writer.write("Número de Cuenta: " + cuenta.getNumeroCuenta());
+            writer.newLine();
+            writer.write("Titular: " + cuenta.getTitular());
+            writer.newLine();
+            writer.write("Saldo: " + cuenta.getSaldo());
+            writer.newLine();
+            writer.newLine();
+            writer.write("--- Historial de Transacciones ---");
+            writer.newLine();
+
+            if (cuenta.getHistorialTransacciones().isEmpty()) {
+                throw new HistorialVacioException("No hay transacciones para mostrar.");
+            }
+
+            for (String transaccion : cuenta.getHistorialTransacciones()) {
+                writer.write(transaccion);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            throw new IOException("Error al escribir el archivo de reporte.", e);
+        }
+    }
+}
