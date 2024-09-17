@@ -1,0 +1,123 @@
+Ingrese el número de cuenta (10 dígitos):
+0123456789
+Ingrese el nombre del titular (no vacío):
+Luis
+Ingrese el saldo inicial:
+500
+Ingrese el límite de crédito:
+5000
+Cuenta creada con éxito.
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 1
+Saldo actual: 500.0
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 4
+Error al generar el reporte: No hay transacciones para mostrar.
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 2
+Ingrese el monto a retirar:
+1000
+Error: Saldo insuficiente para realizar el retiro.
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 3
+Ingrese el monto a transferir:
+100
+Ingrese el número de cuenta destino: 0123456789
+Transferencia exitosa.
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 5
+Ingrese el nombre del archivo a leer: adads
+Error al leer el archivo: adads (El sistema no puede encontrar el archivo especificado)
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 4
+Reporte generado con éxito.
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 5
+Ingrese el nombre del archivo a leer: reporte_transacciones
+Error al leer el archivo: reporte_transacciones (El sistema no puede encontrar el archivo especificado)
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 5
+Ingrese el nombre del archivo a leer: reportes_transacciones.txt
+Error al leer el archivo: reportes_transacciones.txt (El sistema no puede encontrar el archivo especificado)
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 5
+Ingrese el nombre del archivo a leer: reporte_transacciones.txt
+Número de Cuenta: 0123456789
+Titular: Luis
+Saldo: 500.0
+
+--- Historial de Transacciones ---
+Transferencia con crédito a 0123456789: 100.0
+
+--- MENÚ ---
+1. Consultar saldo
+2. Retirar dinero
+3. Transferir dinero
+4. Generar reporte de transacciones
+5. Leer archivo de transacciones
+6. Salir
+Seleccione una opción: 6
+Saliendo del sistema.
