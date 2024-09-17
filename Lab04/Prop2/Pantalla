@@ -1,0 +1,8 @@
+6.0
+java.lang.IllegalArgumentException: Algún número es negativo.
+6.0
+java.lang.IllegalArgumentException: Algún número es negativo.
+24.0
+java.lang.IllegalArgumentException: Algún número es negativo.
+5.0
+Prop2.DivisionPorCeroException: Alguno de los números es cero.
