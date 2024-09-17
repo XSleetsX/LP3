@@ -1,5 +1,5 @@
-jajava.lang.IllegalArgumentException: El número no es válido (son 9 números).
-jajava.lang.IllegalArgumentException: El nombre no puede ser nulo o vacío.
+java.lang.IllegalArgumentException: El número no es válido (son 9 números).
+java.lang.IllegalArgumentException: El nombre no puede ser nulo o vacío.
 Contacto agregado: Nombre: Luis Arizaga, Email: luis.arizaga@ucsm.edu.pe, Dirección: Urb. Campiña Dorada D-1, Arequipa, 04001, Teléfono: 952424969
 Contacto agregado: Nombre: Cesar Arizaga, Email: sdada@ucsm.edu.pe, Dirección: Calle Falsa, Ciudad Falsa, 00000, Teléfono: 123456789
 Nombre: Luis Arizaga, Email: luis.arizaga@ucsm.edu.pe, Dirección: Urb. Campiña Dorada D-1, Arequipa, 04001, Teléfono: 952424969
