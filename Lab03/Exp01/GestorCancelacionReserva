@@ -1,0 +1,18 @@
+package LAB03;
+
+public class GestorCancelacionReserva {
+	private PoliticaCancelacion polcan;
+	
+	public GestorCancelacionReserva(PoliticaCancelacion polcan) {
+		this.polcan = polcan;
+	}
+	public void cancelar(Reserva reserva) {
+		if (polcan.puedeCancelar(reserva) == true) {
+			double penalizacion = polcan.calcularPenalizacion(reserva);
+			System.out.println("Cancelado exitosamente. Con penalizacion de: " + penalizacion);
+			System.out.println("Monto total a pagar: " + (penalizacion + reserva.getMontoTotal()));
+		} else {
+			System.out.println("No se puede cancelar esta reserva según la política.");
+		}
+	}
+}
