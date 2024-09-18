@@ -1,0 +1,9 @@
+public class GestorDisponibilidadHabitacion {
+    public void estaDisponible(Habitacion habitacion) {
+        if (habitacion.getDisponible()) {
+            System.out.println("La habitación N° " + habitacion.getNumero() + " está disponible.");
+        } else {
+            System.out.println("La habitación N° " + habitacion.getNumero() + " no está disponible.");
+        }
+    }
+}
