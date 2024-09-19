@@ -1,0 +1,40 @@
+package HOTEL;
+
+import java.time.LocalDate;
+
+public class Reserva {
+    //Atributos
+    private LocalDate fechaInicio;
+    private LocalDate fechaFinal;
+    private double montoTotal;
+    private PoliticaCancelacion polcan;
+    private Habitacion habitacion;
+    private GestorCancelacionReserva gcr;
+    
+    //Constructor
+    public Reserva(LocalDate fechaFinal, double montoTotal, PoliticaCancelacion polcan, Habitacion habitacion, GestorCancelacionReserva gcr) {
+        this.fechaInicio = LocalDate.now();
+        this.fechaFinal = fechaFinal;
+        this.montoTotal = montoTotal;
+        this.polcan = polcan;
+        this.habitacion = habitacion;
+        this.gcr = gcr;
+    }
+    
+    //Setters
+    public void setFechaFinal(LocalDate fechaFinal) { this.fechaFinal = fechaFinal; }
+    
+    //Getters
+    public LocalDate getFechaInicio() { return fechaInicio; }
+    public LocalDate getFechaFinal() { return fechaFinal; }
+    public double getMontoTotal() { return montoTotal; }
+    public PoliticaCancelacion getPolCan() { return polcan; }
+    public Habitacion getHabitacion() { return habitacion; }
+    public GestorCancelacionReserva getGCR() { return gcr; }
+    
+    //Métodos
+    public void cancelarReserva() {
+        gcr.cancelar(this);
+    }
+}
+

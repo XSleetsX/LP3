@@ -1,0 +1,7 @@
+package HOTEL;
+
+public class HabitacionEstandar extends Habitacion {
+    public HabitacionEstandar(int numero, boolean disponible, double precio_base, GestorDisponibilidadHabitacion gdh) {
+        super(numero, disponible, precio_base, gdh);
+    }
+}
