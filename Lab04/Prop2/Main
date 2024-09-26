@@ -8,9 +8,9 @@ public class Main {
 		
 		try {
 			System.out.println("Ingrese el primer número: ");
-			int num1 = Integer.parseInt(scan.nextLine());
+			double num1 = Double.parseDouble(scan.next());
 			System.out.println("Ingrese el segundo número: ");
-			int num2 = Integer.parseInt(scan.nextLine());
+			double num2 = Double.parseDouble(scan.next());
 			calculadora.sumar(num1, num2);
 			calculadora.restar(num1, num2);
 			calculadora.multiplicar(num1, num2);
