@@ -2,29 +2,17 @@ package Prop2;
 
 public class Calculadora {
 	public double sumar(double x, double y) {
-		if (x < 0 || y < 0) {
-			throw new IllegalArgumentException("Algún número es negativo.");
-		}
 		return x + y;
 	}
 	public double restar(double x, double y) {
-		if (x < 0 || y < 0) {
-			throw new IllegalArgumentException("Algún número es negativo.");
-		}
 		return x - y;
 	}
 	public double multiplicar(double x, double y) {
-		if (x < 0 || y < 0) {
-			throw new IllegalArgumentException("Algún número es negativo.");
-		}
 		return x * y;
 	}
 	public double dividir(double x, double y) {
-		if (x == 0 || y == 0) {
-			throw new DivisionPorCeroException("Alguno de los números es cero.");
-		}
-		if (x < 0 || y < 0) {
-			throw new IllegalArgumentException("Algún número es negativo.");
+		if (y == 0) {
+			throw new DivisionPorCeroException("División entre cero, el segundo número no puede ser cero.");
 		}
 		return x / y;
 	}
