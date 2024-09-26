@@ -1,33 +1,24 @@
 package Prop2;
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
 		Calculadora calculadora = new Calculadora();
 		
 		try {
-			System.out.println(calculadora.sumar(1, 5));
-			System.out.println(calculadora.sumar(-4, 5));
+			System.out.println("Ingrese el primer número: ");
+			int num1 = Integer.parseInt(scan.nextLine());
+			System.out.println("Ingrese el segundo número: ");
+			int num2 = Integer.parseInt(scan.nextLine());
+			calculadora.sumar(num1, num2);
+			calculadora.restar(num1, num2);
+			calculadora.multiplicar(num1, num2);
+			calculadora.dividir(num1, num2);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e);
-		}
-		try {
-			System.out.println(calculadora.restar(10, 4));
-			System.out.println(calculadora.restar(4, -9));
-		} catch (IllegalArgumentException e) {
-			System.out.println(e);
-		}
-		try {
-			System.out.println(calculadora.multiplicar(8, 3));
-			System.out.println(calculadora.multiplicar(-1, -7));
-		} catch (IllegalArgumentException e) {
-			System.out.println(e);
-		}
-		try {
-			System.out.println(calculadora.dividir(10, 2));
-			System.out.println(calculadora.dividir(15, 0));
 		} catch (DivisionPorCeroException e) {
 			System.out.println(e);
 		}
 	}
-
 }
