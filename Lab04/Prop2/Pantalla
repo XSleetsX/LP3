@@ -1,8 +1,21 @@
-6.0
-java.lang.IllegalArgumentException: Algún número es negativo.
-6.0
-java.lang.IllegalArgumentException: Algún número es negativo.
-24.0
-java.lang.IllegalArgumentException: Algún número es negativo.
-5.0
-Prop2.DivisionPorCeroException: Alguno de los números es cero.
+Ingrese el primer número: 
+10
+Ingrese el segundo número: 
+0
+10.0
+10.0
+0.0
+Prop2.DivisionPorCeroException: División entre cero, el segundo número no puede ser cero.
+
+Ingrese el primer número: 
+ucsm
+java.lang.NumberFormatException: For input string: "ucsm"
+
+Ingrese el primer número: 
+8.2
+Ingrese el segundo número: 
+2
+10.2
+6.199999999999999
+16.4
+4.1
