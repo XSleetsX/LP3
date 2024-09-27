@@ -17,6 +17,9 @@ public class RegistroEstudiantes {
     }
 
     public Estudiante buscarEstudiante(String nombre) throws NoSuchElementException {
+        if (estudiantes.isEmpty()) {
+            throw new NoSuchElementException("La lista de estudiantes está vacía");
+        }
         for (Estudiante estudiante : estudiantes) {
             if (estudiante.getNombre().equalsIgnoreCase(nombre)) {
                 return estudiante;
@@ -26,8 +29,16 @@ public class RegistroEstudiantes {
     }
 
     public void mostrarEstudiantes() {
+        if (estudiantes.isEmpty()) {
+            System.out.println("La lista de estudiantes está vacía");
+            return;
+        }
         for (Estudiante estudiante : estudiantes) {
             System.out.println(estudiante);
         }
+    }
+
+    public boolean estaVacia() {
+        return estudiantes.isEmpty();
     }
 }
