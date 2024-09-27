@@ -1,5 +1,5 @@
-package Ej1;
 import java.io.IOException;
+import java.text.Normalizer;
 
 public class ProcesadorCaracteres {
     private LeerEntrada lector;
@@ -11,7 +11,12 @@ public class ProcesadorCaracteres {
     public void procesar() throws IOException, ExcepcionVocal, ExcepcionNumero, ExcepcionBlanco, ExcepcionSalida {
         char caracter = lector.getChar();
         
-        if ("aeiouAEIOU".indexOf(caracter) != -1) {
+        // Normalizar el carácter para eliminar las tildes
+        String normalizado = Normalizer.normalize(String.valueOf(caracter), Normalizer.Form.NFD);
+        normalizado = normalizado.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+        char caracterSinTilde = normalizado.charAt(0);
+
+        if ("aeiouAEIOU".indexOf(caracterSinTilde) != -1) {
             throw new ExcepcionVocal("Se ha ingresado una vocal: " + caracter);
         } else if (Character.isDigit(caracter)) {
             throw new ExcepcionNumero("Se ha ingresado un número: " + caracter);
