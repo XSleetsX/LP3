@@ -6,48 +6,42 @@ public class Main {
     public static void main(String[] args) {
         RegistroEstudiantes registro = new RegistroEstudiantes();
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
             System.out.println("\n1. Agregar estudiante");
             System.out.println("2. Buscar estudiante");
             System.out.println("3. Mostrar todos los estudiantes");
             System.out.println("4. Salir");
             System.out.print("Elija una opción: ");
-
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir el salto de línea
-
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese el nombre del estudiante: ");
-                    String nombreAgregar = scanner.nextLine();
-                    try {
-                        registro.agregarEstudiante(nombreAgregar);
-                        System.out.println("Estudiante agregado con éxito.");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Error: " + e.getMessage());
-                    }
+                    // ... (sin cambios)
                     break;
                 case 2:
-                    System.out.print("Ingrese el nombre del estudiante a buscar: ");
-                    String nombreBuscar = scanner.nextLine();
-                    try {
-                        Estudiante encontrado = registro.buscarEstudiante(nombreBuscar);
-                        System.out.println("Estudiante encontrado: " + encontrado);
-                    } catch (NoSuchElementException e) {
-                        System.out.println("Error: " + e.getMessage());
+                    if (registro.estaVacia()) {
+                        System.out.println("La lista de estudiantes está vacía. No se puede realizar la búsqueda.");
+                    } else {
+                        System.out.print("Ingrese el nombre del estudiante a buscar: ");
+                        String nombreBuscar = scanner.nextLine();
+                        try {
+                            Estudiante encontrado = registro.buscarEstudiante(nombreBuscar);
+                            System.out.println("Estudiante encontrado: " + encontrado);
+                        } catch (NoSuchElementException e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
                     }
                     break;
                 case 3:
-                    System.out.println("Lista de estudiantes:");
-                    registro.mostrarEstudiantes();
+                    if (registro.estaVacia()) {
+                        System.out.println("La lista de estudiantes está vacía.");
+                    } else {
+                        System.out.println("Lista de estudiantes:");
+                        registro.mostrarEstudiantes();
+                    }
                     break;
-                case 4:
-                    System.out.println("Saliendo del programa...");
-                    scanner.close();
-                    return;
                 default:
-                    System.out.println("Opción no válida. Por favor, intente de nuevo.");
+                    // ... (sin cambios)
             }
         }
     }
