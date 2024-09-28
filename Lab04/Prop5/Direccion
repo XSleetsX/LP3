@@ -1,24 +1,48 @@
 package Prop5;
+import java.util.regex.Pattern;
 
 public class Direccion {
     private String calle;
     private String ciudad;
     private String codigoPostal;
 
+    private static final Pattern CODIGO_POSTAL_PATTERN = Pattern.compile("^\\d{5}$");
+
     public Direccion(String calle, String ciudad, String codigoPostal) {
-        this.calle = calle;
-        this.ciudad = ciudad;
-        this.codigoPostal = codigoPostal;
+        setCalle(calle);
+        setCiudad(ciudad);
+        setCodigoPostal(codigoPostal);
     }
 
     public String getCalle() { return calle; }
-    public void setCalle(String calle) { this.calle = calle; }
+    
+    public void setCalle(String calle) {
+        if (calle == null || calle.trim().isEmpty()) {
+            throw new IllegalArgumentException("La calle no puede ser nula o vacía.");
+        }
+        this.calle = calle.trim();
+    }
     
     public String getCiudad() { return ciudad; }
-    public void setCiudad(String ciudad) { this.ciudad = ciudad; }
-
+    
+    public void setCiudad(String ciudad) {
+        if (ciudad == null || ciudad.trim().isEmpty()) {
+            throw new IllegalArgumentException("La ciudad no puede ser nula o vacía.");
+        }
+        this.ciudad = ciudad.trim();
+    }
+    
     public String getCodigoPostal() { return codigoPostal; }
-    public void setCodigoPostal(String codigoPostal) { this.codigoPostal = codigoPostal; }
+    
+    public void setCodigoPostal(String codigoPostal) {
+        if (codigoPostal == null || codigoPostal.trim().isEmpty()) {
+            throw new IllegalArgumentException("El código postal no puede ser nulo o vacío.");
+        }
+        if (!CODIGO_POSTAL_PATTERN.matcher(codigoPostal.trim()).matches()) {
+            throw new IllegalArgumentException("Formato de código postal no válido. Debe ser de 5 dígitos.");
+        }
+        this.codigoPostal = codigoPostal.trim();
+    }
 
     @Override
     public String toString() {
