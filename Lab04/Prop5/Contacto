@@ -1,4 +1,5 @@
 package Prop5;
+import java.util.regex.Pattern;
 
 public class Contacto {
     private String nombre;
@@ -6,55 +7,52 @@ public class Contacto {
     private Direccion direccion;
     private Telefono telefono;
 
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+        "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
+    );
+
     public Contacto(String nombre, String email, Direccion direccion, Telefono telefono) {
-        if (nombre == null || nombre.isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede ser nulo o vacío.");
-        }
-        this.nombre = nombre;
-        if (email == null || email.isEmpty()) {
-            throw new IllegalArgumentException("El email no puede ser nulo o vacío.");
-        }
-        this.email = email;
-        this.direccion = direccion;
-        if (telefono == null || telefono.isEmpty()) {
-            throw new IllegalArgumentException("El email no puede ser nulo o vacío.");
-        }
-        if (telefono < 100000000 || telefono > 999999999) {
-            throw new IllegalArgumentException("Número de teléfono no válido.);
-        }
-        this.telefono = telefono;
+        setNombre(nombre);
+        setEmail(email);
+        setDireccion(direccion);
+        setTelefono(telefono);
     }
 
     public String getNombre() { return nombre; }
-
+    
     public void setNombre(String nombre) {
-        if (nombre == null || nombre.isEmpty()) {
+        if (nombre == null || nombre.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede ser nulo o vacío.");
         }
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     public String getEmail() { return email; }
-
+    
     public void setEmail(String email) {
-    	if (email == null || email.isEmpty()) {
+        if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException("El email no puede ser nulo o vacío.");
         }
-        this.email = email;
+        if (!EMAIL_PATTERN.matcher(email.trim()).matches()) {
+            throw new IllegalArgumentException("Formato de email no válido.");
+        }
+        this.email = email.trim();
     }
 
     public Direccion getDireccion() { return direccion; }
+    
     public void setDireccion(Direccion direccion) { 
-        if (direccion == null || direccion.isEmpty()) {
-            throw new IllegalArgumentException("La dirección no puede ser nula o vacía.");
+        if (direccion == null) {
+            throw new IllegalArgumentException("La dirección no puede ser nula.");
         }
         this.direccion = direccion; 
     }
 
     public Telefono getTelefono() { return telefono; }
+    
     public void setTelefono(Telefono telefono) { 
-        if (telefono == null || telefono.isEmpty()) {
-            throw new IllegalArgumentException("El teléfono no puede ser nulo o vacío.");
+        if (telefono == null) {
+            throw new IllegalArgumentException("El teléfono no puede ser nulo.");
         }
         this.telefono = telefono; 
     }
