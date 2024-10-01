@@ -1,0 +1,39 @@
+package ModeloVistaControlador;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+	public static void main(String[] args) {
+		//Inicializar las instancias
+		List<Task> tasks = new ArrayList();
+		TaskView view = new TaskView();
+		TaskController controller = new TaskController(tasks,view);
+		
+		//Agregar tareas
+		controller.addTask("Limpiar el baño.");
+		controller.addTask("Ordenar el cuarto.");
+		
+		//Mostrar la lista de tareas
+		controller.displatTasks();
+		
+		//Modificar el estado de una tarea con validación
+		try {
+			controller.completeTask(1);
+		} catch (FueraRangoException e) {
+			System.out.println(e);
+		}
+		try {
+			controller.completeTask(5);
+		} catch (FueraRangoException e) {
+			System.out.println(e);
+		}
+		try {
+			controller.completeTask(-3);
+		} catch (FueraRangoException e) {
+			System.out.println(e);
+		}
+		
+		//Volver a mostrar la lista de tareas
+		controller.displatTasks();
+	}
+}
