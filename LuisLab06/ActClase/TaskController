@@ -1,0 +1,28 @@
+package ModeloVistaControlador;
+import java.util.List;
+
+public class TaskController {
+	private List<Task> tasks;
+	private TaskView view;
+	
+	//Constructor
+	public TaskController(List<Task> tasks, TaskView view) {
+		this.tasks = tasks;
+		this.view = view;
+	}
+	
+	//Métodos
+	public void addTask(String taskName) {
+		tasks.add(new Task(taskName));
+		view.printMessage("Tarea agregada con éxito");
+	}
+	public void completeTask(int index) throws FueraRangoException {
+		if (index > (tasks.size() - 1) || index < -1 * (tasks.size())) {
+			throw new FueraRangoException("El índice está fuera del límite de la lista.");
+		}
+		tasks.get(index).complete();
+	}
+	public void displatTasks() {
+		view.printTasks(tasks);
+	}
+}
