@@ -1,0 +1,18 @@
+package ModeloVistaControlador;
+
+public class Task {
+	private String name;
+	private boolean completed;
+	
+	//Constructor
+	public Task(String name) {
+		this.name = name;
+		this.completed = false;
+	}
+	
+	//Métodos
+	public String getName() { return name; }
+	public boolean isCompleted() { return completed; }
+	public void complete() { this.completed = true; }
+	
+}
