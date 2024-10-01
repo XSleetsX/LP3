@@ -1,0 +1,7 @@
+package Lab05;
+
+public class InvalidSubscriptException extends Exception{
+	public InvalidSubscriptException(String mensaje) {
+		super(mensaje);
+	}
+}
