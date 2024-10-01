@@ -1,0 +1,16 @@
+package ModeloVistaControlador;
+import java.util.List;
+
+public class TaskView {
+	//Métodos
+	public void printTasks(List<Task> tasks) {
+		for (Task task : tasks) {
+			if (task.isCompleted() == true) {
+				System.out.println("Tarea: " + task.getName() + "\nEstado: Completada\n");
+			} else {
+				System.out.println("Tarea: " + task.getName() + "\nEstado: Pendiente\n");
+			}
+		}
+	}
+	public void printMessage(String message) { System.out.println(message); }
+}
