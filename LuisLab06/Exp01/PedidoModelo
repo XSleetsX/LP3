@@ -1,0 +1,43 @@
+package LuisLab06;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PedidoModelo {
+	private List<Pedido> pedidos;
+	
+	public PedidoModelo() {
+		pedidos = new ArrayList<>();
+	}
+	
+	public void agregarPedido(Pedido pedido) {
+		pedidos.add(pedido);
+	}
+	public void eliminarPedido(String nombrePlato) {
+		for(Pedido pedido : pedidos) { 
+			if (pedido.getNombrePlato() == nombrePlato) {
+				pedidos.remove(pedido);
+			}
+		}
+	}
+	public void actualizarPedido(String nombrePlato, String nuevoNombre) {
+		for (Pedido pedido : pedidos) {
+			if (pedido.getNombrePlato() == nombrePlato) {
+				pedido.setNombrePlato(nuevoNombre);
+			}
+		}
+	}
+	public boolean buscarPedido(String nombrePlato) {
+		for(Pedido pedido : pedidos) { 
+			if (pedido.getNombrePlato() == nombrePlato) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public int contarPedidos() {
+		return pedidos.size();
+	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+}
