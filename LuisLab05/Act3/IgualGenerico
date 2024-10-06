@@ -1,0 +1,13 @@
+package Lab05_Act3;
+
+public class IgualGenerico {
+	public static <T> boolean esIgualA(T objeto1, T objeto2) {
+		if (objeto1 == null && objeto2 == null) { //condicional para comparar null
+			return true;
+		}
+		if (objeto1 == null || objeto2 == null) { //condicional para comparar null
+			return false;
+		}
+		return objeto1.equals(objeto2);
+	}
+}
