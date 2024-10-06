@@ -1,0 +1,18 @@
+package Lab05_Prop1;
+
+public class PruebaPar {
+	public static void main(String[] args) {
+		Par<Integer, Double> par1 = new Par<>(1, 9.9);
+		System.out.println(par1);
+	
+		Par<Integer, Double> par2 = new Par<>(5, 6.6);
+		System.out.println(par2);
+		
+		Par<Integer, Double> par3 = new Par<>(1, 9.9);
+		System.out.println(par3);
+		
+		// prueba método esIgual()
+		System.out.println("¿El par1 es igual al par2? " + par1.esIgual(par2));
+		System.out.println("¿El par1 es igual al par3? " + par1.esIgual(par3));
+	}
+}
