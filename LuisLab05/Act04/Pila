@@ -1,0 +1,88 @@
+package Lab05_Act4;
+import java.util.Stack;
+
+public class Pila< E > {
+	private final int tamanio; // número de elementos en la pila
+	private int superior; // ubicación del elemento superior
+	private E[] elementos; // arreglo que almacena los elementos de la pila
+	
+	// el constructor sin argumentos crea una pila del tamaño predeterminado
+	public Pila(){
+		this( 10 ); // tamaño predeterminado de la pila
+	} // fin del constructor de Pila sin argumentos
+
+	// constructor que crea una pila del número especificado de elementos
+	public Pila( int s ) {
+		tamanio = s > 0 ? s : 10; // establece el tamaño de la Pila
+		superior = -1; // al principio, la MarcoTeorico.Pila está vacía
+		elementos = ( E[] ) new Object[ tamanio ]; // crea el arreglo
+	} // fin del constructor de Pila sin argumentos
+
+	// mete un elemento a la pila; si tiene éxito, devuelve verdadero;// en caso contrario, lanza excepción ExcepcionPilaLlena
+	public void push( E valorAMeter ) throws ExceptionPilaLlena {
+		if ( superior == tamanio - 1 ) {// si la pila está llena
+			throw new ExceptionPilaLlena( String.format("La Pila esta llena, no se puede meter %s", valorAMeter));
+		}
+		elementos[ ++superior ] = valorAMeter; // mete valorAMeter enPila
+	} // fin del método push
+
+	// devuelve el ultimo elemento o lanza ExcepcionPilaVacia
+	public E pop() throws ExceptionPilaVacia{
+		if ( superior == -1 ) {// si la pila está vacía
+			throw new ExceptionPilaVacia( "Pila vacia, no se puede sacar");
+		}
+		return elementos[ superior-- ]; // elimina y devuelve el ultimo
+	} // fin del método pop
+	
+	// busca un elemento en la pila y devuelve un valor booleano
+	public boolean contains(E elemento) {
+		for (int i = elementos.length - 1; i >= 0; i--) { //recorre la lista desde arriba
+			if (elementos[i].equals(elemento)) {
+				return true;
+			}
+		}
+		return false;
+	} //fin del método contains
+	
+	// verifica si la pila está vacía
+	public boolean isEmpty() {
+		return superior == -1;
+	}
+	
+	// compara la pila actual con otra pila
+	public boolean esIgual(Pila<E> otraPila) {
+        if (this.superior != otraPila.superior) { // compara los tamaños de las pilas
+            return false;
+        }
+        
+        Stack<E> pilaApoyo1 = new Stack<>(); // creamos una pila temporal 1 para mover los elementos
+        Stack<E> pilaApoyo2 = new Stack<>(); // creamos una pila temporal 2 para mover los elementos
+
+        boolean sonIguales = true;
+
+        while (!this.isEmpty() && !otraPila.isEmpty()) { // mueve elementos desde ambas pilas a las pilas temporales
+            try {
+            	E elemento1 = this.pop();
+            	E elemento2 = otraPila.pop();
+            	if (elemento1 == null ? elemento2 != null : !elemento1.equals(elemento2)) {
+            		sonIguales = false;
+            	}
+            	pilaApoyo1.push(elemento1);
+            	pilaApoyo2.push(elemento2);
+            } catch( ExceptionPilaVacia excepcionPilaVacia ) {
+    			System.err.println();
+    			excepcionPilaVacia.printStackTrace();
+    		}
+        }
+        while (!pilaApoyo1.isEmpty() && !pilaApoyo2.isEmpty()) { // mueve elementos desde ambas pilas temporales a las pilas
+            try {
+            	this.push(pilaApoyo1.pop());
+            	otraPila.push(pilaApoyo2.pop());
+    		} catch( ExceptionPilaLlena excepcionPilaLlena ) {
+    			System.err.println();
+    			excepcionPilaLlena.printStackTrace();
+    		}
+        }
+        return sonIguales;
+    }
+} // fin de la clase MarcoTeorico.Pila< E >
