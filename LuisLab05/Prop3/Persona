@@ -1,0 +1,14 @@
+package Lab05_Prop1;
+
+public class Persona { // clase para prueba
+	private String nombre;
+	
+	public Persona(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	@Override
+	public String toString() {
+		return  "(Persona, nombre: " + nombre + ")";
+	}
+}
