@@ -1,0 +1,7 @@
+package Lab05_Act4;
+
+public class ExceptionPilaLlena extends Exception{
+	public ExceptionPilaLlena(String mensaje) {
+		super(mensaje);
+	}
+}
