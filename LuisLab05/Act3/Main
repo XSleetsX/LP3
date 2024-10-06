@@ -1,0 +1,23 @@
+package Lab05_Act3;
+
+public class Main {
+	public static void main(String[] args) {
+		// comparando tipos integer
+        System.out.println("Comparar Integer (5, 5): " + IgualGenerico.esIgualA(5, 5));
+        System.out.println("Comparar Integer (5, 10): " + IgualGenerico.esIgualA(5, 10));
+        
+        // comparando tipos String
+        System.out.println("Comparar String (\"Hola\", \"Hola\"): " + IgualGenerico.esIgualA("Hola", "Hola"));
+        System.out.println("Comparar String (\"Hola\", \"Adiós\"): " + IgualGenerico.esIgualA("Hola", "Mundo"));
+        
+        // comparando tipos null
+        System.out.println("Comparar null (null, null): " + IgualGenerico.esIgualA(null, null));
+        System.out.println("Comparar null (null, \"Hola\"): " + IgualGenerico.esIgualA(null, "Hola"));
+        
+        // comparando tipos Object
+        Object objeto1 = new Object();
+        Object objeto2 = new Object();
+        System.out.println("Comparar Object (objeto1, objeto1): " + IgualGenerico.esIgualA(objeto1, objeto1));
+        System.out.println("Comparar Object (objeto1, objeto2): " + IgualGenerico.esIgualA(objeto1, objeto2));
+	}
+}
