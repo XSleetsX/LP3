@@ -1,0 +1,77 @@
+package Lab05_Act4;
+
+public class PruebaPila {
+	private double[] elementosDouble1 = { 1.1, 2.2, 3.3, 4.4, 5.5 };
+	private double[] elementosDouble2 = { 10.10, 9.9, 8.8, 7.7, 6.6, 5.5, 4.4, 3.3, 2.2, 1.1};
+	private double[] elementosDouble3 = { 1.1, 2.2, 3.3, 4.4, 5.5 };
+	private Pila< Double > pilaDouble1;
+	private Pila< Double > pilaDouble2;
+	private Pila< Double > pilaDouble3;
+	
+	// prueba objetos Pila
+	public void pruebaPilas() {
+		pilaDouble1 = new Pila< Double >( 5 );
+		pilaDouble2 = new Pila< Double >( 10 );
+		pilaDouble3 = new Pila< Double >( 5 );
+		
+		pruebaPushDouble1();
+		pruebaPushDouble2();
+		pruebaPushDouble3();
+		
+        //prueba comparación de dos pilas iguales
+        System.out.println("\n¿pilaDouble es igual a pilaDouble? " + pilaDouble1.esIgual(pilaDouble3));
+        System.out.println("¿pilaDouble es igual a pilaInteger? " + pilaDouble1.esIgual(pilaDouble2));
+	} // fin del método probarPilas
+
+	// prueba el método push para la primera pila double
+	public void pruebaPushDouble1() {
+		// mete elementos en la pila
+		try{
+			System.out.println( "\nMetiendo elementos en pilaDouble1" );
+			// mete elementos en la Pila
+			for ( double elemento : elementosDouble1 ) {
+				System.out.printf( " %.1f ", elemento );
+				pilaDouble1.push( elemento );
+			} // fin de for
+		} catch ( ExceptionPilaLlena excepcionPilaLlena ) {
+			System.err.println();
+			excepcionPilaLlena.printStackTrace();
+		} // find de catch ExcepcionPilaLlena
+	} // fin del método pruebaPushDouble1
+	
+	// prueba el método push para la segunda pila double
+	public void pruebaPushDouble2() {
+		// mete elementos a la pila
+		try {
+			System.out.println( "\nMetiendo elementos en pilaDouble2" );
+			// mete elementos a la Pila
+			for ( double elemento : elementosDouble2 ) {
+				System.out.printf( " %.1f ", elemento );
+				pilaDouble2.push( elemento );
+			} // fin de for
+		} catch ( ExceptionPilaLlena excepcionPilaLlena ) {
+			System.err.println();
+			excepcionPilaLlena.printStackTrace();
+		} // fin de catch ExcepcionPilaLlena
+	} // fin del método pruebaPushDouble2
+	
+	public void pruebaPushDouble3() {
+		// mete elementos a la pila
+		try {
+			System.out.println( "\nMetiendo elementos en pilaDouble3" );
+			// mete elementos a la Pila
+			for ( double elemento : elementosDouble3 ) {
+				System.out.printf( " %.1f ", elemento );
+				pilaDouble3.push( elemento );
+			} // fin de for
+		} catch ( ExceptionPilaLlena excepcionPilaLlena ) {
+			System.err.println();
+			excepcionPilaLlena.printStackTrace();
+		} // fin de catch ExcepcionPilaLlena
+	} // fin del método pruebaPushDouble2
+	
+	public static void main( String args[] ) {
+		PruebaPila aplicacion = new PruebaPila();
+		aplicacion.pruebaPilas();
+	} // fin de main
+} // fin de la clase PruebaPila
