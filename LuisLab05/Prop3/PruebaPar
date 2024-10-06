@@ -1,0 +1,19 @@
+package Lab05_Prop1;
+
+public class PruebaPar {
+	public static <F, S> void imprimirPar(Par<F,S> par) { // recibe un par genérico y lo muestra en pantalla
+		System.out.println(par);
+	}
+	
+	public static void main(String[] args) {
+		Par<String, Integer> par1 = new Par<>("Hola", 123); // par genérico tipo String-Integer
+        imprimirPar(par1); 
+	
+        Par<Double, Boolean> par2 = new Par<>(6.6, true); // par genérico tipo Double-Boolean
+        imprimirPar(par2);
+		
+        Persona persona = new Persona("Luis");
+        Par<Persona, Integer> par3 = new Par<>(persona, 42); // par genérico tipo Persona-Integer
+        imprimirPar(par3);
+	}
+}
