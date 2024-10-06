@@ -1,0 +1,35 @@
+Metiendo elementos en pilaDouble
+ 1.1  2.2  3.3  4.4  5.5  6.6 
+Lab05_Act2.ExceptionPilaLlena: La Pila esta llena, no se puede meter 6.6
+	at Lab05_Act2/Lab05_Act2.Pila.push(Pila.java:23)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.pruebaPushDouble(PruebaPila.java:36)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.pruebaPilas(PruebaPila.java:14)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.main(PruebaPila.java:95)
+
+Sacando elementos de pilaDouble
+5.5 4.4 3.3 2.2 1.1 
+Lab05_Act2.ExceptionPilaVacia: Pila vacia, no se puede sacar
+	at Lab05_Act2/Lab05_Act2.Pila.pop(Pila.java:31)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.pruebaPopDouble(PruebaPila.java:52)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.pruebaPilas(PruebaPila.java:15)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.main(PruebaPila.java:95)
+
+Metiendo elementos a pilaInteger
+ 1  2  3  4  5  6  7  8  9  10  11 
+Lab05_Act2.ExceptionPilaLlena: La Pila esta llena, no se puede meter 11
+	at Lab05_Act2/Lab05_Act2.Pila.push(Pila.java:23)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.pruebaPushInteger(PruebaPila.java:69)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.pruebaPilas(PruebaPila.java:16)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.main(PruebaPila.java:95)
+
+Sacando elementos de pilaInteger
+10 9 8 7 6 5 4 3 2 1 
+Lab05_Act2.ExceptionPilaVacia: Pila vacia, no se puede sacar
+	at Lab05_Act2/Lab05_Act2.Pila.pop(Pila.java:31)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.pruebaPopInteger(PruebaPila.java:84)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.pruebaPilas(PruebaPila.java:17)
+	at Lab05_Act2/Lab05_Act2.PruebaPila.main(PruebaPila.java:95)
+¿La pila contiene el elemento 3.3? true
+¿La pila contiene el elemento 6.6? false
+¿La pila contiene el elemento 7? true
+¿La pila contiene el elemento 11? false
