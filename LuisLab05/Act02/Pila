@@ -1,0 +1,45 @@
+package Lab05_Act2;
+
+public class Pila< E > {
+	private final int tamanio; // número de elementos en la pila
+	private int superior; // ubicación del elemento superior
+	private E[] elementos; // arreglo que almacena los elementos de la pila
+	
+	// el constructor sin argumentos crea una pila del tamaño predeterminado
+	public Pila(){
+		this( 10 ); // tamaño predeterminado de la pila
+	} // fin del constructor de Pila sin argumentos
+
+	// constructor que crea una pila del número especificado de elementos
+	public Pila( int s ) {
+		tamanio = s > 0 ? s : 10; // establece el tamaño de la Pila
+		superior = -1; // al principio, la MarcoTeorico.Pila está vacía
+		elementos = ( E[] ) new Object[ tamanio ]; // crea el arreglo
+	} // fin del constructor de Pila sin argumentos
+
+	// mete un elemento a la pila; si tiene éxito, devuelve verdadero;// en caso contrario, lanza excepción ExcepcionPilaLlena
+	public void push( E valorAMeter ) throws ExceptionPilaLlena {
+		if ( superior == tamanio - 1 ) {// si la pila está llena
+			throw new ExceptionPilaLlena( String.format("La Pila esta llena, no se puede meter %s", valorAMeter));
+		}
+		elementos[ ++superior ] = valorAMeter; // mete valorAMeter enPila
+	} // fin del método push
+
+	// devuelve el ultimo elemento o lanza ExcepcionPilaVacia
+	public E pop() throws ExceptionPilaVacia{
+		if ( superior == -1 ) {// si la pila está vacía
+			throw new ExceptionPilaVacia( "Pila vacia, no se puede sacar");
+		}
+		return elementos[ superior-- ]; // elimina y devuelve el ultimo
+	} // fin del método pop
+	
+	// busca un elemento en la pila y devuelve un valor booleano
+	public boolean contains(E elemento) {
+		for (int i = elementos.length - 1; i >= 0; i--) { //recorre la lista desde arriba
+			if (elementos[i].equals(elemento)) {
+				return true;
+			}
+		}
+		return false;
+	} //fin del método contains
+} // fin de la clase MarcoTeorico.Pila< E >
