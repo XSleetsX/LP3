@@ -1,0 +1,31 @@
+package Lab05_Prop1;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Contenedor<F, S> {
+	private List<Par<F,S>> contenedor; // ArrayList que va a contener todos pares
+	
+	public Contenedor() { // constructor
+		this.contenedor = new ArrayList<>();
+		System.out.println("Contenedor creado exitosamente.");
+	}
+	
+	public void agregarPar(F primero, S segundo) { // agrega pares al contenedor
+		contenedor.add(new Par<>(primero, segundo));
+		System.out.println("Par agregado exitosamente.");
+	}
+	
+	public void obtenerPar(int indice) { // obtiene un par del contenedor
+		System.out.println("Par encontrado: ");
+		System.out.println(contenedor.get(indice));
+	}
+	
+	public List<Par<F,S>> obtenerTodosLosPares() { // obtiene la lista del contenedor
+		return contenedor;
+	}
+	public void mostrarPares() {
+		for (Par<F,S> par : contenedor) { // muestra todos los pares
+			System.out.println(par);
+		}
+	}
+}
