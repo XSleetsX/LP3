@@ -1,0 +1,7 @@
+package Lab05_Act2;
+
+public class ExceptionPilaVacia extends Exception{
+	public ExceptionPilaVacia(String mensaje) {
+		super(mensaje);
+	}
+}
