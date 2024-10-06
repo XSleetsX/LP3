@@ -1,0 +1,8 @@
+Comparar Integer (5, 5): true
+Comparar Integer (5, 10): false
+Comparar String ("Hola", "Hola"): true
+Comparar String ("Hola", "Adiós"): false
+Comparar null (null, null): true
+Comparar null (null, "Hola"): false
+Comparar Object (objeto1, objeto1): true
+Comparar Object (objeto1, objeto2): false
