@@ -1,0 +1,29 @@
+package Lab05_Prop1;
+
+public class Par< F,S > {
+	private F primero;
+	private S segundo;
+	
+	public Par(F primero, S segundo) {
+		this.primero = primero;
+		this.segundo = segundo;
+	}
+	
+	public void setPrimero(F p) { this.primero = p; }
+	public void setSegundo(S s) { this.segundo = s; }
+	
+	public F getPrimero() { return primero; }
+	public S getSegundo() { return segundo; }
+	
+	public String toString() {
+		return "(Primero: " + primero + " ,Segundo: " + segundo + ")";
+	}
+	
+	public boolean esIgual(Par<F,S> otroPar) { // método que recibe otro par genérico
+		if (primero.equals(otroPar.getPrimero()) && segundo.equals(otroPar.getSegundo())) { // compara los atributos de cada par
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
