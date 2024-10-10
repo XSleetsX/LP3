@@ -1,55 +1,109 @@
 package Lab06_Act1;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class PedidoModelo {
-	private List<Pedido> pedidos;
-	private List<String> historial;
-	
-	public PedidoModelo() {
-		pedidos = new ArrayList<Pedido>();
-		historial = new ArrayList<String>();
+public class PedidoVista {
+	private Scanner scanner;
+	public PedidoVista() {
+		scanner = new Scanner(System.in);
 	}
-	
-	public void agregarPedido(Pedido pedido) {
-		pedidos.add(pedido);
+	public String solicitarNombrePlato() {
+		System.out.print("Introduce el nombre del plato: ");
+		return scanner.nextLine();
 	}
-	public void eliminarPedido(String nombrePlato) {
-		for (int i = 0; i < pedidos.size(); i++) { 
-			if (pedidos.get(i).getNombrePlato().equals(nombrePlato)) {
-				pedidos.remove(i);
+	public String solicitarTipoPlato() {
+		System.out.print("Introduce el tipo del plato: ");
+		return scanner.nextLine();
+	}
+	public String solicitarNuevoNombre() {
+		System.out.print("Introduce el nuevo nombre del plato: ");
+		return scanner.nextLine();
+	}
+	public void mostrarPedidos(List<Pedido> pedidos) {
+		if (pedidos.isEmpty()) {
+			System.out.println("No hay pedidos en la lista.");
+		} else {
+			System.out.println("Lista de Pedidos: ");
+			for (int i = 0; i < pedidos.size(); i++) {
+				System.out.println("- " + pedidos.get(i).getNombrePlato() + ", " + pedidos.get(i).getTipoPlato() + ", " + pedidos.get(i).estaCompletadoStr());
 			}
 		}
 	}
-	public void actualizarPedido(String nombrePlato, String nuevoNombre) {
-		for (int i = 0; i < pedidos.size(); i++) {
-			if (pedidos.get(i).getNombrePlato().equals(nombrePlato)) {
-				pedidos.get(i).setNombrePlato(nuevoNombre);
+	public void mostrarPedidosCompletados(List<Pedido> pedidos) {
+		if (pedidos.isEmpty()) {
+			System.out.println("No hay pedidos en la lista.");
+		} else {
+			int cont = 0;
+			for (int i = 0; i < pedidos.size(); i++) {
+				if (pedidos.get(i).estaCompletadoBool() == true) {
+					cont++;
+				}
+			}
+			System.out.println("Cantidad de pedidos completados: " + cont);
+			System.out.println("Lista de Pedidos Completados: ");
+			for (int i = 0; i < pedidos.size(); i++) {
+				if (pedidos.get(i).estaCompletadoBool() == true) {
+					System.out.println("- " + pedidos.get(i).getNombrePlato() + ", " + pedidos.get(i).getTipoPlato() + ", " + pedidos.get(i).estaCompletadoStr());
+				}
 			}
 		}
 	}
-	public boolean buscarPedido(String nombrePlato) {
-		for	(int i = 0; i < pedidos.size(); i++) { 
-			if (pedidos.get(i).getNombrePlato().equals(nombrePlato)) {
-				return true;
+	public void mostrarPedidosPendientes(List<Pedido> pedidos) {
+		if (pedidos.isEmpty()) {
+			System.out.println("No hay pedidos en la lista.");
+		} else {
+			int cont = 0;
+			for (int i = 0; i < pedidos.size(); i++) {
+				if (pedidos.get(i).estaCompletadoBool() == false) {
+					cont++;
+				}
+			}
+			System.out.println("Cantidad de pedidos pendientes: " + cont);
+			System.out.println("Lista de Pedidos Completados: ");
+			for (int i = 0; i < pedidos.size(); i++) {
+				if (pedidos.get(i).estaCompletadoBool() == false) {
+					System.out.println("- " + pedidos.get(i).getNombrePlato() + ", " + pedidos.get(i).getTipoPlato() + ", " + pedidos.get(i).estaCompletadoStr());
+				}
 			}
 		}
-		return false;
 	}
-	public void completarPedido(String nombrePlato) {
-		for (int i = 0; i < pedidos.size(); i++) {
-			if (pedidos.get(i).getNombrePlato().equals(nombrePlato)) {
-				pedidos.get(i).completarPedido();
+	public void mostrarHistorial(List<String> historial) {
+		if (historial.isEmpty()) {
+			System.out.println("Historial vacío.");
+		} else {
+			System.out.println("Historial: ");
+			for (String  registro : historial) {
+				System.out.println(registro);
 			}
 		}
 	}
-	public int contarPedidos() {
-		return pedidos.size();
+	public void mostrarMenu() {
+		System.out.println("\nOpciones:");
+		System.out.println("1. Agregar Pedido");
+		System.out.println("2. Eliminar Pedido");
+		System.out.println("3. Actualizar Pedido");
+		System.out.println("4. Buscar Pedido");
+		System.out.println("5. Completar Pedido");
+		System.out.println("6. Contar Pedidos");
+		System.out.println("7. Mostrar Pedidos");
+		System.out.println("8. Mostrar Historial Pedidos");
+		System.out.println("9. Salir");
 	}
-	public List<Pedido> getPedidos() {
-		return pedidos;
+	public void mostrarMenuPedidos() {
+		System.out.println("\nOpciones:");
+		System.out.println("1. Mostrar Pedidos Completados");
+		System.out.println("2. Mostrar Pedidos Pendientes");
+		System.out.println("3. Mostrar Todos los Pedidos");
+		System.out.println("4. Regresar");
 	}
-	public List<String> getHistorial() {
-		return historial;
+	public String solicitarOpcion() {
+		System.out.print("Selecciona una opción: ");
+		return scanner.nextLine();
+	}
+	public void mostrarMensaje(String mensaje) {
+		System.out.println(mensaje);
+	}
+	public void cerrarScanner() {
+		scanner.close();
 	}
 }
