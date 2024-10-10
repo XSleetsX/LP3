@@ -1,1 +1,27 @@
+package LuisLab06_Prop1;
 
+import java.util.Scanner;
+
+public class CarritoComprasVista {
+	private Scanner scanner;
+	
+	public CarritoComprasVista() {
+		scanner = new Scanner(System.in);
+	}
+	
+	public void solicitarNombreProducto() {}
+	public void solicitarTipoProdcuto() {}
+	public void listarProductos() {}
+	public void verHistorial() {}
+	public void menu() {}
+	public String solicitarOpcion() {
+		System.out.print("Selecciona una opción: ");
+		return scanner.nextLine();
+	}
+	public void mostrarMensaje(String mensaje) {
+		System.out.println(mensaje);
+	}
+	public void cerrarScanner() {
+		scanner.close();
+	}
+}
