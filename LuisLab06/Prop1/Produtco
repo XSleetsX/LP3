@@ -1,1 +1,15 @@
+package LuisLab06_Prop1;
 
+public class Producto {
+	private String nombreProducto;
+	private String tipoProducto;
+	
+	public Producto(String nombreProducto, String tipoProducto) {
+		this.nombreProducto = nombreProducto;
+		this.tipoProducto = tipoProducto;
+	}
+	
+	public void setNombreProducto(String nuevoNombre) { this.nombreProducto = nuevoNombre; }
+	public String getNombreProducto() { return nombreProducto; }
+	public String getTipoProducto() { return tipoProducto; }
+}
