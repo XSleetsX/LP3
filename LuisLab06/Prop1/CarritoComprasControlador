@@ -1,1 +1,22 @@
+package LuisLab06_Prop1;
 
+public class CarritoComprasControlador {
+	private CarritoComprasModelo modelo;
+	private CarritoComprasVista vista;
+	
+	public CarritoComprasControlador(CarritoComprasModelo modelo, CarritoComprasVista vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+	}
+	
+	public void agregarProducto() {
+		
+	}
+	public void listarProductos() {}
+	public void eliminarProducto() {}
+	public void aplicarDescuento() {}
+	public void calcularEnvio() {}
+	public void verHistorial() {}
+	public void realizarCompra() {}
+	public void iniciar() {}
+}
