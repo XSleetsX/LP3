@@ -1,4 +1,4 @@
-package LuisLab06;
+package Lab06_Act1;
 import java.util.List;
 
 public class PedidoControlador {
@@ -10,24 +10,27 @@ public class PedidoControlador {
 		this.vista = vista;
 	}
 	public void agregarPedido(String nombrePlato, String tipoPlato) {
-		if(!nombrePlato.isEmpty()) {
+		if(!nombrePlato.isEmpty() || !tipoPlato.isEmpty()) {
 			modelo.agregarPedido(new Pedido(nombrePlato, tipoPlato));
+			modelo.getHistorial().add("Pedido agregado: " + nombrePlato);
 			vista.mostrarMensaje("Pedido agregado: " + nombrePlato);
 		} else {
-			vista.mostrarMensaje("El nombre del plato no puede estar vacío");
+			vista.mostrarMensaje("Alguno de los dos espacios está vacío.");
 		}
 	}
 	public void eliminarPedido(String nombrePlato) {
 		if(!nombrePlato.isEmpty()) {
 			modelo.eliminarPedido(nombrePlato);
-			vista.mostrarMensaje("Pedido eliminado con éxito.");
+			modelo.getHistorial().add("Pedido: " + nombrePlato + " eliminado con éxito.");
+			vista.mostrarMensaje("Pedido: " + nombrePlato + " eliminado con éxito.");
 		} else {
-			vista.mostrarMensaje("Debe llenar con un nombre o tipo de un pedido.");
+			vista.mostrarMensaje("Debe llenar con un nombre del pedido.");
 		}
 	}
 	public void actualizarPedido(String nombrePlato, String nuevoNombre) {
 		if(!nombrePlato.isEmpty() || !nuevoNombre.isEmpty()) {
 			modelo.actualizarPedido(nombrePlato, nuevoNombre);
+			modelo.getHistorial().add("Pedido: " + nombrePlato + ", actualizado a: " + nuevoNombre + " con éxito.");
 			vista.mostrarMensaje("Pedido: " + nombrePlato + ", actualizado a: " + nuevoNombre + " con éxito.");
 		} else {
 			vista.mostrarMensaje("Alguno de los dos espacios está vacío.");
@@ -41,22 +44,44 @@ public class PedidoControlador {
 				vista.mostrarMensaje("Pedido no encontrado.");
 			}
 		} else {
-			vista.mostrarMensaje("Alguno de los dos espacios está vacío.");
+			vista.mostrarMensaje("Debe llenar con un nombre del pedido.");
+		}
+	}
+	public void completarPedido(String nombrePlato) {
+		if(!nombrePlato.isEmpty()) {
+			modelo.completarPedido(nombrePlato);
+			modelo.getHistorial().add("Pedido: " + nombrePlato + " completado.");
+			vista.mostrarMensaje("Pedido: " + nombrePlato + " completado.");
 		}
 	}
 	public void contarPedidos() {
 		vista.mostrarMensaje("Cantidad total de pedidos: " + modelo.contarPedidos());
 	}
+	public void mostrarPedidosCompletados() {
+		List<Pedido> pedidos = modelo.getPedidos();
+		modelo.getHistorial().add("Se mostraron los pedidos completados.");
+		vista.mostrarPedidosCompletados(pedidos);
+	}
+	public void mostrarPedidosPendientes() {
+		List<Pedido> pedidos = modelo.getPedidos();
+		modelo.getHistorial().add("Se mostraron los pedidos pendientes.");
+		vista.mostrarPedidosPendientes(pedidos);
+	}
 	public void mostrarPedidos() {
 		List<Pedido> pedidos = modelo.getPedidos();
+		modelo.getHistorial().add("Se mostraron todos los pedidos.");
 		vista.mostrarPedidos(pedidos);
 	}
+	public void mostrarHistorialPedidos() {
+		List<String> historial = modelo.getHistorial();
+		vista.mostrarHistorial(historial);
+	}
 	public void iniciar() {
-		String opcion;
+		String opcion1, opcion2;
 		do {
 			vista.mostrarMenu();
-			opcion = vista.solicitarOpcion();
-			switch (opcion) {
+			opcion1 = vista.solicitarOpcion();
+			switch (opcion1) {
 				case "1": {
 					String nombrePlato = vista.solicitarNombrePlato();
 					String tipoPlato = vista.solicitarTipoPlato();
@@ -80,21 +105,50 @@ public class PedidoControlador {
 					break;
 				}
 				case "5": {
-					contarPedidos();
+					String nombrePlato = vista.solicitarNombrePlato();
+					completarPedido(nombrePlato);
 					break;
 				}
 				case "6": {
-					mostrarPedidos();
+					contarPedidos();
 					break;
 				}
 				case "7": {
+					vista.mostrarMenuPedidos();
+					opcion2 = vista.solicitarOpcion();
+					switch (opcion2) {
+						case "1": {
+							mostrarPedidosCompletados();
+							break;
+						}
+						case "2": {
+							mostrarPedidosPendientes();
+							break;
+						}
+						case "3": {
+							mostrarPedidos();
+							break;
+						}
+						case "4": {
+							continue;
+						}
+						default:
+							vista.mostrarMensaje("Opción no válida. Inténtalo de nuevo.");
+					}
+					break;
+				}
+				case "8": {
+					mostrarHistorialPedidos();
+					break;
+				}
+				case "9": {
 					vista.mostrarMensaje("Saliendo...");
 					break;
 				}
 				default:
 					vista.mostrarMensaje("Opción no válida. Inténtalo de nuevo.");
 			}
-		} while (!opcion.equals("3"));
+		} while (!opcion1.equals("8"));
 		vista.cerrarScanner();
 	}
 }
