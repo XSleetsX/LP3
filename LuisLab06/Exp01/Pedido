@@ -1,15 +1,26 @@
-package LuisLab06;
+package Lab06_Act1;
 
 public class Pedido {
 	private String nombrePlato;
 	private String tipoPlato;
+	private boolean completado;
 	
 	public Pedido(String nombrePlato, String tipoPlato) {
 		this.nombrePlato = nombrePlato;
 		this.tipoPlato = tipoPlato;
+		this.completado = false;
 	}
 	
 	public void setNombrePlato(String nuevoNombre) { this.nombrePlato = nuevoNombre; }
+	public void completarPedido() { this.completado = true; }
 	public String getNombrePlato() { return nombrePlato; }
 	public String getTipoPlato() { return tipoPlato; }
+	public boolean estaCompletadoBool() { return completado; }
+	public String estaCompletadoStr() {
+		if(completado == false) {
+			return "No completado";
+		} else {
+			return "Completado";
+		}
+	}
 }
