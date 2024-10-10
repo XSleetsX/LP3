@@ -1,12 +1,14 @@
-package LuisLab06;
+package Lab06_Act1;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoModelo {
 	private List<Pedido> pedidos;
+	private List<String> historial;
 	
 	public PedidoModelo() {
 		pedidos = new ArrayList<>();
+		historial = new ArrayList<>();
 	}
 	
 	public void agregarPedido(Pedido pedido) {
@@ -34,10 +36,20 @@ public class PedidoModelo {
 		}
 		return false;
 	}
+	public void completarPedido(String nombrePlato) {
+		for (Pedido pedido : pedidos) {
+			if (pedido.getNombrePlato() == nombrePlato) {
+				pedido.completarPedido();
+			}
+		}
+	}
 	public int contarPedidos() {
 		return pedidos.size();
 	}
 	public List<Pedido> getPedidos() {
 		return pedidos;
+	}
+	public List<String> getHistorial() {
+		return historial;
 	}
 }
