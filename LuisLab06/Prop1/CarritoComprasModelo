@@ -1,1 +1,33 @@
+package LuisLab06_Prop1;
+import java.util.ArrayList;
+import java.util.List;
 
+public class CarritoComprasModelo {
+	private List<Producto> carrito;
+	private List<String> historial;
+	
+	public CarritoComprasModelo() {
+		List<Producto> carrito = new ArrayList<Producto>();
+		List<String> historial = new ArrayList<String>();
+	}
+	
+	public void agregarProducto(Producto producto) {
+		carrito.add(producto);
+	}
+	public List<Producto> getCarrito() {
+		return carrito;
+	}
+	public void eliminarProducto(String nombreProducto) {
+		for (int i = 0; i < carrito.size(); i++) {
+			if (carrito.get(i).getNombreProducto() == nombreProducto) {
+				carrito.remove(i);
+			}
+		}
+	}
+	public void aplicarDescuento() {}
+	public void calcularEnvio() {}
+	public List<String> getHistorial() {
+		return historial;
+	}
+	public void realizarCompra() {}
+}
