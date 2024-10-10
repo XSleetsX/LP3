@@ -7,39 +7,39 @@ public class PedidoModelo {
 	private List<String> historial;
 	
 	public PedidoModelo() {
-		pedidos = new ArrayList<>();
-		historial = new ArrayList<>();
+		pedidos = new ArrayList<Pedido>();
+		historial = new ArrayList<String>();
 	}
 	
 	public void agregarPedido(Pedido pedido) {
 		pedidos.add(pedido);
 	}
 	public void eliminarPedido(String nombrePlato) {
-		for(Pedido pedido : pedidos) { 
-			if (pedido.getNombrePlato() == nombrePlato) {
-				pedidos.remove(pedido);
+		for (int i = 0; i < pedidos.size(); i++) { 
+			if (pedidos.get(i).getNombrePlato().equals(nombrePlato)) {
+				pedidos.remove(i);
 			}
 		}
 	}
 	public void actualizarPedido(String nombrePlato, String nuevoNombre) {
-		for (Pedido pedido : pedidos) {
-			if (pedido.getNombrePlato() == nombrePlato) {
-				pedido.setNombrePlato(nuevoNombre);
+		for (int i = 0; i < pedidos.size(); i++) {
+			if (pedidos.get(i).getNombrePlato().equals(nombrePlato)) {
+				pedidos.get(i).setNombrePlato(nuevoNombre);
 			}
 		}
 	}
 	public boolean buscarPedido(String nombrePlato) {
-		for(Pedido pedido : pedidos) { 
-			if (pedido.getNombrePlato() == nombrePlato) {
+		for	(int i = 0; i < pedidos.size(); i++) { 
+			if (pedidos.get(i).getNombrePlato().equals(nombrePlato)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	public void completarPedido(String nombrePlato) {
-		for (Pedido pedido : pedidos) {
-			if (pedido.getNombrePlato() == nombrePlato) {
-				pedido.completarPedido();
+		for (int i = 0; i < pedidos.size(); i++) {
+			if (pedidos.get(i).getNombrePlato().equals(nombrePlato)) {
+				pedidos.get(i).completarPedido();
 			}
 		}
 	}
