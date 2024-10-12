@@ -1,22 +1,171 @@
-package LuisLab06_Prop1;
+package Lab06_Prop1;
+import java.util.List;
+import java.util.Map;
 
 public class CarritoComprasControlador {
 	private CarritoComprasModelo modelo;
 	private CarritoComprasVista vista;
-	
+	//Constructor
 	public CarritoComprasControlador(CarritoComprasModelo modelo, CarritoComprasVista vista) {
 		this.modelo = modelo;
 		this.vista = vista;
 	}
-	
-	public void agregarProducto() {
-		
+	//Métodos con usuario
+	public void agregarUsuario(String nombreUsuario, String contrasenia) {
+		if(!nombreUsuario.isEmpty() && !contrasenia.isEmpty()) {
+			modelo.registrarUsuario(new Usuario(nombreUsuario, contrasenia));
+			vista.mostrarLetras("Usuario registrado con éxito.");
+		} else {
+			vista.mostrarLetras("Alguno de los espacios está vacío.");
+		}
 	}
-	public void listarProductos() {}
-	public void eliminarProducto() {}
-	public void aplicarDescuento() {}
-	public void calcularEnvio() {}
-	public void verHistorial() {}
-	public void realizarCompra() {}
-	public void iniciar() {}
+	public boolean loginUsuario(String nombreUsuario, String contrasenia) {
+		if(!nombreUsuario.isEmpty() && !contrasenia.isEmpty()) {
+			return modelo.loginUsuario(nombreUsuario, contrasenia);
+		} else {
+			vista.mostrarLetras("Alguno de los espacios está vacío.");
+			return false;
+		}
+	}
+	public void eliminarUsuario(String nombreUsuario, String contrasenia) {
+		if(!nombreUsuario.isEmpty() && !contrasenia.isEmpty()) {
+			modelo.eliminarUsuario(nombreUsuario, contrasenia);
+			vista.mostrarLetras("Usuario eliminado con éxito.");
+		} else {
+			vista.mostrarLetras("Alguno de los espacios está vacío.");
+		}
+	}
+	//Métodos con producto
+	public void agregarProducto(String nombreProducto, String tipoProducto, double precio) {
+		if(!nombreProducto.isEmpty() && !tipoProducto.isEmpty()) {
+			modelo.agregarProducto(new Producto(nombreProducto, tipoProducto, precio));
+			vista.mostrarLetras("Producto agregado al carrito: " + nombreProducto);
+		} else {
+			vista.mostrarLetras("Alguno de los espacios está vacío.");
+		}
+	}
+	public void eliminarProducto(String nombreProducto) {
+		if(!nombreProducto.isEmpty()) {
+			modelo.eliminarProducto(nombreProducto);
+			vista.mostrarLetras("Producto eliminado del carrito: " + nombreProducto);
+		} else {
+			vista.mostrarLetras("El nombre del producto está vacío.");
+		}
+	}
+	public void listarProductos() {
+		List<Producto> carrito = modelo.getCarrito();
+		vista.listarProductos(carrito);
+	}
+	//Métodos de precio
+	public void aplicarDescuento(String nombreProducto, double descuento) {
+		if(!nombreProducto.isEmpty() && !(descuento <= 0)) {
+			modelo.aplicarDescuento(nombreProducto, descuento);
+			vista.mostrarLetras("Descuento aplicado al producto: " + nombreProducto);
+		} else {
+			vista.mostrarLetras("Alguno de los espacios está vacío.");
+		}
+	}
+	public void verHistorial() {
+		Map<List<Producto>, Resenia> historial = modelo.getHistorial();
+		vista.verHistorial(historial);
+	}
+	public void realizarCompra(Resenia resenia) {
+		vista.mostrarLetras("Precio de compra total del carrito: ");
+		vista.mostrarNumeros(modelo.realizarCompra());
+		List<Producto> carrito = modelo.getCarrito();
+		modelo.agregarCompra(carrito, resenia);
+	}
+	
+	public void iniciar() {
+		String opcion1, opcion2;
+		do {
+			vista.menuUsuario();
+			opcion1 = vista.solicitarOpcion();
+			switch(opcion1) {
+				case "1": {
+					String nombre = vista.solicitarNombreUsuario();
+					String contrasenia = vista.solicitarContraseniaUsuario();
+					agregarUsuario(nombre, contrasenia);
+					break;
+				}
+				case "2": {
+					boolean registrado = false;
+					while (!registrado) {
+						String nombre = vista.solicitarNombreUsuario();
+						String contrasenia = vista.solicitarContraseniaUsuario();
+						registrado = modelo.loginUsuario(nombre, contrasenia);
+						if (registrado) {
+							vista.mostrarLetras("Bienvenido.");
+						} else {
+							vista.mostrarLetras("Usuario o contraseña incorrectos.");
+						}
+					}
+					do {
+						vista.menuCarrito();
+						opcion2 = vista.solicitarOpcion();
+						switch(opcion2) {
+							case "1": {
+								String nombreProducto = vista.solicitarNombreProducto();
+								String tipoProducto = vista.solicitarTipoProdcuto();
+								double precio = vista.solicitarPrecio();
+								agregarProducto(nombreProducto, tipoProducto, precio);
+								break;
+							}
+							case "2": {
+								String nombreProducto = vista.solicitarNombreProducto();
+								eliminarProducto(nombreProducto);
+								break;
+							}
+							case "3": {
+								listarProductos();
+								break;
+							}
+							case "4": {
+								String nombreProducto = vista.solicitarNombreProducto();
+								double descuento = vista.solicitarDescuento();
+								aplicarDescuento(nombreProducto, descuento);
+								break;
+							}
+							case "5": {
+								verHistorial();
+								break;
+							}
+							case "6": {
+								vista.mostrarLetras("Queremos saber tu opinión:");
+								String comentario = vista.solicitarComentario();
+								int calificacion = vista.solicitarCalificacion();
+								Resenia resenia = new Resenia(comentario, calificacion);
+								realizarCompra(resenia);
+								break;
+							}
+							case "7": {
+								vista.mostrarLetras("Deslogeando...");
+								continue;
+							}
+							default: {
+								vista.mostrarLetras("Opción no válida. Ingrese de nuevo");
+								break;
+							}
+						}
+					} while (!opcion2.equals("7"));
+					break;
+				}
+				case "3": {
+					String nombreUsuario = vista.solicitarNombreUsuario();
+					String contrasenia = vista.solicitarContraseniaUsuario();
+					eliminarUsuario(nombreUsuario, contrasenia);
+					break;
+				}
+				case "4": {
+					vista.mostrarLetras("Saliendo...");
+					break;
+				}
+				default: {
+					vista.mostrarLetras("Opción no válida. Ingrese de nuevo");
+					break;
+				}
+			}
+		} while (!opcion1.equals("4"));
+		vista.cerrarScanner();
+	}
 }
