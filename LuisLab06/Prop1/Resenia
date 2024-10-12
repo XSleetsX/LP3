@@ -1,0 +1,16 @@
+package Lab06_Prop1;
+
+public class Resenia {
+	private String comentario;
+	private int calificacion;
+	
+	public Resenia(String comentario, int calificacion) {
+		this.comentario = comentario;
+		this.calificacion = calificacion;
+	}
+	
+	public void setComentario(String comentario) { this.comentario = comentario; }
+	public void setCalificacion(int calificacion) { this.calificacion = calificacion; }
+	public String getComentario() { return comentario; }
+	public int getCalificacion() { return calificacion; }
+}
