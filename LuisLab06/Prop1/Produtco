@@ -1,15 +1,23 @@
-package LuisLab06_Prop1;
+package Lab06_Prop1;
 
 public class Producto {
 	private String nombreProducto;
 	private String tipoProducto;
+	private boolean descuento;
+	private double precio;
 	
-	public Producto(String nombreProducto, String tipoProducto) {
+	public Producto(String nombreProducto, String tipoProducto, double precio) {
 		this.nombreProducto = nombreProducto;
 		this.tipoProducto = tipoProducto;
+		this.precio = precio;
+		this.descuento = false;
 	}
 	
 	public void setNombreProducto(String nuevoNombre) { this.nombreProducto = nuevoNombre; }
+	public void aplicarDescuento() { this.descuento = true; }
+	public void setPrecio(double precio) { this.precio = precio; }
 	public String getNombreProducto() { return nombreProducto; }
 	public String getTipoProducto() { return tipoProducto; }
+	public boolean getDescuento() { return descuento; }
+	public double getPrecio() { return precio; }
 }
