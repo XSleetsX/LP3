@@ -1,16 +1,40 @@
-package LuisLab06_Prop1;
+package Lab06_Prop1;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CarritoComprasModelo {
 	private List<Producto> carrito;
-	private List<String> historial;
-	
+	private List<Usuario> usuarios;
+	private Map<List<Producto>, Resenia> historial;
+	//Constructor
 	public CarritoComprasModelo() {
-		List<Producto> carrito = new ArrayList<Producto>();
-		List<String> historial = new ArrayList<String>();
+		carrito = new ArrayList<>();
+		historial = new HashMap<>();
+		usuarios = new ArrayList<>();
+		
 	}
-	
+	//Métodos con usuario
+	public void registrarUsuario(Usuario usuario) {
+		usuarios.add(usuario);
+	}
+	public boolean loginUsuario(String nombreUsuario, String contrasenia) {
+		for (int i = 0; i < usuarios.size(); i++) {
+			if (usuarios.get(i).getNombre().equals(nombreUsuario) && usuarios.get(i).getContrasenia().equals(contrasenia)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public void eliminarUsuario(String nombreUsuario, String contrasenia) {
+		for (int i = 0; i < usuarios.size(); i++) {
+			if (!usuarios.get(i).getNombre().equals(nombreUsuario) && !usuarios.get(i).equals(contrasenia)) {
+				usuarios.remove(i);
+			}
+		}
+	}
+	//Métodos con producto
 	public void agregarProducto(Producto producto) {
 		carrito.add(producto);
 	}
@@ -19,15 +43,34 @@ public class CarritoComprasModelo {
 	}
 	public void eliminarProducto(String nombreProducto) {
 		for (int i = 0; i < carrito.size(); i++) {
-			if (carrito.get(i).getNombreProducto() == nombreProducto) {
+			if (carrito.get(i).getNombreProducto().equals(nombreProducto)) {
 				carrito.remove(i);
 			}
 		}
 	}
-	public void aplicarDescuento() {}
-	public void calcularEnvio() {}
-	public List<String> getHistorial() {
+	//Métodos con compra
+	public void agregarCompra(List<Producto> carrito, Resenia resenia) {
+		historial.put(carrito, resenia);
+	}
+	public void aplicarDescuento(String nombreProducto, double descuento) {
+		for (int i = 0; i < carrito.size(); i++) {
+			if (carrito.get(i).getNombreProducto().equals(nombreProducto)) {
+				carrito.get(i).aplicarDescuento();
+				carrito.get(i).setPrecio(carrito.get(i).getPrecio() * (1 - descuento));
+			}
+		}
+	}
+	public Map<List<Producto>, Resenia> getHistorial() {
 		return historial;
 	}
-	public void realizarCompra() {}
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+	public double realizarCompra() {
+		double precioCompra = 0;
+		for (int i = 0; i < carrito.size(); i++) {
+			precioCompra += carrito.get(i).getPrecio();
+		}
+		return precioCompra;
+	}
 }
