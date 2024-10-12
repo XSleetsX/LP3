@@ -1,5 +1,7 @@
-package LuisLab06_Prop1;
+package Lab06_Prop1;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CarritoComprasVista {
@@ -9,16 +11,90 @@ public class CarritoComprasVista {
 		scanner = new Scanner(System.in);
 	}
 	
-	public void solicitarNombreProducto() {}
-	public void solicitarTipoProdcuto() {}
-	public void listarProductos() {}
-	public void verHistorial() {}
-	public void menu() {}
+	//Métodos con usuario
+	public String solicitarNombreUsuario() {
+		System.out.println("Introduce tu nombre de usuario: ");
+		return scanner.nextLine();
+	}
+	public String solicitarContraseniaUsuario() {
+		System.out.println("Introduce tu contraseña: ");
+		return scanner.nextLine();
+	}
+	public void menuUsuario() {
+		System.out.println("Registro");
+		System.out.println("1. Registrar usuario");
+		System.out.println("2. Login");
+		System.out.println("3. Eliminar usuario");
+		System.out.println("4. Salir");
+	}
+	//Métodos con producto	
+	public String solicitarNombreProducto() {
+		System.out.println("Introduce el nombre del producto: ");
+		return scanner.nextLine();
+	}
+	public String solicitarTipoProdcuto() {
+		System.out.println("Introduce el tipo del producto: ");
+		return scanner.nextLine();
+	}
+	public double solicitarPrecio() {
+		System.out.println("Introduce el precio del producto: ");
+		return scanner.nextDouble();
+	}
+	public double solicitarDescuento() {
+		System.out.println("Introduce el descuento del producto: ");
+		return scanner.nextDouble();
+	}
+	//Métodos con resenia
+	public String solicitarComentario() {
+		System.out.println("Introduce un comentario: ");
+		return scanner.nextLine();
+	}
+	public int solicitarCalificacion() {
+		System.out.println("Califica tu compra(1-5): ");
+		return scanner.nextInt();
+	}
+	public void listarProductos(List<Producto> carrito) {
+		if(carrito.isEmpty()) {
+			System.out.println("No hay productos en el carrito.");
+		} else {
+			System.out.println("Lista de productos: ");
+			for(int i = 0; i < carrito.size(); i++) {
+				System.out.println("- Producto: " + carrito.get(i).getNombreProducto() + " , Tipo: " + carrito.get(i).getTipoProducto() + ", Precio: " + carrito.get(i).getPrecio() + ", Descuento aplicado: " + carrito.get(i).getDescuento());
+			}
+		}
+	}
+	public void verHistorial(Map<List<Producto>, Resenia> historial) {
+		if (historial.isEmpty()) {
+			System.out.println("Historial vacío.");
+		} else {
+			System.out.println("Historial: ");
+			for (Map.Entry<List<Producto>, Resenia> registro : historial.entrySet()) {
+				List<Producto> carrito = registro.getKey();
+				Resenia resenia = registro.getValue();
+				System.out.println("Compra: ");
+				listarProductos(carrito);
+				System.out.println("Comentario: " + resenia.getComentario() + ", Calificacion: " + resenia.getCalificacion());
+			}
+		}
+	}
+	public void menuCarrito() {
+		System.out.println("Opciones del carrito: ");
+		System.out.println("1. Agregar producto");
+		System.out.println("2. Eliminar producto");
+		System.out.println("3. Listar productos");
+		System.out.println("4. Aplicar descuento");
+		System.out.println("5. Ver historial de compras");
+		System.out.println("6. Realizar compra");
+		System.out.println("7. Sign out");
+	}
 	public String solicitarOpcion() {
 		System.out.print("Selecciona una opción: ");
 		return scanner.nextLine();
 	}
-	public void mostrarMensaje(String mensaje) {
+	public void mostrarLetras(String mensaje) {
+		System.out.println(mensaje);
+	}
+	public void mostrarNumeros(double mensaje) {
 		System.out.println(mensaje);
 	}
 	public void cerrarScanner() {
