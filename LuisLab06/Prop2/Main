@@ -1,0 +1,10 @@
+package Lab06_Prop2;
+
+public class Main {
+	public static void main(String[] args) {
+		CombateModelo modelo = new CombateModelo();
+		CombateVista vista = new CombateVista();
+		CombateControlador controlador = new CombateControlador(modelo, vista);
+		controlador.menuInicio();
+	}
+}
