@@ -1,1 +1,10 @@
+package Lab06_Prop1;
 
+public class Main {
+	public static void main(String[] args) {
+		CarritoComprasModelo modelo = new CarritoComprasModelo();
+		CarritoComprasVista vista = new CarritoComprasVista();
+		CarritoComprasControlador controlador = new CarritoComprasControlador(modelo, vista);
+		controlador.iniciar();
+	}
+}
