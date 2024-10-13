@@ -1,0 +1,33 @@
+package Lab06_Prop2;
+
+public class Jugador {
+	private String nombre;
+	private int salud;
+	private int danio;
+	private int nivel;
+	private InventarioControlador inventario;
+	
+	public Jugador(String nombre) {
+		this.nombre = nombre;
+		this.salud = 100;
+		this.danio = 5;
+		this.nivel = 0;
+		this.inventario = new InventarioControlador(new InventarioModelo(), new InventarioVista());
+	}
+	
+	public String getNombre() { return nombre; }
+	public int getSalud() { return salud; }
+	public void setDanio(int danio) { this.danio = danio; }
+	public InventarioControlador getInventario() { return inventario; }
+	
+	public int atacar() { return this.danio; }
+	public void recibirDanio(int danio) { this.salud -= danio; }
+	
+	public void equiparArma(Arma arma) { this.danio += arma.getDanio(); }
+	public void usarPocion(Pocion pocion) { 
+		this.salud += pocion.getStat();
+		if(this.salud > 100) {
+			this.salud = 100;
+		}
+	}
+}
