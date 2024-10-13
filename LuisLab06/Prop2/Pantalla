@@ -1,0 +1,278 @@
+Ingresa tu nombre: 
+Luis
+
+Bienvenido, Luis
+1. Empezar combate
+2. Salir
+Seleccione una opción: 
+1
+Empieza el combate.
+PRIMER ENEMIGO: Zombie - No muerto
+***Luis***|***Zombie***
+   100   |     100     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+2
+
+Inventario:
+No tienes items en el inventario.
+
+1. Agregar item
+2. Eliminar item
+3. Buscar item
+4. Usar item
+5. Atrás
+Selecciona una opción: 1
+
+Items:
+1. Espada
+2. Pocion de curación
+3. Atrás
+Selecciona una opción: 1
+Se agregó Espada al inventario.
+
+Items:
+1. Espada
+2. Pocion de curación
+3. Atrás
+Selecciona una opción: 2
+Se agregó Pocion de curación al inventario.
+
+Items:
+1. Espada
+2. Pocion de curación
+3. Atrás
+Selecciona una opción: 2
+Se agregó Pocion de curación al inventario.
+
+Items:
+1. Espada
+2. Pocion de curación
+3. Atrás
+Selecciona una opción: 3
+
+Inventario:
+1 || Espada || Arma || Hace 10 de daño.
+2 || Pocion de curación || Pocion || Cura 15 de vida.
+
+1. Agregar item
+2. Eliminar item
+3. Buscar item
+4. Usar item
+5. Atrás
+Selecciona una opción: 3
+Nombre del item: Espada
+Item encontrado.
+Espada || 1 || Arma || Hace 10 de daño.
+
+Inventario:
+1 || Espada || Arma || Hace 10 de daño.
+2 || Pocion de curación || Pocion || Cura 15 de vida.
+
+1. Agregar item
+2. Eliminar item
+3. Buscar item
+4. Usar item
+5. Atrás
+Selecciona una opción: 4
+Nombre del item: Espada
+Item utilizado.
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Luis***|***Zombie***
+   90   |     100     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   90   |     85     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Luis***|***Zombie***
+   80   |     85     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   80   |     70     
+
+Turno del: Zombie
+El enemigo se cura: 15 vida.
+***Luis***|***Zombie***
+   80   |     85     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   80   |     70     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Luis***|***Zombie***
+   70   |     70     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   70   |     55     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Luis***|***Zombie***
+   60   |     55     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+2
+
+Inventario:
+1 || Espada || Arma || Hace 10 de daño.
+2 || Pocion de curación || Pocion || Cura 15 de vida.
+
+1. Agregar item
+2. Eliminar item
+3. Buscar item
+4. Usar item
+5. Atrás
+Selecciona una opción: 4
+Nombre del item: Pocion de curación
+Item utilizado.
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Luis***|***Zombie***
+   65   |     55     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   65   |     40     
+
+Turno del: Zombie
+El enemigo se cura: 15 vida.
+***Luis***|***Zombie***
+   65   |     55     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   65   |     40     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Luis***|***Zombie***
+   55   |     40     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   55   |     25     
+
+Turno del: Zombie
+El enemigo se cura: 15 vida.
+***Luis***|***Zombie***
+   55   |     40     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   55   |     25     
+
+Turno del: Zombie
+El enemigo se cura: 15 vida.
+***Luis***|***Zombie***
+   55   |     40     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   55   |     25     
+
+Turno del: Zombie
+El enemigo se cura: 15 vida.
+***Luis***|***Zombie***
+   55   |     40     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   55   |     25     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Luis***|***Zombie***
+   45   |     25     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   45   |     10     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Luis***|***Zombie***
+   35   |     10     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Luis***|***Zombie***
+   35   |     -5     
+
+GANASTE!! Buen trabajo :)
