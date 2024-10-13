@@ -1,0 +1,131 @@
+Opciones:
+1. Agregar Pedido
+2. Eliminar Pedido
+3. Actualizar Pedido
+4. Buscar Pedido
+5. Completar Pedido
+6. Contar Pedidos
+7. Mostrar Pedidos
+8. Mostrar Historial Pedidos
+9. Salir
+Selecciona una opción: 1
+Introduce el nombre del plato: Lomo Saltado
+Introduce el tipo del plato: Fondo
+Pedido agregado: Lomo Saltado
+
+Opciones:
+1. Agregar Pedido
+2. Eliminar Pedido
+3. Actualizar Pedido
+4. Buscar Pedido
+5. Completar Pedido
+6. Contar Pedidos
+7. Mostrar Pedidos
+8. Mostrar Historial Pedidos
+9. Salir
+Selecciona una opción: 1
+Introduce el nombre del plato: Helado
+Introduce el tipo del plato: Postre
+Pedido agregado: Helado
+
+Opciones:
+1. Agregar Pedido
+2. Eliminar Pedido
+3. Actualizar Pedido
+4. Buscar Pedido
+5. Completar Pedido
+6. Contar Pedidos
+7. Mostrar Pedidos
+8. Mostrar Historial Pedidos
+9. Salir
+Selecciona una opción: 1
+Introduce el nombre del plato: Causa Rellena
+Introduce el tipo del plato: Entrada
+Pedido agregado: Causa Rellena
+
+Opciones:
+1. Agregar Pedido
+2. Eliminar Pedido
+3. Actualizar Pedido
+4. Buscar Pedido
+5. Completar Pedido
+6. Contar Pedidos
+7. Mostrar Pedidos
+8. Mostrar Historial Pedidos
+9. Salir
+Selecciona una opción: 7
+
+Opciones:
+1. Mostrar Pedidos Completados
+2. Mostrar Pedidos Pendientes
+3. Mostrar Todos los Pedidos
+4. Regresar
+Selecciona una opción: 3
+Lista de Pedidos: 
+- Lomo Saltado, Fondo, No completado
+- Helado, Postre, No completado
+- Causa Rellena, Entrada, No completado
+
+Opciones:
+1. Agregar Pedido
+2. Eliminar Pedido
+3. Actualizar Pedido
+4. Buscar Pedido
+5. Completar Pedido
+6. Contar Pedidos
+7. Mostrar Pedidos
+8. Mostrar Historial Pedidos
+9. Salir
+Selecciona una opción: 2
+Introduce el nombre del plato: Lomo Saltado
+Pedido: Lomo Saltado eliminado con éxito.
+
+Opciones:
+1. Agregar Pedido
+2. Eliminar Pedido
+3. Actualizar Pedido
+4. Buscar Pedido
+5. Completar Pedido
+6. Contar Pedidos
+7. Mostrar Pedidos
+8. Mostrar Historial Pedidos
+9. Salir
+Selecciona una opción: 3
+Introduce el nombre del plato: Helado
+Introduce el nuevo nombre del plato: Torta
+Pedido: Helado, actualizado a: Torta con éxito.
+
+Opciones:
+1. Agregar Pedido
+2. Eliminar Pedido
+3. Actualizar Pedido
+4. Buscar Pedido
+5. Completar Pedido
+6. Contar Pedidos
+7. Mostrar Pedidos
+8. Mostrar Historial Pedidos
+9. Salir
+Selecciona una opción: 7
+
+Opciones:
+1. Mostrar Pedidos Completados
+2. Mostrar Pedidos Pendientes
+3. Mostrar Todos los Pedidos
+4. Regresar
+Selecciona una opción: 3
+Lista de Pedidos: 
+- Torta, Postre, No completado
+- Causa Rellena, Entrada, No completado
+
+Opciones:
+1. Agregar Pedido
+2. Eliminar Pedido
+3. Actualizar Pedido
+4. Buscar Pedido
+5. Completar Pedido
+6. Contar Pedidos
+7. Mostrar Pedidos
+8. Mostrar Historial Pedidos
+9. Salir
+Selecciona una opción: 9
+Saliendo...
