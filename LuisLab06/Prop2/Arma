@@ -1,0 +1,12 @@
+package Lab06_Prop2;
+
+public class Arma extends Item{
+	private int danio;
+	
+	public Arma(String nombre, String tipo, String descripcion) {
+		super(nombre, tipo, descripcion);
+		this.danio = 10;
+	}
+	
+	public int getDanio() { return danio; }
+}
