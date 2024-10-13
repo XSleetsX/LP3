@@ -1,0 +1,45 @@
+package Lab06_Prop2;
+
+public class CombateModelo {
+	private int turno;
+	
+	public CombateModelo() {
+		this.turno = 1;
+	}
+	
+	public int getTurno() { return turno; }
+	public void pasarTurno() { this.turno++; }
+	
+	public int accionEnemigo(Jugador jugador, Enemigo enemigo) {
+		int numero = (int) (Math.random() * 2) + 1;
+		if(numero == 1) {
+			jugador.recibirDanio(enemigo.atacar());
+			return 1;
+		} else {
+			if(enemigo.getSalud() >= 100) {
+				jugador.recibirDanio(enemigo.atacar());
+				return 1;
+			} else {
+				enemigo.curarVida(15);
+				return 2;
+			}	
+		}
+	}
+	public void atacarEnemigo(Jugador jugador, Enemigo enemigo) {
+		enemigo.recibirDanio(jugador.atacar());
+	}
+	public boolean verificarSaludJugador(Jugador jugador) {
+		if(jugador.getSalud() <= 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	public boolean verificarSaludEnemigo(Enemigo enemigo) {
+		if(enemigo.getSalud() <= 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+}
