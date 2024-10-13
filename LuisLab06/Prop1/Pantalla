@@ -1,0 +1,150 @@
+Registro
+1. Registrar usuario
+2. Login
+3. Eliminar usuario
+4. Salir
+Selecciona una opción: 1
+Introduce tu nombre de usuario: 
+Luis
+Introduce tu contraseña: 
+lucho1928
+Usuario registrado con éxito.
+
+Registro
+1. Registrar usuario
+2. Login
+3. Eliminar usuario
+4. Salir
+Selecciona una opción: 2
+Introduce tu nombre de usuario: 
+Luis
+Introduce tu contraseña: 
+lucho1928
+
+Bienvenido.
+Opciones del carrito: 
+1. Agregar producto
+2. Eliminar producto
+3. Listar productos
+4. Aplicar descuento
+5. Ver historial de compras
+6. Realizar compra
+7. Sign out
+Selecciona una opción: 1
+Introduce el nombre del producto: 
+Platano
+Introduce el tipo del producto: 
+Fruta
+Introduce el precio del producto: 
+2.0
+Producto agregado al carrito: Platano
+
+Opciones del carrito: 
+1. Agregar producto
+2. Eliminar producto
+3. Listar productos
+4. Aplicar descuento
+5. Ver historial de compras
+6. Realizar compra
+7. Sign out
+Selecciona una opción: 1
+Introduce el nombre del producto: 
+Fanta
+Introduce el tipo del producto: 
+Gaseosa
+Introduce el precio del producto: 
+9.0
+Producto agregado al carrito: Fanta
+
+Opciones del carrito: 
+1. Agregar producto
+2. Eliminar producto
+3. Listar productos
+4. Aplicar descuento
+5. Ver historial de compras
+6. Realizar compra
+7. Sign out
+Selecciona una opción: 3
+Lista de productos: 
+- Producto: Platano , Tipo: Fruta, Precio: 2.0, Descuento aplicado: false
+- Producto: Fanta , Tipo: Gaseosa, Precio: 9.0, Descuento aplicado: false
+
+Opciones del carrito: 
+1. Agregar producto
+2. Eliminar producto
+3. Listar productos
+4. Aplicar descuento
+5. Ver historial de compras
+6. Realizar compra
+7. Sign out
+Selecciona una opción: 4
+Introduce el nombre del producto: 
+Fanta
+Introduce el descuento del producto: 
+0.05
+Descuento aplicado al producto: Fanta
+
+Opciones del carrito: 
+1. Agregar producto
+2. Eliminar producto
+3. Listar productos
+4. Aplicar descuento
+5. Ver historial de compras
+6. Realizar compra
+7. Sign out
+Selecciona una opción: 3
+Lista de productos: 
+- Producto: Platano , Tipo: Fruta, Precio: 2.0, Descuento aplicado: false
+- Producto: Fanta , Tipo: Gaseosa, Precio: 8.549999999999999, Descuento aplicado: true
+
+Opciones del carrito: 
+1. Agregar producto
+2. Eliminar producto
+3. Listar productos
+4. Aplicar descuento
+5. Ver historial de compras
+6. Realizar compra
+7. Sign out
+Selecciona una opción: 6
+Queremos saber tu opinión:
+Introduce un comentario: 
+Muy buena calidad
+Califica tu compra(1-5): 
+5
+Precio de compra total del carrito: 
+10.549999999999999
+
+Opciones del carrito: 
+1. Agregar producto
+2. Eliminar producto
+3. Listar productos
+4. Aplicar descuento
+5. Ver historial de compras
+6. Realizar compra
+7. Sign out
+Selecciona una opción: 5
+Historial: 
+Compra: 
+Lista de productos: 
+- Producto: Platano , Tipo: Fruta, Precio: 2.0, Descuento aplicado: false
+- Producto: Fanta , Tipo: Gaseosa, Precio: 8.549999999999999, Descuento aplicado: true
+Comentario: Muy buena calidad, Calificacion: 5
+
+Opciones del carrito: 
+1. Agregar producto
+2. Eliminar producto
+3. Listar productos
+4. Aplicar descuento
+5. Ver historial de compras
+6. Realizar compra
+7. Sign out
+Selecciona una opción: 7
+Deslogeando...
+
+Registro
+1. Registrar usuario
+2. Login
+3. Eliminar usuario
+4. Salir
+Selecciona una opción: 4
+Saliendo...
