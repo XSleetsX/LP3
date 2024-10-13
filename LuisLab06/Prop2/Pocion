@@ -1,0 +1,12 @@
+package Lab06_Prop2;
+
+public class Pocion extends Item{
+	private int stat;
+	
+	public Pocion(String nombre, String tipo, String descripcion) {
+		super(nombre, tipo, descripcion);
+		this.stat = 15;
+	}
+	
+	public int getStat() { return stat; }
+}
