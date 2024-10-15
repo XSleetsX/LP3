@@ -1,0 +1,21 @@
+package Luis_Lab07_ActClase;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.IOException;
+
+public class Main {
+	public static void main(String[] args) {
+		Personaje p1 = new Personaje("Caballero", 4, 2, 4, 2);
+		Personaje p2 = new Personaje("Guerrero", 2, 4, 2, 4);
+		Personaje p3 = new Personaje("Arquero", 2, 4, 1, 8);
+		
+		try (FileOutputStream fos = new FileOutputStream("personajes.txt");
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+			oos.writeObject(p1);
+			oos.writeObject(p2);
+			oos.writeObject(p3);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
