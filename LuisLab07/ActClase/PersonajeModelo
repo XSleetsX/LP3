@@ -5,11 +5,17 @@ public class PersonajeModelo {
     
     private List<Personaje> personajes;
     
+    
+    
     public PersonajeModelo() {
         personajes = new ArrayList<>();
     }
      
-
+    public List<Personaje> getPersonajes() {
+    	 return personajes;
+    	 }
+    
+    
     public Personaje buscarPersonaje(String nombre) {
         for (Personaje personaje : personajes) {
             if (personaje.getNombre().equals(nombre)) {
