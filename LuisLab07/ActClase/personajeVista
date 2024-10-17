@@ -1,0 +1,35 @@
+import java.util.Scanner;
+public class PersonajeVista {
+	private Scanner scanner = new Scanner (System.in);
+	String  caballero;
+	String guerro;
+	String Arquero;
+	
+	public void listaPersonaje () {
+		System.out.println("==== Lista de personajes ===");
+		System.out.println("1. Caballero");
+		System.out.println("2. Guerrero");
+		System.out.println("3. Arquero");
+
+	}
+	public void menuInicio() {
+		System.out.println("==== Menú inicio ===");
+		System.out.println("1. Ver lista de personajes");
+		System.out.println("2. Gestionar personajes");
+		System.out.println("3. Salir");
+	}
+	public void menuPersonajes(){
+		System.out.println("==== Menú de Gestión de Personajes ====");
+        System.out.println("1. Añadir personaje");
+        System.out.println("2. Modificar personaje");
+        System.out.println("3. Borrar personaje");
+        System.out.println("4. Volver al menú principal");
+	}
+	public int solicitarOpcion() {
+		System.out.println("Qué opción eliges (?)");
+		return scanner.nextInt();
+	}
+	public void mostrarMensaje(String mensaje) {
+		System.out.println(mensaje);
+	}
+}
