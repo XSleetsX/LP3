@@ -1,0 +1,77 @@
+package LuisLab07;
+import java.util.List;
+
+public class PersonajesControlador {
+	private PersonajesModelo modelo;
+	private PersonajesVista vista;
+	
+	public PersonajesControlador(PersonajesModelo modelo, PersonajesVista vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+	}
+	
+	public Personaje buscarPersonaje(String nombre) {
+		Personaje personaje = modelo.buscarPersonaje(nombre);
+		if(personaje == null) {
+			return null;
+		} else {
+			return personaje;
+		}
+	}
+	public void agregarPersonaje(String nombre) {
+		if(!nombre.isEmpty()) {
+			vista.mostrarMensaje("Debe llenar el nombre del personaje.");
+		} else {
+			Personaje personaje = buscarPersonaje(nombre);
+			if(personaje == null) {
+				vista.mostrarMensaje("No se encontró " + nombre);
+			} else {
+				if(nombre.equals("Caballero")) {
+					modelo.agregarPersonaje(new Personaje(nombre, 4, 2, 4, 2));
+					vista.mostrarMensaje("Caballero creado.");
+				}
+			}
+		}
+	}
+	public void modificarPersonaje(String nombre) {
+		if(!nombre.isEmpty()) {
+			vista.mostrarMensaje("Debe llenar el nombre del personaje.")
+		} else {
+			Personaje personaje = buscarPersonaje(nombre);
+			if(personaje == null) {
+				vista.mostrarMensaje("No se encontró " + nombre);
+			} else {
+				modelo.modificarPersonaje();
+			}
+		}
+	}
+	public void eliminarPersonaje(String nombre) {
+		if(!nombre.isEmpty()) {
+			vista.mostrarMensaje("Debe llenar el nombre del personaje.");
+		} else {
+			Personaje personaje = buscarPersonaje(nombre);
+			if(personaje == null) {
+				vista.mostrarMensaje("No se encontró " + nombre);
+			} else {
+				modelo.eliminarPersonaje(nombre);
+			}
+			
+		}
+	}
+	
+	public void listarPersonajes() {
+		List<Personaje> personajes = modelo.getPersonajes();
+		vista.listarPersonajes(personajes);
+	}
+	public void guardarArchivo() {}
+	public void cargarArchivo() {}
+	public void inicio() {
+		String opcion1, opcion2;
+		do{
+			vista.menuInicio();
+			opcion1 = vista.solicitarOpcion();
+		} while (!opcion.equals(""));
+		
+	}
+	
+}
