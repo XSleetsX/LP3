@@ -1,0 +1,38 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class PersonajeModelo {
+    
+    private List<Personaje> personajes;
+    
+    public PersonajeModelo() {
+        personajes = new ArrayList<>();
+    }
+     
+
+    public Personaje buscarPersonaje(String nombre) {
+        for (Personaje personaje : personajes) {
+            if (personaje.getNombre().equals(nombre)) {
+                return personaje; 
+            }
+        }
+        return null; 
+    }
+    
+    
+    public void agregarPersonaje(Personaje personaje) {    //AGREGAR
+        personajes.add(personaje);
+    }
+   
+    
+    public void eliminarPersonaje(Personaje personaje) {
+        personajes.remove(personaje);
+    }
+    
+    
+    
+   public void modificarPersonaje();
+    
+    
+    
+}
