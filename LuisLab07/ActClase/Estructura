@@ -1,8 +1,8 @@
 Controlador
-buscarPersonaje()
-agregarPersonaje()
-modificarPersonaje()
-eliminarPersonaje()
+buscarPersonaje(String nombre) { return null o Personaje; }
+agregarPersonaje(String nombre)
+modificarPersonaje(String nombre) //Aún no
+eliminarPersonaje(String nombre)
 listarPersonajes()
 
 guardarArchivo()
@@ -11,10 +11,11 @@ cargarArchivo()
 inicio()
 
 Modelo
-buscarPersonaje()
-agregarPersonaje()
-modificarPersonaje()
-eliminarPersonaje()
+getPersonajes() { return List<Personaje>; }
+buscarPersonaje(String nombre) { return null o Personaje; }
+agregarPersonaje(Personaje)
+modificarPersonaje() //Aún no
+eliminarPersonaje(Personaje)
 
 guardarArchivo()
 cargarArchivo()
@@ -23,5 +24,5 @@ Vista
 listarPersonajes()
 menuInicio()
 menuPersonajes()
-solicitarOpcion()
-mostrarMensaje()
+solicitarOpcion() { return Scanner; }
+mostrarMensaje(String mensaje)
