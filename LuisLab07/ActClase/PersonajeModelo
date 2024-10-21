@@ -40,5 +40,28 @@ public class PersonajeModelo {
    public void modificarPersonaje();
     
     
+   
+   public boolean guardarPersonajes() {
+	    try (FileOutputStream fos = new FileOutputStream("personajes.ser");
+	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+	        oos.writeObject(personajes);
+	        return true; 
+	    } catch (IOException e) {
+	        return false; 
+	    }
+	}
+
+	public List<Personaje> cargarPersonajes() {
+	    List<Personaje> personajesCargados;
+	    
+	    try (FileInputStream fis = new FileInputStream("personajes.ser");
+	         ObjectInputStream ois = new ObjectInputStream(fis)) {
+	        personajesCargados = (List<Personaje>) ois.readObject();
+	    } catch (IOException | ClassNotFoundException e) {
+	        return null; 
+	    }
+	    return personajesCargados; 
+	}
+
     
 }
