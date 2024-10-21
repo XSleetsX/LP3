@@ -21,7 +21,8 @@ guardarArchivo()
 cargarArchivo()
 
 Vista
-listarPersonajes()
+listarPersonajes(List<Personaje>)
+opcionesPersonajes()
 menuInicio()
 menuPersonajes()
 solicitarOpcion() { return Scanner; }
