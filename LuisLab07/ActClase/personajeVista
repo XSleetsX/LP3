@@ -1,15 +1,25 @@
+import java.util.List;
 import java.util.Scanner;
-public class PersonajeVista {
-	private Scanner scanner = new Scanner (System.in);
-	String  caballero;
-	String guerro;
-	String Arquero;
+
+public class PersonajesVista {
+	private Scanner scanner;
 	
-	public void listaPersonaje () {
+	public PersonajesVista() {
+		scanner = new Scanner(System.in);
+	}
+	public void listarPersonajes(List<Personaje> personajes) {
+		for(Personaje personaje : personajes) {
+			System.out.println(personaje.getNombre() + " || Vida: " + personaje.getVida() + " || Ataque: " + 
+								personaje.getAtaque() + " || Defensa: " + personaje.getDefensa() + " || Alcance: " +
+								personaje.getAlcance());		
+		}
+	}
+	public void opcionesPersonajes() {
 		System.out.println("==== Lista de personajes ===");
 		System.out.println("1. Caballero");
 		System.out.println("2. Guerrero");
 		System.out.println("3. Arquero");
+		System.out.println("4. Atrás");
 
 	}
 	public void menuInicio() {
@@ -22,12 +32,12 @@ public class PersonajeVista {
 		System.out.println("==== Menú de Gestión de Personajes ====");
         System.out.println("1. Añadir personaje");
         System.out.println("2. Modificar personaje");
-        System.out.println("3. Borrar personaje");
-        System.out.println("4. Volver al menú principal");
+        System.out.println("3. Eliminar personaje");
+        System.out.println("4. Atrás");
 	}
-	public int solicitarOpcion() {
-		System.out.println("Qué opción eliges (?)");
-		return scanner.nextInt();
+	public String solicitarOpcion() {
+		System.out.println("Qué opción eliges (?): ");
+		return scanner.nextLine();
 	}
 	public void mostrarMensaje(String mensaje) {
 		System.out.println(mensaje);
