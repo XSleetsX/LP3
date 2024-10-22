@@ -26,7 +26,7 @@ public class PersonajesModelo {
         return null; 
     } 
     
-    public void agregarPersonaje(Personaje personaje) {    //AGREGAR
+    public void agregarPersonaje(Personaje personaje) {
         personajes.add(personaje);
     }
     
@@ -34,7 +34,20 @@ public class PersonajesModelo {
         personajes.remove(personaje);
     }  
     
-    public void modificarPersonaje() {}  
+    public void modificarPersonaje(Personaje personaje, String atributo, int nuevoAtributo) {
+    	if(atributo.equals("Vida")) {
+    		personaje.setVida(nuevoAtributo);
+    	}
+    	if(atributo.equals("Ataque")) {
+    		personaje.setAtaque(nuevoAtributo);
+    	}
+    	if(atributo.equals("Defensa")) {
+    		personaje.setDefensa(nuevoAtributo);
+    	}
+    	if(atributo.equals("Alcance")) {
+    		personaje.setAlcance(nuevoAtributo);
+    	}
+    }  
    
     public boolean guardarPersonajes() {
 	    try (FileOutputStream fos = new FileOutputStream("personajes.ser");
