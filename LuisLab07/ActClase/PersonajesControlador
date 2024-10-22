@@ -1,4 +1,3 @@
-package LuisLab07;
 import java.util.List;
 
 public class PersonajesControlador {
@@ -9,7 +8,6 @@ public class PersonajesControlador {
 		this.modelo = modelo;
 		this.vista = vista;
 	}
-	
 	public Personaje buscarPersonaje(String nombre) {
 		Personaje personaje = modelo.buscarPersonaje(nombre);
 		if(personaje == null) {
@@ -19,23 +17,36 @@ public class PersonajesControlador {
 		}
 	}
 	public void agregarPersonaje(String nombre) {
-		if(!nombre.isEmpty()) {
+		if(nombre.isEmpty()) {
 			vista.mostrarMensaje("Debe llenar el nombre del personaje.");
 		} else {
 			Personaje personaje = buscarPersonaje(nombre);
 			if(personaje == null) {
-				vista.mostrarMensaje("No se encontró " + nombre);
-			} else {
-				if(nombre.equals("Caballero")) {
-					modelo.agregarPersonaje(new Personaje(nombre, 4, 2, 4, 2));
-					vista.mostrarMensaje("Caballero creado.");
+				switch(nombre) {
+					case "Caballero": {
+						modelo.agregarPersonaje(new Personaje(nombre, 4, 2, 4, 2));
+						vista.mostrarMensaje("Caballero creado.");
+						break;
+					}
+					case "Guerrero": {
+						modelo.agregarPersonaje(new Personaje(nombre, 2, 4, 2, 4));
+						vista.mostrarMensaje("Guerrero creado.");
+						break;
+					}
+					case "Arquero": {
+						modelo.agregarPersonaje(new Personaje(nombre, 2, 4, 1, 8));
+						vista.mostrarMensaje("Arquero creado.");
+						break;
+					}
 				}
+			} else {
+				vista.mostrarMensaje("Ya tienes un " + nombre + " como personaje.");
 			}
 		}
 	}
 	public void modificarPersonaje(String nombre) {
-		if(!nombre.isEmpty()) {
-			vista.mostrarMensaje("Debe llenar el nombre del personaje.")
+		if(nombre.isEmpty()) {
+			vista.mostrarMensaje("Debe llenar el nombre del personaje.");
 		} else {
 			Personaje personaje = buscarPersonaje(nombre);
 			if(personaje == null) {
@@ -46,32 +57,115 @@ public class PersonajesControlador {
 		}
 	}
 	public void eliminarPersonaje(String nombre) {
-		if(!nombre.isEmpty()) {
+		if(nombre.isEmpty()) {
 			vista.mostrarMensaje("Debe llenar el nombre del personaje.");
 		} else {
 			Personaje personaje = buscarPersonaje(nombre);
 			if(personaje == null) {
 				vista.mostrarMensaje("No se encontró " + nombre);
 			} else {
-				modelo.eliminarPersonaje(nombre);
+				modelo.eliminarPersonaje(personaje);
+				vista.mostrarMensaje("Se eliminó " + nombre + " exitosamente.");
 			}
 			
 		}
 	}
-	
 	public void listarPersonajes() {
 		List<Personaje> personajes = modelo.getPersonajes();
 		vista.listarPersonajes(personajes);
 	}
-	public void guardarArchivo() {}
-	public void cargarArchivo() {}
+	public void guardarArchivo() {
+		boolean guardado = modelo.guardarPersonajes();
+		if(guardado) {
+			vista.mostrarMensaje("Se guardaron los personajes exitosamente.");
+		} else {
+			vista.mostrarMensaje("Hubo un probelma al guardar el archivo de persoanjes.");
+		}
+	}
+	public void cargarArchivo() {
+		boolean cargado = modelo.cargarPersonajes();
+		if(cargado) {
+			vista.mostrarMensaje("Se cargaron los personajes.");
+		} else {
+			vista.mostrarMensaje("Hubo un problema al cargar el archivo de personajes.");
+		}
+	}
+	
 	public void inicio() {
-		String opcion1, opcion2;
+		String opcion1, opcion2, opcion3;
+		cargarArchivo();
 		do{
 			vista.menuInicio();
 			opcion1 = vista.solicitarOpcion();
-		} while (!opcion.equals(""));
-		
+			switch(opcion1) {
+				case "1": {
+					listarPersonajes();
+					break;
+				}
+				case "2": {
+					do {
+						vista.menuPersonajes();
+						opcion2 = vista.solicitarOpcion();
+						switch(opcion2) {
+							case "1": {
+								do {
+									vista.opcionesPersonajes();
+									opcion3 = vista.solicitarOpcion();
+									switch(opcion3) {
+										case "1": {
+											agregarPersonaje("Caballero");
+											break;
+										}
+										case "2": {
+											agregarPersonaje("Guerrero");
+											break;
+										}
+										case "3": {
+											agregarPersonaje("Arquero");
+											break;
+										}
+										case "4": {
+											break;
+										}
+										default: {
+											vista.mostrarMensaje("Opción no válida. Intenta de nuevo.");
+											break;
+										}
+									}
+								} while (!opcion3.equals("4"));
+								break;
+							}
+							case "2": {
+								String nombre = vista.solicitarNombre();
+								modificarPersonaje(nombre);
+								break;
+							}
+							case "3": {
+								String nombre = vista.solicitarNombre();
+								eliminarPersonaje(nombre);
+								break;
+							}
+							case "4": {
+								break;
+							}
+							default: {
+								vista.mostrarMensaje("Opción no válida. Intenta de nuevo.");
+								break;
+							}
+						}
+					} while (!opcion2.equals("4"));
+					break;
+				}
+				case "3": {
+					vista.mostrarMensaje("Saliendo...");
+					break;
+				}
+				default: {
+					vista.mostrarMensaje("Opción no válida. Intenta de nuevo.");
+					break;
+				}
+			}
+		} while (!opcion1.equals("3"));
+		guardarArchivo();
 	}
-	
 }
