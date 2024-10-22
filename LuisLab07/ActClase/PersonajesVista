@@ -47,6 +47,14 @@ public class PersonajesVista {
 		System.out.println("Ingresa el nombre de personaje: ");
 		return scanner.nextLine();
 	}
+	public String solicitarAtributo() {
+		System.out.println("Ingresa el nombre del atributo: ");
+		return scanner.nextLine();
+	}
+	public int solicitarNuevoAtributo() {
+		System.out.println("Ingresa el nuevo valor del atributo: ");
+		return scanner.nextInt();
+	}
 	public void mostrarMensaje(String mensaje) {
 		System.out.println(mensaje);
 	}
