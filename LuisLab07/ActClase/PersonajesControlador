@@ -44,15 +44,16 @@ public class PersonajesControlador {
 			}
 		}
 	}
-	public void modificarPersonaje(String nombre) {
-		if(nombre.isEmpty()) {
-			vista.mostrarMensaje("Debe llenar el nombre del personaje.");
+	public void modificarPersonaje(String nombre, String atributo, int nuevoAtributo) {
+		if(nombre.isEmpty() || atributo.isEmpty() || nuevoAtributo <= 0) {
+			vista.mostrarMensaje("Alguna de las lineas ingresadas es incorrecta.");
 		} else {
 			Personaje personaje = buscarPersonaje(nombre);
 			if(personaje == null) {
 				vista.mostrarMensaje("No se encontró " + nombre);
 			} else {
-				modelo.modificarPersonaje();
+				modelo.modificarPersonaje(personaje, atributo, nuevoAtributo);
+				vista.mostrarMensaje("Se modificó " + nombre + " exitosamente.");
 			}
 		}
 	}
@@ -136,8 +137,11 @@ public class PersonajesControlador {
 								break;
 							}
 							case "2": {
+								listarPersonajes();
 								String nombre = vista.solicitarNombre();
-								modificarPersonaje(nombre);
+								String atributo = vista.solicitarAtributo();
+								int nuevoAtributo = vista.solicitarNuevoAtributo();
+								modificarPersonaje(nombre, atributo, nuevoAtributo);
 								break;
 							}
 							case "3": {
