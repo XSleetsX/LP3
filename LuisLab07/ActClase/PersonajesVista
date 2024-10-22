@@ -8,10 +8,14 @@ public class PersonajesVista {
 		scanner = new Scanner(System.in);
 	}
 	public void listarPersonajes(List<Personaje> personajes) {
-		for(Personaje personaje : personajes) {
-			System.out.println(personaje.getNombre() + " || Vida: " + personaje.getVida() + " || Ataque: " + 
-								personaje.getAtaque() + " || Defensa: " + personaje.getDefensa() + " || Alcance: " +
-								personaje.getAlcance());		
+		if(personajes.isEmpty()) {
+			System.out.println("No tiene personajes activos.");
+		} else {
+			for(Personaje personaje : personajes) {
+				System.out.println(personaje.getNombre() + " || Vida: " + personaje.getVida() + " || Ataque: " + 
+									personaje.getAtaque() + " || Defensa: " + personaje.getDefensa() + " || Alcance: " +
+									personaje.getAlcance());		
+			}
 		}
 	}
 	public void opcionesPersonajes() {
@@ -37,6 +41,10 @@ public class PersonajesVista {
 	}
 	public String solicitarOpcion() {
 		System.out.println("Qué opción eliges (?): ");
+		return scanner.nextLine();
+	}
+	public String solicitarNombre() {
+		System.out.println("Ingresa el nombre de personaje: ");
 		return scanner.nextLine();
 	}
 	public void mostrarMensaje(String mensaje) {
