@@ -1,20 +1,21 @@
 import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class PersonajeModelo {
-    
+public class PersonajesModelo {  
     private List<Personaje> personajes;
     
-    
-    
-    public PersonajeModelo() {
+    public PersonajesModelo() {
         personajes = new ArrayList<>();
     }
      
     public List<Personaje> getPersonajes() {
     	 return personajes;
     	 }
-    
     
     public Personaje buscarPersonaje(String nombre) {
         for (Personaje personaje : personajes) {
@@ -23,45 +24,40 @@ public class PersonajeModelo {
             }
         }
         return null; 
-    }
-    
+    } 
     
     public void agregarPersonaje(Personaje personaje) {    //AGREGAR
         personajes.add(personaje);
     }
-   
     
     public void eliminarPersonaje(Personaje personaje) {
         personajes.remove(personaje);
-    }
+    }  
     
-    
-    
-   public void modificarPersonaje();
-    
-    
+    public void modificarPersonaje() {}  
    
-   public boolean guardarPersonajes() {
+    public boolean guardarPersonajes() {
 	    try (FileOutputStream fos = new FileOutputStream("personajes.ser");
 	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-	        oos.writeObject(personajes);
+	        for(Personaje personaje : personajes) {
+	        	oos.writeObject(personaje);
+	        }
 	        return true; 
 	    } catch (IOException e) {
 	        return false; 
 	    }
 	}
 
-	public List<Personaje> cargarPersonajes() {
-	    List<Personaje> personajesCargados;
-	    
+	public boolean cargarPersonajes() {
 	    try (FileInputStream fis = new FileInputStream("personajes.ser");
 	         ObjectInputStream ois = new ObjectInputStream(fis)) {
-	        personajesCargados = (List<Personaje>) ois.readObject();
+	        for(int i = 0; i < 3; i++) {
+	        	Personaje personaje = (Personaje) ois.readObject();
+	        	agregarPersonaje(personaje);
+	        }
+	        return true;
 	    } catch (IOException | ClassNotFoundException e) {
-	        return null; 
-	    }
-	    return personajesCargados; 
+	        return false; 
+	    }    
 	}
-
-    
 }
