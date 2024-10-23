@@ -1,0 +1,13 @@
+public class Carcaj extends Item {
+    private int ataque;
+    private int costo;
+
+    public Carcaj() {
+        super("Carcaj", "Dispara una flecha con gran ataque. Costo: 45 maná");
+        this.ataque = 80;
+        this.costo = 45;
+    }
+
+    public int getAtaque() { return ataque; }
+    public int getCosto() { return costo; }
+}
