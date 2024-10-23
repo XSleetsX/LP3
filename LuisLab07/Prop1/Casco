@@ -1,0 +1,13 @@
+public class Casco extends Item{
+    private int ataque;
+    private int costo;
+
+    public Casco() {
+        super("Casco", "Aumenta el ataque en 15 por 1 turno. Costo: 60 maná");
+        this.ataque = 15;
+        this.costo = 60;
+    }
+
+    public int getAtaque() { return ataque; }
+    public int getCosto() { return costo; }
+}
