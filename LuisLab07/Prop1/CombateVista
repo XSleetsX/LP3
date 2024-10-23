@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class CombateVista {
+    private Scanner scanner;
+
+    public CombateVista() {
+        scanner = new Scanner(System.in);
+    }
+    public String solicitarOpcion() {
+        System.out.println("Seleccione una opción: ");
+        return scanner.nextLine();
+    }
+    public String solicitarNombre() {
+        System.out.println("Ingresa tu nombre: ");
+        return scanner.nextLine();
+    }
+    public void menuInicio() {
+        System.out.println("1. Empezar combate");
+        System.out.println("2. Crear Personaje");
+        System.out.println("3. Salir");
+    }
+    public void menuCombate() {
+        System.out.println("\nTu turno:");
+        System.out.println("1. Atacar");
+        System.out.println("2. Ver inventario");
+        System.out.println("3. Pasar turno");
+    }
+    public void interfazCombate(Jugador jugador, Enemigo enemigo) {
+        System.out.println("***" + jugador.getNombre() + "***|***" + enemigo.getNombre() + "***");
+        System.out.println("   " + jugador.getSalud() + "   |     " + enemigo.getSalud() + "     ");
+    }
+    public void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
+    }
+    public void cerrarScanner() {
+        scanner.close();
+    }
+}
