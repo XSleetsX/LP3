@@ -1,0 +1,36 @@
+public class Arquero extends Personaje {
+    private Arco arco;
+    private Carcaj carcaj;
+
+    public Arquero() {
+        super("Arquero", 150, 100, 17, 0, 15, 5, 1);
+        this.arco = null;
+        this.carcaj = null;
+    }
+
+    public int atacar() { return ataque; }
+    public void equiparArco(Arco arco) {
+        this.arco = arco;
+        ataque += arco.getAtaque();
+    }
+    public void desequiparArco() {
+        ataque -= arco.getAtaque();
+        this.arco = null;
+    }
+    public void equiparCarcaj(Carcaj carcaj) {
+        this.carcaj = carcaj;
+    }
+    public void desequiparCarcaj() {
+        this.carcaj = null;
+    }
+    public int usarCarcaj() {
+        mana -= carcaj.getCosto();
+        return carcaj.getAtaque();
+    }
+    public void tomarPocionSalud(PocionSalud pocionSalud) {
+        vida += pocionSalud.getCuracion();
+        if(vida > 150) {
+            vida = 150;
+        }
+    }
+}
