@@ -1,1 +1,32 @@
-
+public class Guerrrero extends Personaje{
+	private Arma arma;
+	private Casco casco;
+	
+	public Caballero(int vida, int mana, int ataque, int defensa, int inteligencia, int alcance, int nivel) {
+		super("Guerrero", 200, 100, 17, 0, 15, 2, 1);
+		this.arma = null;
+		this.casco = null;
+	}
+	
+	public int atacar() { return ataque; }
+	public void equiparArma(Arma arma) {  
+		this.arma = arma;
+		ataque += arma.getAtaque();
+	}
+	public void desequiparArma() {
+		ataque -= arma.getAtaque();
+		this.arma = null;
+	}
+	/*public void equiparCasco(Casco casco) {
+		this.casco = casco;
+	}
+	public void desequiparCasco() {
+		this.casco = null;
+	}*/
+	public void tomarPocion(Pocion pocion) {
+		vida += pocion.getCuracion();
+		if(vida > 100) {
+			vida = 100;
+		}
+	}
+}
