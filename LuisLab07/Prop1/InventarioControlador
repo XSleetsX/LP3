@@ -1,0 +1,120 @@
+import java.util.List;
+
+public class InventarioControlador {
+    private InventarioModelo modelo;
+    private InventarioVista vista;
+
+    public InventarioControlador(InventarioModelo modelo, InventarioVista vista) {
+        this.modelo = modelo;
+        this.vista = vista;
+    }
+
+    public void verInventario() {
+        List<Item> items = modelo.obtenerItems();
+        vista.mostrarMensaje("\nInventario:");
+        vista.mostrarInventario(items);
+    }
+    public void agregarItem(String nombre, String tipo, String descripcion) {
+        if(nombre.isEmpty() && tipo.isEmpty() && descripcion.isEmpty()) {
+            vista.mostrarMensaje("No tienes items en el inventario.");
+        } else {
+            if(tipo.equals("Arma")) {
+                modelo.agregarItem(new Arma(nombre, tipo, descripcion));
+                vista.mostrarMensaje("Se agregó " + nombre + " al inventario.");
+            } else {
+                modelo.agregarItem(new Pocion(nombre, tipo, descripcion));
+                vista.mostrarMensaje("Se agregó " + nombre + " al inventario.");
+            }
+
+        }
+    }
+    public void eliminarItem(String nombre) {
+        if(nombre.isEmpty()) {
+            vista.mostrarMensaje("Debes colocar el nombre del item.");
+        } else {
+            modelo.eliminarItem(nombre);
+            vista.mostrarMensaje("Se quitó " + nombre + " del inventario.");
+        }
+    }
+    public void buscarItem(String nombre) {
+        if(nombre.isEmpty()) {
+            vista.mostrarMensaje("Debes colocar el nombre y el tipo del item.");
+        } else {
+            Item item = modelo.buscarItem(nombre);
+            if(item == null) {
+                vista.mostrarMensaje("No tienes este item en el inventario.");
+            } else {
+                vista.mostrarMensaje("Item encontrado.");
+                vista.mostrarMensaje(item.getNombre() + " || " + item.getCantidad() + " || " +
+                        item.getTipo() + " || " + item.getDescripcion());
+            }
+        }
+    }
+    public void usarItem(Jugador jugador, String nombre) {
+        if(nombre.isEmpty()) {
+            vista.mostrarMensaje("Debes colocar el nombre del item.");
+        } else {
+            modelo.usarItem(jugador, nombre);
+            vista.mostrarMensaje("Item utilizado.");
+        }
+    }
+    public boolean iniciarInventario(Personaje pesonaje) {
+        String opcion1, opcion2;
+        do {
+            verInventario();
+            vista.menuInventario();
+            opcion1 = vista.solicitarOpcion();
+            switch(opcion1) {
+                case "1":{
+                    do {
+                        vista.menuAgregarItem();
+                        opcion2 = vista.solicitarOpcion();
+                        switch(opcion2) {
+                            case "1":{
+                                agregarItem("Espada", "Arma", "Hace 10 de daño.");
+                                break;
+                            }
+                            case "2": {
+                                agregarItem("Pocion de curación", "Pocion", "Cura 15 de vida.");
+                                break;
+                            }
+                            case "3": {
+                                break;
+                            }
+                        }
+                    } while(!opcion2.equals("3"));
+                    break;
+                }
+                case "2": {
+                    String nombre = vista.solicitarNombre();
+                    eliminarItem(nombre);
+                    break;
+                }
+                case "3": {
+                    String nombre = vista.solicitarNombre();
+                    buscarItem(nombre);
+                    break;
+                }
+                case "4": {
+                    String nombre = vista.solicitarNombre();
+                    usarItem(jugador, nombre);
+                    break;
+                }
+                case "5": {
+                    vista.mostrarMensaje("Saliendo del inventario...");
+                    break;
+                }
+                default: {
+                    vista.mostrarMensaje("Opción no válida. Intenta de nuevo.");
+                    break;
+                }
+            }
+        } while (!opcion1.equals("4") && !opcion1.equals("5"));
+        /*vista.cerrarScanner();*/
+        if(opcion1.equals("4")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
