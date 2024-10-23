@@ -1,0 +1,50 @@
+import java.io.Serializable;
+
+public class Personaje implements Serializable{
+    private static final long serialVersionUID = 1L;
+    protected String nombre;
+    protected int vida;
+    protected int mana;
+    protected int ataque;
+    protected int defensa;
+    protected int inteligencia;
+    protected int alcance;
+    protected int nivel;
+    protected InventarioControlador inventario;
+
+    public Personaje(String nombre, int vida, int mana, int ataque, int defensa, int inteligencia, int alcance, int nivel) {
+        this.nombre = nombre;
+        this.vida = vida;
+        this.mana = mana;
+        this.ataque = ataque;
+        this.defensa = defensa;
+        this.inteligencia = inteligencia;
+        this.alcance = alcance;
+        this.nivel = nivel;
+        this.inventario = new InventarioControlador(new InventarioModelo(), new InventarioVista());
+    }
+
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setVida(int vida) { this.vida = vida; }
+    public void setMana(int mana) { this.mana = mana; }
+    public void setAtaque(int ataque) { this.ataque = ataque; }
+    public void setDefensa(int defensa) { this.defensa = defensa; }
+    public void setInteligencia(int inteligencia) { this.inteligencia = inteligencia; }
+    public void setAlcance(int alcance) { this.alcance = alcance; }
+    public void setNivel(int nivel) { this.nivel = nivel; }
+
+    public String getNombre() { return nombre; }
+    public int getVida() { return vida; }
+    public int getMana() { return mana; }
+    public int getAtaque() { return ataque; }
+    public int getDefensa() { return defensa; }
+    public int getInteligencia() { return inteligencia; }
+    public int getAlcance() { return alcance; }
+    public int getNivel() { return nivel; }
+    public InventarioControlador getInventario() { return inventario; }
+
+    @Override
+    public String toString() {
+        return " " + nombre + " | " + ataque + " | " + defensa + " | " + alcance + "\n";
+    }
+}
