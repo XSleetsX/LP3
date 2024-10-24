@@ -8,100 +8,109 @@ public class InventarioControlador {
         this.modelo = modelo;
         this.vista = vista;
     }
-
-    public void verInventario() {
-        List<Item> items = modelo.obtenerItems();
-        vista.mostrarMensaje("\nInventario:");
-        vista.mostrarInventario(items);
-    }
-    public void agregarItem(String nombre, String tipo, String descripcion) {
-        if(nombre.isEmpty() && tipo.isEmpty() && descripcion.isEmpty()) {
-            vista.mostrarMensaje("No tienes items en el inventario.");
-        } else {
-            if(tipo.equals("Arma")) {
-                modelo.agregarItem(new Arma(nombre, tipo, descripcion));
-                vista.mostrarMensaje("Se agregó " + nombre + " al inventario.");
-            } else {
-                modelo.agregarItem(new Pocion(nombre, tipo, descripcion));
-                vista.mostrarMensaje("Se agregó " + nombre + " al inventario.");
-            }
-
-        }
-    }
-    public void eliminarItem(String nombre) {
-        if(nombre.isEmpty()) {
-            vista.mostrarMensaje("Debes colocar el nombre del item.");
-        } else {
-            modelo.eliminarItem(nombre);
-            vista.mostrarMensaje("Se quitó " + nombre + " del inventario.");
-        }
-    }
     public void buscarItem(String nombre) {
         if(nombre.isEmpty()) {
-            vista.mostrarMensaje("Debes colocar el nombre y el tipo del item.");
+            vista.mostrarMensaje("Debes colocar el nombre del item.");
         } else {
             Item item = modelo.buscarItem(nombre);
             if(item == null) {
                 vista.mostrarMensaje("No tienes este item en el inventario.");
             } else {
                 vista.mostrarMensaje("Item encontrado.");
-                vista.mostrarMensaje(item.getNombre() + " || " + item.getCantidad() + " || " +
-                        item.getTipo() + " || " + item.getDescripcion());
+                vista.mostrarMensaje(item.getNombre() + " || " + item.getCantidad() + " || " + item.getDescripcion());
             }
         }
     }
-    public void usarItem(Jugador jugador, String nombre) {
+    public void verInventario() {
+        List<Item> items = modelo.obtenerItems();
+        vista.mostrarMensaje("\nInventario:");
+        vista.mostrarInventario(items);
+    }
+    public void agregarItem(String nombre) {
+        switch(nombre) {
+        	case "Espada": {
+        		modelo.agregarItem(new Espada());
+        		break;
+        	}
+        	case "Escudo": {
+        		modelo.agregarItem(new Escudo());
+        		break;
+        	}
+        	case "Casco": {
+        		modelo.agregarItem(new Casco());
+        		break;
+        	}
+        	case "Arco": {
+        		modelo.agregarItem(new Arco());
+        		break;
+        	}
+        	case "Carcaj": {
+        		modelo.agregarItem(new Carcaj());
+        		break;
+        	}
+        	case "PocionSalud": {
+        		modelo.agregarItem(new PocionSalud());
+        		break;
+        	}
+        	default: {
+        		vista.mostrarMensaje("Parece que hubo un problema.");
+        	}
+        }
+    }
+    public void eliminarItem(String nombre) {
         if(nombre.isEmpty()) {
             vista.mostrarMensaje("Debes colocar el nombre del item.");
         } else {
-            modelo.usarItem(jugador, nombre);
-            vista.mostrarMensaje("Item utilizado.");
+        	Item item = modelo.buscarItem(nombre);
+			if(item == null) {
+				vista.mostrarMensaje("No se encontró " + nombre);
+			} else {
+				modelo.eliminarItem(item);
+				vista.mostrarMensaje("Se eliminó " + nombre + " exitosamente.");
+			}
         }
     }
-    public boolean iniciarInventario(Personaje pesonaje) {
-        String opcion1, opcion2;
+    public void usarItem(Personaje personaje, String nombre) {
+        if(nombre.isEmpty()) {
+            vista.mostrarMensaje("Debes colocar el nombre del item.");
+        } else {
+        	Item item = modelo.buscarItem(nombre);
+			if(item == null) {
+				vista.mostrarMensaje("No se encontró " + nombre);
+			} else {
+				modelo.usarItem(personaje, item);
+	            if(item.getNombre().equals("Pocion de Salud")) {
+	            	vista.mostrarMensaje("Poción de salud utilizada.");
+	            } else {
+	            	vista.mostrarMensaje(item.getNombre() + " equipado.");
+	            }
+			}
+        }
+    }
+    public boolean iniciarInventario(Personaje personaje) {
+        String opcion;
         do {
             verInventario();
             vista.menuInventario();
-            opcion1 = vista.solicitarOpcion();
-            switch(opcion1) {
-                case "1":{
-                    do {
-                        vista.menuAgregarItem();
-                        opcion2 = vista.solicitarOpcion();
-                        switch(opcion2) {
-                            case "1":{
-                                agregarItem("Espada", "Arma", "Hace 10 de daño.");
-                                break;
-                            }
-                            case "2": {
-                                agregarItem("Pocion de curación", "Pocion", "Cura 15 de vida.");
-                                break;
-                            }
-                            case "3": {
-                                break;
-                            }
-                        }
-                    } while(!opcion2.equals("3"));
-                    break;
-                }
-                case "2": {
-                    String nombre = vista.solicitarNombre();
+            opcion = vista.solicitarOpcion();
+            switch(opcion) {
+                case "1": {
+                	String nombre = vista.solicitarNombre();
                     eliminarItem(nombre);
                     break;
                 }
-                case "3": {
-                    String nombre = vista.solicitarNombre();
+                case "2": {
+                	String nombre = vista.solicitarNombre();
                     buscarItem(nombre);
                     break;
                 }
-                case "4": {
-                    String nombre = vista.solicitarNombre();
-                    usarItem(jugador, nombre);
+                case "3": {
+                	String nombre = vista.solicitarNombre();
+                    usarItem(personaje, nombre);
                     break;
                 }
-                case "5": {
-                    vista.mostrarMensaje("Saliendo del inventario...");
+                case "4": {
+                	vista.mostrarMensaje("Saliendo del inventario...");
                     break;
                 }
                 default: {
@@ -109,9 +118,9 @@ public class InventarioControlador {
                     break;
                 }
             }
-        } while (!opcion1.equals("4") && !opcion1.equals("5"));
+        } while (!opcion.equals("3") && !opcion.equals("4"));
         /*vista.cerrarScanner();*/
-        if(opcion1.equals("4")) {
+        if(opcion.equals("3")) {
             return true;
         } else {
             return false;
