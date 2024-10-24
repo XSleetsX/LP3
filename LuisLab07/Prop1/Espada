@@ -1,13 +1,19 @@
 public class Espada extends Item{
     private int ataque;
     private int alcance;
+    private boolean equipado;
 
     public Espada() {
         super("Espada", "Tier 0. Ataque alto y Alcance bajo.");
-        this.ataque = 10;
+        this.ataque = 45;
         this.alcance = 2;
+        this.equipado = false;
     }
 
     public int getAtaque() { return ataque; }
     public int getAlcance() { return alcance; }
+    public boolean estaEquipado() { return equipado; }
+    
+    public void equipar() { this.equipado = true; }
+    public void desequipar() { this.equipado = false; }
 }
