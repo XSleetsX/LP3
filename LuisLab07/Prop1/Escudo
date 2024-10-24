@@ -1,13 +1,19 @@
 public class Escudo extends Item{
     private int ataque;
     private int costo;
+    private boolean equipado;
 
     public Escudo() {
         super("Escudo", "Aturde al enemigo por 1 turno. Costo: 75 maná");
         this.ataque = 60;
         this.costo = 75;
+        this.equipado = false;
     }
 
     public int getAtaque() { return ataque; }
     public int getCosto() { return costo; }
+    public boolean estaEquipado() { return equipado; }
+    
+    public void equipar() { this.equipado = true; }
+    public void desequipar() { this.equipado = false; }
 }
