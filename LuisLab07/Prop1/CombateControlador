@@ -7,26 +7,26 @@ public class CombateControlador {
         this.vista = vista;
     }
 
-    public void atacarEnemigo(Jugador jugador, Enemigo enemigo) {
-        modelo.atacarEnemigo(jugador, enemigo);
-        vista.interfazCombate(jugador, enemigo);
+    public void atacarEnemigo(Personaje personaje, Enemigo enemigo) {
+        modelo.atacarEnemigo(personaje, enemigo);
+        vista.interfazCombate(personaje, enemigo);
     }
-    public void accionEnemigo(Jugador jugador, Enemigo enemigo) {
-        if(modelo.accionEnemigo(jugador, enemigo) == 1) {
+    public void accionEnemigo(Personaje personaje, Enemigo enemigo) {
+        if(modelo.accionEnemigo(personaje, enemigo) == 1) {
             vista.mostrarMensaje("El enemigo ataca: 10 daño.");
         } else {
             vista.mostrarMensaje("El enemigo se cura: 15 vida.");
         }
-        vista.interfazCombate(jugador, enemigo);
+        vista.interfazCombate(personaje, enemigo);
     }
-    public boolean verInventario(Jugador jugador) {
-        return jugador.getInventario().iniciarInventario(jugador);
+    public boolean verInventario(Personaje personaje) {
+        return personaje.getInventario().iniciarInventario(personaje);
     }
-    public void iniciarCombate(Jugador jugador) {
+    public <T extends Personaje> void iniciarCombate(T personaje) {
         vista.mostrarMensaje("Empieza el combate.");
         Enemigo enemigo1 = new Enemigo("Zombie", "No muerto");
         vista.mostrarMensaje("PRIMER ENEMIGO: " + enemigo1.getNombre() + " - " + enemigo1.getTipo());
-        vista.interfazCombate(jugador, enemigo1);
+        vista.interfazCombate(personaje, enemigo1);
         do {
             int turno = modelo.getTurno();
             if(turno % 2 != 0) {
@@ -37,11 +37,11 @@ public class CombateControlador {
                     opcion = vista.solicitarOpcion();
                     switch(opcion) {
                         case "1": {
-                            atacarEnemigo(jugador, enemigo1);
+                            atacarEnemigo(personaje, enemigo1);
                             break;
                         }
                         case "2": {
-                            if(verInventario(jugador)) {
+                            if(verInventario(personaje)) {
                                 pasarTurno = true;
                                 break;
                             } else {
@@ -65,42 +65,17 @@ public class CombateControlador {
             }
             if(turno % 2 == 0) {
                 vista.mostrarMensaje("\nTurno del: " + enemigo1.getNombre());
-                accionEnemigo(jugador, enemigo1);
-                if(modelo.verificarSaludJugador(jugador) == false) {
+                accionEnemigo(personaje, enemigo1);
+                if(modelo.verificarSaludJugador(personaje) == false) {
                     break;
                 }
             }
             modelo.pasarTurno();
+            personaje.regenerarMana(20);
+            if(personaje.getMana() > 100) {
+            	personaje.setMana(100);
+            }
         } while(modelo.getTurno() != 100);
         vista.mostrarMensaje("\nPerdiste :(\nVuelve a intentarlo.\n");
-    }
-
-    public void menuInicio() {
-        String nombre = vista.solicitarNombre();
-        vista.mostrarMensaje("\nBienvenido, " + nombre);
-        String opcion;
-        do {
-            vista.menuInicio();
-            opcion = vista.solicitarOpcion();
-            switch(opcion) {
-                case "1": {
-                    iniciarCombate();
-                    break;
-                }
-                case "2": {
-                    vista.mostrarMensaje("Saliendo...");
-                    break;
-                }
-                case "3": {
-                    vista.mostrarMensaje("Saliendo...");
-                    break;
-                }
-                default: {
-                    vista.mostrarMensaje("Opción no válida. Intenta de nuevo.");
-                    break;
-                }
-            }
-        } while(!opcion.equals("3"));
-        vista.cerrarScanner();
     }
 }
