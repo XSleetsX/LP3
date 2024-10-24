@@ -1,0 +1,91 @@
+==== Menú inicio ===
+1. Ver lista de personajes
+2. Gestionar personajes
+3. Salir
+Qué opción eliges (?): 
+1
+No tiene personajes activos.
+==== Menú inicio ===
+1. Ver lista de personajes
+2. Gestionar personajes
+3. Salir
+Qué opción eliges (?): 
+2
+==== Menú de Gestión de Personajes ====
+1. Añadir personaje
+2. Modificar personaje
+3. Eliminar personaje
+4. Atrás
+Qué opción eliges (?): 
+1
+==== Lista de personajes ===
+1. Caballero
+2. Guerrero
+3. Arquero
+4. Atrás
+Qué opción eliges (?): 
+1
+Caballero creado.
+==== Lista de personajes ===
+1. Caballero
+2. Guerrero
+3. Arquero
+4. Atrás
+Qué opción eliges (?): 
+2
+Guerrero creado.
+==== Lista de personajes ===
+1. Caballero
+2. Guerrero
+3. Arquero
+4. Atrás
+Qué opción eliges (?): 
+4
+==== Menú de Gestión de Personajes ====
+1. Añadir personaje
+2. Modificar personaje
+3. Eliminar personaje
+4. Atrás
+Qué opción eliges (?): 
+2
+Caballero || Vida: 4 || Ataque: 2 || Defensa: 4 || Alcance: 2
+Guerrero || Vida: 2 || Ataque: 4 || Defensa: 2 || Alcance: 4
+Ingresa el nombre de personaje: 
+Caballero
+Ingresa el nombre del atributo: 
+Vida
+Ingresa el nuevo valor del atributo: 
+10
+Se modificó Caballero exitosamente.
+==== Menú de Gestión de Personajes ====
+1. Añadir personaje
+2. Modificar personaje
+3. Eliminar personaje
+4. Atrás
+Qué opción eliges (?): 
+3
+Ingresa el nombre de personaje: 
+Guerrero
+Se eliminó Guerrero exitosamente.
+==== Menú de Gestión de Personajes ====
+1. Añadir personaje
+2. Modificar personaje
+3. Eliminar personaje
+4. Atrás
+Qué opción eliges (?): 
+4
+==== Menú inicio ===
+1. Ver lista de personajes
+2. Gestionar personajes
+3. Salir
+Qué opción eliges (?): 
+1
+Caballero || Vida: 10 || Ataque: 2 || Defensa: 4 || Alcance: 2
+==== Menú inicio ===
+1. Ver lista de personajes
+2. Gestionar personajes
+3. Salir
+Qué opción eliges (?): 
+3
+Saliendo...
+Se guardaron los personajes exitosamente.
