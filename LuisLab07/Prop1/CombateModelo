@@ -8,14 +8,14 @@ public class CombateModelo {
     public int getTurno() { return turno; }
     public void pasarTurno() { this.turno++; }
 
-    public int accionEnemigo(Jugador jugador, Enemigo enemigo) {
+    public int accionEnemigo(Personaje personaje, Enemigo enemigo) {
         int numero = (int) (Math.random() * 2) + 1;
         if(numero == 1) {
-            jugador.recibirDanio(enemigo.atacar());
+        	personaje.recibirDanio(enemigo.atacar());
             return 1;
         } else {
             if(enemigo.getSalud() >= 100) {
-                jugador.recibirDanio(enemigo.atacar());
+            	personaje.recibirDanio(enemigo.atacar());
                 return 1;
             } else {
                 enemigo.curarVida(15);
@@ -23,11 +23,11 @@ public class CombateModelo {
             }
         }
     }
-    public void atacarEnemigo(Jugador jugador, Enemigo enemigo) {
-        enemigo.recibirDanio(jugador.atacar());
+    public void atacarEnemigo(Personaje personaje, Enemigo enemigo) {
+        enemigo.recibirDanio(personaje.atacar());
     }
-    public boolean verificarSaludJugador(Jugador jugador) {
-        if(jugador.getSalud() <= 0) {
+    public boolean verificarSaludJugador(Personaje personaje) {
+        if(personaje.getVida() <= 0) {
             return false;
         } else {
             return true;
