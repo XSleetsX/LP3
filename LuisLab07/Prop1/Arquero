@@ -3,7 +3,7 @@ public class Arquero extends Personaje {
     private Carcaj carcaj;
 
     public Arquero() {
-        super("Arquero", 150, 100, 17, 0, 15, 5, 1);
+        super("Arquero", 150, 100, 17, 0, 15, 1);
         this.arco = null;
         this.carcaj = null;
     }
