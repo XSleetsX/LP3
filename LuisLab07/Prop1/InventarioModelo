@@ -8,6 +8,14 @@ public class InventarioModelo {
         items = new ArrayList<>();
     }
 
+    public Item buscarItem(String nombre) {
+        for(Item item : items) {
+            if(item.getNombre().equals(nombre)) {
+                return item;
+            }
+        }
+        return null;
+    }
     public void agregarItem(Item item) {
         boolean itemExiste = false;
         for (int i = 0; i < items.size(); i++) {
@@ -23,32 +31,74 @@ public class InventarioModelo {
         }
 
     }
-    public void eliminarItem(String nombre) {
-        for(int i = 0; i < items.size(); i++) {
-            if(items.get(i).getNombre().equals(nombre)) {
-                items.remove(i);
-            }
-        }
+    public void eliminarItem(Item item) {
+        items.remove(item);
     }
     public List<Item> obtenerItems() {
         return items;
     }
-    public Item buscarItem(String nombre) {
-        for(Item item : items) {
-            if(item.getNombre().equals(nombre)) {
-                return item;
-            }
-        }
-        return null;
-    }
-    public void usarItem(Jugador jugador, String nombre) {
-        Item item = buscarItem(nombre);
-        if(item.getTipo().equals("Arma")) {
-            Arma arma = (Arma) item;
-            jugador.equiparArma(arma);
-        } else {
-            Pocion pocion = (Pocion) item;
-            jugador.usarPocion(pocion);
+    public void usarItem(Personaje personaje, Item item) {
+        switch(personaje.getNombre()) {
+        	case "Caballero": {
+        		Caballero caballero = (Caballero) personaje;
+        		switch(item.getNombre()) {
+        			case "Espada": {
+        				Espada espada = (Espada) item;
+        				caballero.equiparEspada(espada);
+        				break;
+        			}
+        			case "Escudo": {
+        				Escudo escudo = (Escudo) item;
+        				caballero.equiparEscudo(escudo);
+        				break;
+        			}
+        			case "Poción de Salud": {
+        				PocionSalud pocionSalud = (PocionSalud) item;
+        				caballero.tomarPocionSalud(pocionSalud);
+        			}
+        		}
+        		break;
+        	}
+        	case "Guerrero": {
+        		Guerrero guerrero = (Guerrero) personaje;
+        		switch(item.getNombre()) {
+        			case "Espada": {
+        				Espada espada = (Espada) item;
+        				guerrero.equiparEspada(espada);
+        				break;
+        			}
+        			case "Casco": {
+        				Casco casco = (Casco) item;
+        				guerrero.equiparCasco(casco);
+        				break;
+        			}
+        			case "Poción de Salud": {
+        				PocionSalud pocionSalud = (PocionSalud) item;
+        				guerrero.tomarPocionSalud(pocionSalud);
+        			}
+        		}
+        		break;
+        	}
+        	case "Arquero": {
+        		Arquero arquero = (Arquero) personaje;
+        		switch(item.getNombre()) {
+        			case "Arco": {
+        				Arco arco = (Arco) item;	
+        				arquero.equiparArco(arco);
+        				break;
+        			}
+        			case "Carcaj": {
+        				Carcaj carcaj = (Carcaj) item;
+        				arquero.equiparCarcaj(carcaj);
+        				break;
+        			}
+        			case "Poción de Salud": {
+        				PocionSalud pocionSalud = (PocionSalud) item;
+        				arquero.tomarPocionSalud(pocionSalud);
+        			}
+        		}
+        		break;
+        	}
         }
     }
 }
