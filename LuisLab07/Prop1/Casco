@@ -1,13 +1,19 @@
 public class Casco extends Item{
-    private int ataque;
+    private int bonusAtaque;
     private int costo;
+    private boolean equipado;
 
     public Casco() {
         super("Casco", "Aumenta el ataque en 15 por 1 turno. Costo: 60 maná");
-        this.ataque = 15;
+        this.bonusAtaque = 15;
         this.costo = 60;
+        this.equipado = false;
     }
 
-    public int getAtaque() { return ataque; }
+    public int getBonusAtaque() { return bonusAtaque; }
     public int getCosto() { return costo; }
+    public boolean estaEquipado() { return equipado; }
+    
+    public void equipar() { this.equipado = true; }
+    public void desequipar() { this.equipado = false; }
 }
