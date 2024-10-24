@@ -15,8 +15,8 @@ public class CombateVista {
         return scanner.nextLine();
     }
     public void menuInicio() {
-        System.out.println("1. Empezar combate");
-        System.out.println("2. Crear Personaje");
+        System.out.println("1. Crear Personaje");
+        System.out.println("2. Empezar combate");
         System.out.println("3. Salir");
     }
     public void menuCombate() {
@@ -25,9 +25,9 @@ public class CombateVista {
         System.out.println("2. Ver inventario");
         System.out.println("3. Pasar turno");
     }
-    public void interfazCombate(Jugador jugador, Enemigo enemigo) {
-        System.out.println("***" + jugador.getNombre() + "***|***" + enemigo.getNombre() + "***");
-        System.out.println("   " + jugador.getSalud() + "   |     " + enemigo.getSalud() + "     ");
+    public void interfazCombate(Personaje personaje, Enemigo enemigo) {
+        System.out.println("***" + personaje.getNombre() + "***|*** Maná ***|***" + enemigo.getNombre() + "***");
+        System.out.println("   " + personaje.getVida() + "   |   " + personaje.getMana() + "   |   " + enemigo.getSalud() + "     ");
     }
     public void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
