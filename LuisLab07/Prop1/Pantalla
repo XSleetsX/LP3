@@ -1,0 +1,160 @@
+==== Menú inicio ===
+1. Nuevo Personaje
+2. Elegir Personaje y Empezar Combate
+3. Eliminar Personaje
+4. Salir
+Elige una opción: 
+1
+==== Lista de personajes ===
+1. Caballero
+2. Guerrero
+3. Arquero
+4. Atrás
+Elige una opción: 
+1
+Caballero creado.
+==== Lista de personajes ===
+1. Caballero
+2. Guerrero
+3. Arquero
+4. Atrás
+Elige una opción: 
+4
+==== Menú inicio ===
+1. Nuevo Personaje
+2. Elegir Personaje y Empezar Combate
+3. Eliminar Personaje
+4. Salir
+Elige una opción: 
+2
+Caballero || Vida: 200 || Mana: 100 || Ataque: 15 || Defensa: 1 || Inteligencia: 15 || Nivel: 1
+Ingresa el nombre de personaje: 
+Caballero
+Elegiste al Caballero.
+Empieza el combate.
+PRIMER ENEMIGO: Zombie - No muerto
+***Caballero***|*** Maná ***|***Zombie***
+   200   |   100   |   100     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   200   |   100   |   85     
+
+Turno del: Zombie
+El enemigo se cura: 15 vida.
+***Caballero***|*** Maná ***|***Zombie***
+   200   |   100   |   100     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   200   |   100   |   85     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Caballero***|*** Maná ***|***Zombie***
+   190   |   100   |   85     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   190   |   100   |   70     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Caballero***|*** Maná ***|***Zombie***
+   180   |   100   |   70     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   180   |   100   |   55     
+
+Turno del: Zombie
+El enemigo se cura: 15 vida.
+***Caballero***|*** Maná ***|***Zombie***
+   180   |   100   |   70     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   180   |   100   |   55     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Caballero***|*** Maná ***|***Zombie***
+   170   |   100   |   55     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   170   |   100   |   40     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Caballero***|*** Maná ***|***Zombie***
+   160   |   100   |   40     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   160   |   100   |   25     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Caballero***|*** Maná ***|***Zombie***
+   150   |   100   |   25     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   150   |   100   |   10     
+
+Turno del: Zombie
+El enemigo ataca: 10 daño.
+***Caballero***|*** Maná ***|***Zombie***
+   140   |   100   |   10     
+
+Tu turno:
+1. Atacar
+2. Ver inventario
+3. Pasar turno
+Seleccione una opción: 
+1
+***Caballero***|*** Maná ***|***Zombie***
+   140   |   100   |   -5     
+
+GANASTE!! Buen trabajo :)
