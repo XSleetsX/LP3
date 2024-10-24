@@ -29,22 +29,15 @@ public class InventarioVista {
             System.out.println("No tienes items en el inventario.");
         } else {
             for(Item item : items) {
-                System.out.println(item.getCantidad() + " || " + item.getNombre() + " || " + item.getTipo() + " || " + item.getDescripcion());
+                System.out.println(item.getCantidad() + " || " + item.getNombre() + " || " + item.getDescripcion());
             }
         }
     }
     public void menuInventario() {
-        System.out.println("\n1. Agregar item");
-        System.out.println("2. Eliminar item");
-        System.out.println("3. Buscar item");
-        System.out.println("4. Usar item");
-        System.out.println("5. Atrás");
-    }
-    public void menuAgregarItem() {
-        System.out.println("\nItems:");
-        System.out.println("1. Espada");
-        System.out.println("2. Pocion de curación");
-        System.out.println("3. Atrás");
+        System.out.println("\n1. Eliminar item");
+        System.out.println("2. Buscar item");
+        System.out.println("3. Usar item");
+        System.out.println("4. Atrás");
     }
     public void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
