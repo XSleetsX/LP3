@@ -8,7 +8,7 @@ public class Enemigo {
     public Enemigo(String nombre, String tipo) {
         this.nombre = nombre;
         this.salud = 100;
-        this.nivel = 0;
+        this.nivel = 1;
         this.ataque = 10;
         this.tipo = tipo;
     }
