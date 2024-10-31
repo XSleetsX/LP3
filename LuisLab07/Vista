@@ -1,0 +1,55 @@
+package LAB_7;
+
+import java.util.Scanner;
+
+public class Vista {
+    private final Scanner scanner = new Scanner(System.in);
+
+    public int mostrarMenu() {
+        System.out.println("\n=== MENÚ ===");
+        System.out.println("1. Listar todos los empleados");
+        System.out.println("2. Agregar un nuevo empleado");
+        System.out.println("3. Buscar un empleado por número");
+        System.out.println("4. Eliminar un empleado por número");
+        System.out.println("5. Salir");
+        System.out.print("Seleccione una opción: ");
+        return scanner.nextInt();
+    }
+
+    public Empleado ingresarDatosEmpleado() {
+        System.out.print("Ingrese el número del empleado: ");
+        int numero = scanner.nextInt();
+        scanner.nextLine(); // Consumir salto de línea
+        System.out.print("Ingrese el nombre del empleado: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Ingrese el sueldo del empleado: ");
+        double sueldo = scanner.nextDouble();
+        return new Empleado(numero, nombre, sueldo);
+    }
+
+    public int ingresarNumeroEmpleado() {
+        try {
+            System.out.print("Ingrese el número del empleado: ");
+            return Integer.parseInt(scanner.nextLine());  //Evita que se use número en vez de texto
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada no válida. Intente de nuevo.");
+            return ingresarNumeroEmpleado();
+        }
+    }
+
+
+    public void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
+    }
+
+    public void mostrarEmpleado(Empleado empleado) {
+        if (empleado != null) {
+            System.out.println(empleado);
+        } else {
+            System.out.println("Empleado no encontrado.");
+        }
+    }
+    public void cerrarScanner() {   //para liberar espacios de recursos 
+        scanner.close();
+    }
+}
