@@ -1,0 +1,61 @@
+package LAB_7;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmpleadoDAO {
+    private final String archivo = "empleados.dat";
+
+    // Lee todos los empleados desde el archivo
+    public List<Empleado> leerEmpleados() {
+        List<Empleado> empleados = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+            empleados = (List<Empleado>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            System.out.println("Archivo no encontrado, se creará uno nuevo.");
+        } catch (IOException e) {
+            System.out.println("Error de lectura en el archivo: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error en el formato del archivo.");
+        }
+        return empleados;
+    }
+
+
+    private void guardarEmpleados(List<Empleado> empleados) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo))) {
+            oos.writeObject(empleados);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void agregarEmpleado(Empleado empleado) {
+        List<Empleado> empleados = leerEmpleados();
+        empleados.add(empleado);
+        guardarEmpleados(empleados);
+        System.out.println("Empleado agregado exitosamente.");
+    }
+
+    public Empleado buscarEmpleado(int numero) {
+        for (Empleado emp : leerEmpleados()) {
+            if (emp.getNumero() == numero) {
+                return emp;
+            }
+        }
+        return null;
+    }
+
+    public boolean eliminarEmpleado(int numero) {
+        List<Empleado> empleados = leerEmpleados();
+        boolean eliminado = empleados.removeIf(emp -> emp.getNumero() == numero);
+        if (eliminado) {
+            guardarEmpleados(empleados);
+            System.out.println("Empleado eliminado exitosamente.");
+        } else {
+            System.out.println("Empleado no encontrado.");
+        }
+        return eliminado;
+    }
+}
