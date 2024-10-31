@@ -1,0 +1,62 @@
+package LAB_7;
+
+public class Controlador {
+    private final EmpleadoDAO modelo;
+    private final Vista vista;
+
+    public Controlador(EmpleadoDAO modelo, Vista vista) {
+        this.modelo = modelo;
+        this.vista = vista;
+    }
+
+    public void iniciar() {
+        boolean continuar = true;
+        while (continuar) {
+            int opcion = vista.mostrarMenu();
+            switch (opcion) {
+                case 1 -> listarEmpleados();
+                case 2 -> agregarEmpleado();
+                case 3 -> buscarEmpleado();
+                case 4 -> eliminarEmpleado();
+                case 5 -> {
+                    vista.mostrarMensaje("Saliendo del programa...");
+                    continuar = false;
+                }
+                default -> vista.mostrarMensaje("Opción inválida. Intente nuevamente.");
+            }
+        }
+    }
+
+    private void listarEmpleados() {
+        for (Empleado emp : modelo.leerEmpleados()) {
+            vista.mostrarEmpleado(emp);
+        }
+    }
+
+    private void agregarEmpleado() {
+        Empleado nuevoEmpleado = vista.ingresarDatosEmpleado();
+        // Verificar si el número de empleado ya existe
+        if (modelo.buscarEmpleado(nuevoEmpleado.getNumero()) != null) { //si existe un número igual no deja que se agregue a la lista
+            vista.mostrarMensaje("Error: El número de empleado ya existe. No se puede agregar.");
+        } else {
+            modelo.agregarEmpleado(nuevoEmpleado);
+            vista.mostrarMensaje("Empleado agregado exitosamente.");
+        }
+    }
+
+    private void buscarEmpleado() {
+        int numero = vista.ingresarNumeroEmpleado();
+        Empleado empleado = modelo.buscarEmpleado(numero);
+        vista.mostrarEmpleado(empleado);
+    }
+
+    private void eliminarEmpleado() {
+        int numero = vista.ingresarNumeroEmpleado();
+        boolean exito = modelo.eliminarEmpleado(numero);
+        if (exito) {
+            vista.mostrarMensaje("Empleado eliminado exitosamente.");
+        } else {
+            vista.mostrarMensaje("Empleado no encontrado.");
+        }
+    }
+}
