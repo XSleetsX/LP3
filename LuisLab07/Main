@@ -1,0 +1,10 @@
+package LAB_7;
+
+public class Main {
+    public static void main(String[] args) {
+        EmpleadoDAO modelo = new EmpleadoDAO();
+        Vista vista = new Vista();
+        Controlador controlador = new Controlador(modelo, vista);
+        controlador.iniciar();
+    }
+}
