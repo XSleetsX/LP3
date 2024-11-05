@@ -1,0 +1,232 @@
+public class BDcontrolador {
+	private BDmodelo modelo;
+	private BDvista vista;
+	
+	public BDcontrolador(BDmodelo modelo, BDvista vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+	}
+	
+	public void menuInicio() {
+		String opc1, opc2, opc3;
+		do {
+			vista.menuLogin();
+			opc1 = vista.solicitarOpcion();
+			switch(opc1) {
+			case "1":
+				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
+				String nuevoNombre = vista.solicitarString();
+				String nuevaContrasenia = vista.solicitarString();
+				agregarUsuario(nuevoNombre, nuevaContrasenia);
+				break;
+			case "2":
+				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
+				String nombre = vista.solicitarString();
+				String contrasenia = vista.solicitarString();
+				boolean existe = verificarUsuario(nombre, contrasenia);
+				if(existe) {
+					do {
+						vista.menuCRUD();
+						opc2 = vista.solicitarOpcion();
+						switch(opc2) {
+						case "1":
+							vista.mostrarMensaje("¿En qué tabla desea insertar un registro?");
+							do {
+								vista.menuTablas();
+								opc3 = vista.solicitarOpcion();
+								switch(opc3) {
+								case "1":
+									vista.mostrarMensaje("Ingrese [DATOS TABLA PERSONAJES]: ");
+									int id_personaje = vista.solicitarInt();
+									//...
+									break;
+								case "2":
+									vista.mostrarMensaje("Ingrese [DATOS TABLA ENEMIGOS]: ");
+									int id_enemigo = vista.solicitarInt();
+									//...
+									break;
+								case "3":
+									vista.mostrarMensaje("Ingrese [DATOS TABLA INVENTARIOS]: ");
+									int id_inventario = vista.solicitarInt();
+									//...
+									break;
+								case "4":
+									vista.mostrarMensaje("Ingrese [DATOS TABLA ITEMS]: ");
+									int id_item = vista.solicitarInt();
+									//...
+									break;
+								case "5":
+									vista.mostrarMensaje("Ingrese [DATOS TABLA COMBATES]: ");
+									int id_combate = vista.solicitarInt();
+									//...
+									break;
+								case "6":
+									vista.mostrarMensaje("Ingrese [DATOS TABLA INVENTARIOS_ITEMS]: ");
+									int id_inventarios_items = vista.solicitarInt();
+									//...
+									break;
+								case "7":
+									break;
+								default:
+									vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+									break;
+								}
+							} while(!opc3.equals("7"));
+							break;
+						case "2":
+							vista.mostrarMensaje("¿En qué tabla desea actualizar un registro?");
+							do {
+								vista.menuTablas();
+								opc3 = vista.solicitarOpcion();
+								switch(opc3) {
+								case "1":
+									vista.mostrarMensaje("Ingrese id_personaje: ");
+									int id_personaje = vista.solicitarInt();
+									//...
+									break;
+								case "2":
+									vista.mostrarMensaje("Ingrese id_enemigo: ");
+									int id_enemigo = vista.solicitarInt();
+									//...
+									break;
+								case "3":
+									vista.mostrarMensaje("Ingrese id_inventario: ");
+									int id_inventario = vista.solicitarInt();
+									//...
+									break;
+								case "4":
+									vista.mostrarMensaje("Ingrese id_item: ");
+									int id_item = vista.solicitarInt();
+									//...
+									break;
+								case "5":
+									vista.mostrarMensaje("Ingrese id_combate: ");
+									int id_combate = vista.solicitarInt();
+									//...
+									break;
+								case "6":
+									vista.mostrarMensaje("Ingrese id_inventario_item: ");
+									int id_inventarios_items = vista.solicitarInt();
+									//...
+									break;
+								case "7":
+									break;
+								default:
+									vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+									break;
+								}
+							} while(!opc3.equals("7"));
+							break;
+						case "3":
+							vista.mostrarMensaje("¿De qué tabla desea mostrar un registro?");
+							do {
+								vista.menuTablas();
+								opc3 = vista.solicitarOpcion();
+								switch(opc3) {
+								case "1":
+									vista.mostrarMensaje("Ingrese id_personaje: ");
+									int id_personaje = vista.solicitarInt();
+									//...
+									break;
+								case "2":
+									vista.mostrarMensaje("Ingrese id_enemigo: ");
+									int id_enemigo = vista.solicitarInt();
+									//...
+									break;
+								case "3":
+									vista.mostrarMensaje("Ingrese id_inventario: ");
+									int id_inventario = vista.solicitarInt();
+									//...
+									break;
+								case "4":
+									vista.mostrarMensaje("Ingrese id_item: ");
+									int id_item = vista.solicitarInt();
+									//...
+									break;
+								case "5":
+									vista.mostrarMensaje("Ingrese id_combate: ");
+									int id_combate = vista.solicitarInt();
+									//...
+									break;
+								case "6":
+									vista.mostrarMensaje("Ingrese id_inventario_item: ");
+									int id_inventarios_items = vista.solicitarInt();
+									//...
+									break;
+								case "7":
+									break;
+								default:
+									vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+									break;
+								}
+							} while(!opc3.equals("7"));
+							break;
+						case "4":
+							vista.mostrarMensaje("¿En qué tabla desea borrar un registro?");
+							do {
+								vista.menuTablas();
+								opc3 = vista.solicitarOpcion();
+								switch(opc3) {
+								case "1":
+									vista.mostrarMensaje("Ingrese id_personaje: ");
+									int id_personaje = vista.solicitarInt();
+									//...
+									break;
+								case "2":
+									vista.mostrarMensaje("Ingrese id_enemigo: ");
+									int id_enemigo = vista.solicitarInt();
+									//...
+									break;
+								case "3":
+									vista.mostrarMensaje("Ingrese id_inventario: ");
+									int id_inventario = vista.solicitarInt();
+									//...
+									break;
+								case "4":
+									vista.mostrarMensaje("Ingrese id_item: ");
+									int id_item = vista.solicitarInt();
+									//...
+									break;
+								case "5":
+									vista.mostrarMensaje("Ingrese id_combate: ");
+									int id_combate = vista.solicitarInt();
+									//...
+									break;
+								case "6":
+									vista.mostrarMensaje("Ingrese id_inventario_item: ");
+									int id_inventarios_items = vista.solicitarInt();
+									//...
+									break;
+								case "7":
+									break;
+								default:
+									vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+									break;
+								}
+							} while(!opc3.equals("7"));
+							break;
+						case "5":
+							vista.mostrarMensaje("¿Está seguro?(Si/No)");
+							String elim = vista.solicitarString();
+							if(elim == "Si" || elim == "si") {
+								eliminarUsuario();
+							}
+							break;
+						case "6":
+							break;
+						default:
+							vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+							break;
+						}
+					} while(!opc2.equals("5")||!opc2.equals("6"));
+				}
+				break;
+			case "3":
+				break;
+			default:
+				vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+				break;
+			}
+		} while(!opc1.equals("3"));
+	}
+}
