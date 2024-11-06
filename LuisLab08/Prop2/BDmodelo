@@ -2,28 +2,30 @@ import java.sql.*;
 
 public class BDmodelo {
 	//Métodos TABLA personajes
-	public void insertarPersonaje(String nombre, int vida, int ataque, int defensa, int alcance) {
-		try {PreparedStatement pstmt = con.prepareStatement("INSERT INTO personajes VALUES (?,?,?,?,?");
+	public void insertarPersonaje(String nombre, int vida, int ataque, int defensa, int alcance, int id_inventario) {
+		try {PreparedStatement pstmt = con.prepareStatement("INSERT INTO personajes (nombre, vida, ataque, defensa, alcance, id_inventario) VALUES (?,?,?,?,?,?");
 			pstmt.setString(1, nombre);
 			pstmt.setInt(2, vida);
 			pstmt.setInt(3, ataque);
 			pstmt.setInt(4, defensa);
 			pstmt.setInt(5, alcance);
+			pstmt.setInt(6, id_inventario);
 			pstmt.executeUpdate();
 		} catch(SQLException e) {
 			System.out.println(e);
 		}
 				
 	}
-	public void actualizarPersonaje(int id_personaje, String nombre, int vida, int ataque, int defensa, int alcance) {
+	public void actualizarPersonaje(int id_personaje, String nombre, int vida, int ataque, int defensa, int alcance, int id_inventario) {
 		try {PreparedStatement pstmt = con.prepareStatement("UPDATE personajes SET nombre = ?, "
-			+ "vida = ?" + "ataque = ?" + "defensa = ?" + "alcance = ?" + "WHERE id_personaje = ?");
+			+ "vida = ?" + "ataque = ?" + "defensa = ?" + "alcance = ?" + "id_inventario: ? " + "WHERE id_personaje = ?");
 			pstmt.setString(1, nombre);
 			pstmt.setInt(2, vida);
 			pstmt.setInt(3, ataque);
 			pstmt.setInt(4, defensa);
 			pstmt.setInt(5, alcance);
-			pstmt.setInt(6, id_personaje);
+			pstmt.setInt(6, id_inventario);
+			pstmt.setInt(7, id_personaje);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e);
