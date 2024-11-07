@@ -37,7 +37,7 @@ public class BDmodelo {
 	    String sql3 = "CREATE TABLE IF NOT EXISTS enemigos (\n"
 	            + " id_enemigo INTEGER PRIMARY KEY AUTOINCREMENT,\n"
 	            + " nombre TEXT NOT NULL,\n"
-	            + " salud INTEGER,\n"
+	            + " vida INTEGER,\n"
 	            + " ataque INTEGER,\n"
 	            + " tipo TEXT NOT NULL\n"
 	            + ");";
@@ -60,12 +60,12 @@ public class BDmodelo {
 	            + " id_combate INTEGER PRIMARY KEY AUTOINCREMENT,\n"
 	            + " resultado TEXT NOT NULL,\n"
 	            + " FOREGIN KEY (id_personaje) REFERENCES personajes (id_personaje),\n"
-	            + " FOREGIN KEY (id_enemigo) REFERENCES enemigos (id_enemigo),\n"
-	            + " FOREGIN KEY (id_turno) REFERENCES turnos (id_turno)\n"
+	            + " FOREGIN KEY (id_enemigo) REFERENCES enemigos (id_enemigo)\n"
 	            + ");";
 	    String sql8 = "CREATE TABLE IF NOT EXISTS turnos (\n"
 	            + " id_turno INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-	            + " descripcion TEXT NOT NULL\n"
+	            + " descripcion TEXT NOT NULL,\n"
+	            + " FOREGIN KEY (id_combate) REFERENCES combates (id_combate)\n"
 	            + ");";
 	    try {Statement stmt = conn.createStatement();
 	    	stmt.execute(sql);
@@ -83,7 +83,7 @@ public class BDmodelo {
 	}
 	//Métodos TABLA usuarios
 	public void insertarUsuario(String nombre, String contrasenia) {
-		String sql = "INSERT INTO usuarios (nombre, contrasenia) VALUES(?, ?)";
+		String sql = "INSERT INTO usuarios (nombre, contrasenia) VALUES (?,?)";
 	    try {PreparedStatement pstmt = conn.prepareStatement(sql);
 	    	pstmt.setString(1, nombre);
 	        pstmt.setString(2, contrasenia);
@@ -124,9 +124,9 @@ public class BDmodelo {
         try {Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                System.out.print("\nId_usuario: " + rs.getInt("id_usuario"));
-                System.out.print("Nombre: " + rs.getString("nombre"));
-                System.out.print("Contraseña: " + rs.getString("contrasenia"));
+            	System.out.print("\nId_usuario: " + rs.getInt("id_usuario"));
+				System.out.print(" | Nombre: " + rs.getString("nombre"));
+				System.out.print(" | Contraseña: " + rs.getInt("contrasenia"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -373,14 +373,51 @@ public class BDmodelo {
 		}
 	}
 	//Métodos TABLA inventarios
-	public void insertarInventario(int id_inventario) {
-		String sql = "INSERT INTO inventarios (id_inventario) VALUES (?)";
+	public void insertarInventario(int id_personaje) {
+		String sql = "INSERT INTO inventarios (id_personaje) VALUES (?)";
 		try {PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id_inventario);
+			pstmt.setInt(1, id_personaje);
 			pstmt.executeUpdate();
 		} catch(SQLException e) {
 			System.out.println(e);
 		}			
+	}
+	public void actualizarInventario(int id_inventario, int id_personaje) {
+		String sql = "UPDATE inventarios SET id_personaje = ? WHERE id_inventario = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_personaje);
+			pstmt.setInt(2, id_inventario);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	public void mostrarInventario(int id_inventario) {
+		String sql = "SELECT * FROM inventarios WHERE id_inventario = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id_inventario);
+            ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				System.out.print("\nId_inventario: " + rs.getInt("id_inventario"));
+				System.out.print(" | Id_personaje: " + rs.getInt("id_personaje"));
+			} else {
+				System.out.println("No se encontró el registro.");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	public void mostrarInventario() {
+		String sql = "SELECT * FROM inventarios";
+        try {Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+            	System.out.print("\nId_inventario: " + rs.getInt("id_inventario"));
+				System.out.print(" | Id_personaje: " + rs.getInt("id_personaje"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
 	}
 	public void borrarInventario(int id_inventario) {
 		String sql = "DELETE FROM inventarios WHERE id_inventario = ?";
@@ -411,16 +448,28 @@ public class BDmodelo {
 		}
 	}
 	//Métodos TABLA combates
-	public void insertarCombate(int id_personaje, int id_enemigo, boolean resultado) {
-		String sql = "INSERT INTO combates (id_personaje, id_enemigo, resultado) VALUES (?,?,?)";
+	public void insertarCombate(String resultado, int id_personaje, int id_enemigo) {
+		String sql = "INSERT INTO combates (resultado, id_personaje, id_enemigo) VALUES (?,?,?)";
 		try {PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, id_personaje);
-	        pstmt.setInt(2, id_enemigo);
-	        pstmt.setBoolean(3, resultado);
+        	pstmt.setString(1, resultado);
+			pstmt.setInt(2, id_personaje);
+	        pstmt.setInt(3, id_enemigo);
 			pstmt.executeUpdate();
 		} catch(SQLException e) {
 			System.out.println(e);
 		}			
+	}
+	public void actualizarCombate(int id_combate, String resultado, int id_personaje, int id_enemigo) {
+		String sql = "UPDATE combates SET resultado = ?, id_personaje = ?, id_enemigo = ? WHERE id_combate = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, resultado);
+			pstmt.setInt(2, id_personaje);
+			pstmt.setInt(3, id_enemigo);
+			pstmt.setInt(4, id_combate);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
 	}
 	public void mostrarCombate(int id_combate) {
 		String sql = "SELECT * FROM combates WHERE id_combate = ?";
@@ -429,9 +478,9 @@ public class BDmodelo {
             ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				System.out.print("\nId_combate: " + rs.getInt("id_combate"));
+				System.out.print(" | Resultado: " + rs.getString("resultado"));
 				System.out.print(" | Id_personaje: " + rs.getInt("id_personaje"));
 				System.out.print(" | Id_enemigo: " + rs.getInt("id_enemigo"));
-				System.out.print(" | Resultado: " + rs.getBoolean("resultado"));
 			} else {
 				System.out.println("No se encontró el registro.");
 			}
@@ -445,9 +494,9 @@ public class BDmodelo {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
             	System.out.print("\nId_combate: " + rs.getInt("id_combate"));
+				System.out.print(" | Resultado: " + rs.getString("resultado"));
 				System.out.print(" | Id_personaje: " + rs.getInt("id_personaje"));
 				System.out.print(" | Id_enemigo: " + rs.getInt("id_enemigo"));
-				System.out.print(" | Resultado: " + rs.getBoolean("resultado"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -463,14 +512,26 @@ public class BDmodelo {
 		}
 	}
 	//Métodos TABLA turnos
-	public void insertarTurno(String descripcion) {
-		String sql = "INSERT INTO turnos (descripcion) VALUES (?)";
+	public void insertarTurno(String descripcion, int id_combate) {
+		String sql = "INSERT INTO turnos (descripcion, id_combate) VALUES (?,?)";
 		try {PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, descripcion);
+			pstmt.setInt(2, id_combate);
 			pstmt.executeUpdate();
 		} catch(SQLException e) {
 			System.out.println(e);
 		}			
+	}
+	public void actualizarTurno(int id_turno, String descripcion, int id_combate) {
+		String sql = "UPDATE inventarios SET descripcion = ?, id_combate = ? WHERE id_turno = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, descripcion);
+			pstmt.setInt(2, id_combate);
+			pstmt.setInt(3, id_turno);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
 	}
 	public void mostrarTurno(int id_turno) {
 		String sql = "SELECT * FROM turnos WHERE id_turno = ?";
@@ -480,6 +541,7 @@ public class BDmodelo {
 			if(rs.next()) {
 				System.out.print("\nId_turno: " + rs.getInt("id_turno"));
 				System.out.print(" | Descripción: " + rs.getString("descripcion"));
+				System.out.print(" | Id_combate: " + rs.getInt("id_combate"));
 			} else {
 				System.out.println("No se encontró el registro.");
 			}
@@ -494,6 +556,7 @@ public class BDmodelo {
             while (rs.next()) {
             	System.out.print("\nId_turno: " + rs.getInt("id_turno"));
 				System.out.print(" | Descripción: " + rs.getString("descripcion"));
+				System.out.print(" | Id_combate: " + rs.getInt("id_combate"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -509,4 +572,3 @@ public class BDmodelo {
 		}
 	}
 }
-
