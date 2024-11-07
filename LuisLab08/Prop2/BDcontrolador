@@ -6,172 +6,341 @@ public class BDcontrolador {
 		this.modelo = modelo;
 		this.vista = vista;
 	}
+	//Método para crear las TABLAS
+	public void crearTablas() {
+		modelo.crearTablas();
+		vista.mostrarMensaje("Se crearon las tablas en la base de datos.");
+	}
 	//Métodos TABLA usuarios
-	public void verificarUsuario() {
-		
+	public boolean verificarUsuario(String nombre, String contrasenia) {
+		return true;
 	}
 	public void insertarUsuario(String nombre, String contrasenia) {
-		
+		if(nombre.isEmpty() || contrasenia.isEmpty()) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.insertarUsuario(nombre, contrasenia);
+			vista.mostrarMensaje("Usuario agregado con éxito.");
+		}
 	}
 	public void actualizarUsuario(int id_usuario, String nombre, String contrasenia) {
-		
+		if(id_usuario <= 0 || nombre.isEmpty() || contrasenia.isEmpty()) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.actualizarUsuario(id_usuario, nombre, contrasenia);
+			vista.mostrarMensaje("Usuario actualizado con éxito.");
+		}
 	}
 	public void mostrarUsuario(int id_usuario) {
-
+		if(id_usuario <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.mostrarUsuario(id_usuario);
+		}
 	}
 	public void mostrarUsuario() {
-
+		modelo.mostrarUsuario();
 	}
 	public void borrarUsuario(int id_usuario) {
-
+		if(id_usuario <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.borrarUsuario(id_usuario);
+			vista.mostrarMensaje("Usuario eliminado con éxito.");
+		}
 	}
 	//Métodos TABLA personajes
 	public void insertarPersonaje(String nombre, int vida, int ataque, int defensa, int alcance, int id_inventario) {
-
+		if(nombre.isEmpty() || vida <= 0 || ataque <= 0 || defensa <= 0 || alcance <= 0 || id_inventario <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.insertarPersonaje(nombre, vida, ataque, defensa, alcance, id_inventario);
+			vista.mostrarMensaje("Personaje agregado con éxito.");
+		}
 	}
 	public void actualizarPersonaje(int id_personaje, String nombre, int vida, int ataque, int defensa, int alcance, int id_inventario) {
-
+		if(id_personaje <= 0 || nombre.isEmpty() || vida <= 0 || ataque <= 0 || defensa <= 0 || alcance <= 0 || id_inventario <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.actualizarPersonaje(id_personaje, nombre, vida, ataque, defensa, alcance, id_inventario);
+			vista.mostrarMensaje("Personaje actualizado con éxito.");
+		}
 	}
 	public void mostrarPersonaje(int id_personaje) {
-
+		if(id_personaje <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.mostrarPersonaje(id_personaje);
+		}
 	}
 	public void mostrarPersonaje() {
-
+		modelo.mostrarPersonaje();
 	}
 	public void borrarPersonaje(int id_personaje) {
-
+		if(id_personaje <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.borrarPersonaje(id_personaje);
+			vista.mostrarMensaje("Personaje eliminado con éxito");
+		}
 	}
 	//Métodos TABLA enemigos
 	public void insertarEnemigo(String nombre, int vida, int ataque, String tipo) {
-		
+		if(nombre.isEmpty() || vida <= 0 || ataque <= 0 || tipo.isEmpty()) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.insertarEnemigo(nombre, vida, ataque, tipo);
+			vista.mostrarMensaje("Enemigo agregado con éxito.");
+		}		
 	}
 	public void actualizarEnemigo(int id_enemigo, String nombre, int vida, int ataque, String tipo) {
-
+		if(id_enemigo <= 0 || nombre.isEmpty() || vida <= 0 || ataque <= 0 || tipo.isEmpty()) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.actualizarEnemigo(id_enemigo, nombre, vida, ataque, tipo);
+			vista.mostrarMensaje("Enemigo actualizado con éxito.");
+		}
 	}
 	public void mostrarEnemigo(int id_enemigo) {
-
+		if(id_enemigo <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.mostrarEnemigo(id_enemigo);
+		}
 	}
 	public void mostrarEnemigo() {
-
+		modelo.mostrarEnemigo();
 	}
 	public void borrarEnemigo(int id_enemigo) {
-
+		if(id_enemigo <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.borrarEnemigo(id_enemigo);
+			vista.mostrarMensaje("Enemigo eliminado con éxito");
+		}
 	}
 	//Métodos TABLA items
 	public void insertarItem(String nombre, String tipo, String descripcion, int cantidad) {
-			
+		if(nombre.isEmpty() || tipo.isEmpty() || descripcion.isEmpty() || cantidad <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.insertarItem(nombre, tipo, descripcion, cantidad);
+			vista.mostrarMensaje("Item agregado con éxito.");
+		}			
 	}
 	public void actualizarItem(int id_item, String nombre, String tipo, String descripcion, int cantidad) {
-
+		if(id_item <= 0 || nombre.isEmpty() || tipo.isEmpty() || descripcion.isEmpty() || cantidad <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.actualizarItem(id_item, nombre, tipo, descripcion, cantidad);
+			vista.mostrarMensaje("Item actualizado con éxito.");
+		}
 	}
 	public void mostrarItem(int id_item) {
-
+		if(id_item <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.mostrarItem(id_item);
+		}
 	}
 	public void mostrarItem() {
-
+		modelo.mostrarItem();
 	}
 	public void borrarItem(int id_item) {
-
+		if(id_item <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.borrarItem(id_item);
+			vista.mostrarMensaje("Item eliminado con éxito");
+		}
 	}
 	//Métodos TABLA inventarios
-	public void insertarInventario(int id_inventario) {
-		
+	public void insertarInventario(int id_personaje) {
+		if(id_personaje <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.insertarInventario(id_personaje);
+			vista.mostrarMensaje("Inventario agregado con éxito.");
+		}
+	}
+	public void actualizarInventario(int id_inventario, int id_personaje) {
+		if(id_inventario <= 0 || id_personaje <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.actualizarInventario(id_inventario, id_personaje);
+			vista.mostrarMensaje("Inventario actualizado con éxito.");
+		}
+	}
+	public void mostrarInventario(int id_inventario) {
+		if(id_inventario <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.mostrarInventario(id_inventario);
+		}
+	}
+	public void mostrarInventario() {
+		modelo.mostrarInventario();
 	}
 	public void borrarInventario(int id_inventario) {
-
+		if(id_inventario <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.borrarInventario(id_inventario);
+			vista.mostrarMensaje("Inventario eliminado con éxito");
+		}
 	} 
-	//Métodos TABLA inventarios_items
-	public void insertarIntentario_Item(int id_inventario, int id_item) {
-			
-	}
-	public void borrarInventario_Item() {
-
-	}
 	//Métodos TABLA combates
-	public void insertarCombate(int id_personaje, int id_enemigo, boolean resultado) {
-			
+	public void insertarCombate(String resultado, int id_personaje, int id_enemigo) {
+		if(resultado.isEmpty() || id_personaje <= 0 || id_enemigo <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.insertarCombate(resultado, id_personaje, id_enemigo);
+			vista.mostrarMensaje("Combate agregado con éxito.");
+		}
+	}
+	public void actualizarCombate(int id_combate, String resultado, int id_personaje, int id_enemigo) {
+		if(id_combate <= 0 || resultado.isEmpty() || id_personaje <= 0 || id_enemigo <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.actualizarCombate(id_combate, resultado, id_personaje, id_enemigo);
+			vista.mostrarMensaje("Combate actualizado con éxito.");
+		}
 	}
 	public void mostrarCombate(int id_combate) {
-
+		if(id_combate <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.mostrarCombate(id_combate);
+		}
 	}
 	public void mostrarCombate() {
-
+		modelo.mostrarCombate();
 	}
 	public void borrarCombate(int id_combate) {
-
+		if(id_combate <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.borrarCombate(id_combate);
+			vista.mostrarMensaje("Combate eliminado con éxito");
+		}
 	}
 	//Métodos TABLA turnos
-	public void insertarTurno(String descripcion) {
-			
+	public void insertarTurno(String descripcion, int id_combate) {
+		if(descripcion.isEmpty() || id_combate <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.insertarTurno(descripcion, id_combate);
+			vista.mostrarMensaje("Turno agregado con éxito.");
+		}	
+	}
+	public void actualizarTurno(int id_turno, String descripcion, int id_combate) {
+		if(id_turno <= 0 || descripcion.isEmpty() || id_combate <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.actualizarTurno(id_turno, descripcion, id_combate);
+			vista.mostrarMensaje("Turno actualizado con éxito.");
+		}
 	}
 	public void mostrarTurno(int id_turno) {
-
+		if(id_turno <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.mostrarTurno(id_turno);
+		}
 	}
 	public void mostrarTurno() {
-
+		modelo.mostrarTurno();
 	}
 	public void borrarTurno(int id_turno) {
-
+		if(id_turno <= 0) {
+			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
+		} else {
+			modelo.borrarTurno(id_turno);
+			vista.mostrarMensaje("Turno eliminado con éxito.");
+		}
 	}
 	//Método para iniciar el programa
 	public void menuInicio() {
 		String opc1, opc2, opc3;
 		do {
+			crearTablas();
 			vista.menuLogin();
 			opc1 = vista.solicitarOpcion();
 			switch(opc1) {
-			case "1":
+			case "1": {
 				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
-				String nuevoNombre = vista.solicitarString();
-				String nuevaContrasenia = vista.solicitarString();
-				insertarUsuario(nuevoNombre, nuevaContrasenia);
+				String nombre = vista.solicitarString();
+				String contrasenia = vista.solicitarString();
+				insertarUsuario(nombre, contrasenia);
 				break;
-			case "2":
+			}
+			case "2": {
 				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
 				String nombre = vista.solicitarString();
 				String contrasenia = vista.solicitarString();
 				boolean existe = verificarUsuario(nombre, contrasenia);
 				if(existe) {
+					crearTablas();
 					do {
 						vista.menuCRUD();
 						opc2 = vista.solicitarOpcion();
 						switch(opc2) {
-						case "1":
+						case "1": {
 							vista.mostrarMensaje("¿En qué tabla desea insertar un registro?");
 							do {
 								vista.menuTablas();
 								opc3 = vista.solicitarOpcion();
 								switch(opc3) {
-								case "1":
-									vista.mostrarMensaje("Ingrese [DATOS TABLA PERSONAJES]: ");
-									int id_personaje = vista.solicitarInt();
-									//...
-									break;
-								case "2":
-									vista.mostrarMensaje("Ingrese [DATOS TABLA ENEMIGOS]: ");
-									int id_enemigo = vista.solicitarInt();
-									//...
-									break;
-								case "3":
-									vista.mostrarMensaje("Ingrese [DATOS TABLA INVENTARIOS]: ");
+								case "1": {
+									vista.mostrarMensaje("Ingrese nombre/vida/ataque/defensa/alcance/id_inventario: ");
+									String nombrePersonaje = vista.solicitarString();
+									int vida = vista.solicitarInt();
+									int ataque = vista.solicitarInt();
+									int defensa = vista.solicitarInt();
+									int alcance = vista.solicitarInt();
 									int id_inventario = vista.solicitarInt();
-									//...
+									insertarPersonaje(nombrePersonaje,vida,ataque,defensa,alcance,id_inventario);
 									break;
-								case "4":
-									vista.mostrarMensaje("Ingrese [DATOS TABLA ITEMS]: ");
-									int id_item = vista.solicitarInt();
-									//...
+								}
+								case "2": {
+									vista.mostrarMensaje("Ingrese nombre/vida/ataque/tipo: ");
+									String nombreEnemigo = vista.solicitarString();
+									int vida = vista.solicitarInt();
+									int ataque = vista.solicitarInt();
+									String tipo = vista.solicitarString();
+									insertarEnemigo(nombreEnemigo,vida,ataque,tipo);
 									break;
-								case "5":
-									vista.mostrarMensaje("Ingrese [DATOS TABLA COMBATES]: ");
+								}
+								case "3": {
+									vista.mostrarMensaje("Ingrese id_personaje: ");
+									int id_personaje = vista.solicitarInt();
+									insertarInventario(id_personaje);
+									break;
+								}
+								case "4": {
+									vista.mostrarMensaje("Ingrese nombre/tipo/descripcion/cantidad: ");
+									String nombreItem = vista.solicitarString();
+									String tipo = vista.solicitarString();
+									String descripcion = vista.solicitarString();
+									int cantidad = vista.solicitarInt();
+									insertarItem(nombreItem,tipo,descripcion,cantidad);
+									break;
+								}
+								case "5": {
+									vista.mostrarMensaje("Ingrese resultado/id_personaje/id_enemigo: ");
+									String resultado = vista.solicitarString();
+									int id_personaje = vista.solicitarInt();
+									int id_enemigo = vista.solicitarInt();
+									insertarCombate(resultado,id_personaje,id_enemigo);
+									break;
+								}
+								case "6": {
+									vista.mostrarMensaje("Ingrese descripcion/id_combate: ");
+									String descripcion = vista.solicitarString();
 									int id_combate = vista.solicitarInt();
-									//...
+									insertarTurno(descripcion,id_combate);
 									break;
-								case "6":
-									vista.mostrarMensaje("Ingrese [DATOS TABLA INVENTARIOS_ITEMS]: ");
-									int id_inventarios_items = vista.solicitarInt();
-									//...
-									break;
+								}
 								case "7":
 									break;
 								default:
@@ -180,42 +349,75 @@ public class BDcontrolador {
 								}
 							} while(!opc3.equals("7"));
 							break;
-						case "2":
+						}
+						case "2": {
 							vista.mostrarMensaje("¿En qué tabla desea actualizar un registro?");
 							do {
 								vista.menuTablas();
 								opc3 = vista.solicitarOpcion();
 								switch(opc3) {
-								case "1":
-									vista.mostrarMensaje("Ingrese id_personaje: ");
+								case "1": {
+									mostrarPersonaje();
+									vista.mostrarMensaje("Ingrese id_personaje/nombre/vida/ataque/defensa/alcance/id_inventario: ");
 									int id_personaje = vista.solicitarInt();
-									//...
-									break;
-								case "2":
-									vista.mostrarMensaje("Ingrese id_enemigo: ");
-									int id_enemigo = vista.solicitarInt();
-									//...
-									break;
-								case "3":
-									vista.mostrarMensaje("Ingrese id_inventario: ");
+									String nombrePersonaje = vista.solicitarString();
+									int vida = vista.solicitarInt();
+									int ataque = vista.solicitarInt();
+									int defensa = vista.solicitarInt();
+									int alcance = vista.solicitarInt();
 									int id_inventario = vista.solicitarInt();
-									//...
+									actualizarPersonaje(id_personaje,nombrePersonaje,vida,ataque,defensa,alcance,id_inventario);
 									break;
-								case "4":
-									vista.mostrarMensaje("Ingrese id_item: ");
+								}
+								case "2": {
+									mostrarEnemigo();
+									vista.mostrarMensaje("Ingrese id_enemigo/nombre/vida/ataque/tipo: ");
+									int id_enemigo = vista.solicitarInt();
+									String nombreEnemigo = vista.solicitarString();
+									int vida = vista.solicitarInt();
+									int ataque = vista.solicitarInt();
+									String tipo = vista.solicitarString();
+									actualizarEnemigo(id_enemigo,nombreEnemigo,vida,ataque,tipo);
+									break;
+								}
+								case "3": {
+									mostrarInventario();
+									vista.mostrarMensaje("Ingrese id_inventario/id_personaje: ");
+									int id_inventario = vista.solicitarInt();
+									int id_personaje = vista.solicitarInt();
+									actualizarInventario(id_inventario,id_personaje);
+									break;
+								}
+								case "4": {
+									mostrarItem();
+									vista.mostrarMensaje("Ingrese id_item/nombre/tipo/descripcion/cantidad: ");
 									int id_item = vista.solicitarInt();
-									//...
+									String nombreItem = vista.solicitarString();
+									String tipo = vista.solicitarString();
+									String descripcion = vista.solicitarString();
+									int cantidad = vista.solicitarInt();
+									actualizarItem(id_item,nombreItem,tipo,descripcion,cantidad);
 									break;
-								case "5":
-									vista.mostrarMensaje("Ingrese id_combate: ");
+								}
+								case "5": {
+									mostrarCombate();
+									vista.mostrarMensaje("Ingrese id_combate/resultado/id_personaje/id_enemigo: ");
 									int id_combate = vista.solicitarInt();
-									//...
+									String resultado = vista.solicitarString();
+									int id_personaje = vista.solicitarInt();
+									int id_enemigo = vista.solicitarInt();
+									actualizarCombate(id_combate,resultado,id_personaje,id_enemigo);
 									break;
-								case "6":
-									vista.mostrarMensaje("Ingrese id_inventario_item: ");
-									int id_inventarios_items = vista.solicitarInt();
-									//...
+								}
+								case "6": {
+									mostrarTurno();
+									vista.mostrarMensaje("Ingrese id_turno/descripcion/id_combate: ");
+									int id_turno = vista.solicitarInt();
+									String descripcion = vista.solicitarString();
+									int id_combate = vista.solicitarInt();
+									actualizarTurno(id_turno,descripcion,id_combate);
 									break;
+								}
 								case "7":
 									break;
 								default:
@@ -224,42 +426,55 @@ public class BDcontrolador {
 								}
 							} while(!opc3.equals("7"));
 							break;
-						case "3":
+						}
+						case "3": {
 							vista.mostrarMensaje("¿De qué tabla desea mostrar un registro?");
 							do {
 								vista.menuTablas();
 								opc3 = vista.solicitarOpcion();
 								switch(opc3) {
-								case "1":
+								case "1": {
+									mostrarPersonaje();
 									vista.mostrarMensaje("Ingrese id_personaje: ");
 									int id_personaje = vista.solicitarInt();
-									//...
+									mostrarPersonaje(id_personaje);
 									break;
-								case "2":
+								}
+								case "2": {
+									mostrarEnemigo();
 									vista.mostrarMensaje("Ingrese id_enemigo: ");
 									int id_enemigo = vista.solicitarInt();
-									//...
+									mostrarEnemigo(id_enemigo);
 									break;
-								case "3":
+								}
+								case "3": {
+									mostrarInventario();
 									vista.mostrarMensaje("Ingrese id_inventario: ");
 									int id_inventario = vista.solicitarInt();
-									//...
+									mostrarInventario(id_inventario);
 									break;
-								case "4":
+								}
+								case "4": {
+									mostrarItem();
 									vista.mostrarMensaje("Ingrese id_item: ");
 									int id_item = vista.solicitarInt();
-									//...
+									mostrarItem(id_item);
 									break;
-								case "5":
+								}
+								case "5": {
+									mostrarCombate();
 									vista.mostrarMensaje("Ingrese id_combate: ");
 									int id_combate = vista.solicitarInt();
-									//...
+									mostrarCombate(id_combate);
 									break;
-								case "6":
-									vista.mostrarMensaje("Ingrese id_inventario_item: ");
-									int id_inventarios_items = vista.solicitarInt();
-									//...
+								}
+								case "6": {
+									mostrarTurno();
+									vista.mostrarMensaje("Ingrese id_turno: ");
+									int id_turno = vista.solicitarInt();
+									mostrarTurno(id_turno);
 									break;
+								}
 								case "7":
 									break;
 								default:
@@ -268,42 +483,55 @@ public class BDcontrolador {
 								}
 							} while(!opc3.equals("7"));
 							break;
-						case "4":
+						}
+						case "4": {
 							vista.mostrarMensaje("¿En qué tabla desea borrar un registro?");
 							do {
 								vista.menuTablas();
 								opc3 = vista.solicitarOpcion();
 								switch(opc3) {
-								case "1":
+								case "1": {
+									mostrarPersonaje();
 									vista.mostrarMensaje("Ingrese id_personaje: ");
 									int id_personaje = vista.solicitarInt();
-									//...
+									borrarPersonaje(id_personaje);
 									break;
-								case "2":
+								}
+								case "2": {
+									mostrarEnemigo();
 									vista.mostrarMensaje("Ingrese id_enemigo: ");
 									int id_enemigo = vista.solicitarInt();
-									//...
+									borrarEnemigo(id_enemigo);
 									break;
-								case "3":
+								}
+								case "3": {
+									mostrarInventario();
 									vista.mostrarMensaje("Ingrese id_inventario: ");
 									int id_inventario = vista.solicitarInt();
-									//...
+									borrarInventario(id_inventario);
 									break;
-								case "4":
+								}
+								case "4": {
+									mostrarItem();
 									vista.mostrarMensaje("Ingrese id_item: ");
 									int id_item = vista.solicitarInt();
-									//...
+									borrarItem(id_item);
 									break;
-								case "5":
+								}
+								case "5": {
+									mostrarCombate();
 									vista.mostrarMensaje("Ingrese id_combate: ");
 									int id_combate = vista.solicitarInt();
-									//...
+									borrarCombate(id_combate);
 									break;
-								case "6":
-									vista.mostrarMensaje("Ingrese id_inventario_item: ");
-									int id_inventarios_items = vista.solicitarInt();
-									//...
+								}
+								case "6": {
+									mostrarTurno();
+									vista.mostrarMensaje("Ingrese id_turno: ");
+									int id_turno = vista.solicitarInt();
+									borrarTurno(id_turno);
 									break;
+								}
 								case "7":
 									break;
 								default:
@@ -312,6 +540,7 @@ public class BDcontrolador {
 								}
 							} while(!opc3.equals("7"));
 							break;
+						}
 						case "5":
 							break;
 						default:
@@ -321,20 +550,39 @@ public class BDcontrolador {
 					} while(!opc2.equals("5"));
 				}
 				break;
-			case "3":
+			}
+			case "3": {
 				mostrarUsuario();
-				
+				vista.mostrarMensaje("Ingrese el id del usuario que desea actualizar: ");
+				int id_usuario = vista.solicitarInt();
+				vista.mostrarMensaje("Ingrese el nuevo nombre del usuario: ");
+				String nombre = vista.solicitarString();
+				vista.mostrarMensaje("Ingrese la nueva contraseña del usuario: ");
+				String contrasenia = vista.solicitarString();
+				actualizarUsuario(id_usuario, nombre, contrasenia);
 				break;
-			case "4":
+			}
+			case "4": {
+				mostrarUsuario();
+				vista.mostrarMensaje("Ingrese el id del usuario que desea ver: ");
+				int id_usuario = vista.solicitarInt();
+				mostrarUsuario(id_usuario);
 				break;
-			case "5":
+			}
+			case "5": {
+				mostrarUsuario();
+				vista.mostrarMensaje("Ingrese el id del usuario que desea borrar: ");
+				int id_usuario = vista.solicitarInt();
+				borrarUsuario(id_usuario);
 				break;
+			}
 			case "6":
 				break;
 			default:
 				vista.mostrarMensaje("Opción no válida. Intente de nuevo");
 				break;
 			}
-		} while(!opc1.equals("3"));
+		} while(!opc1.equals("6"));
+	vista.cerrarScanner();
 	}
 }
