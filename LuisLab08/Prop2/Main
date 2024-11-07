@@ -1,0 +1,8 @@
+public class Main {
+	public static void main(String[] args) {
+		BDmodelo modelo = new BDmodelo();
+		BDvista vista = new BDvista();
+		BDcontrolador controlador = new BDcontrolador(modelo, vista);
+		controlador.menuInicio();
+	}
+}
