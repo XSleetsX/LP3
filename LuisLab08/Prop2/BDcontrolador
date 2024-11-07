@@ -12,30 +12,39 @@ public class BDcontrolador {
 		vista.mostrarMensaje("Se crearon las tablas en la base de datos.");
 	}
 	//Métodos TABLA usuarios
-	public boolean verificarUsuario(String nombre, String contrasenia) {
-		return true;
-	}
 	public void insertarUsuario(String nombre, String contrasenia) {
 		if(nombre.isEmpty() || contrasenia.isEmpty()) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.insertarUsuario(nombre, contrasenia);
-			vista.mostrarMensaje("Usuario agregado con éxito.");
+			if(modelo.buscarUsuario(nombre, contrasenia)) {
+				vista.mostrarMensaje("El usuario ya existe.");
+			} else {
+				modelo.insertarUsuario(nombre, contrasenia);
+				vista.mostrarMensaje("Usuario agregado con éxito.");
+			}
 		}
 	}
 	public void actualizarUsuario(int id_usuario, String nombre, String contrasenia) {
 		if(id_usuario <= 0 || nombre.isEmpty() || contrasenia.isEmpty()) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.actualizarUsuario(id_usuario, nombre, contrasenia);
-			vista.mostrarMensaje("Usuario actualizado con éxito.");
+			if(modelo.buscarUsuario(id_usuario)) {
+				modelo.actualizarUsuario(id_usuario, nombre, contrasenia);
+				vista.mostrarMensaje("Usuario actualizado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el usuario.");
+			}
 		}
 	}
 	public void mostrarUsuario(int id_usuario) {
 		if(id_usuario <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.mostrarUsuario(id_usuario);
+			if(modelo.buscarUsuario(id_usuario)) {
+				modelo.mostrarUsuario(id_usuario);
+			} else {
+				vista.mostrarMensaje("No se encontró el usuario.");
+			}
 		}
 	}
 	public void mostrarUsuario() {
@@ -45,8 +54,12 @@ public class BDcontrolador {
 		if(id_usuario <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.borrarUsuario(id_usuario);
-			vista.mostrarMensaje("Usuario eliminado con éxito.");
+			if(modelo.buscarUsuario(id_usuario)) {
+				modelo.borrarUsuario(id_usuario);
+				vista.mostrarMensaje("Usuario eliminado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el usuario.");
+			}
 		}
 	}
 	//Métodos TABLA personajes
@@ -54,23 +67,35 @@ public class BDcontrolador {
 		if(nombre.isEmpty() || vida <= 0 || ataque <= 0 || defensa <= 0 || alcance <= 0 || id_inventario <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.insertarPersonaje(nombre, vida, ataque, defensa, alcance, id_inventario);
-			vista.mostrarMensaje("Personaje agregado con éxito.");
+			if(modelo.buscarPersonaje(nombre, vida, ataque, defensa, alcance, id_inventario)) {
+				modelo.insertarPersonaje(nombre, vida, ataque, defensa, alcance, id_inventario);
+				vista.mostrarMensaje("Personaje agregado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el personaje.");
+			}
 		}
 	}
 	public void actualizarPersonaje(int id_personaje, String nombre, int vida, int ataque, int defensa, int alcance, int id_inventario) {
 		if(id_personaje <= 0 || nombre.isEmpty() || vida <= 0 || ataque <= 0 || defensa <= 0 || alcance <= 0 || id_inventario <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.actualizarPersonaje(id_personaje, nombre, vida, ataque, defensa, alcance, id_inventario);
-			vista.mostrarMensaje("Personaje actualizado con éxito.");
+			if(modelo.buscarPersonaje(id_personaje)) {
+				modelo.actualizarPersonaje(id_personaje, nombre, vida, ataque, defensa, alcance, id_inventario);
+				vista.mostrarMensaje("Personaje actualizado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el personaje.");
+			}
 		}
 	}
 	public void mostrarPersonaje(int id_personaje) {
 		if(id_personaje <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.mostrarPersonaje(id_personaje);
+			if(modelo.buscarPersonaje(id_personaje)) {
+				modelo.mostrarPersonaje(id_personaje);
+			} else {
+				vista.mostrarMensaje("No se encontró el personaje.");
+			}
 		}
 	}
 	public void mostrarPersonaje() {
@@ -80,8 +105,12 @@ public class BDcontrolador {
 		if(id_personaje <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.borrarPersonaje(id_personaje);
-			vista.mostrarMensaje("Personaje eliminado con éxito");
+			if(modelo.buscarPersonaje(id_personaje)) {
+				modelo.borrarPersonaje(id_personaje);
+				vista.mostrarMensaje("Personaje eliminado con éxito");
+			} else {
+				vista.mostrarMensaje("No se encontró el personaje.");
+			}	
 		}
 	}
 	//Métodos TABLA enemigos
@@ -89,23 +118,35 @@ public class BDcontrolador {
 		if(nombre.isEmpty() || vida <= 0 || ataque <= 0 || tipo.isEmpty()) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.insertarEnemigo(nombre, vida, ataque, tipo);
-			vista.mostrarMensaje("Enemigo agregado con éxito.");
+			if(modelo.buscarEnemigo(nombre, vida, ataque, tipo)) {
+				modelo.insertarEnemigo(nombre, vida, ataque, tipo);
+				vista.mostrarMensaje("Enemigo agregado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el enemigo.");
+			}
 		}		
 	}
 	public void actualizarEnemigo(int id_enemigo, String nombre, int vida, int ataque, String tipo) {
 		if(id_enemigo <= 0 || nombre.isEmpty() || vida <= 0 || ataque <= 0 || tipo.isEmpty()) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.actualizarEnemigo(id_enemigo, nombre, vida, ataque, tipo);
-			vista.mostrarMensaje("Enemigo actualizado con éxito.");
+			if(modelo.buscarEnemigo(id_enemigo)) {
+				modelo.actualizarEnemigo(id_enemigo, nombre, vida, ataque, tipo);
+				vista.mostrarMensaje("Enemigo actualizado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el enemigo.");
+			}
 		}
 	}
 	public void mostrarEnemigo(int id_enemigo) {
 		if(id_enemigo <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.mostrarEnemigo(id_enemigo);
+			if(modelo.buscarEnemigo(id_enemigo)) {
+				modelo.mostrarEnemigo(id_enemigo);
+			} else {
+				vista.mostrarMensaje("No se encontró el enemigo.");
+			}
 		}
 	}
 	public void mostrarEnemigo() {
@@ -115,8 +156,12 @@ public class BDcontrolador {
 		if(id_enemigo <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.borrarEnemigo(id_enemigo);
-			vista.mostrarMensaje("Enemigo eliminado con éxito");
+			if(modelo.buscarEnemigo(id_enemigo)) {
+				modelo.borrarEnemigo(id_enemigo);
+				vista.mostrarMensaje("Enemigo eliminado con éxito");
+			} else {
+				vista.mostrarMensaje("No se encontró el enemigo.");
+			}
 		}
 	}
 	//Métodos TABLA items
@@ -124,23 +169,35 @@ public class BDcontrolador {
 		if(nombre.isEmpty() || tipo.isEmpty() || descripcion.isEmpty() || cantidad <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.insertarItem(nombre, tipo, descripcion, cantidad);
-			vista.mostrarMensaje("Item agregado con éxito.");
+			if(modelo.buscarItem(nombre, tipo, descripcion, cantidad)) {
+				modelo.insertarItem(nombre, tipo, descripcion, cantidad);
+				vista.mostrarMensaje("Item agregado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el item.");
+			}
 		}			
 	}
 	public void actualizarItem(int id_item, String nombre, String tipo, String descripcion, int cantidad) {
 		if(id_item <= 0 || nombre.isEmpty() || tipo.isEmpty() || descripcion.isEmpty() || cantidad <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.actualizarItem(id_item, nombre, tipo, descripcion, cantidad);
-			vista.mostrarMensaje("Item actualizado con éxito.");
+			if(modelo.buscarItem(id_item)) {
+				modelo.actualizarItem(id_item, nombre, tipo, descripcion, cantidad);
+				vista.mostrarMensaje("Item actualizado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el item.");
+			}
 		}
 	}
 	public void mostrarItem(int id_item) {
 		if(id_item <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.mostrarItem(id_item);
+			if(modelo.buscarItem(id_item)) {
+				modelo.mostrarItem(id_item);
+			} else {
+				vista.mostrarMensaje("No se encontró el item.");
+			}
 		}
 	}
 	public void mostrarItem() {
@@ -150,8 +207,12 @@ public class BDcontrolador {
 		if(id_item <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.borrarItem(id_item);
-			vista.mostrarMensaje("Item eliminado con éxito");
+			if(modelo.buscarItem(id_item)) {
+				modelo.borrarItem(id_item);
+				vista.mostrarMensaje("Item eliminado con éxito");
+			} else {
+				vista.mostrarMensaje("No se encontró el item.");
+			}
 		}
 	}
 	//Métodos TABLA inventarios
@@ -159,16 +220,24 @@ public class BDcontrolador {
 		if(id_personaje <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.insertarInventario(id_personaje);
-			vista.mostrarMensaje("Inventario agregado con éxito.");
+			if(modelo.buscarInventario(id_personaje)) {
+				modelo.insertarInventario(id_personaje);
+				vista.mostrarMensaje("Inventario agregado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el inventario.");
+			}
 		}
 	}
 	public void actualizarInventario(int id_inventario, int id_personaje) {
 		if(id_inventario <= 0 || id_personaje <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.actualizarInventario(id_inventario, id_personaje);
-			vista.mostrarMensaje("Inventario actualizado con éxito.");
+			if(modelo.buscarInventario(id_personaje)) {
+				modelo.actualizarInventario(id_inventario, id_personaje);
+				vista.mostrarMensaje("Inventario actualizado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el inventario.");
+			}
 		}
 	}
 	public void mostrarInventario(int id_inventario) {
@@ -194,23 +263,35 @@ public class BDcontrolador {
 		if(resultado.isEmpty() || id_personaje <= 0 || id_enemigo <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.insertarCombate(resultado, id_personaje, id_enemigo);
-			vista.mostrarMensaje("Combate agregado con éxito.");
+			if(modelo.buscarCombate(resultado, id_personaje, id_enemigo)) {
+				modelo.insertarCombate(resultado, id_personaje, id_enemigo);
+				vista.mostrarMensaje("Combate agregado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el combate.");
+			}
 		}
 	}
 	public void actualizarCombate(int id_combate, String resultado, int id_personaje, int id_enemigo) {
 		if(id_combate <= 0 || resultado.isEmpty() || id_personaje <= 0 || id_enemigo <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.actualizarCombate(id_combate, resultado, id_personaje, id_enemigo);
-			vista.mostrarMensaje("Combate actualizado con éxito.");
+			if(modelo.buscarCombate(id_combate)) {
+				modelo.actualizarCombate(id_combate, resultado, id_personaje, id_enemigo);
+				vista.mostrarMensaje("Combate actualizado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el combate.");
+			}
 		}
 	}
 	public void mostrarCombate(int id_combate) {
 		if(id_combate <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.mostrarCombate(id_combate);
+			if(modelo.buscarCombate(id_combate)) {
+				modelo.mostrarCombate(id_combate);
+			} else {
+				vista.mostrarMensaje("No se encontró el combate.");
+			}
 		}
 	}
 	public void mostrarCombate() {
@@ -220,8 +301,12 @@ public class BDcontrolador {
 		if(id_combate <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.borrarCombate(id_combate);
-			vista.mostrarMensaje("Combate eliminado con éxito");
+			if(modelo.buscarCombate(id_combate)) {
+				modelo.borrarCombate(id_combate);
+				vista.mostrarMensaje("Combate eliminado con éxito");
+			} else {
+				vista.mostrarMensaje("No se encontró el combate.");
+			}
 		}
 	}
 	//Métodos TABLA turnos
@@ -229,23 +314,35 @@ public class BDcontrolador {
 		if(descripcion.isEmpty() || id_combate <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.insertarTurno(descripcion, id_combate);
-			vista.mostrarMensaje("Turno agregado con éxito.");
+			if(modelo.buscarTurno(descripcion, id_combate)) {
+				modelo.insertarTurno(descripcion, id_combate);
+				vista.mostrarMensaje("Turno agregado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el turno.");
+			}	
 		}	
 	}
 	public void actualizarTurno(int id_turno, String descripcion, int id_combate) {
 		if(id_turno <= 0 || descripcion.isEmpty() || id_combate <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.actualizarTurno(id_turno, descripcion, id_combate);
-			vista.mostrarMensaje("Turno actualizado con éxito.");
+			if(modelo.buscarTurno(id_turno)) {
+				modelo.actualizarTurno(id_turno, descripcion, id_combate);
+				vista.mostrarMensaje("Turno actualizado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el turno.");
+			}
 		}
 	}
 	public void mostrarTurno(int id_turno) {
 		if(id_turno <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.mostrarTurno(id_turno);
+			if(modelo.buscarTurno(id_turno)) {
+				modelo.mostrarTurno(id_turno);
+			} else {
+				vista.mostrarMensaje("No se encontró el turno.");
+			}
 		}
 	}
 	public void mostrarTurno() {
@@ -255,8 +352,12 @@ public class BDcontrolador {
 		if(id_turno <= 0) {
 			vista.mostrarMensaje("Debe ingresar los datos correctos y completos.");
 		} else {
-			modelo.borrarTurno(id_turno);
-			vista.mostrarMensaje("Turno eliminado con éxito.");
+			if(modelo.buscarTurno(id_turno)) {
+				modelo.borrarTurno(id_turno);
+				vista.mostrarMensaje("Turno eliminado con éxito.");
+			} else {
+				vista.mostrarMensaje("No se encontró el turno.");
+			}
 		}
 	}
 	//Método para iniciar el programa
@@ -276,9 +377,9 @@ public class BDcontrolador {
 			}
 			case "2": {
 				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
-				String nombre = vista.solicitarString();
-				String contrasenia = vista.solicitarString();
-				boolean existe = verificarUsuario(nombre, contrasenia);
+				String nombreUsuario = vista.solicitarString();
+				String contraseniaUsuario = vista.solicitarString();
+				boolean existe = modelo.buscarUsuario(nombreUsuario, contraseniaUsuario);
 				if(existe) {
 					crearTablas();
 					do {
@@ -299,6 +400,12 @@ public class BDcontrolador {
 									int defensa = vista.solicitarInt();
 									int alcance = vista.solicitarInt();
 									int id_inventario = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									insertarPersonaje(nombrePersonaje,vida,ataque,defensa,alcance,id_inventario);
 									break;
 								}
@@ -308,12 +415,24 @@ public class BDcontrolador {
 									int vida = vista.solicitarInt();
 									int ataque = vista.solicitarInt();
 									String tipo = vista.solicitarString();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									insertarEnemigo(nombreEnemigo,vida,ataque,tipo);
 									break;
 								}
 								case "3": {
 									vista.mostrarMensaje("Ingrese id_personaje: ");
 									int id_personaje = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									insertarInventario(id_personaje);
 									break;
 								}
@@ -323,6 +442,12 @@ public class BDcontrolador {
 									String tipo = vista.solicitarString();
 									String descripcion = vista.solicitarString();
 									int cantidad = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									insertarItem(nombreItem,tipo,descripcion,cantidad);
 									break;
 								}
@@ -331,6 +456,12 @@ public class BDcontrolador {
 									String resultado = vista.solicitarString();
 									int id_personaje = vista.solicitarInt();
 									int id_enemigo = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									insertarCombate(resultado,id_personaje,id_enemigo);
 									break;
 								}
@@ -338,6 +469,12 @@ public class BDcontrolador {
 									vista.mostrarMensaje("Ingrese descripcion/id_combate: ");
 									String descripcion = vista.solicitarString();
 									int id_combate = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									insertarTurno(descripcion,id_combate);
 									break;
 								}
@@ -366,6 +503,12 @@ public class BDcontrolador {
 									int defensa = vista.solicitarInt();
 									int alcance = vista.solicitarInt();
 									int id_inventario = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									actualizarPersonaje(id_personaje,nombrePersonaje,vida,ataque,defensa,alcance,id_inventario);
 									break;
 								}
@@ -377,6 +520,12 @@ public class BDcontrolador {
 									int vida = vista.solicitarInt();
 									int ataque = vista.solicitarInt();
 									String tipo = vista.solicitarString();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									actualizarEnemigo(id_enemigo,nombreEnemigo,vida,ataque,tipo);
 									break;
 								}
@@ -385,6 +534,12 @@ public class BDcontrolador {
 									vista.mostrarMensaje("Ingrese id_inventario/id_personaje: ");
 									int id_inventario = vista.solicitarInt();
 									int id_personaje = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									actualizarInventario(id_inventario,id_personaje);
 									break;
 								}
@@ -396,6 +551,12 @@ public class BDcontrolador {
 									String tipo = vista.solicitarString();
 									String descripcion = vista.solicitarString();
 									int cantidad = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									actualizarItem(id_item,nombreItem,tipo,descripcion,cantidad);
 									break;
 								}
@@ -406,6 +567,12 @@ public class BDcontrolador {
 									String resultado = vista.solicitarString();
 									int id_personaje = vista.solicitarInt();
 									int id_enemigo = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									actualizarCombate(id_combate,resultado,id_personaje,id_enemigo);
 									break;
 								}
@@ -415,6 +582,12 @@ public class BDcontrolador {
 									int id_turno = vista.solicitarInt();
 									String descripcion = vista.solicitarString();
 									int id_combate = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									actualizarTurno(id_turno,descripcion,id_combate);
 									break;
 								}
@@ -494,6 +667,12 @@ public class BDcontrolador {
 									mostrarPersonaje();
 									vista.mostrarMensaje("Ingrese id_personaje: ");
 									int id_personaje = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									borrarPersonaje(id_personaje);
 									break;
 								}
@@ -501,6 +680,12 @@ public class BDcontrolador {
 									mostrarEnemigo();
 									vista.mostrarMensaje("Ingrese id_enemigo: ");
 									int id_enemigo = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									borrarEnemigo(id_enemigo);
 									break;
 								}
@@ -508,6 +693,12 @@ public class BDcontrolador {
 									mostrarInventario();
 									vista.mostrarMensaje("Ingrese id_inventario: ");
 									int id_inventario = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									borrarInventario(id_inventario);
 									break;
 								}
@@ -515,6 +706,12 @@ public class BDcontrolador {
 									mostrarItem();
 									vista.mostrarMensaje("Ingrese id_item: ");
 									int id_item = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									borrarItem(id_item);
 									break;
 								}
@@ -522,6 +719,12 @@ public class BDcontrolador {
 									mostrarCombate();
 									vista.mostrarMensaje("Ingrese id_combate: ");
 									int id_combate = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									borrarCombate(id_combate);
 									break;
 								}
@@ -529,6 +732,12 @@ public class BDcontrolador {
 									mostrarTurno();
 									vista.mostrarMensaje("Ingrese id_turno: ");
 									int id_turno = vista.solicitarInt();
+									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									String contrasenia = vista.solicitarString();
+									while(contraseniaUsuario != contrasenia) {
+										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										contrasenia = vista.solicitarString();
+									}
 									borrarTurno(id_turno);
 									break;
 								}
