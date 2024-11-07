@@ -6,7 +6,114 @@ public class BDcontrolador {
 		this.modelo = modelo;
 		this.vista = vista;
 	}
-	
+	//Métodos TABLA usuarios
+	public void verificarUsuario() {
+		
+	}
+	public void insertarUsuario(String nombre, String contrasenia) {
+		
+	}
+	public void actualizarUsuario(int id_usuario, String nombre, String contrasenia) {
+		
+	}
+	public void mostrarUsuario(int id_usuario) {
+
+	}
+	public void mostrarUsuario() {
+
+	}
+	public void borrarUsuario(int id_usuario) {
+
+	}
+	//Métodos TABLA personajes
+	public void insertarPersonaje(String nombre, int vida, int ataque, int defensa, int alcance, int id_inventario) {
+
+	}
+	public void actualizarPersonaje(int id_personaje, String nombre, int vida, int ataque, int defensa, int alcance, int id_inventario) {
+
+	}
+	public void mostrarPersonaje(int id_personaje) {
+
+	}
+	public void mostrarPersonaje() {
+
+	}
+	public void borrarPersonaje(int id_personaje) {
+
+	}
+	//Métodos TABLA enemigos
+	public void insertarEnemigo(String nombre, int vida, int ataque, String tipo) {
+		
+	}
+	public void actualizarEnemigo(int id_enemigo, String nombre, int vida, int ataque, String tipo) {
+
+	}
+	public void mostrarEnemigo(int id_enemigo) {
+
+	}
+	public void mostrarEnemigo() {
+
+	}
+	public void borrarEnemigo(int id_enemigo) {
+
+	}
+	//Métodos TABLA items
+	public void insertarItem(String nombre, String tipo, String descripcion, int cantidad) {
+			
+	}
+	public void actualizarItem(int id_item, String nombre, String tipo, String descripcion, int cantidad) {
+
+	}
+	public void mostrarItem(int id_item) {
+
+	}
+	public void mostrarItem() {
+
+	}
+	public void borrarItem(int id_item) {
+
+	}
+	//Métodos TABLA inventarios
+	public void insertarInventario(int id_inventario) {
+		
+	}
+	public void borrarInventario(int id_inventario) {
+
+	} 
+	//Métodos TABLA inventarios_items
+	public void insertarIntentario_Item(int id_inventario, int id_item) {
+			
+	}
+	public void borrarInventario_Item() {
+
+	}
+	//Métodos TABLA combates
+	public void insertarCombate(int id_personaje, int id_enemigo, boolean resultado) {
+			
+	}
+	public void mostrarCombate(int id_combate) {
+
+	}
+	public void mostrarCombate() {
+
+	}
+	public void borrarCombate(int id_combate) {
+
+	}
+	//Métodos TABLA turnos
+	public void insertarTurno(String descripcion) {
+			
+	}
+	public void mostrarTurno(int id_turno) {
+
+	}
+	public void mostrarTurno() {
+
+	}
+	public void borrarTurno(int id_turno) {
+
+	}
+	//Método para iniciar el programa
 	public void menuInicio() {
 		String opc1, opc2, opc3;
 		do {
@@ -17,7 +124,7 @@ public class BDcontrolador {
 				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
 				String nuevoNombre = vista.solicitarString();
 				String nuevaContrasenia = vista.solicitarString();
-				agregarUsuario(nuevoNombre, nuevaContrasenia);
+				insertarUsuario(nuevoNombre, nuevaContrasenia);
 				break;
 			case "2":
 				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
@@ -206,22 +313,23 @@ public class BDcontrolador {
 							} while(!opc3.equals("7"));
 							break;
 						case "5":
-							vista.mostrarMensaje("¿Está seguro?(Si/No)");
-							String elim = vista.solicitarString();
-							if(elim == "Si" || elim == "si") {
-								eliminarUsuario();
-							}
-							break;
-						case "6":
 							break;
 						default:
 							vista.mostrarMensaje("Opción no válida. Intente de nuevo");
 							break;
 						}
-					} while(!opc2.equals("5")||!opc2.equals("6"));
+					} while(!opc2.equals("5"));
 				}
 				break;
 			case "3":
+				mostrarUsuario();
+				
+				break;
+			case "4":
+				break;
+			case "5":
+				break;
+			case "6":
 				break;
 			default:
 				vista.mostrarMensaje("Opción no válida. Intente de nuevo");
