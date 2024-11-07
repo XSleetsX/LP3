@@ -1,0 +1,64 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class SQLITEmodelo {
+	private List<Usuario> usuarios;
+	private List<Personaje> personajes;
+	private List<Enemigo> enemigos;
+	private List<Inventario> inventarios;
+	private List<Item> items;
+	private List<Combate> combates;
+	private List<Turno> turnos;
+	
+	public SQLITEmodelo () {
+		this.usuarios = new ArrayList<>();
+		this.personajes = new ArrayList<>();
+		this.enemigos = new ArrayList<>();
+		this.inventarios = new ArrayList<>();
+		this.items = new ArrayList<>();
+		this.combates = new ArrayList<>();
+		this.turnos = new ArrayList<>();
+	}
+	
+	public void buscarUsuario(int id_usuario) {}
+	public void insertarUsuario(String nombre, String contrasenia) {}
+	public void actualizarUsuario(int id_usuario, String nombre, String contrasenia) {}
+	public void mostrarUsuario(int id_usuario) {}
+	public void borrarUsuario(int id_usuario) {}
+	
+	public void buscarPersonaje(int id_personaje) {}
+	public void insertarPersonaje(String nombre, int vida, int ataque, int defensa, int alcance, Inventario inventario) {}
+	public void actualizarPersonaje(int id_personaje, String nombre, int vida, int ataque, int defensa, int alcance, Inventario inventario) {}
+	public void mostrarPersonaje(int id_personaje) {}
+	public void borrarPersonaje(int id_personaje) {}
+	
+	public void buscarEnemigo(int id_enemigo) {}
+	public void insertarEnemigo(String nombre, int vida, int ataque, String tipo) {}
+	public void actualizarEnemigo(int id_enemigo, String nombre, int vida, int ataque, String tipo) {}
+	public void mostrarEnemigo(int id_enemigo) {}
+	public void borrarEnemigo(int id_enemigo) {}
+	
+	public void buscarInventario(int id_inventario) {}
+	public void insertarInventario(Personaje personaje) {}
+	public void actualizarInventario(int id_inventario, Personaje personaje) {}
+	public void mostrarInventario(int id_inventario) {}
+	public void borrarInventario(int id_inventario) {}
+	
+	public void buscarItem(int id_item) {}
+	public void insertarItem(String nombre, String tipo, String descripcion, int cantidad) {}
+	public void actualizarItem(int id_item, String nombre, String tipo, String descripcion, int cantidad) {}
+	public void mostrarItem(int id_item) {}
+	public void borrarItem(int id_item) {}
+	
+	public void buscarCombate(int id_combate) {}
+	public void insertarCombate(String resultado, Personaje personaje, Enemigo enemigo, Turno turno) {}
+	public void actualizarCombate(int id_combate, String resultado, Personaje personaje, Enemigo enemigo, Turno turno) {}
+	public void mostrarCombate(int id_combate) {}
+	public void borrarCombate(int id_combate) {}
+
+	public void buscarTurno(int id_turno) {}
+	public void insertarTurno(String descripcion) {}
+	public void actualizarTurno(int id_turno, String descripcion) {}
+	public void mostrarTurno(int id_turno) {}
+	public void borrarTurno(int id_turno) {}
+}
