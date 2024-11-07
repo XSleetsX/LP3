@@ -1,0 +1,229 @@
+package LAB_8;
+
+
+
+public class Usuarios {
+private int id_usuario;
+private String nombre;
+private String contrasena;
+
+public Usuarios(int id_usuario, String nombre, String contrasena) {
+   this.id_usuario = id_usuario;
+   this.nombre = nombre;
+   this.contrasena = contrasena;
+}
+
+public int getId_usuario() { return id_usuario; }
+public void setId_usuario(int id_usuario) { this.id_usuario = id_usuario; }
+
+public String getNombre() { return nombre; }
+public void setNombre(String nombre) { this.nombre = nombre; }
+
+public String getContrasena() { return contrasena; }
+public void setContrasena(String contrasena) { this.contrasena = contrasena; }
+}
+
+public class Personajes {
+private int id_personaje;
+private String nombre;
+private int vida;
+private int ataque;
+private int defensa;
+private int alcance;
+private int id_usuario;
+
+// Constructor
+public Personajes(int id_personaje, String nombre, int vida, int ataque, int defensa, int alcance, int id_usuario) {
+   this.id_personaje = id_personaje;
+   this.nombre = nombre;
+   this.vida = vida;
+   this.ataque = ataque;
+   this.defensa = defensa;
+   this.alcance = alcance;
+   this.id_usuario = id_usuario;
+}
+
+public int getId_personaje() { return id_personaje; }
+public void setId_personaje(int id_personaje) { this.id_personaje = id_personaje; }
+
+public String getNombre() { return nombre; }
+public void setNombre(String nombre) { this.nombre = nombre; }
+
+public int getVida() { return vida; }
+public void setVida(int vida) { this.vida = vida; }
+
+public int getAtaque() { return ataque; }
+public void setAtaque(int ataque) { this.ataque = ataque; }
+
+public int getDefensa() { return defensa; }
+public void setDefensa(int defensa) { this.defensa = defensa; }
+
+public int getAlcance() { return alcance; }
+public void setAlcance(int alcance) { this.alcance = alcance; }
+
+public int getId_usuario() { return id_usuario; }
+public void setId_usuario(int id_usuario) { this.id_usuario = id_usuario; }
+}
+
+//Clase Enemigos
+public class Enemigos {
+private int id_enemigo;
+private String nombre;
+private int salud;
+private int ataque;
+private String tipo;
+
+// Constructor
+public Enemigos(int id_enemigo, String nombre, int salud, int ataque, String tipo) {
+   this.id_enemigo = id_enemigo;
+   this.nombre = nombre;
+   this.salud = salud;
+   this.ataque = ataque;
+   this.tipo = tipo;
+}
+
+// Getters y Setters
+public int getId_enemigo() { return id_enemigo; }
+public void setId_enemigo(int id_enemigo) { this.id_enemigo = id_enemigo; }
+
+public String getNombre() { return nombre; }
+public void setNombre(String nombre) { this.nombre = nombre; }
+
+public int getSalud() { return salud; }
+public void setSalud(int salud) { this.salud = salud; }
+
+public int getAtaque() { return ataque; }
+public void setAtaque(int ataque) { this.ataque = ataque; }
+
+public String getTipo() { return tipo; }
+public void setTipo(String tipo) { this.tipo = tipo; }
+}
+
+public class Combates {
+private int id_combate;
+private String resultado;
+private int id_personaje;
+private int id_enemigo;
+private int id_turno;
+
+public Combates(int id_combate, String resultado, int id_personaje, int id_enemigo, int id_turno) {
+   this.id_combate = id_combate;
+   this.resultado = resultado;
+   this.id_personaje = id_personaje;
+   this.id_enemigo = id_enemigo;
+   this.id_turno = id_turno;
+}
+
+// Getters y Setters
+public int getId_combate() { return id_combate; }
+public void setId_combate(int id_combate) { this.id_combate = id_combate; }
+
+public String getResultado() { return resultado; }
+public void setResultado(String resultado) { this.resultado = resultado; }
+
+public int getId_personaje() { return id_personaje; }
+public void setId_personaje(int id_personaje) { this.id_personaje = id_personaje; }
+
+public int getId_enemigo() { return id_enemigo; }
+public void setId_enemigo(int id_enemigo) { this.id_enemigo = id_enemigo; }
+
+public int getId_turno() { return id_turno; }
+public void setId_turno(int id_turno) { this.id_turno = id_turno; }
+}
+
+public class Turnos {
+private int id_turno;
+private String descripcion;
+
+// Constructor
+public Turnos(int id_turno, String descripcion) {
+   this.id_turno = id_turno;
+   this.descripcion = descripcion;
+}
+
+public int getId_turno() { return id_turno; }
+public void setId_turno(int id_turno) { this.id_turno = id_turno; }
+
+public String getDescripcion() { return descripcion; }
+public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+}
+
+public class Inventarios {
+private int id_inventario;
+private int id_personaje;
+
+public Inventarios(int id_inventario, int id_personaje) {
+   this.id_inventario = id_inventario;
+   this.id_personaje = id_personaje;
+}
+
+public int getId_inventario() { return id_inventario; }
+public void setId_inventario(int id_inventario) { this.id_inventario = id_inventario; }
+
+public int getId_personaje() { return id_personaje; }
+public void setId_personaje(int id_personaje) { this.id_personaje = id_personaje; }
+}
+
+public class Items {
+private int id_item;
+private String nombre;
+private String tipo;
+private String descripcion;
+private int cantidad;
+
+public Items(int id_item, String nombre, String tipo, String descripcion, int cantidad) {
+   this.id_item = id_item;
+   this.nombre = nombre;
+   this.tipo = tipo;
+   this.descripcion = descripcion;
+   this.cantidad = cantidad;
+}
+
+public int getId_item() { return id_item; }
+public void setId_item(int id_item) { this.id_item = id_item; }
+
+public String getNombre() { return nombre; }
+public void setNombre(String nombre) { this.nombre = nombre; }
+
+public String getTipo() { return tipo; }
+public void setTipo(String tipo) { this.tipo = tipo; }
+
+public String getDescripcion() { return descripcion; }
+public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+
+public int getCantidad() { return cantidad; }
+public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+}
+
+public class InventariosItems {
+private int id_inventario;
+private int id_item;
+
+public InventariosItems(int id_inventario, int id_item) {
+   this.id_inventario = id_inventario;
+   this.id_item = id_item;
+}
+
+public int getId_inventario() { return id_inventario; }
+public void setId_inventario(int id_inventario) { this.id_inventario = id_inventario; }
+
+public int getId_item() { return id_item; }
+public void setId_item(int id_item) { this.id_item = id_item; }
+}
+
+//Clase UsuariosPersonajes (relación muchos a muchos entre Usuarios y Personajes)
+public class UsuariosPersonajes {
+private int id_usuario;
+private int id_personaje;
+
+public UsuariosPersonajes(int id_usuario, int id_personaje) {
+   this.id_usuario = id_usuario;
+   this.id_personaje = id_personaje;
+}
+
+public int getId_usuario() { return id_usuario; }
+public void setId_usuario(int id_usuario) { this.id_usuario = id_usuario; }
+
+public int getId_personaje() { return id_personaje; }
+public void setId_personaje(int id_personaje) { this.id_personaje = id_personaje; }
+}
