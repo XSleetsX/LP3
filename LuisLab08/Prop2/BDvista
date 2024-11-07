@@ -5,7 +5,10 @@ public class BDvista {
 		System.out.println("===Menú===");
 		System.out.println("1.Crear usuario");
 		System.out.println("2.Ingresar");
-		System.out.println("3.Salir");
+		System.out.println("3.Actualizar usuario");
+		System.out.println("4.Mostrar usuario");
+		System.out.println("5.Borrar usuario");
+		System.out.println("6.Salir");
 	}
 	public void menuCRUD() {
 		System.out.println("===CRUD===");
@@ -13,8 +16,7 @@ public class BDvista {
 		System.out.println("2.Actualizar registro");
 		System.out.println("3.Mostrar registro");
 		System.out.println("4.Borrar registro");
-		System.out.println("5.Eliminar usuario");
-		System.out.println("6.Cerrar sesión");
+		System.out.println("5.Cerrar sesión");
 	}
 	public void menuTablas() {
 		System.out.println("===Tablas===");
@@ -48,3 +50,4 @@ public class BDvista {
 		System.out.println(mensaje);
 	}
 }
+
