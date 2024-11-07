@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class BDvista {
+	private Scanner sc;
+	
+	public BDvista() {
+		this.sc = new Scanner(System.in);
+	}
 	public void menuLogin() {
 		System.out.println("===Menú===");
 		System.out.println("1.Crear usuario");
@@ -25,29 +30,25 @@ public class BDvista {
 		System.out.println("3.Inventarios");
 		System.out.println("4.Items");
 		System.out.println("5.Combates");
-		System.out.println("6.Inventarios_Items");
+		System.out.println("6.Turnos");
 		System.out.println("7.Salir");
 	}
 	public String solicitarOpcion() {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Ingrese una opción: ");
-		sc.close();
 		return sc.next();
 	}
 	public String solicitarString() {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Escriba aquí: ");
-		sc.close();
 		return sc.next();
 	}
 	public int solicitarInt() {
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Escriba aquí: ");
-		sc.close();
 		return sc.nextInt();
 	}
 	public void mostrarMensaje(String mensaje) {
 		System.out.println(mensaje);
 	}
+	public void cerrarScanner() {
+		sc.close();
+	}
 }
-
