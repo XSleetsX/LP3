@@ -1,0 +1,211 @@
+package LAB_8; 
+
+  
+
+import java.sql.Connection; 
+
+import java.sql.DriverManager; 
+
+import java.sql.PreparedStatement; 
+
+import java.sql.ResultSet; 
+
+import java.sql.SQLException; 
+
+  
+
+public class NuevaActividad { 
+
+    public static void main(String[] args) { 
+
+        Connection con = null; 
+
+  
+
+        try { 
+
+            // Carga la clase del controlador JDBC de SQLite 
+
+            Class.forName("org.sqlite.JDBC"); 
+
+            // Conecta la base de datos SQLite 
+
+            con = DriverManager.getConnection("jdbc:sqlite:NuevaActividad\\ejemplo1.db"); 
+
+            con.setAutoCommit(false); // Desactivar auto-commit para manejo de transacciones 
+
+  
+
+            if (con != null) { 
+
+                System.out.println("Conexión exitosa a la base de datos."); 
+
+            } 
+
+  
+
+            // Crear tabla 'producto' si no existe 
+
+            try (PreparedStatement ps = con.prepareStatement("CREATE TABLE IF NOT EXISTS producto (id INTEGER PRIMARY KEY, nombre TEXT, precio REAL);")) { 
+
+                ps.executeUpdate(); 
+
+            } 
+
+            System.out.println("Tabla 'producto' creada exitosamente."); 
+
+  
+
+            // Insertar registros en la tabla usando PreparedStatement 
+
+            String insertSQL = "INSERT INTO producto (id, nombre, precio) VALUES (?, ?, ?)"; 
+
+            try (PreparedStatement psInsert = con.prepareStatement(insertSQL)) { 
+
+                psInsert.setInt(1, 1); 
+
+                psInsert.setString(2, "Lapiz"); 
+
+                psInsert.setDouble(3, 1.50); 
+
+                psInsert.executeUpdate(); 
+
+  
+
+                psInsert.setInt(1, 2); 
+
+                psInsert.setString(2, "Cuaderno"); 
+
+                psInsert.setDouble(3, 3.00); 
+
+                psInsert.executeUpdate(); 
+
+  
+
+                psInsert.setInt(1, 3); 
+
+                psInsert.setString(2, "Borrador"); 
+
+                psInsert.setDouble(3, 0.50); 
+
+                psInsert.executeUpdate(); 
+
+            } 
+
+            System.out.println("Inserciones realizadas con éxito."); 
+
+  
+
+            // Mostrar productos 
+
+            mostrarProductos(con); 
+
+  
+
+            // Actualizar el precio de un producto 
+
+            String updateSQL = "UPDATE producto SET precio = ? WHERE nombre = ?"; 
+
+            try (PreparedStatement psUpdate = con.prepareStatement(updateSQL)) { 
+
+                psUpdate.setDouble(1, 2.00); 
+
+                psUpdate.setString(2, "Lapiz"); 
+
+                psUpdate.executeUpdate(); 
+
+            } 
+
+            System.out.println("Precio actualizado para 'Lapiz'."); 
+
+  
+
+            // Eliminar un producto específico 
+
+            String deleteSQL = "DELETE FROM producto WHERE nombre = ?"; 
+
+            try (PreparedStatement psDelete = con.prepareStatement(deleteSQL)) { 
+
+                psDelete.setString(1, "Cuaderno"); 
+
+                psDelete.executeUpdate(); 
+
+            } 
+
+            System.out.println("Producto 'Cuaderno' eliminado."); 
+
+  
+
+            // Confirmar transacción 
+
+            con.commit(); 
+
+            mostrarProductos(con); 
+
+  
+
+        } catch (Exception e) { 
+
+            System.out.println(e); 
+
+            if (con != null) { 
+
+                try { 
+
+                    con.rollback(); // Revertir cambios si ocurre un error 
+
+                    System.out.println("Se ha realizado un rollback."); 
+
+                } catch (SQLException ex) { 
+
+                    System.out.println("Error al hacer rollback: " + ex); 
+
+                } 
+
+            } 
+
+        } finally { 
+
+            if (con != null) { 
+
+                try { 
+
+                    con.close(); 
+
+                } catch (SQLException ex) { 
+
+                    System.out.println("Error al cerrar conexión: " + ex); 
+
+                } 
+
+            } 
+
+        } 
+
+    } 
+
+  
+
+    private static void mostrarProductos(Connection con) throws SQLException { 
+
+        String selectSQL = "SELECT * FROM producto"; 
+
+        try (PreparedStatement psSelect = con.prepareStatement(selectSQL); 
+
+             ResultSet rs = psSelect.executeQuery()) { 
+
+            System.out.println("Lista de productos:"); 
+
+            System.out.printf("%-3s %-10s %-5s\n", "ID", "Nombre", "Precio"); 
+
+            while (rs.next()) { 
+
+                System.out.printf("%-3d %-10s %-5.2f\n", rs.getInt("id"), rs.getString("nombre"), rs.getDouble("precio")); 
+
+            } 
+
+        } 
+
+    } 
+
+} 
