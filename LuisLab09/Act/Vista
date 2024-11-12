@@ -1,0 +1,58 @@
+package Luis_Lab09_Act;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Vista extends JFrame implements ActionListener {
+	private JButton botonIngresar, botonCancelar;
+	private FlowLayout flowLayout;
+	private JTextField campoUsuario;
+	private JPasswordField campoContrasenia;
+	private JLabel textoBienvenida;
+	private JLabel textoUsuario;
+	private JLabel textoContrasenia;
+	private JLabel textoIngreso;
+	
+	public Vista() {
+		this.botonIngresar = new JButton("Ingresar");
+		this.botonCancelar = new JButton("Cancelar");
+		this.flowLayout = new FlowLayout(FlowLayout.CENTER,15,15);
+		this.campoUsuario = new JTextField(15);
+		this.campoContrasenia = new JPasswordField(15);
+		this.textoBienvenida = new JLabel("Bienvenido, LUIS RICARDO ARIZAGA USNAYO");
+		this.textoUsuario = new JLabel("Usuario:");
+		this.textoContrasenia = new JLabel("Contraseña:");
+		this.textoIngreso = new JLabel("");
+		
+		setLayout(flowLayout);
+		add(textoBienvenida);
+		add(textoUsuario);
+		add(campoUsuario);
+		add(textoContrasenia);
+		add(campoContrasenia);
+		add(botonIngresar);
+		add(botonCancelar);
+		menuLogin();
+	}
+	
+	public void menuLogin() {
+		pack();
+		setLocationRelativeTo(null);
+		setTitle("Login");
+		setSize(300, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		botonIngresar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerfomed(ActionEvent e) {
+				String usuario = campoUsuario.getText();
+				if(!usuario.trim().isEmpty()) {
+					textoIngreso.setText("Usuario ingresado correctamente.");
+				} else {
+					textoIngreso.setText("Bro ingresa bien el texto Bro, no seas gay");
+				}
+			}
+		});
+		setVisible(true);
+	}
+}
