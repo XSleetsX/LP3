@@ -1,29 +1,21 @@
-package Luis_Lab09_Act;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class Vista extends JFrame implements ActionListener {
-	private JButton botonIngresar, botonCancelar;
-	private FlowLayout flowLayout;
-	private JTextField campoUsuario;
-	private JPasswordField campoContrasenia;
-	private JLabel textoBienvenida;
-	private JLabel textoUsuario;
-	private JLabel textoContrasenia;
-	private JLabel textoIngreso;
-	
-	public Vista() {
-		this.botonIngresar = new JButton("Ingresar");
-		this.botonCancelar = new JButton("Cancelar");
-		this.flowLayout = new FlowLayout(FlowLayout.CENTER,15,15);
-		this.campoUsuario = new JTextField(15);
-		this.campoContrasenia = new JPasswordField(15);
-		this.textoBienvenida = new JLabel("Bienvenido, LUIS RICARDO ARIZAGA USNAYO");
-		this.textoUsuario = new JLabel("Usuario:");
-		this.textoContrasenia = new JLabel("Contraseña:");
-		this.textoIngreso = new JLabel("");
+public class Vista extends JFrame {
+	public void menuLogin() {
+		pack();
+		setLocationRelativeTo(null);
+		setTitle("Login");
+		setSize(300, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER,15,15);
+		JButton botonIngresar = new JButton("Ingresar");
+		JButton botonCancelar = new JButton("Cancelar");
+		JTextField campoUsuario = new JTextField(15);
+		JPasswordField campoContrasenia = new JPasswordField(15);
+		JLabel textoBienvenida = new JLabel("Bienvenido, LUIS RICARDO ARIZAGA USNAYO");
+		JLabel textoUsuario = new JLabel("Usuario:");
+		JLabel textoContrasenia = new JLabel("Contraseña:");
 		
 		setLayout(flowLayout);
 		add(textoBienvenida);
@@ -33,26 +25,32 @@ public class Vista extends JFrame implements ActionListener {
 		add(campoContrasenia);
 		add(botonIngresar);
 		add(botonCancelar);
-		menuLogin();
+		setVisible(true);
 	}
-	
-	public void menuLogin() {
+	public void menuComidas() {
 		pack();
 		setLocationRelativeTo(null);
-		setTitle("Login");
-		setSize(300, 300);
+		setTitle("Almuerzos");
+		setSize(500,500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		botonIngresar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerfomed(ActionEvent e) {
-				String usuario = campoUsuario.getText();
-				if(!usuario.trim().isEmpty()) {
-					textoIngreso.setText("Usuario ingresado correctamente.");
-				} else {
-					textoIngreso.setText("Bro ingresa bien el texto Bro, no seas gay");
-				}
-			}
-		});
+		GridLayout gridlayout = new GridLayout(2,3);
+		JButton botonPedir = new JButton("Pedir");
+		JLabel textoLomoSaltado = new JLabel("Lomo Saltado");
+		JLabel textoCausaRellena = new JLabel("Causa Rellena");
+		JLabel textoCeviche = new JLabel("Ceviche");
+		JLabel textoChicharron = new JLabel("Chicharrón");
+		JLabel textoAnticucho = new JLabel("Anticucho");
+		JLabel textoArrozChaufa = new JLabel("Arroz Chaufa");
+		
+		ImageIcon imagenLomoSaltado = new ImageIcon("Direccion de la imagen");
+		ImageIcon imagenCausaRellena = new ImageIcon();
+		ImageIcon imagenCeviche = new ImageIcon();
+		ImageIcon imagenChicharron = new ImageIcon();
+		ImageIcon imagenAnticucho = new ImageIcon();
+		ImageIcon imagenArrozChaufa = new ImageIcon();
+		
+		setLayout(gridlayout);
+		add(textoLomoSaltado, imagenLomoSaltado, botonPedir);
 		setVisible(true);
 	}
 }
