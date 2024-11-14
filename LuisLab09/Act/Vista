@@ -31,26 +31,61 @@ public class Vista extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 		setTitle("Almuerzos");
+		setSize(500,300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		GridLayout gridLayout = new GridLayout(1,3);
+		JButton botonPedirLomoSaltado = new JButton("Pedir Lomo Saltado");
+		ImageIcon imagenLomoSaltado = new ImageIcon("C:\\Users\\Alumno\\Pictures\\comidasJava\\LomoSaltado.png");
+		JLabel iconoLomoSaltado = new JLabel(imagenLomoSaltado);
+		JPanel panelLomoSaltado = new JPanel();
+		panelLomoSaltado.add(iconoLomoSaltado);
+		panelLomoSaltado.add(botonPedirLomoSaltado);
+		
+		JButton botonPedirCausaRellena = new JButton("Pedir Causa Rellena");
+		ImageIcon imagenCausaRellena = new ImageIcon("C:\\Users\\Alumno\\Pictures\\comidasJava\\CausaRellena.png");
+		JLabel iconoCausaRellena = new JLabel(imagenCausaRellena);
+		JPanel panelCausaRellena = new JPanel();
+		panelCausaRellena.add(iconoCausaRellena);
+		panelCausaRellena.add(botonPedirCausaRellena);
+		
+		JButton botonPedirCeviche = new JButton("Pedir Ceviche");
+		ImageIcon imagenCeviche = new ImageIcon("C:\\Users\\Alumno\\Pictures\\comidasJava\\Ceviche.png");
+		JLabel iconoCeviche = new JLabel(imagenCeviche);
+		JPanel panelCeviche = new JPanel();
+		panelCeviche.add(iconoCeviche);
+		panelCeviche.add(botonPedirCeviche);
+		
+		setLayout(gridLayout);
+		add(panelLomoSaltado);
+		add(panelCausaRellena);
+		add(panelCeviche);
+		setVisible(true);
+	}
+	public void menuLugares() {
+		pack();
+		setLocationRelativeTo(null);
+		setTitle("Lugares");
 		setSize(500,500);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GridLayout gridlayout = new GridLayout(2,3);
-		JButton botonPedir = new JButton("Pedir");
-		JLabel textoLomoSaltado = new JLabel("Lomo Saltado");
-		JLabel textoCausaRellena = new JLabel("Causa Rellena");
-		JLabel textoCeviche = new JLabel("Ceviche");
-		JLabel textoChicharron = new JLabel("Chicharrón");
-		JLabel textoAnticucho = new JLabel("Anticucho");
-		JLabel textoArrozChaufa = new JLabel("Arroz Chaufa");
+		BorderLayout borderLayout = new BorderLayout();
+		JButton botonCiudadNorte = new JButton("Ciudades del Norte");
+		JButton botonCiudadOeste = new JButton("Ciudades del Oeste");
+		JButton botonCiudadSur = new JButton("Ciudades del Sur");
+		JButton botonCiudadEste = new JButton("Ciudades del Este");
+		JButton botonCiudadCentro = new JButton("Ciudades del Centro");
 		
-		ImageIcon imagenLomoSaltado = new ImageIcon("Direccion de la imagen");
-		ImageIcon imagenCausaRellena = new ImageIcon();
-		ImageIcon imagenCeviche = new ImageIcon();
-		ImageIcon imagenChicharron = new ImageIcon();
-		ImageIcon imagenAnticucho = new ImageIcon();
-		ImageIcon imagenArrozChaufa = new ImageIcon();
+		ImageIcon imagenCiudadNorte = new ImageIcon("Direccion de la imagen");
+		ImageIcon imagenCiudadOeste = new ImageIcon();
+		ImageIcon imagenCiudadSur = new ImageIcon();
+		ImageIcon imagenCiudadEste = new ImageIcon();
+		ImageIcon imagenCiudadCentro = new ImageIcon();
 		
-		setLayout(gridlayout);
-		add(textoLomoSaltado, imagenLomoSaltado, botonPedir);
+		setLayout(borderLayout);
+		add(botonCiudadNorte, BorderLayout.NORTH);
+		add(botonCiudadOeste, BorderLayout.WEST);
+		add(botonCiudadSur, BorderLayout.SOUTH);
+		add(botonCiudadEste, BorderLayout.EAST);
+		add(botonCiudadCentro, BorderLayout.CENTER);
 		setVisible(true);
 	}
 }
