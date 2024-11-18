@@ -1,0 +1,183 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Calculadora {
+	private String operador = "";
+	private double operando1 = 0;
+	private boolean nuevaOperacion = false;
+	
+	public void login() {
+		JFrame login = new JFrame("Login");
+		login.setSize(300, 300);
+		login.setLocationRelativeTo(null);
+		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER,15,15);
+		JButton botonIngresar = new JButton("Ingresar");
+		JTextField campoUsuario = new JTextField(15);
+		JPasswordField campoContrasenia = new JPasswordField(15);
+		JLabel textoBienvenida = new JLabel("Bienvenido, LUIS RICARDO ARIZAGA USNAYO");
+		JLabel textoUsuario = new JLabel("Usuario:");
+		JLabel textoContrasenia = new JLabel("Contraseña:");
+		
+		login.setLayout(flowLayout);
+		botonIngresar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				login.dispose();
+				iniciarCalculadora();
+			}
+		});
+		
+		login.add(textoBienvenida);
+		login.add(textoUsuario);
+		login.add(campoUsuario);
+		login.add(textoContrasenia);
+		login.add(campoContrasenia);
+		login.add(botonIngresar);
+		login.pack();
+		login.setVisible(true);
+		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	public void iniciarCalculadora() {
+		JFrame calculadora = new JFrame("Calculadora");
+		BorderLayout borderLayout = new BorderLayout();
+		
+		JPanel pantalla = new JPanel();
+		JTextField salida = new JTextField(20);
+		pantalla.add(salida);
+		
+		JPanel botones = new JPanel();
+		GridLayout gridLayout = new GridLayout(5, 4, 8, 8);
+		botones.setLayout(gridLayout);
+		JButton bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9, bt0, btPunto, btIgual, btSuma, btResta, btMult, btDiv;
+		bt1 = new JButton ("1");
+		bt2 = new JButton ("2"); 
+		bt3 = new JButton ("3"); 
+		bt4 = new JButton ("4");
+		bt5 = new JButton ("5");
+		bt6 = new JButton ("6");
+		bt7 = new JButton ("7");
+		bt8 = new JButton ("8");
+		bt9 = new JButton ("9");
+		bt0 = new JButton ("0");
+		btPunto = new JButton (".");
+		btIgual = new JButton ("=");
+		btSuma = new JButton ("+");
+		btResta = new JButton ("-");
+		btMult = new JButton ("x");
+		btDiv = new JButton ("/");
+		botones.add(bt7);
+		botones.add(bt8);
+		botones.add(bt9);
+		botones.add(btDiv);
+		botones.add(bt4);
+		botones.add(bt5);
+		botones.add(bt6);
+		botones.add(btMult);
+		botones.add(bt1);
+		botones.add(bt2);
+		botones.add(bt3);
+		botones.add(btResta);
+		botones.add(bt0);
+		botones.add(btPunto);
+		botones.add(btIgual);
+		botones.add(btSuma);
+		
+		JButton btC = new JButton("C");
+		
+		calculadora.setLayout(borderLayout);
+		calculadora.add(pantalla, BorderLayout.NORTH);
+		calculadora.add(botones, BorderLayout.CENTER);
+		calculadora.add(btC, BorderLayout.SOUTH);
+		
+		ActionListener accionNumeros = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(nuevaOperacion) {
+					salida.setText("");
+					nuevaOperacion = false;
+				}
+				salida.setText(salida.getText() + e.getActionCommand());
+			}
+		};
+		
+		ActionListener accionOperadores = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					operando1 = Double.parseDouble(salida.getText());
+					operador = e.getActionCommand();
+					nuevaOperacion = true;
+				} catch (NumberFormatException err) {
+					salida.setText("Error");
+				}
+			}
+		};
+		
+		btIgual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					double operando2 = Double.parseDouble(salida.getText());
+					double resultado = 0;
+					switch(operador) {
+					case "+":
+						resultado = operando1 + operando2;
+						break;
+					case "-":
+						resultado = operando1 - operando2;
+						break;
+					case "x":
+						resultado = operando1 * operando2;
+						break;
+					case "/":
+						if(operando2 == 0) {
+							salida.setText("Error");
+							break;
+						}
+						resultado = operando1 / operando2;
+						break;
+					}
+					salida.setText(String.valueOf(resultado));
+					nuevaOperacion = true;
+				} catch (NumberFormatException err) {
+					salida.setText("Error");
+				}
+			}
+		});
+		
+		btC.addActionListener(new ActionListener () {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				salida.setText("");
+				operando1 = 0;
+				operador = "";
+			}
+		});
+		
+		bt0.addActionListener(accionNumeros);
+		bt1.addActionListener(accionNumeros);
+		bt2.addActionListener(accionNumeros);
+		bt3.addActionListener(accionNumeros);
+		bt4.addActionListener(accionNumeros);
+		bt5.addActionListener(accionNumeros);
+		bt6.addActionListener(accionNumeros);
+		bt7.addActionListener(accionNumeros);
+		bt8.addActionListener(accionNumeros);
+		bt9.addActionListener(accionNumeros);
+		btPunto.addActionListener(accionNumeros);
+		
+		btSuma.addActionListener(accionOperadores);
+		btResta.addActionListener(accionOperadores);
+		btMult.addActionListener(accionOperadores);
+		btDiv.addActionListener(accionOperadores);
+		
+		calculadora.pack();
+		calculadora.setVisible(true);
+		calculadora.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	public static void main(String[] args) {
+		Main main = new Main();
+		main.login();
+	}
+}
