@@ -1,0 +1,135 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class OtisCorp extends JFrame{
+	JLabel textoNombre, textoDNI, textoFechaViaje, textoOpcionAdicional, textoOpcionPisos, textoLugarOrigen, textoLugarDestino, textoCalidadServicio;
+	JTextField nombres, dni, fechaViaje;
+	JButton reiniciar, enviar;
+	JCheckBox audifonos, manta, revistas;
+	JRadioButton primerPiso, segundoPiso;
+	JComboBox<String> lugarOrigen, lugarDestino;
+	JList<String> calidadServicio;
+	
+	public OtisCorp() {
+		super("Compra de Pasajes");
+		setSize(650, 300);
+		setLocationRelativeTo(null);
+		setLayout(new BorderLayout());
+		
+		JPanel datosPasaje = new JPanel(new GridLayout(6, 2, 5, 5));
+		datosPasaje.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		textoNombre = new JLabel("Nombres y Apellidos:");
+		nombres = new JTextField("Ingrese su nombre completo");
+		textoDNI = new JLabel("DNI:");
+		dni = new JTextField("Ingrese su DNI");
+		textoFechaViaje = new JLabel("Fecha de viaje (DD/MM/AAAA):");
+		fechaViaje = new JTextField("Ingrese la fecha de su viaje");
+		textoLugarOrigen = new JLabel("Origen:");
+		lugarOrigen = new JComboBox<>(new String[] {"Camaná", "Islay", "La Unión", "Condesuyos"});
+		textoLugarDestino = new JLabel("Destino");
+		lugarDestino = new JComboBox<>(new String[] {"Arequipa", "Caravelí", "Caylloma", "Castilla"});
+		textoCalidadServicio = new JLabel("Calidad de servicio:");
+		calidadServicio = new JList<>(new String[] {"Económico", "Estándar", "VIP"});
+		datosPasaje.add(textoNombre);
+		datosPasaje.add(nombres);
+		datosPasaje.add(textoDNI);
+		datosPasaje.add(dni);
+		datosPasaje.add(textoFechaViaje);
+		datosPasaje.add(fechaViaje);
+		datosPasaje.add(textoLugarOrigen);
+		datosPasaje.add(lugarOrigen);
+		datosPasaje.add(textoLugarDestino);
+		datosPasaje.add(lugarDestino);
+		datosPasaje.add(textoCalidadServicio);
+		datosPasaje.add(new JScrollPane(calidadServicio));
+		
+		JPanel servicios = new JPanel(new GridLayout(4, 1, 5, 5));
+		JPanel opcionAdicional = new JPanel(new FlowLayout());
+		textoOpcionAdicional = new JLabel("Servicios opcionales:");
+		audifonos = new JCheckBox("Audifonos");
+		manta = new JCheckBox("Manta");
+		revistas = new JCheckBox("Revistas");
+		opcionAdicional.add(audifonos);
+		opcionAdicional.add(manta);
+		opcionAdicional.add(revistas);
+	
+		JPanel opcionPisos = new JPanel(new FlowLayout());
+		textoOpcionPisos = new JLabel("Piso preferido:");
+		primerPiso = new JRadioButton("1er Piso");
+		segundoPiso = new JRadioButton("2do Piso");
+		ButtonGroup grupoPisos = new ButtonGroup();
+		grupoPisos.add(primerPiso);
+		grupoPisos.add(segundoPiso);
+		opcionPisos.add(primerPiso);
+		opcionPisos.add(segundoPiso);
+		
+		servicios.add(textoOpcionAdicional);
+		servicios.add(opcionAdicional);
+		servicios.add(textoOpcionPisos);
+		servicios.add(opcionPisos);
+		
+		JPanel botones = new JPanel(new FlowLayout());
+		reiniciar = new JButton("Reiniciar");
+		enviar = new JButton("Enviar");
+		botones.add(reiniciar);
+		botones.add(enviar);
+		
+		reiniciar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                reiniciarCampos();
+            }
+        });
+
+
+        enviar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarResumen();
+            }
+        });
+
+		add(datosPasaje, BorderLayout.CENTER);
+		add(servicios, BorderLayout.EAST);
+		add(botones, BorderLayout.SOUTH);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	public void reiniciarCampos() {
+		nombres.setText("");
+        dni.setText("");
+        fechaViaje.setText("");
+        lugarOrigen.setSelectedIndex(0);
+        lugarDestino.setSelectedIndex(0);
+        calidadServicio.clearSelection();
+        audifonos.setSelected(false);
+        manta.setSelected(false);
+        revistas.setSelected(false);
+        primerPiso.setSelected(false);
+        segundoPiso.setSelected(false);
+	}
+	public void mostrarResumen() {
+        String serviciosOpcionales = "";
+        if (audifonos.isSelected()) {
+        	serviciosOpcionales = "Audífonos";
+        }
+        if (manta.isSelected()) {
+        	serviciosOpcionales = "Manta";
+        }
+        if (revistas.isSelected()) {
+        	serviciosOpcionales = "Revistas";
+        }
+        String piso = "";
+        if (primerPiso.isSelected()) {
+        	piso = "1er Piso";
+        }
+        if (segundoPiso.isSelected()) {
+        	piso = "2do Piso";
+        }
+        String resumen = String.format("Nombre: " + nombres.getText() + "\nDNI: " + dni.getText() + "\nFecha de viaje: " + fechaViaje.getText() + 
+        								"\nOrigen: " + (String) lugarOrigen.getSelectedItem() + "\nDestino: " + (String) lugarDestino.getSelectedItem() + 
+        								"\nCalidad de servicio: " + calidadServicio.getSelectedValue() + "\nServicios opcionales: " + serviciosOpcionales + 
+        								"\nPiso Preferido: " + piso);
+        JOptionPane.showMessageDialog(this, resumen, "Resumen de compra", JOptionPane.INFORMATION_MESSAGE);
+	}
+}
