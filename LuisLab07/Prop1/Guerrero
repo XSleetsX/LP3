@@ -10,12 +10,19 @@ public class Guerrero extends Personaje {
 
     public int atacar() { return ataque; }
     public void equiparEspada(Espada espada) {
+    	this.espada = null;
         this.espada = espada;
         ataque += espada.getAtaque();
+        espada.equipar();
     }
     public void desequiparEspada() {
-        ataque -= espada.getAtaque();
-        this.espada = null;
+    	if(espada == null) {
+    		System.out.println("No tienes una espada equipada.");
+    	}else {
+	        ataque -= espada.getAtaque();
+	        espada.desequipar();
+	        this.espada = null;
+    	}
     }
     public void equiparCasco(Casco casco) {
         this.casco = casco;
@@ -23,6 +30,7 @@ public class Guerrero extends Personaje {
     public void desequiparCasco() {
         this.casco = null;
     }
+    //PENSARLO BIEN PARA QUE CUENTE LOS TURNOS QUE VA A UTILIZAR LA HABILIDAD
     public int usarCasco() {
         mana -= casco.getCosto();
         return casco.getBonusAtaque();
