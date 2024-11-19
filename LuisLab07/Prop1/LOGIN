@@ -1,0 +1,53 @@
+package LAB_10;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class JuegoLuchito {
+    public static void main(String[] args) {
+        // Crear el marco principal
+        JFrame frame = new JFrame("JUEGO LUCHITO");
+        frame.setSize(600, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Crear el panel principal
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        // Crear un título
+        JLabel titulo = new JLabel("LOGIN", JLabel.CENTER);
+        titulo.setFont(new Font("Arial", Font.BOLD, 24));
+        panel.add(titulo, BorderLayout.NORTH);
+
+        // Crear los botones
+        JButton btnNuevaPartida = new JButton("NUEVA PARTIDA");
+        JButton btnConfiguracion = new JButton("CONFIGURACIÓN");
+
+        // Panel para los botones
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new FlowLayout());
+        panelBotones.add(btnNuevaPartida);
+        panelBotones.add(btnConfiguracion);
+        panel.add(panelBotones, BorderLayout.CENTER);
+
+        // Acción para los botones
+        btnNuevaPartida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Iniciando nueva partida...", "Nueva Partida", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        btnConfiguracion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Abriendo configuración...", "Configuración", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        // Agregar el panel al marco
+        frame.add(panel);
+        frame.setVisible(true);
+    }
+}
