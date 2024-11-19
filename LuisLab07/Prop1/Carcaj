@@ -3,11 +3,31 @@ public class Carcaj extends Item {
     private int costo;
     private boolean equipado;
 
-    public Carcaj() {
-        super("Carcaj", "Dispara una flecha con fuerza que hace mucho daño. Costo: 45 maná");
-        this.ataque = 80;
-        this.costo = 45;
+    public Carcaj(int tier) {
+        super("Carcaj", "Dispara una flecha con fuerza que hace mucho daño. Costo: 45 maná", tier);
         this.equipado = false;
+        switch(tier) {
+	    	case 0: {
+	            this.ataque = 80;
+	            this.costo = 45;
+	            break;
+	    	}
+	    	case 1: {
+	            this.ataque = 140;
+	            this.costo = 55;
+	            break;
+	    	}
+	    	case 2: {
+	            this.ataque = 220;
+	            this.costo = 60;
+	            break;
+	    	}
+	    	case 3: {
+	            this.ataque = 340;
+	            this.costo = 65;
+	            break;
+	    	}
+	    }
     }
 
     public int getAtaque() { return ataque; }
