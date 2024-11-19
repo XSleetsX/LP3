@@ -11,29 +11,29 @@ public class Casco extends Item{
         switch(tier) {
 	    	case 0: {
 	    		this.bonusAtaque = 15;
-	    		this.bonusTurnos = 2;
-	    		this.contTurnos = 2;
+	    		this.bonusTurnos = 3;
+	    		this.contTurnos = 3;
 	            this.costo = 75;
 	            break;
 	    	}
 	    	case 1: {
 	    		this.bonusAtaque = 20;
-	    		this.bonusTurnos = 2;
-	    		this.contTurnos = 2;
+	    		this.bonusTurnos = 3;
+	    		this.contTurnos = 3;
 	            this.costo = 75;
 	            break;
 	    	}
 	    	case 2: {
 	    		this.bonusAtaque = 25;
-	    		this.bonusTurnos = 3;
-	    		this.contTurnos = 3;
+	    		this.bonusTurnos = 4;
+	    		this.contTurnos = 4;
 	            this.costo = 100;
 	            break;
 	    	}
 	    	case 3: {
 	    		this.bonusAtaque = 30;
-	    		this.bonusTurnos = 4;
-	    		this.contTurnos = 4;
+	    		this.bonusTurnos = 5;
+	    		this.contTurnos = 5;
 	            this.costo = 125;
 	            break;
 	    	}
@@ -47,5 +47,11 @@ public class Casco extends Item{
     
     public void equipar() { this.equipado = true; }
     public void desequipar() { this.equipado = false; }
-    public void pasarTurno() { this.contTurnos -= 1; }
+    public void usarCasco() { this.contTurnos = bonusTurnos; }
+    public void pasarTurno() {
+    	this.contTurnos -= 1;
+    	if(contTurnos == 0) {
+    		usarCasco();
+    	}
+    }
 }
