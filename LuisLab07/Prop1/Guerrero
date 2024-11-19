@@ -31,9 +31,9 @@ public class Guerrero extends Personaje {
         this.casco = null;
     }
     //PENSARLO BIEN PARA QUE CUENTE LOS TURNOS QUE VA A UTILIZAR LA HABILIDAD
-    public int usarCasco() {
+    public void usarCasco() {
         mana -= casco.getCosto();
-        return casco.getBonusAtaque();
+        casco.getBonusAtaque();
     }
     public void tomarPocionSalud(PocionSalud pocionSalud) {
         vida += pocionSalud.getCuracion();
