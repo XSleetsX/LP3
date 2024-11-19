@@ -10,12 +10,19 @@ public class Caballero extends Personaje {
 
     public int atacar() { return ataque; }
     public void equiparEspada(Espada espada) {
+    	this.espada = null;
         this.espada = espada;
         ataque += espada.getAtaque();
+        espada.equipar();
     }
     public void desequiparEspada() {
-        ataque -= espada.getAtaque();
-        this.espada = null;
+    	if(espada == null) {
+    		System.out.println("No tienes una espada equipada.");
+    	}else {
+	        ataque -= espada.getAtaque();
+	        espada.desequipar();
+	        this.espada = null;
+    	}
     }
     public void equiparEscudo(Escudo escudo) {
         this.escudo = escudo;
