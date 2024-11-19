@@ -1,19 +1,51 @@
 public class Casco extends Item{
     private int bonusAtaque;
+    private int bonusTurnos;
+    private int contTurnos;
     private int costo;
     private boolean equipado;
 
-    public Casco() {
-        super("Casco", "Aumenta el ataque en 15 por 1 turno. Costo: 60 maná");
-        this.bonusAtaque = 15;
-        this.costo = 60;
+    public Casco(int tier) {
+        super("Casco", "Aumenta el ataque en 15 por 1 turno. Costo: 60 maná", tier);
         this.equipado = false;
+        switch(tier) {
+	    	case 0: {
+	    		this.bonusAtaque = 15;
+	    		this.bonusTurnos = 2;
+	    		this.contTurnos = 2;
+	            this.costo = 75;
+	            break;
+	    	}
+	    	case 1: {
+	    		this.bonusAtaque = 20;
+	    		this.bonusTurnos = 2;
+	    		this.contTurnos = 2;
+	            this.costo = 75;
+	            break;
+	    	}
+	    	case 2: {
+	    		this.bonusAtaque = 25;
+	    		this.bonusTurnos = 3;
+	    		this.contTurnos = 3;
+	            this.costo = 100;
+	            break;
+	    	}
+	    	case 3: {
+	    		this.bonusAtaque = 30;
+	    		this.bonusTurnos = 4;
+	    		this.contTurnos = 4;
+	            this.costo = 125;
+	            break;
+	    	}
+	    }
     }
 
     public int getBonusAtaque() { return bonusAtaque; }
     public int getCosto() { return costo; }
+    public int getBonusTurnos() { return bonusTurnos; }
     public boolean estaEquipado() { return equipado; }
     
     public void equipar() { this.equipado = true; }
     public void desequipar() { this.equipado = false; }
+    public void pasarTurno() { this.contTurnos -= 1; }
 }
