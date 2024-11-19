@@ -10,12 +10,19 @@ public class Arquero extends Personaje {
 
     public int atacar() { return ataque; }
     public void equiparArco(Arco arco) {
+    	this.arco = null;
         this.arco = arco;
         ataque += arco.getAtaque();
+        arco.equipar();
     }
     public void desequiparArco() {
-        ataque -= arco.getAtaque();
-        this.arco = null;
+    	if(arco == null) {
+    		System.out.println("No tienes una espada equipada.");
+    	}else {
+	        ataque -= arco.getAtaque();
+	        arco.desequipar();
+	        this.arco = null;
+    	}
     }
     public void equiparCarcaj(Carcaj carcaj) {
         this.carcaj = carcaj;
