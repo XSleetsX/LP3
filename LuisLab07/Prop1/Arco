@@ -3,11 +3,28 @@ public class Arco extends Item{
     private int alcance;
     private boolean equipado;
 
-    public Arco() {
-        super("Arco", "Tier 0. Ataque y Alcance medio.");
-        this.ataque = 15;
+    public Arco(int tier) {
+        super("Arco", "Tier 0. Ataque y Alcance medio.", tier);
         this.alcance = 5;
         this.equipado = false;
+        switch(tier) {
+	    	case 0: {
+	    		this.ataque = 15;
+	            break;
+	    	}
+	    	case 1: {
+	    		this.ataque = 20;
+	            break;
+	    	}
+	    	case 2: {
+	    		this.ataque = 25;
+	            break;
+	    	}
+	    	case 3: {
+	    		this.ataque = 30;
+	            break;
+	    	}
+	    }
     }
 
     public int getAtaque() { return ataque; }
