@@ -4,7 +4,7 @@ public class BDmodelo {
 	private Connection conn = null;
 	
 	public BDmodelo() {
-		String url = "jdbc:sqlite:biblioteca.db";
+		String url = "jdbc:sqlite:juegoBD.db";
 		try {
 	        Class.forName("org.sqlite.JDBC");
 	        this.conn = DriverManager.getConnection(url);
@@ -97,7 +97,7 @@ public class BDmodelo {
 		String sql = "SELECT 1 FROM usuarios WHERE nombre = ? AND contrasenia = ?";
 		try {PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, nombre);
-			pstmt.setString(1, contrasenia);
+			pstmt.setString(2, contrasenia);
 			ResultSet rs = pstmt.executeQuery();
 			return rs.next();
 		} catch (SQLException e) {
@@ -109,7 +109,9 @@ public class BDmodelo {
 		String sql = "INSERT INTO usuarios (nombre, contrasenia) VALUES (?,?)";
 	    try {PreparedStatement pstmt = conn.prepareStatement(sql);
 	    	pstmt.setString(1, nombre);
+	    	System.out.println(nombre);
 	        pstmt.setString(2, contrasenia);
+	        System.out.println(contrasenia);
 	        pstmt.executeUpdate();
 	    } catch (SQLException e) {
 	        System.out.println(e);
@@ -134,7 +136,7 @@ public class BDmodelo {
 			if(rs.next()) {
 				System.out.print("\nId_usuario: " + rs.getInt("id_usuario"));
 				System.out.print(" | Nombre: " + rs.getString("nombre"));
-				System.out.print(" | Contraseña: " + rs.getInt("contrasenia"));
+				System.out.print(" | Contraseña: " + rs.getString("contrasenia"));
 			} else {
 				System.out.println("No se encontró el registro.");
 			}
@@ -149,7 +151,7 @@ public class BDmodelo {
             while (rs.next()) {
             	System.out.print("\nId_usuario: " + rs.getInt("id_usuario"));
 				System.out.print(" | Nombre: " + rs.getString("nombre"));
-				System.out.print(" | Contraseña: " + rs.getInt("contrasenia"));
+				System.out.print(" | Contraseña: " + rs.getString("contrasenia"));
             }
         } catch (SQLException e) {
             System.out.println(e);
