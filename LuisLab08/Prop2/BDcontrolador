@@ -363,116 +363,115 @@ public class BDcontrolador {
 	//Método para iniciar el programa
 	public void menuInicio() {
 		String opc1, opc2, opc3;
+		crearTablas();
 		do {
-			crearTablas();
 			vista.menuLogin();
 			opc1 = vista.solicitarOpcion();
 			switch(opc1) {
 			case "1": {
-				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
+				vista.mostrarMensaje("\nIngrese nombre y contraseña: ");
 				String nombre = vista.solicitarString();
 				String contrasenia = vista.solicitarString();
 				insertarUsuario(nombre, contrasenia);
 				break;
 			}
 			case "2": {
-				vista.mostrarMensaje("Ingrese nombre y contraseña: ");
+				vista.mostrarMensaje("\nIngrese nombre y contraseña: ");
 				String nombreUsuario = vista.solicitarString();
 				String contraseniaUsuario = vista.solicitarString();
 				boolean existe = modelo.buscarUsuario(nombreUsuario, contraseniaUsuario);
 				if(existe) {
-					crearTablas();
 					do {
 						vista.menuCRUD();
 						opc2 = vista.solicitarOpcion();
 						switch(opc2) {
 						case "1": {
-							vista.mostrarMensaje("¿En qué tabla desea insertar un registro?");
+							vista.mostrarMensaje("\n¿En qué tabla desea insertar un registro?");
 							do {
 								vista.menuTablas();
 								opc3 = vista.solicitarOpcion();
 								switch(opc3) {
 								case "1": {
-									vista.mostrarMensaje("Ingrese nombre/vida/ataque/defensa/alcance/id_inventario: ");
+									vista.mostrarMensaje("\nIngrese nombre/vida/ataque/defensa/alcance/id_inventario: ");
 									String nombrePersonaje = vista.solicitarString();
 									int vida = vista.solicitarInt();
 									int ataque = vista.solicitarInt();
 									int defensa = vista.solicitarInt();
 									int alcance = vista.solicitarInt();
 									int id_inventario = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									insertarPersonaje(nombrePersonaje,vida,ataque,defensa,alcance,id_inventario);
 									break;
 								}
 								case "2": {
-									vista.mostrarMensaje("Ingrese nombre/vida/ataque/tipo: ");
+									vista.mostrarMensaje("\nIngrese nombre/vida/ataque/tipo: ");
 									String nombreEnemigo = vista.solicitarString();
 									int vida = vista.solicitarInt();
 									int ataque = vista.solicitarInt();
 									String tipo = vista.solicitarString();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									insertarEnemigo(nombreEnemigo,vida,ataque,tipo);
 									break;
 								}
 								case "3": {
-									vista.mostrarMensaje("Ingrese id_personaje: ");
+									vista.mostrarMensaje("\nIngrese id_personaje: ");
 									int id_personaje = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									insertarInventario(id_personaje);
 									break;
 								}
 								case "4": {
-									vista.mostrarMensaje("Ingrese nombre/tipo/descripcion/cantidad: ");
+									vista.mostrarMensaje("\nIngrese nombre/tipo/descripcion/cantidad: ");
 									String nombreItem = vista.solicitarString();
 									String tipo = vista.solicitarString();
 									String descripcion = vista.solicitarString();
 									int cantidad = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									insertarItem(nombreItem,tipo,descripcion,cantidad);
 									break;
 								}
 								case "5": {
-									vista.mostrarMensaje("Ingrese resultado/id_personaje/id_enemigo: ");
+									vista.mostrarMensaje("\nIngrese resultado/id_personaje/id_enemigo: ");
 									String resultado = vista.solicitarString();
 									int id_personaje = vista.solicitarInt();
 									int id_enemigo = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									insertarCombate(resultado,id_personaje,id_enemigo);
 									break;
 								}
 								case "6": {
-									vista.mostrarMensaje("Ingrese descripcion/id_combate: ");
+									vista.mostrarMensaje("\nIngrese descripcion/id_combate: ");
 									String descripcion = vista.solicitarString();
 									int id_combate = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									insertarTurno(descripcion,id_combate);
@@ -481,21 +480,21 @@ public class BDcontrolador {
 								case "7":
 									break;
 								default:
-									vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+									vista.mostrarMensaje("\nOpción no válida. Intente de nuevo");
 									break;
 								}
 							} while(!opc3.equals("7"));
 							break;
 						}
 						case "2": {
-							vista.mostrarMensaje("¿En qué tabla desea actualizar un registro?");
+							vista.mostrarMensaje("\n¿En qué tabla desea actualizar un registro?");
 							do {
 								vista.menuTablas();
 								opc3 = vista.solicitarOpcion();
 								switch(opc3) {
 								case "1": {
 									mostrarPersonaje();
-									vista.mostrarMensaje("Ingrese id_personaje/nombre/vida/ataque/defensa/alcance/id_inventario: ");
+									vista.mostrarMensaje("\nIngrese id_personaje/nombre/vida/ataque/defensa/alcance/id_inventario: ");
 									int id_personaje = vista.solicitarInt();
 									String nombrePersonaje = vista.solicitarString();
 									int vida = vista.solicitarInt();
@@ -503,10 +502,10 @@ public class BDcontrolador {
 									int defensa = vista.solicitarInt();
 									int alcance = vista.solicitarInt();
 									int id_inventario = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									actualizarPersonaje(id_personaje,nombrePersonaje,vida,ataque,defensa,alcance,id_inventario);
@@ -514,16 +513,16 @@ public class BDcontrolador {
 								}
 								case "2": {
 									mostrarEnemigo();
-									vista.mostrarMensaje("Ingrese id_enemigo/nombre/vida/ataque/tipo: ");
+									vista.mostrarMensaje("\nIngrese id_enemigo/nombre/vida/ataque/tipo: ");
 									int id_enemigo = vista.solicitarInt();
 									String nombreEnemigo = vista.solicitarString();
 									int vida = vista.solicitarInt();
 									int ataque = vista.solicitarInt();
 									String tipo = vista.solicitarString();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									actualizarEnemigo(id_enemigo,nombreEnemigo,vida,ataque,tipo);
@@ -531,13 +530,13 @@ public class BDcontrolador {
 								}
 								case "3": {
 									mostrarInventario();
-									vista.mostrarMensaje("Ingrese id_inventario/id_personaje: ");
+									vista.mostrarMensaje("\nIngrese id_inventario/id_personaje: ");
 									int id_inventario = vista.solicitarInt();
 									int id_personaje = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									actualizarInventario(id_inventario,id_personaje);
@@ -545,16 +544,16 @@ public class BDcontrolador {
 								}
 								case "4": {
 									mostrarItem();
-									vista.mostrarMensaje("Ingrese id_item/nombre/tipo/descripcion/cantidad: ");
+									vista.mostrarMensaje("\nIngrese id_item/nombre/tipo/descripcion/cantidad: ");
 									int id_item = vista.solicitarInt();
 									String nombreItem = vista.solicitarString();
 									String tipo = vista.solicitarString();
 									String descripcion = vista.solicitarString();
 									int cantidad = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									actualizarItem(id_item,nombreItem,tipo,descripcion,cantidad);
@@ -562,15 +561,15 @@ public class BDcontrolador {
 								}
 								case "5": {
 									mostrarCombate();
-									vista.mostrarMensaje("Ingrese id_combate/resultado/id_personaje/id_enemigo: ");
+									vista.mostrarMensaje("\nIngrese id_combate/resultado/id_personaje/id_enemigo: ");
 									int id_combate = vista.solicitarInt();
 									String resultado = vista.solicitarString();
 									int id_personaje = vista.solicitarInt();
 									int id_enemigo = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									actualizarCombate(id_combate,resultado,id_personaje,id_enemigo);
@@ -578,14 +577,14 @@ public class BDcontrolador {
 								}
 								case "6": {
 									mostrarTurno();
-									vista.mostrarMensaje("Ingrese id_turno/descripcion/id_combate: ");
+									vista.mostrarMensaje("\nIngrese id_turno/descripcion/id_combate: ");
 									int id_turno = vista.solicitarInt();
 									String descripcion = vista.solicitarString();
 									int id_combate = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									actualizarTurno(id_turno,descripcion,id_combate);
@@ -594,56 +593,56 @@ public class BDcontrolador {
 								case "7":
 									break;
 								default:
-									vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+									vista.mostrarMensaje("\nOpción no válida. Intente de nuevo");
 									break;
 								}
 							} while(!opc3.equals("7"));
 							break;
 						}
 						case "3": {
-							vista.mostrarMensaje("¿De qué tabla desea mostrar un registro?");
+							vista.mostrarMensaje("\n¿De qué tabla desea mostrar un registro?");
 							do {
 								vista.menuTablas();
 								opc3 = vista.solicitarOpcion();
 								switch(opc3) {
 								case "1": {
 									mostrarPersonaje();
-									vista.mostrarMensaje("Ingrese id_personaje: ");
+									vista.mostrarMensaje("\nIngrese id_personaje: ");
 									int id_personaje = vista.solicitarInt();
 									mostrarPersonaje(id_personaje);
 									break;
 								}
 								case "2": {
 									mostrarEnemigo();
-									vista.mostrarMensaje("Ingrese id_enemigo: ");
+									vista.mostrarMensaje("\nIngrese id_enemigo: ");
 									int id_enemigo = vista.solicitarInt();
 									mostrarEnemigo(id_enemigo);
 									break;
 								}
 								case "3": {
 									mostrarInventario();
-									vista.mostrarMensaje("Ingrese id_inventario: ");
+									vista.mostrarMensaje("\nIngrese id_inventario: ");
 									int id_inventario = vista.solicitarInt();
 									mostrarInventario(id_inventario);
 									break;
 								}
 								case "4": {
 									mostrarItem();
-									vista.mostrarMensaje("Ingrese id_item: ");
+									vista.mostrarMensaje("\nIngrese id_item: ");
 									int id_item = vista.solicitarInt();
 									mostrarItem(id_item);
 									break;
 								}
 								case "5": {
 									mostrarCombate();
-									vista.mostrarMensaje("Ingrese id_combate: ");
+									vista.mostrarMensaje("\nIngrese id_combate: ");
 									int id_combate = vista.solicitarInt();
 									mostrarCombate(id_combate);
 									break;
 								}
 								case "6": {
 									mostrarTurno();
-									vista.mostrarMensaje("Ingrese id_turno: ");
+									vista.mostrarMensaje("\nIngrese id_turno: ");
 									int id_turno = vista.solicitarInt();
 									mostrarTurno(id_turno);
 									break;
@@ -651,26 +650,26 @@ public class BDcontrolador {
 								case "7":
 									break;
 								default:
-									vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+									vista.mostrarMensaje("\nOpción no válida. Intente de nuevo");
 									break;
 								}
 							} while(!opc3.equals("7"));
 							break;
 						}
 						case "4": {
-							vista.mostrarMensaje("¿En qué tabla desea borrar un registro?");
+							vista.mostrarMensaje("\n¿En qué tabla desea borrar un registro?");
 							do {
 								vista.menuTablas();
 								opc3 = vista.solicitarOpcion();
 								switch(opc3) {
 								case "1": {
 									mostrarPersonaje();
-									vista.mostrarMensaje("Ingrese id_personaje: ");
+									vista.mostrarMensaje("\nIngrese id_personaje: ");
 									int id_personaje = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									borrarPersonaje(id_personaje);
@@ -678,12 +677,12 @@ public class BDcontrolador {
 								}
 								case "2": {
 									mostrarEnemigo();
-									vista.mostrarMensaje("Ingrese id_enemigo: ");
+									vista.mostrarMensaje("\nIngrese id_enemigo: ");
 									int id_enemigo = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									borrarEnemigo(id_enemigo);
@@ -691,12 +690,12 @@ public class BDcontrolador {
 								}
 								case "3": {
 									mostrarInventario();
-									vista.mostrarMensaje("Ingrese id_inventario: ");
+									vista.mostrarMensaje("\nIngrese id_inventario: ");
 									int id_inventario = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									borrarInventario(id_inventario);
@@ -704,12 +703,12 @@ public class BDcontrolador {
 								}
 								case "4": {
 									mostrarItem();
-									vista.mostrarMensaje("Ingrese id_item: ");
+									vista.mostrarMensaje("\nIngrese id_item: ");
 									int id_item = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									borrarItem(id_item);
@@ -717,12 +716,12 @@ public class BDcontrolador {
 								}
 								case "5": {
 									mostrarCombate();
-									vista.mostrarMensaje("Ingrese id_combate: ");
+									vista.mostrarMensaje("\nIngrese id_combate: ");
 									int id_combate = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									borrarCombate(id_combate);
@@ -730,12 +729,12 @@ public class BDcontrolador {
 								}
 								case "6": {
 									mostrarTurno();
-									vista.mostrarMensaje("Ingrese id_turno: ");
+									vista.mostrarMensaje("\nIngrese id_turno: ");
 									int id_turno = vista.solicitarInt();
-									vista.mostrarMensaje("Ingresa tu contraseña para confirmar: ");
+									vista.mostrarMensaje("\nIngresa tu contraseña para confirmar: ");
 									String contrasenia = vista.solicitarString();
 									while(contraseniaUsuario != contrasenia) {
-										vista.mostrarMensaje("Contraseña incorrecta. Intenta de nuevo.");
+										vista.mostrarMensaje("\nContraseña incorrecta. Intenta de nuevo.");
 										contrasenia = vista.solicitarString();
 									}
 									borrarTurno(id_turno);
@@ -744,7 +743,7 @@ public class BDcontrolador {
 								case "7":
 									break;
 								default:
-									vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+									vista.mostrarMensaje("\nOpción no válida. Intente de nuevo");
 									break;
 								}
 							} while(!opc3.equals("7"));
@@ -753,34 +752,36 @@ public class BDcontrolador {
 						case "5":
 							break;
 						default:
-							vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+							vista.mostrarMensaje("\nOpción no válida. Intente de nuevo");
 							break;
 						}
 					} while(!opc2.equals("5"));
+				} else {
+					vista.mostrarMensaje("\nUsuario o contrasenia incorrectos.");
 				}
 				break;
 			}
 			case "3": {
 				mostrarUsuario();
-				vista.mostrarMensaje("Ingrese el id del usuario que desea actualizar: ");
+				vista.mostrarMensaje("\nIngrese el id del usuario que desea actualizar: ");
 				int id_usuario = vista.solicitarInt();
-				vista.mostrarMensaje("Ingrese el nuevo nombre del usuario: ");
+				vista.mostrarMensaje("\nIngrese el nuevo nombre del usuario: ");
 				String nombre = vista.solicitarString();
-				vista.mostrarMensaje("Ingrese la nueva contraseña del usuario: ");
+				vista.mostrarMensaje("\nIngrese la nueva contraseña del usuario: ");
 				String contrasenia = vista.solicitarString();
 				actualizarUsuario(id_usuario, nombre, contrasenia);
 				break;
 			}
 			case "4": {
 				mostrarUsuario();
-				vista.mostrarMensaje("Ingrese el id del usuario que desea ver: ");
+				vista.mostrarMensaje("\nIngrese el id del usuario que desea ver: ");
 				int id_usuario = vista.solicitarInt();
 				mostrarUsuario(id_usuario);
 				break;
 			}
 			case "5": {
 				mostrarUsuario();
-				vista.mostrarMensaje("Ingrese el id del usuario que desea borrar: ");
+				vista.mostrarMensaje("\nIngrese el id del usuario que desea borrar: ");
 				int id_usuario = vista.solicitarInt();
 				borrarUsuario(id_usuario);
 				break;
@@ -788,7 +789,7 @@ public class BDcontrolador {
 			case "6":
 				break;
 			default:
-				vista.mostrarMensaje("Opción no válida. Intente de nuevo");
+				vista.mostrarMensaje("\nOpción no válida. Intente de nuevo");
 				break;
 			}
 		} while(!opc1.equals("6"));
