@@ -1,0 +1,45 @@
+public class Caballero extends Personaje {
+    private Espada espada;
+    private Escudo escudo;
+
+    public Caballero() {
+        super("Caballero", 200, 100, 15, 1, 15, 1);
+        this.espada = null;
+        this.escudo = null;
+    }
+
+    public Espada getEspada() { return espada; }
+    public Escudo getEscudo() { return escudo; }
+    public int atacar() { return ataque; }
+    public void equiparEspada(Espada espada) {
+    	this.espada = null;
+        this.espada = espada;
+        ataque += espada.getAtaque();
+        espada.equipar();
+    }
+    public void desequiparEspada() {
+    	if(espada == null) {
+    		System.out.println("No tienes una espada equipada.");
+    	}else {
+	        ataque -= espada.getAtaque();
+	        espada.desequipar();
+	        this.espada = null;
+    	}
+    }
+    public void equiparEscudo(Escudo escudo) {
+        this.escudo = escudo;
+    }
+    public void desequiparEscudo() {
+        this.escudo = null;
+    }
+    public int usarEscudo() {
+        mana -= escudo.getCosto();
+        return escudo.getAtaque();
+    }
+    public void tomarPocionSalud(PocionSalud pocionSalud) {
+        vida += pocionSalud.getCuracion();
+        if(vida > 200) {
+            vida = 200;
+        }
+    }
+}
