@@ -1,0 +1,41 @@
+public class Arco extends Item{
+	private int ataque;
+    private int alcance;
+    private boolean equipado;
+
+    public Arco(int tier) {
+        super("Arco", "Ataque y Alcance medio", tier);
+        this.alcance = 5;
+        this.equipado = false;
+        switch(tier) {
+	    	case 0: {
+	    		this.ataque = 15;
+	            break;
+	    	}
+	    	case 1: {
+	    		this.ataque = 20;
+	            break;
+	    	}
+	    	case 2: {
+	    		this.ataque = 25;
+	            break;
+	    	}
+	    	case 3: {
+	    		this.ataque = 30;
+	            break;
+	    	}
+	    }
+    }
+
+    public int getAtaque() { return ataque; }
+    public int getAlcance() { return alcance; }
+    public boolean estaEquipado() { return equipado; }
+    
+    public void equipar() { this.equipado = true; }
+    public void desequipar() { this.equipado = false; }
+    
+    @Override
+    public String toString() {
+        return " " + nombre + " | " + cantidad + " | " + descripcion + " | " + tier + " | " + ataque + " | " + alcance;
+    }
+}
