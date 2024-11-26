@@ -1,0 +1,56 @@
+import java.util.List;
+import java.util.Scanner;
+
+public class PersonajesVista {
+	private Scanner scanner;
+	
+	public PersonajesVista() {
+		scanner = new Scanner(System.in);
+	}
+	public void listarPersonajes(List<Personaje> personajes) {
+		if(personajes.isEmpty()) {
+			System.out.println("No tiene personajes activos.");
+		} else {
+			for(Personaje personaje : personajes) {
+				System.out.println(personaje.getNombre() + 
+									" || Vida: " + personaje.getVida() + " || Mana: " + personaje.getMana() + 
+									" || Ataque: " + personaje.getAtaque() + " || Defensa: " + personaje.getDefensa() + 
+									" || Inteligencia: " + personaje.getInteligencia() + " || Nivel: " + personaje.getNivel());		
+			}
+		}
+	}
+	public void opcionesPersonajes() {
+		System.out.println("==== Lista de personajes ===");
+		System.out.println("1. Caballero");
+		System.out.println("2. Guerrero");
+		System.out.println("3. Arquero");
+		System.out.println("4. Atrás");
+
+	}
+	public void menuInicio() {
+		System.out.println("==== Menú inicio ===");
+		System.out.println("1. Nuevo Personaje");
+		System.out.println("2. Elegir Personaje y Empezar Combate");
+		System.out.println("3. Eliminar Personaje");
+		System.out.println("4. Salir");
+	}
+	public String solicitarOpcion() {
+		System.out.println("Elige una opción: ");
+		return scanner.nextLine();
+	}
+	public String solicitarNombre() {
+		System.out.println("Ingresa el nombre de personaje: ");
+		return scanner.nextLine();
+	}
+	public String solicitarAtributo() {
+		System.out.println("Ingresa el nombre del atributo: ");
+		return scanner.nextLine();
+	}
+	public int solicitarNuevoAtributo() {
+		System.out.println("Ingresa el nuevo valor del atributo: ");
+		return scanner.nextInt();
+	}
+	public void mostrarMensaje(String mensaje) {
+		System.out.println(mensaje);
+	}
+}
