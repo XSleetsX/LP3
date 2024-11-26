@@ -1,0 +1,81 @@
+public class CombateControlador {
+    private CombateModelo modelo;
+    private CombateVista vista;
+
+    public CombateControlador(CombateModelo modelo, CombateVista vista) {
+        this.modelo = modelo;
+        this.vista = vista;
+    }
+
+    public void atacarEnemigo(Personaje personaje, Enemigo enemigo) {
+        modelo.atacarEnemigo(personaje, enemigo);
+        vista.interfazCombate(personaje, enemigo);
+    }
+    public void accionEnemigo(Personaje personaje, Enemigo enemigo) {
+        if(modelo.accionEnemigo(personaje, enemigo) == 1) {
+            vista.mostrarMensaje("El enemigo ataca: 10 daño.");
+        } else {
+            vista.mostrarMensaje("El enemigo se cura: 15 vida.");
+        }
+        vista.interfazCombate(personaje, enemigo);
+    }
+    public boolean verInventario(Personaje personaje) {
+        return personaje.getInventario().iniciarInventario(personaje);
+    }
+    public <T extends Personaje> void iniciarCombate(T personaje) {
+        vista.mostrarMensaje("Empieza el combate.");
+        Enemigo enemigo1 = new Enemigo("Zombie", "No muerto");
+        vista.mostrarMensaje("PRIMER ENEMIGO: " + enemigo1.getNombre() + " - " + enemigo1.getTipo());
+        vista.interfazCombate(personaje, enemigo1);
+        do {
+            int turno = modelo.getTurno();
+            if(turno % 2 != 0) {
+                String opcion;
+                boolean pasarTurno = false;
+                do {
+                    vista.menuCombate();
+                    opcion = vista.solicitarOpcion();
+                    switch(opcion) {
+                        case "1": {
+                            atacarEnemigo(personaje, enemigo1);
+                            break;
+                        }
+                        case "2": {
+                            if(verInventario(personaje)) {
+                                pasarTurno = true;
+                                break;
+                            } else {
+                                pasarTurno = false;
+                                break;
+                            }
+                        }
+                        case "3": {
+                            break;
+                        }
+                        default: {
+                            vista.mostrarMensaje("Opción no válida. Intenta de nuevo");
+                            break;
+                        }
+                    }
+                } while(opcion.equals("2") && pasarTurno == false);
+                if(modelo.verificarSaludEnemigo(enemigo1) == false) {
+                    vista.mostrarMensaje("\nGANASTE!! Buen trabajo :)");
+                    System.exit(0);
+                }
+            }
+            if(turno % 2 == 0) {
+                vista.mostrarMensaje("\nTurno del: " + enemigo1.getNombre());
+                accionEnemigo(personaje, enemigo1);
+                if(modelo.verificarSaludJugador(personaje) == false) {
+                    break;
+                }
+            }
+            modelo.pasarTurno();
+            personaje.regenerarMana(20);
+            if(personaje.getMana() > 100) {
+            	personaje.setMana(100);
+            }
+        } while(modelo.getTurno() != 100);
+        vista.mostrarMensaje("\nPerdiste :(\nVuelve a intentarlo.\n");
+    }
+}
