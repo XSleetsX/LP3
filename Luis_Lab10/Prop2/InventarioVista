@@ -1,0 +1,48 @@
+import java.util.List;
+import java.util.Scanner;
+
+public class InventarioVista {
+    private Scanner scanner;
+
+    public InventarioVista() {
+        scanner = new Scanner(System.in);
+    }
+
+    public String solicitarOpcion() {
+        System.out.print("Selecciona una opción: ");
+        return scanner.nextLine();
+    }
+    public String solicitarNombre() {
+        System.out.print("Nombre del item: ");
+        return scanner.nextLine();
+    }
+    public String solicitarTipo() {
+        System.out.print("Tipo del item: ");
+        return scanner.nextLine();
+    }
+    public String solicitarDescripcion() {
+        System.out.print("Breve descripcion del item: ");
+        return scanner.nextLine();
+    }
+    public void mostrarInventario(List<Item> items) {
+        if(items.isEmpty()) {
+            System.out.println("No tienes items en el inventario.");
+        } else {
+            for(Item item : items) {
+                System.out.println(item.getCantidad() + " || " + item.getNombre() + " || " + item.getDescripcion());
+            }
+        }
+    }
+    public void menuInventario() {
+        System.out.println("\n1. Eliminar item");
+        System.out.println("2. Buscar item");
+        System.out.println("3. Usar item");
+        System.out.println("4. Atrás");
+    }
+    public void mostrarMensaje(String mensaje) {
+        System.out.println(mensaje);
+    }
+    public void cerrarScanner() {
+        scanner.close();
+    }
+}
