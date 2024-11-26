@@ -1,0 +1,10 @@
+public class PocionSalud extends Item{
+    private int curacion;
+
+    public PocionSalud() {
+        super("Poción de Salud", "Cura 15 de vida.", 0);
+        this.curacion = 15;
+    }
+
+    public int getCuracion() { return curacion; }
+}
