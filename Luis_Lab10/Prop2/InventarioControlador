@@ -1,0 +1,129 @@
+import java.util.List;
+
+public class InventarioControlador {
+    private InventarioModelo modelo;
+    private InventarioVista vista;
+
+    public InventarioControlador(InventarioModelo modelo, InventarioVista vista) {
+        this.modelo = modelo;
+        this.vista = vista;
+    }
+    public void buscarItem(String nombre) {
+        if(nombre.isEmpty()) {
+            vista.mostrarMensaje("Debes colocar el nombre del item.");
+        } else {
+            Item item = modelo.buscarItem(nombre);
+            if(item == null) {
+                vista.mostrarMensaje("No tienes este item en el inventario.");
+            } else {
+                vista.mostrarMensaje("Item encontrado.");
+                vista.mostrarMensaje(item.getNombre() + " || " + item.getCantidad() + " || " + item.getDescripcion());
+            }
+        }
+    }
+    public void verInventario() {
+        List<Item> items = modelo.obtenerItems();
+        vista.mostrarMensaje("\nInventario:");
+        vista.mostrarInventario(items);
+    }
+    public void agregarItem(String nombre) {
+        switch(nombre) {
+        	case "Espada": {
+        		modelo.agregarItem(new Espada(0));
+        		break;
+        	}
+        	case "Escudo": {
+        		modelo.agregarItem(new Escudo(0));
+        		break;
+        	}
+        	case "Casco": {
+        		modelo.agregarItem(new Casco(0));
+        		break;
+        	}
+        	case "Arco": {
+        		modelo.agregarItem(new Arco(0));
+        		break;
+        	}
+        	case "Carcaj": {
+        		modelo.agregarItem(new Carcaj(0));
+        		break;
+        	}
+        	case "PocionSalud": {
+        		modelo.agregarItem(new PocionSalud());
+        		break;
+        	}
+        	default: {
+        		vista.mostrarMensaje("Parece que hubo un problema.");
+        	}
+        }
+    }
+    public void eliminarItem(String nombre) {
+        if(nombre.isEmpty()) {
+            vista.mostrarMensaje("Debes colocar el nombre del item.");
+        } else {
+        	Item item = modelo.buscarItem(nombre);
+			if(item == null) {
+				vista.mostrarMensaje("No se encontró " + nombre);
+			} else {
+				modelo.eliminarItem(item);
+				vista.mostrarMensaje("Se eliminó " + nombre + " exitosamente.");
+			}
+        }
+    }
+    public void usarItem(Personaje personaje, String nombre) {
+        if(nombre.isEmpty()) {
+            vista.mostrarMensaje("Debes colocar el nombre del item.");
+        } else {
+        	Item item = modelo.buscarItem(nombre);
+			if(item == null) {
+				vista.mostrarMensaje("No se encontró " + nombre);
+			} else {
+				modelo.usarItem(personaje, item);
+	            if(item.getNombre().equals("Pocion de Salud")) {
+	            	vista.mostrarMensaje("Poción de salud utilizada.");
+	            } else {
+	            	vista.mostrarMensaje(item.getNombre() + " equipado.");
+	            }
+			}
+        }
+    }
+    public boolean iniciarInventario(Personaje personaje) {
+        String opcion;
+        do {
+            verInventario();
+            vista.menuInventario();
+            opcion = vista.solicitarOpcion();
+            switch(opcion) {
+                case "1": {
+                	String nombre = vista.solicitarNombre();
+                    eliminarItem(nombre);
+                    break;
+                }
+                case "2": {
+                	String nombre = vista.solicitarNombre();
+                    buscarItem(nombre);
+                    break;
+                }
+                case "3": {
+                	String nombre = vista.solicitarNombre();
+                    usarItem(personaje, nombre);
+                    break;
+                }
+                case "4": {
+                	vista.mostrarMensaje("Saliendo del inventario...");
+                    break;
+                }
+                default: {
+                    vista.mostrarMensaje("Opción no válida. Intenta de nuevo.");
+                    break;
+                }
+            }
+        } while (!opcion.equals("3") && !opcion.equals("4"));
+        /*vista.cerrarScanner();*/
+        if(opcion.equals("3")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
