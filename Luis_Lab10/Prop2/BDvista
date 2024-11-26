@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class BDvista {
+	private Scanner sc;
+	
+	public BDvista() {
+		this.sc = new Scanner(System.in);
+	}
+	public void menuLogin() {
+		System.out.println("\n===Menú===");
+		System.out.println("1.Crear usuario");
+		System.out.println("2.Ingresar");
+		System.out.println("3.Actualizar usuario");
+		System.out.println("4.Mostrar usuario");
+		System.out.println("5.Borrar usuario");
+		System.out.println("6.Salir");
+	}
+	public void menuCRUD() {
+		System.out.println("\n===CRUD===");
+		System.out.println("1.Insertar registro");
+		System.out.println("2.Actualizar registro");
+		System.out.println("3.Mostrar registro");
+		System.out.println("4.Borrar registro");
+		System.out.println("5.Cerrar sesión");
+	}
+	public void menuTablas() {
+		System.out.println("\n===Tablas===");
+		System.out.println("1.Personajes");
+		System.out.println("2.Enemigos");
+		System.out.println("3.Inventarios");
+		System.out.println("4.Items");
+		System.out.println("5.Combates");
+		System.out.println("6.Turnos");
+		System.out.println("7.Salir");
+	}
+	public String solicitarOpcion() {
+		System.out.println("\nIngrese una opción: ");
+		return sc.next();
+	}
+	public String solicitarString() {
+		System.out.println("Escriba aquí: ");
+		return sc.next();
+	}
+	public int solicitarInt() {
+		System.out.println("Escriba aquí: ");
+		return sc.nextInt();
+	}
+	public void mostrarMensaje(String mensaje) {
+		System.out.println(mensaje);
+	}
+	public void cerrarScanner() {
+		sc.close();
+	}
+}
