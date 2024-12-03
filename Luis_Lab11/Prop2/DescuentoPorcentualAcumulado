@@ -1,0 +1,10 @@
+class DescuentoPorcentualAcumulado implements EstrategiaDescuento {
+  @Override
+  public double aplicarDescuento(double precio, int cantidad) {
+    if (cantidad >= 3) {
+      return (precio * cantidad) - (precio * 0.5);
+    } else {
+      return precio * cantidad;
+    }
+  }
+}
