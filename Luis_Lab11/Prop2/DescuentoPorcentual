@@ -1,0 +1,10 @@
+class DescuentoPorcentual implements EstrategiaDescuento {
+  @Override
+  public double aplicarDescuento(double precio, int cantidad) {
+    if (cantidad == 2) {
+      return (precio * cantidad) * 0.7;
+    } else {
+      return precio * cantidad;
+    }
+  }
+}
