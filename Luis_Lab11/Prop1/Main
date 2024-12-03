@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		String opc, opc2;
+		Notificador notificador = new Notificador();
+		Scanner scan = new Scanner(System.in);
+		do {
+			System.out.println("==== Menú ====");
+			System.out.println("1. Crear usuario");
+			System.out.println("2. Login");
+			System.out.println("3. Salir");
+			System.out.println("Elija una opción: ");
+			opc = scan.next();
+			switch(opc) {
+				case "1": {
+					System.out.println("Ingrese el nombre de usuario: ");
+					String nombre = scan.next();
+					System.out.println("Ingrese la contraseña de usuario: ");
+					String contrasenia = scan.next();
+					boolean existe = notificador.buscarUsuario(nombre, contrasenia);
+					if(existe == true) {
+						System.out.println("El usuario ya existe.");
+					} else {
+						notificador.agregarUsuario(new Usuario(nombre, contrasenia));
+					}
+					break;
+				}
+				case "2": {
+					System.out.println("Ingrese el nombre de usuario: ");
+					String nombre = scan.next();
+					System.out.println("Ingrese la contraseña de usuario: ");
+					String contrasenia = scan.next();
+					boolean existe = notificador.buscarUsuario(nombre, contrasenia);
+					Usuario usuario = notificador.obtenerUsuario(nombre, contrasenia);
+					if(existe == true) {
+						do {
+							System.out.println(usuario.getEstado());
+							System.out.println("1. Recibir notificacion");
+							System.out.println("2. Suscribirse");
+							System.out.println("3. Desuscribirse");
+							System.out.println("4. Salir");
+							System.out.println("Elija una opción: ");
+							opc2 = scan.next();
+							switch(opc2) {
+								case "1": {
+									notificador.enviarNotificacion(new Notificacion("¡Nuevos productos disponibles!"));
+									notificador.enviarNotificacionSubscripcion(new Notificacion("¡Promoción de Black Friday!"));
+									break;
+								}
+								case "2": {
+									usuario.suscribir();
+									break;
+								}
+								case "3": {
+									usuario.desuscribir();
+									break;
+								}
+								case "4": {
+									break;
+								}
+								default: {
+									System.out.println("Opción no válida. Intenta de nuevo.");
+								}
+							}
+						} while(!opc2.equals("4"));
+					} else {
+						System.out.println("El usuario no existe.");
+					}
+					break;
+				}
+				case "3": {
+					break;
+				}
+				default: {
+					System.out.println("El usuario no existe.");
+				}
+			}
+		} while(!opc.equals("3"));
+		scan.close();
+	}
+}
