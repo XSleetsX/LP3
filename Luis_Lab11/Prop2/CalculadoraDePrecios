@@ -1,0 +1,10 @@
+class CalculadoraDePrecios {
+  private EstrategiaDescuento estrategiaDescuento;
+
+  public void setEstrategiaDescuento(EstrategiaDescuento estrategia) {
+    this.estrategiaDescuento = estrategia;
+  }
+  public double calcularPrecioFinal(Producto producto, int cantidad) {
+    return estrategiaDescuento.aplicarDescuento(producto.getPrecio(), cantidad);
+  }
+}
