@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Notificador {
+	private List<Usuario> usuarios;
+	
+	public Notificador() {
+		this.usuarios = new ArrayList<>();
+	}
+	
+	public boolean buscarUsuario(String nombre, String contrasenia) {
+		for(Usuario usuario : usuarios) {
+			if(usuario.getNombre().equals(nombre) && usuario.getContrasenia().equals(contrasenia)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public Usuario obtenerUsuario(String nombre, String contrasenia) {
+		for(Usuario usuario : usuarios) {
+			if(usuario.getNombre().equals(nombre) && usuario.getContrasenia().equals(contrasenia)) {
+				return usuario;
+			}
+		}
+		return null;
+	}
+	public void agregarUsuario(Usuario usuario) {
+		usuarios.add(usuario);
+	}
+	public void suscribirUsuario(Usuario usuario) {
+		usuario.suscribir();
+		System.out.println("Usuario suscrito.");
+	}
+	public void desuscribirUsuario(Usuario usuario) {
+		usuario.desuscribir();
+		System.out.println("Usuario desuscrito.");
+	}
+	public void enviarNotificacionSubscripcion(Notificacion notificacion) {
+		System.out.println("Enviando notificación para suscriptores: " + notificacion.getMensaje());
+		for(Usuario usuario : usuarios) {
+			if(usuario.getEstado().equals("Suscrito")) {
+				usuario.recibirNotificacion(notificacion);
+			}
+		}
+	}
+	public void enviarNotificacion(Notificacion notificacion) {
+		System.out.println("Enviando notificación: " + notificacion.getMensaje());
+		for(Usuario usuario : usuarios) {
+			if(usuario.getEstado().equals("No suscrito")) {
+				usuario.recibirNotificacion(notificacion);
+			}
+		}
+	}
+}
