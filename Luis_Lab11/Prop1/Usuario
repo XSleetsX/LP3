@@ -1,0 +1,26 @@
+public class Usuario implements Observer{
+	private String nombre;
+	private String contrasenia;
+	private String estadoSuscripcion;
+	
+	public Usuario(String nombre, String contrasenia) {
+		this.nombre = nombre;
+		this.contrasenia = contrasenia;
+		this.estadoSuscripcion = "No suscrito";
+	}
+	@Override
+	public void recibirNotificacion(Notificacion notificacion) {
+		System.out.println("Usuario " + nombre + " recibió: " + notificacion.getMensaje());
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public String getContrasenia() {
+		return contrasenia;
+	}
+	public String getEstado() {
+		return estadoSuscripcion;
+	}
+	public void suscribir() { this.estadoSuscripcion = "Suscrito"; }
+	public void desuscribir() { this.estadoSuscripcion = "No suscrito"; }
+}
