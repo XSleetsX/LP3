@@ -1,0 +1,493 @@
+package LAB_11; 
+
+  
+
+import java.util.ArrayList; 
+
+import java.util.List; 
+
+  
+
+interface Observador { 
+
+    void actualizar(String mensaje); 
+
+} 
+
+  
+
+class Usuario implements Observador { 
+
+    private String nombre; 
+
+  
+
+    public Usuario(String nombre) { 
+
+        this.nombre = nombre; 
+
+    } 
+
+  
+
+    @Override 
+
+    public void actualizar(String mensaje) { 
+
+        System.out.println(nombre + " recibió notificación: " + mensaje); 
+
+    } 
+
+} 
+
+  
+
+class SistemaNotificaciones { 
+
+    private List<Observador> usuarios = new ArrayList<>(); 
+
+  
+
+    public void registrarUsuario(Observador usuario) { 
+
+        usuarios.add(usuario); 
+
+    } 
+
+  
+
+    public void notificarUsuarios(String mensaje) { 
+
+        for (Observador usuario : usuarios) { 
+
+            usuario.actualizar(mensaje); 
+
+        } 
+
+    } 
+
+} 
+
+  
+
+public class EjemploObserver { 
+
+    public static void main(String[] args) { 
+
+        SistemaNotificaciones sistema = new SistemaNotificaciones(); 
+
+  
+
+        Usuario usuario1 = new Usuario("Alumno 1"); 
+
+        Usuario usuario2 = new Usuario("Alumno 2"); 
+
+  
+
+        sistema.registrarUsuario(usuario1); 
+
+        sistema.registrarUsuario(usuario2); 
+
+  
+
+        sistema.notificarUsuarios("HAY TEREA DE LP, HAZ AL TOQUE NOMÁS"); 
+
+    } 
+
+} 
+
+  
+
+  
+
+  
+
+package LAB_11; 
+
+  
+
+interface EstrategiaDescuento { 
+
+    double aplicarDescuento(double precio); 
+
+} 
+
+  
+
+class SinDescuento implements EstrategiaDescuento { 
+
+    @Override 
+
+    public double aplicarDescuento(double precio) { 
+
+        return precio; 
+
+    } 
+
+} 
+
+  
+
+class DescuentoPorcentaje implements EstrategiaDescuento { 
+
+    private double porcentaje; 
+
+  
+
+    public DescuentoPorcentaje(double porcentaje) { 
+
+        this.porcentaje = porcentaje; 
+
+    } 
+
+  
+
+    @Override 
+
+    public double aplicarDescuento(double precio) { 
+
+        return precio * (1 - porcentaje / 100); 
+
+    } 
+
+} 
+
+  
+
+class CalculadoraPrecios { 
+
+    private EstrategiaDescuento estrategia; 
+
+  
+
+    public void establecerEstrategia(EstrategiaDescuento estrategia) { 
+
+        this.estrategia = estrategia; 
+
+    } 
+
+  
+
+    public double calcularPrecio(double precio) { 
+
+        return estrategia.aplicarDescuento(precio); 
+
+    } 
+
+} 
+
+  
+
+  
+
+package LAB_11; 
+
+  
+
+public class EjemploStrategy { 
+
+    public static void main(String[] args) { 
+
+        CalculadoraPrecios calculadora = new CalculadoraPrecios(); 
+
+  
+
+        // Sin descuento 
+
+        calculadora.establecerEstrategia(new SinDescuento()); 
+
+        System.out.println("Precio sin descuento: " + calculadora.calcularPrecio(100.0)); 
+
+  
+
+        // Con 10% de descuento 
+
+        calculadora.establecerEstrategia(new DescuentoPorcentaje(10)); 
+
+        System.out.println("Precio con 10% de descuento: " + calculadora.calcularPrecio(100.0)); 
+
+  
+
+        // Con 20% de descuento 
+
+        calculadora.establecerEstrategia(new DescuentoPorcentaje(20)); 
+
+        System.out.println("Precio con 20% de descuento: " + calculadora.calcularPrecio(100.0)); 
+
+    } 
+
+} 
+
+  
+
+  
+
+package LAB_11; 
+
+  
+
+interface Comando { 
+
+    void ejecutar(); 
+
+} 
+
+  
+
+class Televisor { 
+
+    public void encender() { 
+
+        System.out.println("El televisor está encendido."); 
+
+    } 
+
+  
+
+    public void apagar() { 
+
+        System.out.println("El televisor está apagado."); 
+
+    } 
+
+  
+
+    public void subirVolumen() { 
+
+        System.out.println("El volumen ha subido."); 
+
+    } 
+
+  
+
+    public void bajarVolumen() { 
+
+        System.out.println("El volumen ha bajado."); 
+
+    } 
+
+  
+
+    public void cambiarCanal() { 
+
+        System.out.println("El canal ha cambiado."); 
+
+    } 
+
+} 
+
+  
+
+class EncenderComando implements Comando { 
+
+    private Televisor televisor; 
+
+  
+
+    public EncenderComando(Televisor televisor) { 
+
+        this.televisor = televisor; 
+
+    } 
+
+  
+
+    @Override 
+
+    public void ejecutar() { 
+
+        televisor.encender(); 
+
+    } 
+
+} 
+
+  
+
+class ApagarComando implements Comando { 
+
+    private Televisor televisor; 
+
+  
+
+    public ApagarComando(Televisor televisor) { 
+
+        this.televisor = televisor; 
+
+    } 
+
+  
+
+    @Override 
+
+    public void ejecutar() { 
+
+        televisor.apagar(); 
+
+    } 
+
+} 
+
+  
+
+class SubirVolumenComando implements Comando { 
+
+    private Televisor televisor; 
+
+  
+
+    public SubirVolumenComando(Televisor televisor) { 
+
+        this.televisor = televisor; 
+
+    } 
+
+  
+
+    @Override 
+
+    public void ejecutar() { 
+
+        televisor.subirVolumen(); 
+
+    } 
+
+} 
+
+  
+
+class BajarVolumenComando implements Comando { 
+
+    private Televisor televisor; 
+
+  
+
+    public BajarVolumenComando(Televisor televisor) { 
+
+        this.televisor = televisor; 
+
+    } 
+
+  
+
+    @Override 
+
+    public void ejecutar() { 
+
+        televisor.bajarVolumen(); 
+
+    } 
+
+} 
+
+  
+
+class CambiarCanalComando implements Comando { 
+
+    private Televisor televisor; 
+
+  
+
+    public CambiarCanalComando(Televisor televisor) { 
+
+        this.televisor = televisor; 
+
+    } 
+
+  
+
+    @Override 
+
+    public void ejecutar() { 
+
+        televisor.cambiarCanal(); 
+
+    } 
+
+} 
+
+  
+
+class ControlRemoto { 
+
+    private Comando comando; 
+
+  
+
+    public void establecerComando(Comando comando) { 
+
+        this.comando = comando; 
+
+    } 
+
+  
+
+    public void presionarBoton() { 
+
+        comando.ejecutar(); 
+
+    } 
+
+} 
+
+  
+
+package LAB_11; 
+
+  
+
+public class EjemploCommand { 
+
+    public static void main(String[] args) { 
+
+        Televisor televisor = new Televisor(); 
+
+  
+
+        Comando encender = new EncenderComando(televisor); 
+
+        Comando apagar = new ApagarComando(televisor); 
+
+        Comando subirVolumen = new SubirVolumenComando(televisor); 
+
+        Comando bajarVolumen = new BajarVolumenComando(televisor); 
+
+        Comando cambiarCanal = new CambiarCanalComando(televisor); 
+
+  
+
+        ControlRemoto control = new ControlRemoto(); 
+
+  
+
+        control.establecerComando(encender); 
+
+        control.presionarBoton(); 
+
+  
+
+        control.establecerComando(subirVolumen); 
+
+        control.presionarBoton(); 
+
+  
+
+        control.establecerComando(cambiarCanal); 
+
+        control.presionarBoton(); 
+
+  
+
+        control.establecerComando(bajarVolumen); 
+
+        control.presionarBoton(); 
+
+  
+
+        control.establecerComando(apagar); 
+
+        control.presionarBoton(); 
+
+    } 
+
+}
