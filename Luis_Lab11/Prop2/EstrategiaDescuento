@@ -1,0 +1,5 @@
+import java.util.Scanner;
+
+interface EstrategiaDescuento {
+  double aplicarDescuento(double precio, int cantidad);
+}
