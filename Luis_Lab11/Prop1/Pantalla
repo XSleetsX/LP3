@@ -1,0 +1,60 @@
+==== Menú ====
+1. Crear usuario
+2. Login
+3. Salir
+Elija una opción: 
+1
+Ingrese el nombre de usuario: 
+Luis
+Ingrese la contraseña de usuario: 
+lucho1928
+==== Menú ====
+1. Crear usuario
+2. Login
+3. Salir
+Elija una opción: 
+2
+Ingrese el nombre de usuario: 
+Luis
+Ingrese la contraseña de usuario: 
+lucho1928
+No suscrito
+1. Recibir notificacion
+2. Suscribirse
+3. Desuscribirse
+4. Salir
+Elija una opción: 
+1
+Enviando notificación: ¡Nuevos productos disponibles!
+Usuario Luis recibió: ¡Nuevos productos disponibles!
+Enviando notificación para suscriptores: ¡Promoción de Black Friday!
+No suscrito
+1. Recibir notificacion
+2. Suscribirse
+3. Desuscribirse
+4. Salir
+Elija una opción: 
+2
+Suscrito
+1. Recibir notificacion
+2. Suscribirse
+3. Desuscribirse
+4. Salir
+Elija una opción: 
+1
+Enviando notificación: ¡Nuevos productos disponibles!
+Enviando notificación para suscriptores: ¡Promoción de Black Friday!
+Usuario Luis recibió: ¡Promoción de Black Friday!
+Suscrito
+1. Recibir notificacion
+2. Suscribirse
+3. Desuscribirse
+4. Salir
+Elija una opción: 
+4
+==== Menú ====
+1. Crear usuario
+2. Login
+3. Salir
+Elija una opción: 
+3
