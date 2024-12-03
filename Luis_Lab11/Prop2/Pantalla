@@ -1,0 +1,11 @@
+1. Procesador Intel i7 - $1200.0
+2. NVIDIA RTX 3060 - $2000.0
+3. Mermoria RAM 16GB - $500.0
+Selecciona el número del producto: 1
+Ingrese la cantidad: 2
+Selecciona una estrategia de descuento:
+1. Sin Descuento
+2. Descuento Fijo (10%)
+3. Descuento Porcuentual (30% para 2 productos iguales)
+4. Descuento Porcentual Acumulado (50% sobre el producto más barato a partir de 3 productos)
+El precio final es: $2160.00
