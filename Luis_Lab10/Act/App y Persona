@@ -1,0 +1,98 @@
+import javax.swing.*; 
+import java.awt.event.ActionEvent; 
+import java.awt.event.ActionListener; 
+ 
+public class App { 
+	public static void main(String[] args) { 
+		JFrame frame = new JFrame("Ejemplo de Binding de Datos"); 
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		frame.setSize(300, 250); 
+		 
+		// Modelo de datos 
+		Persona persona = new Persona("Luis Arizaga", 23, "Masculino", "71336488", "Urb. Campiña Dorada D-1", "952424969"); 
+		 
+		// Componentes de interfaz para cada atributo 
+		JTextField nombreField = new JTextField(persona.getNombre(), 20); 
+		JTextField edadField = new JTextField(String.valueOf(persona.getEdad()), 20); 
+		JTextField sexoField = new JTextField(persona.getSexo(), 20); 
+		JTextField dniField = new JTextField(persona.getDNI(), 20); 
+		JTextField direccionField = new JTextField(persona.getDireccion(), 15); 
+		JTextField telefonoField = new JTextField(persona.getTelefono(), 15); 
+		JButton button = new JButton("Actualizar Modelo"); 
+		 
+		// Listener para actualizar el modelo cuando el botón es presionado 
+		button.addActionListener(new ActionListener() { 
+		@Override 
+		public void actionPerformed(ActionEvent e) { 
+			persona.setNombre(nombreField.getText()); 
+			try { 
+				int edad = Integer.parseInt(edadField.getText()); 
+				persona.setEdad(edad); 
+			} catch (NumberFormatException ex) { 
+				JOptionPane.showMessageDialog(frame, "Por favor, ingrese un número válido para la edad."); 
+			} 
+			persona.setSexo(sexoField.getText());
+			persona.setDNI(dniField.getText());
+			persona.setDireccion(direccionField.getText());
+			persona.setTelefono(telefonoField.getText());
+				 
+			// Mostrar los valores actualizados en consola 
+			System.out.println("Modelo actualizado:"); 
+			System.out.println("Nombre: " + persona.getNombre()); 
+			System.out.println("Edad: " + persona.getEdad()); 
+			System.out.println("Sexo: " + persona.getSexo()); 
+			System.out.println("DNI: " + persona.getDNI()); 
+			System.out.println("Direccion: " + persona.getDireccion()); 
+			System.out.println("Telefono: " + persona.getTelefono()); 
+		} 
+		}); 
+		 
+		frame.setLayout(new java.awt.FlowLayout()); 
+		frame.add(new JLabel("Nombre:")); 
+		frame.add(nombreField); 
+		frame.add(new JLabel("Edad:")); 
+		frame.add(edadField); 
+		frame.add(new JLabel("Sexo:")); 
+		frame.add(sexoField); 
+		frame.add(new JLabel("DNI:")); 
+		frame.add(dniField);
+		frame.add(new JLabel("Dirección:")); 
+		frame.add(direccionField);
+		frame.add(new JLabel("Teléfono:")); 
+		frame.add(telefonoField);
+		frame.add(button); 
+		 
+		frame.setVisible(true); 
+	} 
+} 
+		 
+// Modelo de datos actualizado con nombre, edad y sexo 
+class Persona { 
+	private String nombre; 
+	private int edad; 
+	private String sexo; 
+	private String dni;
+	private String direccion;
+	private String telefono;
+			 
+	public Persona(String nombre, int edad, String sexo, String dni, String direccion, String telefono) { 
+		this.nombre = nombre;
+		this.edad = edad; 
+		this.sexo = sexo; 
+		this.dni = dni;
+		this.direccion = direccion;
+		this.telefono = telefono;
+	} 
+	public String getNombre() { return nombre; } 
+	public void setNombre(String nombre) { this.nombre = nombre; } 
+	public int getEdad() { return edad; } 
+	public void setEdad(int edad) { this.edad = edad; } 
+	public String getSexo() { return sexo; } 
+	public void setSexo(String sexo) { this.sexo = sexo; }
+	public String getDNI() { return dni; }
+	public void setDNI(String dni) { this.dni = dni; }
+	public String getDireccion() { return direccion; }
+	public void setDireccion(String direccion) { this.direccion = direccion; }
+	public String getTelefono() { return telefono; }
+	public void setTelefono(String telefono) { this.telefono = telefono; }
+} 
