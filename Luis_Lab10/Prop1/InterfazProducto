@@ -1,0 +1,79 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+class InterfazProducto { 
+	public static void main(String[] args) { 
+		JFrame frame = new JFrame("Actualizar un producto"); 
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		frame.setSize(300, 250); 
+
+		Producto producto = new Producto("Nombre del producto", 0, 0, "Categoría del producto"); 
+
+		JTextField nombreField = new JTextField(producto.getNombre(), 20); 
+		JTextField precioField = new JTextField(String.valueOf(producto.getPrecio()), 20); 
+		JTextField cantidadField = new JTextField(String.valueOf(producto.getCantidad()), 15); 
+		JTextField categoriaField = new JTextField(producto.getCategoria(), 15); 
+		JButton botonActualizar = new JButton("Actualizar Producto"); 
+
+		botonActualizar.addActionListener(new ActionListener() { 
+		@Override 
+		public void actionPerformed(ActionEvent e) { 
+			producto.setNombre(nombreField.getText()); 
+			try { 
+				float precio = Float.parseFloat(precioField.getText()); 
+				producto.setPrecio(precio);
+				int cantidad = Integer.parseInt(cantidadField.getText()); 
+				producto.setCantidad(cantidad);
+			} catch (NumberFormatException ex) { 
+				JOptionPane.showMessageDialog(frame, "Por favor, ingrese un número válido."); 
+			} 
+			producto.setCategoria(categoriaField.getText());
+			
+			JOptionPane.showMessageDialog(frame, "Nombre: " + producto.getNombre() + 
+											"\nPrecio: " + producto.getPrecio() + 
+											"\nCantidad: " + producto.getCantidad() + 
+											"\nCategoría: " + producto.getCategoria() + 
+											"\nProducto actualizado correctamente.");
+		} 
+		}); 
+		 
+		frame.setLayout(new FlowLayout()); 
+		frame.add(new JLabel("Nombre:")); 
+		frame.add(nombreField); 
+		frame.add(new JLabel("Precio:")); 
+		frame.add(precioField); 
+		frame.add(new JLabel("Cantidad:")); 
+		frame.add(cantidadField); 
+		frame.add(new JLabel("Categoria:")); 
+		frame.add(categoriaField);
+		frame.add(botonActualizar); 
+		 
+		frame.setVisible(true); 
+	} 
+} 
+
+public class Producto {
+	private String nombre;
+	private float precio;
+	private int cantidad;
+	private String categoria;
+	
+	public Producto(String nombre, float precio, int cantidad, String categoria) {
+		this.nombre = nombre;
+		this.precio = precio;
+		this.cantidad = cantidad;
+		this.categoria = categoria;
+	}
+	
+	public void setNombre(String nombre) { this.nombre = nombre; } 
+	public void setPrecio(float precio) { this.precio = precio; }
+	public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+	public void setCategoria(String categoria) { this.categoria = categoria; }
+	
+	public String getNombre() { return nombre; }
+	public float getPrecio() { return precio; }
+	public int getCantidad() { return cantidad; }
+	public String getCategoria() { return categoria; }
+} 
