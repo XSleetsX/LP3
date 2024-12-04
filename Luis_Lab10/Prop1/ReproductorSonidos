@@ -1,0 +1,46 @@
+import javax.swing.*;
+import java.awt.*;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+
+public class ReproductorSonidos {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(ReproductorSonidos::InterfazSonidos);
+    }
+
+    private static void InterfazSonidos() {
+        JFrame frame = new JFrame("Reproductor de Efectos de Sonido");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 200);
+        frame.setLayout(new GridLayout(1, 3));
+        
+        JButton botonAplauso = new JButton("Aplausos");
+        JButton botonCampana = new JButton("Campana");
+        JButton botonExplosion = new JButton("Explosión");
+
+        botonAplauso.addActionListener(e -> reproducirSonido("C:\\Users\\User\\eclipse-workspace\\Lab10_Prop1_A\\src\\Sonidos\\APLAUSOS.wav"));
+        botonCampana.addActionListener(e -> reproducirSonido("C:\\Users\\User\\eclipse-workspace\\Lab10_Prop1_A\\src\\Sonidos\\CAMPANA.wav"));
+        botonExplosion.addActionListener(e -> reproducirSonido("C:\\Users\\User\\eclipse-workspace\\Lab10_Prop1_A\\src\\Sonidos\\BOOM.wav"));
+
+        frame.add(botonAplauso);
+        frame.add(botonCampana);
+        frame.add(botonExplosion);
+
+        frame.setVisible(true);
+    }
+
+    private static void reproducirSonido(String nombreArchivoSonido) {
+        try {
+            File archivoSonido = new File(nombreArchivoSonido);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(archivoSonido);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al reproducir el sonido: " + e.getMessage());
+        }
+    }
+}
