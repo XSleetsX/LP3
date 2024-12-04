@@ -1,0 +1,116 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Random;
+
+public class GraficosAvanzados extends JPanel implements ActionListener, MouseListener, MouseMotionListener {
+    private Timer temp;
+    private int circuloX = 50, circuloY = 50, circuloDiametro = 50;
+    private Color circuloColor;
+    private boolean esArrastrado = false;
+
+    public GraficosAvanzados() {
+        setBackground(Color.BLACK);
+        setFocusable(true);
+
+        circuloColor = generarColorAleatorio();
+
+        temp = new Timer(30, this);
+        temp.start();
+
+        addMouseListener(this);
+        addMouseMotionListener(this);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        
+        g2d.fillRect(0, 0, getWidth(), getHeight());
+
+        g.setColor(circuloColor);
+        g.fillOval(circuloX, circuloY, circuloDiametro, circuloDiametro);
+
+        g.setColor(Color.WHITE);
+        g.drawOval(circuloX, circuloY, circuloDiametro, circuloDiametro);
+
+        g.setColor(Color.YELLOW);
+        g.setFont(new Font("Arial", Font.BOLD, 16));
+        g.drawString("Arrastra el círculo...", 20, 20);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (!esArrastrado) {
+        	circuloX += 2;
+        	circuloY += 2;
+
+            if (circuloX + circuloDiametro > getWidth() || circuloX < 0) {
+            	circuloX = 0;
+            }
+            if (circuloY + circuloDiametro > getHeight() || circuloY < 0) {
+            	circuloY = 0;
+            }
+        }
+        repaint();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (isInsideCircle(e.getX(), e.getY())) {
+            esArrastrado = true;
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    	esArrastrado = false;
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (esArrastrado) {
+            circuloX = e.getX() - circuloDiametro / 2;
+            circuloY = e.getY() - circuloDiametro / 2;
+            repaint();
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (isInsideCircle(e.getX(), e.getY())) {
+            circuloColor = generarColorAleatorio();
+            repaint();
+        }
+    }
+
+    //Métodos necesariamente implementados por la clase MouseListener
+    @Override
+    public void mouseMoved(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    private boolean isInsideCircle(int x, int y) {
+        int centerX = circuloX + circuloDiametro / 2;
+        int centerY = circuloY + circuloDiametro / 2;
+        return Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2) <= Math.pow(circuloDiametro/ 2, 2);
+    }
+
+    private Color generarColorAleatorio() {
+        Random random = new Random();
+        return new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Gráficos Avanzados en Swing");
+        GraficosAvanzados panelGraficosAvanzados = new GraficosAvanzados();
+
+        frame.add(panelGraficosAvanzados);
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+}
