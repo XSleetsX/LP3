@@ -1,0 +1,78 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class GraficosSimples {
+    static class PanelDibujo extends JPanel {
+        private Color colorRectangulo = Color.BLUE;
+        private Color colorOvalo = Color.RED;
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            
+            g.setColor(colorRectangulo);
+            g.fillRect(50, 50, 150, 100);
+
+            g.setColor(colorOvalo);
+            g.fillOval(250, 50, 150, 100);
+
+            g.setColor(Color.BLACK);
+            g.drawLine(50, 200, 400, 200);
+
+            g.setFont(new Font("Arial", Font.BOLD, 16));
+            g.setColor(Color.DARK_GRAY);
+            g.drawString("Ejemplo gráficos simples", 100, 250);
+        }
+        public void setColorRectangulo(Color color) {
+            this.colorRectangulo = color;
+            repaint();
+        }
+        public void setColorOvalo(Color color) {
+            this.colorOvalo = color;
+            repaint();
+        }
+    }
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Camiar color de gráficos en Java.");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500, 400);
+
+        PanelDibujo panelDibujo = new PanelDibujo();
+        panelDibujo.setBackground(Color.LIGHT_GRAY);
+
+        JButton botonRectangulo = new JButton("Cambiar Color Rectángulo");
+        JButton botonOvalo = new JButton("Cambiar Color Óvalo");
+
+        botonRectangulo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color nuevoColor = JColorChooser.showDialog(frame, "Selecciona un color", Color.BLUE);
+                if (nuevoColor != null) {
+                    panelDibujo.setColorRectangulo(nuevoColor);
+                }
+            }
+        });
+
+        botonOvalo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color nuevoColor = JColorChooser.showDialog(frame, "Selecciona un color", Color.RED);
+                if (nuevoColor != null) {
+                    panelDibujo.setColorOvalo(nuevoColor);
+                }
+            }
+        });
+
+        JPanel botonPanel = new JPanel();
+        botonPanel.add(botonRectangulo);
+        botonPanel.add(botonOvalo);
+
+        frame.setLayout(new BorderLayout());
+        frame.add(panelDibujo, BorderLayout.CENTER);
+        frame.add(botonPanel, BorderLayout.SOUTH);
+
+        frame.setVisible(true);
+    }
+}
