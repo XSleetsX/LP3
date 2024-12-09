@@ -1,26 +1,27 @@
 public class Item {
+	protected int id_item;
     protected String nombre;
+    protected String tipo;
     protected int cantidad;
     protected String descripcion;
     protected int tier;
 
-    public Item(String nombre, String descripcion, int tier) {
-        this.nombre = nombre;
+    public Item(int id_item, String nombre, String tipo, String descripcion, int tier) {
+        this.id_item = id_item;
+    	this.nombre = nombre;
+        this.tipo = tipo;
         this.cantidad = 0;
         this.descripcion = descripcion;
         this.tier = tier;
     }
-
+    
+    public int getIdItem() { return id_item; }
     public String getNombre() { return nombre; }
+    public String getTipo() { return tipo; }
     public int getCantidad() { return cantidad; }
     public String getDescripcion() { return descripcion; }
     public int getTier() { return tier; }
 
     public void usarItem() { this.cantidad--; }
     public void agregarItem() { this.cantidad++; }
-    
-    @Override
-    public String toString() {
-        return " " + nombre + " | " + cantidad + " | " + descripcion + " | " + tier;
-    }
 }
