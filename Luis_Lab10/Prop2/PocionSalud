@@ -1,10 +1,17 @@
 public class PocionSalud extends Item{
     private int curacion;
 
-    public PocionSalud() {
-        super("Poción de Salud", "Cura 15 de vida.", 0);
+    public PocionSalud(int id_item) {
+        super(id_item, "Poción de Salud", "Consumible", "Cura 15 de vida.", 0);
         this.curacion = 15;
     }
 
     public int getCuracion() { return curacion; }
+    
+    @Override
+    public String toString() {
+    	return "Nombre: " + nombre + " || Tipo: " + tipo + 
+    			" || Cantidad: " + cantidad + " || Descripción: " + descripcion + 
+    			" || Tier: " + tier + " || Curación de vida: " + curacion;
+    }
 }
