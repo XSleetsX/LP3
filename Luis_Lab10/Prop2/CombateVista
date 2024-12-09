@@ -1,38 +1,217 @@
-import java.util.Scanner;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class CombateVista {
-    private Scanner scanner;
+public class CombateVista extends JFrame{
+	private CombateControlador controlador;
+	
+	private JPanel panelFondo, panelEntidades, panelAccion, panelPersonaje, panelEnemigo, panelBotones, panelInventario, panelInventario_Items, panelInventario_Botones, panelInformacion;
+	private JButton botonAtacar, botonHabilidad, botonInventario, botonTurno, botonUsarItem, botonBorrarItem;
+	private JProgressBar vidaPersonaje, manaPersonaje, vidaEnemigo, manaEnemigo;
+	private ImageIcon iconoPersonaje, iconoEnemigo;
+	private JLabel nombrePersonaje, nombreEnemigo, imagenPersonaje, imagenEnemigo, informacionCombate;
+	private JList<String> items;
+	private JScrollPane inventario;
+	
+	public CombateVista(Personaje personaje, Enemigo enemigo) {
+		//Configuraciones del JFrame
+		setTitle("Juego");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		
+		//Configuraciones de panelFondo
+		panelFondo = new FondoPanel("C:\\Users\\User\\eclipse-workspace\\Testing\\src\\FondoTarde.jpg");
+        panelFondo.setLayout(new BoxLayout(panelFondo, BoxLayout.Y_AXIS));
+		
+        //Configuraciones de panelEntidades
+        panelEntidades = new JPanel();
+        panelEntidades.setOpaque(false);
+        panelEntidades.setBackground(Color.BLUE);
+        panelEntidades.setLayout(new GridLayout(2, 6));
+        panelEntidades.setPreferredSize(new Dimension(800, 455));
+        panelFondo.add(panelEntidades);
+        
+        //Configuraciones de panelPersonaje
+		panelPersonaje = new JPanel();
+		panelPersonaje.setOpaque(false);
+		panelPersonaje.setLayout(new BoxLayout(panelPersonaje, BoxLayout.Y_AXIS));
+		nombrePersonaje = new JLabel(personaje.getNombre());
+        vidaPersonaje = new JProgressBar(personaje.getVida());
+        manaPersonaje = new JProgressBar(personaje.getMana());
+		panelPersonaje.add(nombrePersonaje);
+		panelPersonaje.add(vidaPersonaje);
+        panelPersonaje.add(manaPersonaje);
 
-    public CombateVista() {
-        scanner = new Scanner(System.in);
+        //Configuraciones de panelEnemigo
+        panelEnemigo = new JPanel();
+        panelEnemigo.setOpaque(false);
+        panelEnemigo.setLayout(new BoxLayout(panelEnemigo, BoxLayout.Y_AXIS));
+		nombreEnemigo = new JLabel(enemigo.getNombre());
+		vidaEnemigo = new JProgressBar(enemigo.getVida());
+		manaEnemigo = new JProgressBar();
+		panelEnemigo.add(nombreEnemigo);
+		panelEnemigo.add(vidaEnemigo);
+		panelEnemigo.add(manaEnemigo);
+		manaEnemigo.setVisible(false);
+		
+		for (int i = 0; i < 12; i++) {
+			if(i == 7) {
+				panelEntidades.add(panelPersonaje);
+			} else if(i == 10) {
+				panelEntidades.add(panelEnemigo);
+			} else {
+				panelEntidades.add(new JLabel(""));
+			}
+		}
+		
+		//Configuraciones de panelAccion
+		panelAccion = new JPanel();
+		panelAccion.setOpaque(false);
+		panelAccion.setLayout(new GridBagLayout());
+		panelAccion.setPreferredSize(new Dimension(800, 145));
+		panelFondo.add(panelAccion);
+		GridBagConstraints gbcAccion = new GridBagConstraints();
+		
+		//Configuraciones de labelRelleno1
+		JLabel labelRelleno1 = new JLabel("");
+		labelRelleno1.setPreferredSize(new Dimension(200, 145));
+		gbcAccion.gridx = 0;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.weightx = 0.25;
+		gbcAccion.weighty = 1.0;
+		panelAccion.add(new JLabel(""), gbcAccion);
+		gbcAccion.weightx = 0.0;
+		gbcAccion.weighty = 0.0;
+		
+		//Configuraciones de panelBotones
+		panelBotones = new JPanel();
+		panelBotones.setBackground(Color.ORANGE);
+		panelBotones.setBorder(new LineBorder(Color.BLACK, 3, true));
+		panelBotones.setLayout(new GridLayout(4, 1, 0, 0));
+		panelBotones.setPreferredSize(new Dimension(200, 145));
+		//Configuraciones de botonAtacar
+		botonAtacar = new JButton("Atacar");
+		botonAtacar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controlador.atacarEnemigo(personaje, enemigo);
+			}
+		});
+		
+		botonHabilidad = new JButton("Usar habilidad");
+		botonInventario = new JButton("Ver inventario");
+		botonTurno = new JButton("Pasar turno");
+		panelBotones.add(botonAtacar);
+		panelBotones.add(botonHabilidad);
+		panelBotones.add(botonInventario);
+		panelBotones.add(botonTurno);
+		gbcAccion.gridx = 1;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.fill = GridBagConstraints.BOTH;
+		gbcAccion.insets = new Insets(10, 0, 10, 0);
+		gbcAccion.weightx = 0.25;
+		panelAccion.add(panelBotones, gbcAccion);
+		gbcAccion.weightx = 0.0;
+		
+		//Configuraciones de panelInformacion
+		panelInformacion = new JPanel();
+		panelInformacion.setBackground(Color.ORANGE);
+		panelInformacion.setBorder(new LineBorder(Color.BLACK, 3, true));
+		panelInformacion.setPreferredSize(new Dimension(200, 145));
+		informacionCombate = new JLabel("Informacion del combate.");
+		panelInformacion.add(informacionCombate);
+		gbcAccion.gridx = 2;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.fill = GridBagConstraints.BOTH;
+		gbcAccion.weightx = 1.0;
+		panelAccion.add(panelInformacion, gbcAccion);
+		gbcAccion.weightx = 0.0;
+		//panelInformacion.setVisible(false);
+		
+		//Configuraciones de panelInventario
+		panelInventario = new JPanel();
+		panelInventario.setBackground(Color.ORANGE);
+		panelInventario.setBorder(new LineBorder(Color.BLACK, 3, true));
+		panelInventario.setPreferredSize(new Dimension(200, 145));
+		panelInventario.setLayout(new BorderLayout());
+		
+		//Configuraciones de panelInventario_Items
+		panelInventario_Items = new JPanel();
+		panelInventario_Items.setOpaque(false);
+		panelInventario_Items.setPreferredSize(new Dimension(200, 145));
+		String[] listaItems = {"Nombre: Espada || Tipo: Arma "
+						+ " || Cantidad: 1 || Descripción: Ataque alto" 
+						+ " || Tier: 0 || Ataque: 65" 
+						+ " || Equipado: false"};
+		items = new JList<>(listaItems);
+		items.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        items.setVisibleRowCount(4);
+        inventario = new JScrollPane(items);
+		panelInventario_Items.add(inventario);
+		panelInventario.add(panelInventario_Items, BorderLayout.NORTH);
+		
+		//Configuraciones de panelInventario_Botones
+		panelInventario_Botones = new JPanel();
+		panelInventario_Botones.setOpaque(false);
+		botonUsarItem = new JButton("Usar item");
+		botonBorrarItem = new JButton("Borrar item");
+		panelInventario_Botones.add(botonUsarItem);
+		panelInventario_Botones.add(botonBorrarItem);
+		panelInventario.add(panelInventario_Botones, BorderLayout.SOUTH);
+		gbcAccion.gridx = 2;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.fill = GridBagConstraints.BOTH;
+		gbcAccion.weightx = 1.0;
+		panelAccion.add(panelInventario, gbcAccion);
+		gbcAccion.weightx = 0.0;
+		panelInventario.setVisible(false);
+		
+		//Configuraciones de labelRelleno2
+		JLabel labelRelleno2 = new JLabel("");
+		labelRelleno2.setPreferredSize(new Dimension(200, 145));
+		gbcAccion.gridx = 3;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.weightx = 0.25;
+		panelAccion.add(new JLabel(""), gbcAccion);
+		gbcAccion.weightx = 0.0;
+		
+		setContentPane(panelFondo);
+		setVisible(true);
+	}
+	
+    class FondoPanel extends JPanel {
+        private Image imagen;
+
+        public FondoPanel(String rutaImagen) {
+            try {
+                imagen = new ImageIcon(rutaImagen).getImage();
+            } catch (Exception e) {
+                System.out.println("Error al cargar la imagen: " + e.getMessage());
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (imagen != null) {
+                g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        }
     }
-    public String solicitarOpcion() {
-        System.out.println("Seleccione una opción: ");
-        return scanner.nextLine();
-    }
-    public String solicitarNombre() {
-        System.out.println("Ingresa tu nombre: ");
-        return scanner.nextLine();
-    }
-    public void menuInicio() {
-        System.out.println("1. Crear Personaje");
-        System.out.println("2. Empezar combate");
-        System.out.println("3. Salir");
-    }
-    public void menuCombate() {
-        System.out.println("\nTu turno:");
-        System.out.println("1. Atacar");
-        System.out.println("2. Ver inventario");
-        System.out.println("3. Pasar turno");
-    }
-    public void interfazCombate(Personaje personaje, Enemigo enemigo) {
-        System.out.println("***" + personaje.getNombre() + "***|*** Maná ***|***" + enemigo.getNombre() + "***");
-        System.out.println("   " + personaje.getVida() + "   |   " + personaje.getMana() + "   |   " + enemigo.getVida() + "     ");
-    }
-    public void mostrarMensaje(String mensaje) {
-        System.out.println(mensaje);
-    }
-    public void cerrarScanner() {
-        scanner.close();
+    public void accionBotonAtacar(Enemigo enemigo) {
+		vidaEnemigo.setValue(enemigo.getVida());
     }
 }
