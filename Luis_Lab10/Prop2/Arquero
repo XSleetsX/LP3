@@ -2,8 +2,8 @@ public class Arquero extends Personaje {
     private Arco arco;
     private Carcaj carcaj;
 
-    public Arquero() {
-        super("Arquero", 150, 100, 17, 0, 15, 1);
+    public Arquero(int id_personaje) {
+        super(id_personaje, "Arquero", 150, 100, 17, 0, 15, 1);
         this.arco = null;
         this.carcaj = null;
     }
