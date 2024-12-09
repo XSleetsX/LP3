@@ -1,0 +1,443 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class BaseDeDatos {
+	private Connection conn = null;
+	
+	public BaseDeDatos() {
+		String url = "jdbc:sqlite:juegoBD.db";
+		try {
+	        Class.forName("org.sqlite.JDBC");
+	        this.conn = DriverManager.getConnection(url);
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error: " + e.getMessage());
+	    } catch (SQLException e) {
+	        System.out.println("Error: " + e.getMessage());
+	    }
+	}
+	//Método para crear las TABLAS
+	public void crearTablas() {
+	    String sql1 = "CREATE TABLE IF NOT EXISTS personajes (\n"
+	    		+ " id_personaje INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+	    		+ " nombre TEXT NOT NULL,\n"
+	            + " vida INTEGER,\n"
+	            + " mana INTEGER,\n"
+	            + " ataque INTEGER,\n"
+	            + " defensa INTEGER,\n"
+	            + " inteligencia INTEGER,\n"
+	            + " nivel INTEGER\n"
+	            + ");";
+	    String sql2 = "CREATE TABLE IF NOT EXISTS enemigos (\n"
+	            + " id_enemigo INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+	            + " nombre TEXT NOT NULL,\n"
+	            + " vida INTEGER,\n"
+	            + " ataque INTEGER,\n"
+	            + " tipo TEXT NOT NULL,\n"
+	            + " nivel INTEGER,\n"
+	            + " aturdido TEXT NOT NULL\n"
+	            + ");";
+	    String sql3 = "CREATE TABLE IF NOT EXISTS inventarios (\n"
+	            + " id_inventario INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+	            + " FOREGIN KEY (id_personaje) REFERENCES personajes (id_personaje)\n"
+	            + ");";
+	    String sql4 = "CREATE TABLE IF NOT EXISTS inventarios_items (\n"
+	            + " FOREGIN KEY (id_inventario) REFERENCES inventario (id_inventario),\n"
+	            + " FOREGIN KEY (id_item) REFERENCES items (id_item)\n"
+	            + ");";
+	    String sql5 = "CREATE TABLE IF NOT EXISTS items (\n"
+	            + " id_item INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+	            + " nombre TEXT NOT NULL,\n"
+	            + " tipo TEXT NOT NULL,\n"
+	            + " descripcion TEXT NOT NULL,\n"
+	            + " cantidad INTEGER,\n"
+	            + " tier INTEGER\n"
+	            + ");";
+	    String sql6 = "CREATE TABLE IF NOT EXISTS combates (\n"
+	            + " id_combate INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+	            + " resultado TEXT NOT NULL,\n"
+	            + " FOREGIN KEY (id_personaje) REFERENCES personajes (id_personaje),\n"
+	            + " FOREGIN KEY (id_enemigo) REFERENCES enemigos (id_enemigo)\n"
+	            + ");";
+	    String sql7 = "CREATE TABLE IF NOT EXISTS turnos (\n"
+	            + " id_turno INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+	            + " descripcion TEXT NOT NULL,\n"
+	            + " FOREGIN KEY (id_combate) REFERENCES combates (id_combate)\n"
+	            + ");";
+	    try {Statement stmt = conn.createStatement();
+	    	stmt.execute(sql1);
+	    	stmt.execute(sql2);
+	    	stmt.execute(sql3);
+	    	stmt.execute(sql4);
+	    	stmt.execute(sql5);
+	    	stmt.execute(sql6);
+	    	stmt.execute(sql7);
+	    } catch (SQLException e) {
+	        System.out.println(e.getMessage());
+	    }
+	}
+	//Métodos TABLA personajes
+	public Personaje buscarPersonaje(int id) {
+		String sql = "SELECT * FROM personajes WHERE id_personaje = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int id_personaje = rs.getInt("id_personaje");
+				String nombre = rs.getString("nombre");
+				int vida = rs.getInt("vida");
+				int mana = rs.getInt("mana");
+				int ataque = rs.getInt("ataque");
+				int defensa = rs.getInt("defensa");
+				int inteligencia = rs.getInt("inteligencia");
+				int nivel = rs.getInt("nivel");
+				
+				return new Personaje(id_personaje, nombre, vida, mana, ataque, defensa, inteligencia, nivel);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	public void insertarPersonaje(String nombre, int vida, int mana, int ataque, int defensa, int inteligencia, int nivel) {
+		String sql = "INSERT INTO personajes (nombre, vida, mana, ataque, defensa, inteligencia, nivel) VALUES (?,?,?,?,?,?,?)";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nombre);
+			pstmt.setInt(2, vida);
+			pstmt.setInt(3, mana);
+			pstmt.setInt(4, ataque);
+			pstmt.setInt(5, defensa);
+			pstmt.setInt(6, inteligencia);
+			pstmt.setInt(7, nivel);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+	}
+	public void actualizarPersonaje(int id_personaje, int vida, int mana, int ataque, int defensa, int inteligencia, int nivel) {
+		String sql = "UPDATE personajes SET vida = ?, mana = ?, ataque = ?, defensa = ?, inteligencia = ?, nivel = ? WHERE id_personaje = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, vida);
+			pstmt.setInt(2, mana);
+			pstmt.setInt(3, ataque);
+			pstmt.setInt(4, defensa);
+			pstmt.setInt(5, inteligencia);
+			pstmt.setInt(6, nivel);
+			pstmt.setInt(7, id_personaje);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	public void mostrarPersonaje() {
+		String sql = "SELECT * FROM presonajes";
+        try {Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+				System.out.print("\nNombre: " + rs.getString("nombre"));
+				System.out.print(" | Vida: " + rs.getInt("vida"));
+				System.out.print(" | Maná: " + rs.getString("mana"));
+				System.out.print(" | Ataque: " + rs.getInt("ataque"));
+				System.out.print(" | Defensa: " + rs.getInt("defensa"));
+				System.out.print(" | Inteligencia: " + rs.getInt("inteligencia"));
+				System.out.print(" | Nivel: " + rs.getInt("nivel"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+	}
+	public void borrarPersonaje(int id_personaje) {
+		String sql = "DELETE FROM personajes WHERE id_personaje = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_personaje);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+	}
+	//Métodos TABLA enemigos
+	public Enemigo buscarEnemigo(int id) {
+		String sql = "SELECT id_enemigo, nombre, vida, nivel, ataque, tipo, aturdido FROM enemigos WHERE id_enemigo = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int id_enemigo = rs.getInt("id_enemigo");
+				String nombre = rs.getString("nombre");
+				int vida = rs.getInt("vida");
+				int nivel = rs.getInt("nivel");
+				int ataque = rs.getInt("ataque");
+				String tipo = rs.getString("tipo");
+				boolean aturdido = rs.getBoolean("aturdido");
+				
+				return new Enemigo(id_enemigo, nombre, vida, nivel, ataque, tipo);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	public void insertarEnemigo(String nombre, int vida, int ataque, String tipo) {
+		String sql = "INSERT INTO enemigos (nombre, vida, ataque, tipo) VALUES (?,?,?,?)";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nombre);
+			pstmt.setInt(2, vida);
+			pstmt.setInt(3, ataque);
+			pstmt.setString(4, tipo);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}			
+	}
+	public void actualizarEnemigo(int id_enemigo, String nombre, int vida, int ataque, String tipo) {
+		String sql = "UPDATE enemigos SET nombre = ?, vida = ? ataque = ? tipo = ? WHERE id_enemigo = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nombre);
+			pstmt.setInt(2, vida);
+			pstmt.setInt(3, ataque);
+			pstmt.setString(4, tipo);
+			pstmt.setInt(5, id_enemigo);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	public void mostrarEnemigo(int id_enemigo) {
+		String sql = "SELECT * FROM enemigos WHERE id_enemigo = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id_enemigo);
+            ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				System.out.print("\nId_enemigo: " + rs.getInt("id_enemigo"));
+				System.out.print(" | Nombre: " + rs.getString("nombre"));
+				System.out.print(" | Vida: " + rs.getInt("vida"));
+				System.out.print(" | Ataque: " + rs.getInt("ataque"));
+				System.out.print(" | Tipo: " + rs.getString("tipo"));
+			} else {
+				System.out.println("No se encontró el registro.");
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	public void borrarEnemigo(int id_enemigo) {
+		String sql = "DELETE FROM enemigos WHERE id_enemigo = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_enemigo);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+	}
+	//Métodos TABLA items
+	public Item buscarItem(int id) {
+		String sql = "SELECT id_item, nombre, tipo, cantidad, descripcion, tier FROM items WHERE id_item = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int id_item = rs.getInt("id_item");
+				String nombre = rs.getString("nombre");
+				String tipo = rs.getString("tipo");
+				int cantidad = rs.getInt("cantidad");
+				String descripcion = rs.getString("descripcion");
+				int tier = rs.getInt("tier");
+				
+				return new Item(id_item, nombre, tipo, descripcion, tier);
+			}
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+	public void insertarItem(String nombre, String tipo, String descripcion, int cantidad, int tier) {
+		String sql = "INSERT INTO items (nombre, tipo, descripcion, cantidad, tier) VALUES (?,?,?,?,?)";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, nombre);
+			pstmt.setString(2, tipo);
+			pstmt.setString(3, descripcion);
+			pstmt.setInt(4, cantidad);
+			pstmt.setInt(5, tier);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}			
+	}
+	public void actualizarItem(int id_item, int cantidad) {
+		String sql = "UPDATE items SET cantidad = ? WHERE id_item = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cantidad);
+			pstmt.setInt(2, id_item);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	public void mostrarItem() {
+		String sql = "SELECT * FROM items";
+        try {Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+            	System.out.print("\nId_item: " + rs.getInt("id_item"));
+				System.out.print(" | Nombre: " + rs.getString("nombre"));
+				System.out.print(" | Tipo: " + rs.getString("tipo"));
+				System.out.print(" | Descripción: " + rs.getString("descripcion"));
+				System.out.print(" | Cantidad: " + rs.getInt("cantidad"));
+				System.out.print(" | Tier: " + rs.getInt("tier"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+	}
+	public void borrarItem(int id_item) {
+		String sql = "DELETE FROM items WHERE id_item = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_item);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+	}
+	//Métodos TABLA inventarios
+	public void insertarInventario(int id_personaje) {
+		String sql = "INSERT INTO inventarios (id_personaje) VALUES (?)";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_personaje);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}			
+	}
+	public void actualizarInventario(int id_inventario, int id_personaje) {
+		String sql = "UPDATE inventarios SET id_personaje = ? WHERE id_inventario = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_personaje);
+			pstmt.setInt(2, id_inventario);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+	}
+	public void mostrarInventario() {
+		String sql = "SELECT * FROM inventarios";
+        try {Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+            	System.out.print("\nId_inventario: " + rs.getInt("id_inventario"));
+				System.out.print(" | Id_personaje: " + rs.getInt("id_personaje"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+	}
+	public void borrarInventario(int id_inventario) {
+		String sql = "DELETE FROM inventarios WHERE id_inventario = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_inventario);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+	} 
+	//Métodos TABLA inventarios_items
+	public void insertarInventario_Item(int id_inventario, int id_item) {
+		String sql = "INSERT INTO inventarios_items (id_inventario, id_item) VALUES (?,?)";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_inventario);
+	        pstmt.setInt(2, id_item);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}			
+	}
+	public void borrarInventario_Item() {
+		String sql = "DELETE FROM inventarios_items";
+		try {Statement stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+	}
+	//Métodos TABLA combates
+	public boolean buscarCombate(int id_combate) {
+		String sql = "SELECT 1 FROM combates WHERE id_combate = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_combate);
+			ResultSet rs = pstmt.executeQuery();
+			return rs.next();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		return false;
+	}
+	public void insertarCombate(String resultado, int id_personaje, int id_enemigo) {
+		String sql = "INSERT INTO combates (resultado, id_personaje, id_enemigo) VALUES (?,?,?)";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+        	pstmt.setString(1, resultado);
+			pstmt.setInt(2, id_personaje);
+	        pstmt.setInt(3, id_enemigo);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}			
+	}
+	public void mostrarCombate() {
+		String sql = "SELECT * FROM combates";
+        try {Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+            	System.out.print("\nId_combate: " + rs.getInt("id_combate"));
+				System.out.print(" | Resultado: " + rs.getString("resultado"));
+				System.out.print(" | Id_personaje: " + rs.getInt("id_personaje"));
+				System.out.print(" | Id_enemigo: " + rs.getInt("id_enemigo"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+	}
+	public void borrarCombate(int id_combate) {
+		String sql = "DELETE FROM combates WHERE id_combate = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_combate);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+	}
+	//Métodos TABLA turnos
+	public void insertarTurno(String descripcion, int id_combate) {
+		String sql = "INSERT INTO turnos (descripcion, id_combate) VALUES (?,?)";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, descripcion);
+			pstmt.setInt(2, id_combate);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}			
+	}
+	public void mostrarTurno() {
+		String sql = "SELECT * FROM turnos";
+        try {Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+            	System.out.print("\nId_turno: " + rs.getInt("id_turno"));
+				System.out.print(" | Descripción: " + rs.getString("descripcion"));
+				System.out.print(" | Id_combate: " + rs.getInt("id_combate"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+	}
+	public void borrarTurno(int id_turno) {
+		String sql = "DELETE FROM turnos WHERE id_turno = ?";
+		try {PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id_turno);
+			pstmt.executeUpdate();
+		} catch(SQLException e) {
+			System.out.println(e);
+		}
+	}
+}
