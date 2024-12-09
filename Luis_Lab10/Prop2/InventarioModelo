@@ -1,41 +1,36 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class InventarioModelo {
-    private List<Item> items;
+    private BaseDeDatos bd;
 
     public InventarioModelo() {
-        items = new ArrayList<>();
+        this.bd = new BaseDeDatos();
     }
 
-    public Item buscarItem(String nombre) {
-        for(Item item : items) {
-            if(item.getNombre().equals(nombre)) {
-                return item;
-            }
-        }
-        return null;
+    public Item buscarItem(int id_item) {
+        return bd.buscarItem(id_item);
     }
-    public void agregarItem(Item item) {
-        boolean itemExiste = false;
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getNombre().equals(item.getNombre())) {
-                items.get(i).agregarItem();
-                itemExiste = true;
-                break;
-            }
-        }
-        if (!itemExiste) {
-            item.agregarItem();
-            items.add(item);
-        }
-
+    public void insertarItem(Item item) {
+    	item.agregarItem();
+        bd.insertarItem(item.getNombre(), item.getTipo(), item.getDescripcion(), item.getCantidad(), item.getTier());
     }
-    public void eliminarItem(Item item) {
-        items.remove(item);
+    public void actualizarItem(Item item) {
+    	bd.actualizarItem(item.getIdItem(), item.getCantidad());
+    	if(item.getCantidad() == 0) {
+    		borrarItem(item.getIdItem());
+    	}
     }
-    public List<Item> obtenerItems() {
-        return items;
+    public void borrarItem(int id_item) {
+        bd.borrarItem(id_item);
+    }
+    
+    public void insertarInventario_Item(int id_inventario, int id_item) {
+		bd.insertarInventario_Item(id_inventario, id_item);	
+	}
+	public void borrarInventario_Item() {
+		bd.borrarInventario_Item();
+	}
+	
+    public BaseDeDatos getBaseDeDatos() {
+    	return bd;
     }
     public void usarItem(Personaje personaje, Item item) {
         switch(personaje.getNombre()) {
@@ -54,7 +49,9 @@ public class InventarioModelo {
         			}
         			case "Poción de Salud": {
         				PocionSalud pocionSalud = (PocionSalud) item;
+        				actualizarItem(item);
         				caballero.tomarPocionSalud(pocionSalud);
+        				break;
         			}
         		}
         		break;
@@ -74,7 +71,9 @@ public class InventarioModelo {
         			}
         			case "Poción de Salud": {
         				PocionSalud pocionSalud = (PocionSalud) item;
+        				actualizarItem(item);
         				guerrero.tomarPocionSalud(pocionSalud);
+        				break;
         			}
         		}
         		break;
@@ -94,7 +93,9 @@ public class InventarioModelo {
         			}
         			case "Poción de Salud": {
         				PocionSalud pocionSalud = (PocionSalud) item;
+        				actualizarItem(item);
         				arquero.tomarPocionSalud(pocionSalud);
+        				break;
         			}
         		}
         		break;
