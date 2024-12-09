@@ -1,11 +1,9 @@
 public class Arco extends Item{
 	private int ataque;
-    private int alcance;
     private boolean equipado;
 
-    public Arco(int tier) {
-        super("Arco", "Ataque y Alcance medio", tier);
-        this.alcance = 5;
+    public Arco(int id_item, int tier) {
+        super(id_item, "Arco", "Arma", "Ataque y Alcance medio", tier);
         this.equipado = false;
         switch(tier) {
 	    	case 0: {
@@ -28,7 +26,6 @@ public class Arco extends Item{
     }
 
     public int getAtaque() { return ataque; }
-    public int getAlcance() { return alcance; }
     public boolean estaEquipado() { return equipado; }
     
     public void equipar() { this.equipado = true; }
@@ -36,6 +33,9 @@ public class Arco extends Item{
     
     @Override
     public String toString() {
-        return " " + nombre + " | " + cantidad + " | " + descripcion + " | " + tier + " | " + ataque + " | " + alcance;
+    	return "Nombre: " + nombre + " || Tipo: " + tipo + 
+    			" || Cantidad: " + cantidad + " || Descripción: " + descripcion + 
+    			" || Tier: " + tier + " || Ataque: " + ataque + 
+    			" || Equipado: " + equipado;
     }
 }
