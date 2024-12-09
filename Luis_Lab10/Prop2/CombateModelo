@@ -1,10 +1,35 @@
 public class CombateModelo {
-    private int turno;
+    private BaseDeDatos bd;
+	private int turno;
 
     public CombateModelo() {
-        this.turno = 1;
+        this.bd = new BaseDeDatos();
+    	this.turno = 1;
     }
 
+    public void buscarCombate(int id_combate) {
+    	bd.buscarCombate(id_combate);
+    }
+    public void insertarCombate(String resultado, Personaje personaje, Enemigo enemigo) {
+    	bd.insertarCombate(resultado, personaje.getIdPersonaje(), enemigo.getIdEnemigo());
+    }
+    public void mostrarCombate() {
+    	bd.mostrarCombate();
+    }
+    public void borrarCombate(int id_combate) {
+    	bd.borrarCombate(id_combate);
+    }
+    
+    public void insertarTurno(String descripcion, int id_combate) {
+    	bd.insertarTurno(descripcion, id_combate);
+    }
+    public void mostrarTurno() {
+    	bd.mostrarTurno();
+    }
+    public void borrarTurno(int id_turno) {
+    	bd.borrarTurno(id_turno);
+    }
+    
     public int getTurno() { return turno; }
     public void pasarTurno() { this.turno++; }
 
