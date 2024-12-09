@@ -7,30 +7,44 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class PersonajesModelo {  
-    private List<Personaje> personajes;
+	private BaseDeDatos bd;
     
     public PersonajesModelo() {
-        personajes = new ArrayList<>();
-    }  
-    public List<Personaje> getPersonajes() {
-    	 return personajes;
-    	 }
-    public Personaje buscarPersonaje(String nombre) {
-        for (Personaje personaje : personajes) {
-            if (personaje.getNombre().equals(nombre)) {
-                return personaje; 
-            }
-        }
-        return null; 
-    }  
-    public void agregarPersonaje(Personaje personaje) {
-        personajes.add(personaje);
+        this.bd = new BaseDeDatos();
+    } 
+    
+    public Personaje buscarPersonaje(int id_personaje) {
+        return bd.buscarPersonaje(id_personaje);
+    }
+    public void insertarPersonaje(Personaje personaje) {
+        bd.insertarPersonaje(personaje.getNombre(), personaje.getVida(), personaje.getMana(), personaje.getAtaque(), personaje.getDefensa(), personaje.getInteligencia(), personaje.getNivel());
+    }
+    public void actualizarPersonaje(Personaje personaje) {
+    	bd.actualizarPersonaje(personaje.getIdPersonaje(), personaje.getVida(), 
+    							personaje.getMana(), personaje.getAtaque(), 
+    							personaje.getDefensa(), personaje.getInteligencia(), 
+    							personaje.getNivel());
+    }
+    public void borrarPersonaje(int id_personaje) {
+    	bd.borrarPersonaje(id_personaje);
+    }
+    public BaseDeDatos getBaseDeDatos() {
+    	return bd;
     }
     
-    public void eliminarPersonaje(Personaje personaje) {
-        personajes.remove(personaje);
-    }     
-    public boolean guardarPersonajes() {
+    public void insertarInventario(int id_personaje) {
+		bd.insertarInventario(id_personaje);
+	}
+	public void actualizarInventario(int id_inventario, int id_personaje) {
+		bd.actualizarInventario(id_inventario, id_personaje);
+	}
+	public void mostrarInventario() {
+		bd.mostrarInventario();
+	}
+	public void borrarInventario(int id_inventario) {
+		bd.borrarInventario(id_inventario);
+	} 
+    /*public boolean guardarPersonajes() {
 	    try (FileOutputStream fos = new FileOutputStream("personajes.ser");
 	         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 	        for(Personaje personaje : personajes) {
@@ -52,5 +66,5 @@ public class PersonajesModelo {
 	    } catch (IOException | ClassNotFoundException e) {
 	        return false; 
 	    }    
-	}
+	}*/
 }
