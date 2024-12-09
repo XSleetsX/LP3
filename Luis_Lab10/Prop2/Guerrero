@@ -2,8 +2,8 @@ public class Guerrero extends Personaje {
 	private Espada espada;
     private Casco casco;
 
-    public Guerrero() {
-        super("Guerrero", 200, 100, 15, 1, 15, 1);
+    public Guerrero(int id_personaje) {
+        super(id_personaje, "Guerrero", 200, 100, 15, 1, 15, 1);
         this.espada = null;
         this.casco = null;
     }
