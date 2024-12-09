@@ -2,8 +2,8 @@ public class Caballero extends Personaje {
     private Espada espada;
     private Escudo escudo;
 
-    public Caballero() {
-        super("Caballero", 200, 100, 15, 1, 15, 1);
+    public Caballero(int id_personaje) {
+        super(id_personaje, "Caballero", 200, 100, 15, 1, 15, 1);
         this.espada = null;
         this.escudo = null;
     }
