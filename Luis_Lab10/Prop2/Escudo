@@ -3,8 +3,8 @@ public class Escudo extends Item{
     private int costo;
     private boolean equipado;
 
-    public Escudo(int tier) {
-        super("Escudo", "Aturde al enemigo por 1 turno", tier);
+    public Escudo(int id_item, int tier) {
+        super(id_item, "Escudo", "Habilidad", "Aturde al enemigo por 1 turno", tier);
         this.equipado = false;
         switch(tier) {
 	    	case 0: {
@@ -39,6 +39,9 @@ public class Escudo extends Item{
     
     @Override
     public String toString() {
-        return " " + nombre + " | " + cantidad + " | " + descripcion + " | " + tier + " | " + ataque + " | " + costo;
+    	return "Nombre: " + nombre + " || Tipo: " + tipo + 
+    			" || Cantidad: " + cantidad + " || Descripción: " + descripcion + 
+    			" || Tier: " + tier + " || Ataque: " + ataque + 
+    			" || Costo: " + costo + " || Equipado: " + equipado;
     }
 }
