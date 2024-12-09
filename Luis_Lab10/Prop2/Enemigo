@@ -1,4 +1,5 @@
 public class Enemigo {
+	private int id_enemigo;
     private String nombre;
     private int vida;
     private int nivel;
@@ -6,15 +7,17 @@ public class Enemigo {
     private String tipo;
     private boolean aturdido;
 
-    public Enemigo(String nombre, String tipo) {
-        this.nombre = nombre;
-        this.vida = 100;
-        this.nivel = 1;
-        this.ataque = 10;
+    public Enemigo(int id_enemigo, String nombre, int vida, int nivel, int ataque, String tipo) {
+        this.id_enemigo = id_enemigo;
+    	this.nombre = nombre;
+        this.vida = vida;
+        this.nivel = nivel;
+        this.ataque = ataque;
         this.tipo = tipo;
         this.aturdido = false;
     }
 
+    public int getIdEnemigo() { return id_enemigo; }
     public String getNombre() { return nombre; }
     public String getTipo() { return tipo; }
     public int getVida() { return vida; }
@@ -24,9 +27,4 @@ public class Enemigo {
     public void recibirDanio(int danio) { this.vida -= danio; }
     public void curarVida(int vida) { this.vida += vida; }
     public void esAturdido(boolean aturdido) { this.aturdido = aturdido; }
-    
-    @Override
-    public String toString() {
-        return " " + nombre + " | " + vida + " | " + nivel + " | " + ataque + " | " + tipo;
-    }
 }
