@@ -1,37 +1,31 @@
-public class Escudo extends Item{
+public class Espada extends Item{
     private int ataque;
-    private int costo;
     private boolean equipado;
 
-    public Escudo(int id_item, int tier) {
-        super(id_item, "Escudo", "Habilidad", "Aturde al enemigo por 1 turno", tier);
+    public Espada(int id_item, int tier) {
+        super(id_item, "Espada", "Arma", "Ataque alto", tier);
         this.equipado = false;
         switch(tier) {
 	    	case 0: {
-	            this.ataque = 60;
-	            this.costo = 75;
+	    		this.ataque = 45;
 	            break;
 	    	}
 	    	case 1: {
-	            this.ataque = 65;
-	            this.costo = 75;
+	    		this.ataque = 60;
 	            break;
 	    	}
 	    	case 2: {
-	            this.ataque = 70;
-	            this.costo = 100;
+	    		this.ataque = 75;
 	            break;
 	    	}
 	    	case 3: {
-	            this.ataque = 75;
-	            this.costo = 125;
+	    		this.ataque = 90;
 	            break;
 	    	}
 	    }
     }
 
     public int getAtaque() { return ataque; }
-    public int getCosto() { return costo; }
     public boolean estaEquipado() { return equipado; }
     
     public void equipar() { this.equipado = true; }
@@ -42,6 +36,6 @@ public class Escudo extends Item{
     	return "Nombre: " + nombre + " || Tipo: " + tipo + 
     			" || Cantidad: " + cantidad + " || Descripción: " + descripcion + 
     			" || Tier: " + tier + " || Ataque: " + ataque + 
-    			" || Costo: " + costo + " || Equipado: " + equipado;
+    			" || Equipado: " + equipado;
     }
 }
