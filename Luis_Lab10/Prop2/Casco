@@ -5,8 +5,8 @@ public class Casco extends Item{
     private int costo;
     private boolean equipado;
 
-    public Casco(int tier) {
-        super("Casco", "Aumenta el ataque en 15 por 2 turno", tier);
+    public Casco(int id_item, int tier) {
+        super(id_item, "Casco", "Habilidad", "Aumenta el ataque en 15 por 2 turno", tier);
         this.equipado = false;
         switch(tier) {
 	    	case 0: {
@@ -57,6 +57,9 @@ public class Casco extends Item{
     
     @Override
     public String toString() {
-        return " " + nombre + " | " + cantidad + " | " + descripcion + " | " + tier + " | " + bonusAtaque + " | " + bonusTurnos + " | " + costo;
+    	return "Nombre: " + nombre + " || Tipo: " + tipo + 
+    			" || Cantidad: " + cantidad + " || Descripción: " + descripcion + 
+    			" || Tier: " + tier + " || Bonus de ataque: " + bonusAtaque + 
+    			" || Costo: " + costo + " || Equipado: " + equipado;
     }
 }
