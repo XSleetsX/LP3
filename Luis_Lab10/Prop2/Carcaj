@@ -3,8 +3,8 @@ public class Carcaj extends Item {
     private int costo;
     private boolean equipado;
 
-    public Carcaj(int tier) {
-        super("Carcaj", "Dispara una flecha con fuerza que hace mucho daño", tier);
+    public Carcaj(int id_item, int tier) {
+        super(id_item, "Carcaj", "Habilidad", "Dispara una flecha con fuerza que hace mucho daño", tier);
         this.equipado = false;
         switch(tier) {
 	    	case 0: {
@@ -39,6 +39,9 @@ public class Carcaj extends Item {
     
     @Override
     public String toString() {
-        return " " + nombre + " | " + cantidad + " | " + descripcion + " | " + tier + " | " + ataque + " | " + costo;
+    	return "Nombre: " + nombre + " || Tipo: " + tipo + 
+    			" || Cantidad: " + cantidad + " || Descripción: " + descripcion + 
+    			" || Tier: " + tier + " || Ataque: " + ataque + 
+    			" || Costo: " + costo + " || Equipado: " + equipado;
     }
 }
