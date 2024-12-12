@@ -1,0 +1,36 @@
+public class CombateModelo {
+    private int turno;
+
+    public CombateModelo() {
+        this.turno = 1;
+    }
+
+    public int getTurno() { return turno; }
+    public void nuevoTurno(Personaje personaje, Enemigo enemigo) {
+    	this.turno++;
+    	personaje.regenerarMana();
+    	enemigo.esAturdido(false);
+    }
+    
+    public void atacarEnemigo(Personaje personaje, Enemigo enemigo) {
+        enemigo.recibirDanio(personaje.atacar());
+    }
+    public void usarEscudo(Caballero caballero, Enemigo enemigo) {
+    	enemigo.recibirDanio(caballero.getEscudo().getAtaque());
+    	enemigo.esAturdido(true);
+    }
+    
+    public void usarCarcaj(Arquero arquero, Enemigo enemigo) {
+    	enemigo.recibirDanio(arquero.getCarcaj().getAtaque());
+    }
+    public int accionEnemigo(Personaje personaje, Enemigo enemigo) {
+        int numero = (int) (Math.random() * 2) + 1;
+        if(numero == 1 || enemigo.getVida() == enemigo.getVidaMaxima()) {
+        	personaje.recibirDanio(enemigo.getAtaque());
+            return 1;
+        } else {
+            enemigo.curarVida(30);
+            return 2;
+        }    
+    }
+}
