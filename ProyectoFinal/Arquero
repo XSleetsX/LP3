@@ -1,0 +1,65 @@
+public class Arquero extends Personaje {
+    private Arco arco;
+    private Carcaj carcaj;
+
+    public Arquero() {
+        super("Arquero", 180, 120, 12, 1, 10, 1);
+        insertarItemsIniciales();
+    }
+
+    public void insertarItemsIniciales() {
+    	//Arco por defecto del arquero
+    	equiparArco(new Arco(0));
+    	inventario.insertarItem(arco);
+    	
+    	//Carcaj por defecto del arquero
+    	equiparCarcaj(new Carcaj(0));
+    	inventario.insertarItem(carcaj);
+    	
+    	//Pociones de salud por defecto del personaje
+        inventario.insertarItem(new PocionSalud());
+        inventario.insertarItem(new PocionSalud());
+    }  
+    
+    public int atacar() { return ataque; }
+
+    public void equiparArco(Arco arco) {
+    	if(this.arco == null) {
+    		this.arco = arco;
+            ataque += arco.getAtaque();
+            arco.equipar();
+    	} else {
+    		desequiparArco();
+        	this.arco = arco;
+            ataque += arco.getAtaque();
+            arco.equipar();
+    	}
+    }
+
+    public void desequiparArco() {
+    	ataque -= arco.getAtaque();
+        arco.desequipar();
+        this.arco = null;
+    }  
+    public void equiparCarcaj(Carcaj carcaj) {
+    	if(this.carcaj == null) {
+    		this.carcaj = carcaj;
+    		carcaj.equipar();
+    	} else {
+    		desequiparCarcaj();
+    		this.carcaj = carcaj;
+    		carcaj.equipar();
+    	} 
+    }
+    public void desequiparCarcaj() {
+    	carcaj.desequipar();
+        this.carcaj = null;
+    }   
+    public int usarCarcaj() {
+    	mana -= carcaj.getCosto();
+        return carcaj.getAtaque();
+    }
+    
+    public Arco getArco() { return arco; }
+    public Carcaj getCarcaj() { return carcaj; }
+}
