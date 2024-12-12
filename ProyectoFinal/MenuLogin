@@ -1,0 +1,292 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+
+public class MenuLogin {
+	private static Clip clip;
+    private static boolean musicaEncendida = true;
+
+    public static void main(String[] args) {
+        //Iniciar la música de fondo
+        iniciarMusica("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\musicaLogin.wav");
+
+        //Configuraciones de frame
+        JFrame frame = new JFrame("Héroes de la Batalla");
+        frame.setSize(800, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+
+        //Configuraciones de panelFondo
+        JPanel panelFondo = new PanelConFondo("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\FondoTarde.jpg");
+        panelFondo.setLayout(new BorderLayout());
+        
+        //Configuraciones de panelMenu
+        JPanel panelMenu = new JPanel();
+        panelMenu.setOpaque(false);
+        panelMenu.setLayout(new GridLayout(3, 1));
+        
+        panelFondo.add(panelMenu, BorderLayout.CENTER);
+        
+        //Configuraciones de panelTitulo
+        JPanel panelTitulo = new JPanel();
+        panelTitulo.setOpaque(false);
+        panelTitulo.setLayout(new BorderLayout());
+        //Configuraciones de labelTitulo
+        JLabel labelTitulo = new JLabel("HÉROES DE LA BATALLA", JLabel.CENTER);
+        labelTitulo.setFont(new Font("Playfair Display", Font.BOLD, 50));
+        labelTitulo.setForeground(new Color(0, 0, 0));
+        labelTitulo.setBackground(new Color(255, 165, 0));
+        labelTitulo.setOpaque(true);
+        labelTitulo.setBorder(BorderFactory.createLineBorder(new Color(165, 42, 42), 10));
+        
+        panelTitulo.add(labelTitulo, BorderLayout.SOUTH);
+
+        //Configuraciones de panelOpciones
+        JPanel panelOpciones = new JPanel();
+        panelOpciones.setLayout(new GridLayout(1, 3));
+        panelOpciones.setOpaque(false);
+        JButton btnNuevaPartida = new JButton("Nueva Partida");
+        JButton btnSalir = new JButton("Salir del Juego");
+        JButton btnConfiguracion = new JButton("Configurar Audio");
+        //Configuraciones de panelBotones
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new GridLayout(3, 1, 15, 15));
+        panelBotones.setBorder(BorderFactory.createEmptyBorder(25, 50, 25, 50));
+        panelBotones.setOpaque(false);
+        panelBotones.add(btnNuevaPartida);
+        panelBotones.add(btnConfiguracion);
+        panelBotones.add(btnSalir);
+
+        panelOpciones.add(new JLabel(""));
+        panelOpciones.add(panelBotones);
+        panelOpciones.add(new JLabel(""));
+
+        panelMenu.add(panelTitulo);
+        panelMenu.add(panelOpciones);
+        panelMenu.add(new JLabel(""));
+        
+        // Acción para el botón "Nueva Partida"
+        btnNuevaPartida.addActionListener(e -> abrirSeleccionDePersonaje());
+
+        // Acción para el botón "Salir del Juego"
+        btnSalir.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(frame, "¿Estás seguro de que deseas salir?", "Salir del Juego", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                System.exit(0); // Cerrar el programa
+            }
+        });
+
+        // Acción para el botón "Configuración"
+        btnConfiguracion.addActionListener(e -> abrirConfiguracion());
+
+        // Agregar el panel al marco
+        frame.add(panelFondo);
+        frame.setVisible(true);
+    }
+
+    //Método para abrir la ventana de selección de personaje
+    private static void abrirSeleccionDePersonaje() {
+        JFrame frameSeleccion = new JFrame("Selección de personaje");
+        frameSeleccion.setSize(800, 600);
+        frameSeleccion.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frameSeleccion.setLocationRelativeTo(null);
+
+        //Configuraciones de panelFondoPersonajes
+        JPanel panelFondoPersonajes = new PanelConFondo("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\FondoTarde.jpg");
+        panelFondoPersonajes.setLayout(new BorderLayout());
+        
+        //Configuraciones de panelSeleccionPersonajes
+        JPanel panelSeleccionPersonajes = new JPanel();
+        panelSeleccionPersonajes.setOpaque(false);
+        panelSeleccionPersonajes.setLayout(new GridLayout(3, 1));
+        
+        panelFondoPersonajes.add(panelSeleccionPersonajes, BorderLayout.CENTER);
+        
+        //Configuraciones de panelTitulo
+        JPanel panelTitulo = new JPanel();
+        panelTitulo.setOpaque(false);
+        panelTitulo.setPreferredSize(new Dimension(800, 150));
+        panelTitulo.setLayout(new BorderLayout());
+        
+        //Configuraciones de labelTitulo
+        JLabel labelTitulo = new JLabel("SELECCIONA UN PERSONAJE", JLabel.CENTER);
+        labelTitulo.setFont(new Font("Playfair Display", Font.BOLD, 50));
+        labelTitulo.setForeground(new Color(0, 0, 0));
+        labelTitulo.setBackground(new Color(255, 165, 0));
+        labelTitulo.setOpaque(true);
+        labelTitulo.setBorder(BorderFactory.createLineBorder(new Color(165, 42, 42), 10));
+        
+        panelTitulo.add(labelTitulo, BorderLayout.SOUTH);
+
+        //Configuraciones de panelPersonajes
+        JPanel panelPersonajes = new JPanel();
+        panelPersonajes.setOpaque(false);
+        panelPersonajes.setPreferredSize(new Dimension(800, 300));
+        panelPersonajes.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panelPersonajes.setLayout(new GridLayout(1, 2, 200, 200));
+
+        //Configuraciones de panelCaballero
+        JPanel panelCaballero = new JPanel();
+        panelCaballero.setOpaque(false);
+        panelCaballero.setLayout(new BorderLayout());
+        JLabel caballero = new JLabel();
+        
+        BufferedImage imagen1 = null;
+        try {
+            imagen1 = ImageIO.read(new File("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\caballero.jpg"));
+        } catch (IOException e) {
+            System.out.println("Error al cargar la imagen: " + e.getMessage());
+        }
+        Image imagenAjustadaCaballero = imagen1.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+        ImageIcon imagenCaballero = new ImageIcon(imagenAjustadaCaballero);
+        
+        caballero.setIcon(imagenCaballero);
+        JButton btnCaballero = new JButton("Caballero");
+        
+        panelCaballero.add(caballero, BorderLayout.CENTER);
+        panelCaballero.add(btnCaballero, BorderLayout.SOUTH);
+        
+        panelPersonajes.add(panelCaballero);
+        
+        //Configuraciones de panelArquero
+        JPanel panelArquero = new JPanel();
+        panelArquero.setOpaque(false);
+        panelArquero.setLayout(new BorderLayout());
+        JLabel arquero = new JLabel();
+        
+        BufferedImage imagen2 = null;
+        try {
+            imagen2 = ImageIO.read(new File("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\arquero.jpg"));
+        } catch (IOException e) {
+            System.out.println("Error al cargar la imagen: " + e.getMessage());
+        }
+        Image imagenAjustadaArquero = imagen2.getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+        
+        ImageIcon imagenArquero = new ImageIcon(imagenAjustadaArquero);
+        arquero.setIcon(imagenArquero);
+        JButton btnArquero = new JButton("Arquero");
+        
+        panelArquero.add(arquero, BorderLayout.CENTER);
+        panelArquero.add(btnArquero, BorderLayout.SOUTH);
+        
+        panelPersonajes.add(panelArquero);
+        
+        JLabel labelRelleno1 = new JLabel();
+        labelRelleno1.setPreferredSize(new Dimension(800, 150));
+        
+        /*GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        panelSeleccionPersonajes.add(panelTitulo, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weighty = 0.1;
+        gbc.fill = GridBagConstraints.BOTH;
+        panelSeleccionPersonajes.add(panelPersonajes, gbc);
+        gbc.weighty = 0.0;
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        panelSeleccionPersonajes.add(labelRelleno1, gbc);*/
+        
+        panelSeleccionPersonajes.add(panelTitulo);
+        panelSeleccionPersonajes.add(panelPersonajes);
+        panelSeleccionPersonajes.add(labelRelleno1);
+ 
+        // Acción para elegir "Caballero"
+        btnCaballero.addActionListener(e -> {
+            clip.stop();
+            new CombateVista(new Caballero(), new Enemigo("Slime", "Minion", 300));
+        });
+
+        // Acción para elegir "Arquero"
+        btnArquero.addActionListener(e -> {
+            clip.stop();
+            new CombateVista(new Arquero(), new Enemigo("Slime", "Minion", 300));
+        });
+
+        frameSeleccion.add(panelFondoPersonajes);
+        frameSeleccion.setVisible(true);
+    }
+
+    //Método para abrir la ventana de configuración de audio
+    private static void abrirConfiguracion() {
+        JFrame frameConfiguracion = new JFrame("Configuración de Audio");
+        frameConfiguracion.setSize(300, 200);
+        frameConfiguracion.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frameConfiguracion.setLocationRelativeTo(null);
+
+        JButton btnToggleAudio = new JButton("Encender/Apagar Música");
+        btnToggleAudio.addActionListener(e -> {
+            toggleMusica(); // Cambiar el estado de la música
+            String estado = musicaEncendida ? "encendida" : "apagada";
+            JOptionPane.showMessageDialog(frameConfiguracion, "La música está ahora " + estado + ".", "Configuración", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        frameConfiguracion.add(btnToggleAudio, BorderLayout.CENTER);
+        frameConfiguracion.setVisible(true);
+    }
+    
+    //Método para iniciar o detener la música de fondo
+    private static void iniciarMusica(String archivoMusica) {
+        try {
+            File archivo = new File(archivoMusica);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivo);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            if (musicaEncendida) {
+                clip.loop(Clip.LOOP_CONTINUOUSLY); // Repetir indefinidamente si la música está encendida
+            }
+        } catch (Exception e) {
+            clip = null; // Si falla la carga, asegura que no se intente usar el clip
+            System.err.println("No se pudo cargar el archivo de audio: " + archivoMusica);
+            e.printStackTrace();
+        }
+    }
+
+    //Método para apagar o prender la música
+    private static void toggleMusica() {
+        if (clip != null) {
+            if (musicaEncendida) {
+                clip.stop(); // Detener la música
+            } else {
+                clip.loop(Clip.LOOP_CONTINUOUSLY); // Reanudar la música
+            }
+            musicaEncendida = !musicaEncendida; // Alternar el estado
+        }
+    }
+    
+    //Clase personalizada para agregar una imagen de fondo al panel
+    static class PanelConFondo extends JPanel {
+        private Image fondo;
+
+        public PanelConFondo(String rutaImagen) {
+            try {
+                fondo = new ImageIcon(rutaImagen).getImage();
+            } catch (Exception e) {
+                System.err.println("No se pudo cargar la imagen: " + rutaImagen);
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (fondo != null) {
+                g.drawImage(fondo, 0, 0, getWidth(), getHeight(), this);
+            }
+        }
+    }
+}
