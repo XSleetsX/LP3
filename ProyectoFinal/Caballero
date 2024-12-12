@@ -1,0 +1,65 @@
+public class Caballero extends Personaje {
+    private Espada espada;
+    private Escudo escudo;
+
+    public Caballero() {
+        super("Caballero", 200, 100, 15, 1, 15, 1);
+        insertarItemsIniciales();
+    }
+    
+    public void insertarItemsIniciales() {
+    	//Espada por defecto del caballero
+    	equiparEspada(new Espada(0));
+    	inventario.insertarItem(espada);
+    	
+    	//Escudo por defecto del caballero
+    	equiparEscudo(new Escudo(0));
+    	inventario.insertarItem(escudo);
+    	
+    	//Pociones de salud por defecto del personaje
+        inventario.insertarItem(new PocionSalud());
+        inventario.insertarItem(new PocionSalud());
+    }
+    
+    public int atacar() { return ataque; }
+    
+    public void equiparEspada(Espada espada) {
+    	if(this.espada == null) {
+    		this.espada = espada;
+            ataque += espada.getAtaque();
+            espada.equipar();
+    	} else {
+    		desequiparEspada();
+        	this.espada = espada;
+            ataque += espada.getAtaque();
+            espada.equipar();
+    	}
+    }
+    
+    public void desequiparEspada() {
+	    ataque -= espada.getAtaque();
+	    espada.desequipar();
+	    espada = null;
+    }
+    public void equiparEscudo(Escudo escudo) {
+    	if(this.escudo == null) {
+    		this.escudo = escudo;
+            escudo.equipar();
+    	} else {
+    		desequiparEscudo();
+    		this.escudo = escudo;
+            escudo.equipar();
+    	} 
+    }
+    public void desequiparEscudo() {
+        escudo.desequipar();
+    	this.escudo = null;
+    }
+    public int usarEscudo() {
+        mana -= escudo.getCosto();
+        return escudo.getAtaque();
+    }
+    
+    public Espada getEspada() { return espada; }
+    public Escudo getEscudo() { return escudo; }
+}
