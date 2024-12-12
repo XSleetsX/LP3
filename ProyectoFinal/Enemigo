@@ -1,0 +1,30 @@
+public class Enemigo {
+    private String nombre;
+    private int vida;
+    private int vidaMaxima;
+    private int nivel;
+    private int ataque;
+    private String tipo;
+    private boolean aturdido;
+
+    public Enemigo(String nombre, String tipo, int vida) {
+        this.nombre = nombre;
+        this.vida = vida;
+        this.vidaMaxima = vida;
+        this.nivel = 1;
+        this.ataque = 20;
+        this.tipo = tipo;
+        this.aturdido = false;
+    }
+
+    public String getNombre() { return nombre; }
+    public String getTipo() { return tipo; }
+    public int getVida() { return vida; }
+    public int getVidaMaxima() { return vidaMaxima; }
+    public int getAtaque() { return ataque; }
+    public boolean estaAturdido() { return aturdido; }
+
+    public void recibirDanio(int danio) { this.vida -= danio; }
+    public void curarVida(int vida) { this.vida += vida; }
+    public void esAturdido(boolean aturdido) { this.aturdido = aturdido; }
+}
