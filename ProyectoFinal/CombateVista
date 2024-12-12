@@ -1,0 +1,428 @@
+import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+public class CombateVista extends JFrame{
+	private Inventario inventario;
+	private CombateControlador controlador;
+	private Clip clip;
+	private boolean musicaEncendida = true;
+	private Timer timer;
+	private int indiceTexto = 0;
+
+	private JPanel panelFondo, panelEntidades, panelAccion, panelPersonaje, panelImagenPersonaje, panelEnemigo, panelImagenEnemigo, panelBotones, panelInformacion, panelInventario, panelInventario_Items, panelInventario_Botones;
+	private JButton botonAtacar, botonHabilidad, botonInventario, botonTurno, botonUsarItem, botonBorrarItem;
+	private JProgressBar vidaPersonaje, manaPersonaje, vidaEnemigo, manaEnemigo;
+	private ImageIcon iconoPersonaje, iconoEnemigo;
+	private Image imagenAjustadaPersonaje, imagenAjustadaEnemigo;
+	BufferedImage imagen;
+	private JLabel nombrePersonaje, nombreEnemigo, imagenPersonaje, imagenEnemigo, informacionCombate;
+	private JList<String> itemsJList;
+	private JScrollPane seleccionInventario;
+	private DefaultListModel<String> listaItems;
+	
+	public CombateVista(Personaje personaje, Enemigo enemigo) {
+		this.controlador = new CombateControlador(personaje, enemigo, new CombateModelo(), this);
+		this.inventario = personaje.getInventario();
+		
+		//Iniciando la música
+		iniciarMusica("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\musicaMinions.wav");
+		
+		//Configuraciones del JFrame
+		setTitle("Juego");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		
+		//Configuraciones de panelFondo
+		panelFondo = new FondoPanel("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\FondoTarde.jpg");
+        panelFondo.setLayout(new BoxLayout(panelFondo, BoxLayout.Y_AXIS));
+		
+        //Configuraciones de panelEntidades
+        panelEntidades = new JPanel();
+        panelEntidades.setOpaque(false);
+        panelEntidades.setBackground(Color.BLUE);
+        panelEntidades.setLayout(new GridLayout(2, 6));
+        panelEntidades.setPreferredSize(new Dimension(800, 455));
+        panelFondo.add(panelEntidades);
+        
+        //Configuraciones de panelPersonaje
+		panelPersonaje = new JPanel();
+		panelPersonaje.setOpaque(false);
+		panelPersonaje.setLayout(new BoxLayout(panelPersonaje, BoxLayout.Y_AXIS));
+		nombrePersonaje = new JLabel(personaje.getNombre());
+		vidaPersonaje = new JProgressBar(JProgressBar.HORIZONTAL, 0, personaje.getVida());
+		manaPersonaje = new JProgressBar(JProgressBar.HORIZONTAL, 0, personaje.getMana());
+		//Configuraciones de panelImagenPersonaje
+        switch(personaje.getNombre()) {
+	        case "Caballero": {
+	        	imagenPersonaje = new JLabel();
+	        	imagen = null;
+	            try {
+	                imagen = ImageIO.read(new File("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\caballero.jpg"));
+	            } catch (IOException e) {
+	                System.out.println("Error al cargar la imagen: " + e.getMessage());
+	            }
+	            imagenAjustadaPersonaje = imagen.getScaledInstance(150, 165, Image.SCALE_SMOOTH);
+	            iconoPersonaje = new ImageIcon(imagenAjustadaPersonaje);
+	            imagenPersonaje.setIcon(iconoPersonaje);
+	        	break;
+	        }
+	        case "Arquero": {
+	        	imagenPersonaje = new JLabel();
+	        	imagen = null;
+	            try {
+	                imagen = ImageIO.read(new File("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\arquero.jpg"));
+	            } catch (IOException e) {
+	                System.out.println("Error al cargar la imagen: " + e.getMessage());
+	            }
+	            imagenAjustadaPersonaje = imagen.getScaledInstance(150, 165, Image.SCALE_SMOOTH);
+	            iconoPersonaje = new ImageIcon(imagenAjustadaPersonaje);
+	            imagenPersonaje.setIcon(iconoPersonaje);
+	        	break;
+	        }
+        }
+        
+		panelPersonaje.add(nombrePersonaje);
+		panelPersonaje.add(vidaPersonaje);
+        panelPersonaje.add(manaPersonaje);
+        panelPersonaje.add(imagenPersonaje);
+
+        //Configuraciones de panelEnemigo
+        panelEnemigo = new JPanel();
+        panelEnemigo.setOpaque(false);
+        panelEnemigo.setLayout(new BoxLayout(panelEnemigo, BoxLayout.Y_AXIS));
+		nombreEnemigo = new JLabel(enemigo.getNombre());
+		vidaEnemigo = new JProgressBar(JProgressBar.HORIZONTAL, 0, enemigo.getVida());
+		manaEnemigo = new JProgressBar(JProgressBar.HORIZONTAL);
+		//Configuraciones de panelImagenEnemigo
+        imagenEnemigo = new JLabel();
+    	imagen = null;
+        try {
+            imagen = ImageIO.read(new File("C:\\Users\\User\\eclipse-workspace\\ProyectoFinal\\src\\slime.jpg"));
+        } catch (IOException e) {
+            System.out.println("Error al cargar la imagen: " + e.getMessage());
+        }
+        imagenAjustadaEnemigo = imagen.getScaledInstance(150, 165, Image.SCALE_SMOOTH);
+        iconoEnemigo = new ImageIcon(imagenAjustadaEnemigo);
+        imagenEnemigo.setIcon(iconoEnemigo);
+        
+		panelEnemigo.add(nombreEnemigo);
+		panelEnemigo.add(vidaEnemigo);
+		panelEnemigo.add(manaEnemigo);
+		panelEnemigo.add(imagenEnemigo);
+
+		for (int i = 0; i < 12; i++) {
+			if(i == 7) {
+				panelEntidades.add(panelPersonaje);
+			} else if(i == 10) {
+				panelEntidades.add(panelEnemigo);
+			} else {
+				panelEntidades.add(new JLabel(""));
+			}
+		}
+		
+		//Configuraciones de panelAccion
+		panelAccion = new JPanel();
+		panelAccion.setOpaque(false);
+		panelAccion.setLayout(new GridBagLayout());
+		panelAccion.setPreferredSize(new Dimension(800, 145));
+		panelFondo.add(panelAccion);
+		GridBagConstraints gbcAccion = new GridBagConstraints();
+		
+		//Configuraciones de labelRelleno1
+		JLabel labelRelleno1 = new JLabel("");
+		labelRelleno1.setPreferredSize(new Dimension(200, 145));
+		gbcAccion.gridx = 0;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.weightx = 0.25;
+		gbcAccion.weighty = 1.0;
+		panelAccion.add(new JLabel(""), gbcAccion);
+		gbcAccion.weightx = 0.0;
+		gbcAccion.weighty = 0.0;
+		
+		//Configuraciones de panelBotones
+		panelBotones = new JPanel();
+		panelBotones.setBackground(Color.ORANGE);
+		panelBotones.setBorder(new LineBorder(Color.BLACK, 3, true));
+		panelBotones.setLayout(new GridLayout(4, 1, 0, 0));
+		panelBotones.setPreferredSize(new Dimension(200, 145));
+		//Configuraciones de botonAtacar
+		botonAtacar = new JButton("Atacar");
+		botonAtacar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controlador.atacarEnemigo();
+				botonAtacar.setEnabled(false);
+				botonHabilidad.setEnabled(false);
+				botonInventario.setEnabled(false);
+			}
+		});
+		//Configuraciones de botonHabilidad
+		botonHabilidad = new JButton("Usar habilidad");
+		botonHabilidad.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(controlador.usarHabilidad()) {
+					botonAtacar.setEnabled(false);
+					botonHabilidad.setEnabled(false);
+					botonInventario.setEnabled(false);
+				}
+			}
+		});
+		//Configuraciones de botonInventario
+		botonInventario = new JButton("Ver inventario");
+		botonInventario.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				abrirCerrarInventario();
+			}
+		});
+		//Configuraciones de botonTurno
+		botonTurno = new JButton("Pasar turno");
+		botonTurno.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				botonAtacar.setEnabled(false);
+				botonHabilidad.setEnabled(false);
+				botonInventario.setEnabled(false);
+				botonUsarItem.setEnabled(false);
+				botonBorrarItem.setEnabled(false);
+				botonTurno.setEnabled(false);
+				controlador.nuevoTurno();			
+			}
+		});
+		panelBotones.add(botonAtacar);
+		panelBotones.add(botonHabilidad);
+		panelBotones.add(botonInventario);
+		panelBotones.add(botonTurno);
+		gbcAccion.gridx = 1;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.fill = GridBagConstraints.BOTH;
+		gbcAccion.insets = new Insets(10, 0, 10, 0);
+		gbcAccion.weightx = 0.25;
+		panelAccion.add(panelBotones, gbcAccion);
+		gbcAccion.weightx = 0.0;
+		
+		//Configuraciones de panelInformacion
+		panelInformacion = new JPanel();
+		panelInformacion.setBackground(Color.ORANGE);
+		panelInformacion.setBorder(new LineBorder(Color.BLACK, 3, true));
+		panelInformacion.setPreferredSize(new Dimension(200, 145));
+		panelInformacion.setLayout(new BorderLayout());
+		informacionCombate = new JLabel("Comienza el COMBATE. Es tu TURNO.");
+		informacionCombate.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		informacionCombate.setVerticalAlignment(SwingConstants.TOP);
+		panelInformacion.add(informacionCombate, BorderLayout.NORTH);
+		gbcAccion.gridx = 2;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.fill = GridBagConstraints.BOTH;
+		gbcAccion.weightx = 1.0;
+		panelAccion.add(panelInformacion, gbcAccion);
+		gbcAccion.weightx = 0.0;
+		
+		// Configuraciones de panelInventario
+        panelInventario = new JPanel();
+        panelInventario.setBackground(Color.ORANGE);
+        panelInventario.setBorder(new LineBorder(Color.BLACK, 3, true));
+        panelInventario.setLayout(new BorderLayout());
+        // Configuraciones de panelInventario_Items
+        panelInventario_Items = new JPanel();
+        panelInventario_Items.setOpaque(false);
+        panelInventario_Items.setLayout(new BorderLayout());
+        panelInventario_Items.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10));
+        listaItems = inventario.mostrarItem();
+        itemsJList = new JList<>(listaItems);
+        itemsJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        itemsJList.setVisibleRowCount(4);
+        seleccionInventario = new JScrollPane(itemsJList);
+        panelInventario_Items.add(seleccionInventario, BorderLayout.CENTER);
+        panelInventario.add(panelInventario_Items, BorderLayout.CENTER);
+
+        // Configuraciones de panelInventario_Botones
+        panelInventario_Botones = new JPanel();
+        panelInventario_Botones.setOpaque(false);
+        // Configuraciones de botonUsarItem
+        botonUsarItem = new JButton("Usar item");
+        botonUsarItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	botonAtacar.setEnabled(false);
+				botonHabilidad.setEnabled(false);
+				botonInventario.setEnabled(false);
+				botonUsarItem.setEnabled(false);
+				botonBorrarItem.setEnabled(false);
+				int selectedIndex = itemsJList.getSelectedIndex();
+		        if (selectedIndex != -1) {
+		            String selectedItem = itemsJList.getSelectedValue();
+		            int id_item = Character.getNumericValue(selectedItem.charAt(4));
+		            Item item = controlador.usarItem(id_item);
+		            itemsJList.setModel(inventario.mostrarItem());
+		            if(item.getNombre().equals("Poción de Salud")) {
+		            	actualizarPanelInformacion("Poción de salud consumida. Te curaste: " + ((PocionSalud) item).getCuracion() + " vida.");
+		            } else {
+		            	actualizarPanelInformacion("Te equipaste: " + item.getNombre());
+		            } 
+		        } else {
+		            mostrarMensaje("Debes seleccionar un item para usar.");
+		        }
+            }
+        });
+        // Configuraciones de botonBorrarItem
+        botonBorrarItem = new JButton("Borrar item");
+        botonBorrarItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	botonAtacar.setEnabled(false);
+				botonHabilidad.setEnabled(false);
+				botonInventario.setEnabled(false);
+				botonUsarItem.setEnabled(false);
+				botonBorrarItem.setEnabled(false);
+				int selectedIndex = itemsJList.getSelectedIndex();
+		        if (selectedIndex != -1) {
+		            String selectedItem = itemsJList.getSelectedValue();
+		            int id_item = Character.getNumericValue(selectedItem.charAt(4));
+		            Item item = controlador.borrarItem(id_item);
+		            itemsJList.setModel(inventario.mostrarItem());
+		            actualizarPanelInformacion(item.getNombre() + " eliminado.");
+		        } else {
+		            mostrarMensaje("Debes seleccionar un item para borrar.");
+		        }          
+            }
+        });
+        panelInventario_Botones.add(botonUsarItem);
+        panelInventario_Botones.add(botonBorrarItem);
+        panelInventario.add(panelInventario_Botones, BorderLayout.SOUTH);
+        gbcAccion.gridx = 2;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.fill = GridBagConstraints.BOTH;
+		gbcAccion.weightx = 1.0;
+		panelAccion.add(panelInventario, gbcAccion);
+		gbcAccion.weightx = 0.0;
+        panelInventario.setVisible(false);
+		
+		//Configuraciones de labelRelleno2
+		JLabel labelRelleno2 = new JLabel("");
+		labelRelleno2.setPreferredSize(new Dimension(200, 145));
+		gbcAccion.gridx = 3;
+		gbcAccion.gridy = 0;
+		gbcAccion.gridheight = 1;
+		gbcAccion.gridwidth = 1;
+		gbcAccion.weightx = 0.25;
+		panelAccion.add(new JLabel(""), gbcAccion);
+		gbcAccion.weightx = 0.0;
+		
+		setContentPane(panelFondo);
+		setVisible(true);
+	}
+	
+    class FondoPanel extends JPanel {
+        private Image imagen;
+
+        public FondoPanel(String rutaImagen) {
+            try {
+                imagen = new ImageIcon(rutaImagen).getImage();
+            } catch (Exception e) {
+                System.out.println("Error al cargar la imagen: " + e.getMessage());
+            }
+        }
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (imagen != null) {
+                g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            }
+        }
+    }
+    private void iniciarMusica(String archivoMusica) {
+        try {
+            File archivo = new File(archivoMusica);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(archivo);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            if (musicaEncendida) {
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
+        } catch (Exception e) {
+            clip = null;
+            mostrarMensaje("No se pudo cargar el archivo de audio: " + archivoMusica);
+            e.printStackTrace();
+        }
+    }
+    public void abrirCerrarInventario() {
+    	if(panelInformacion.isVisible() == true) {
+    		panelInformacion.setVisible(false);
+    		panelInventario.setVisible(true);
+    	} else {
+    		panelInformacion.setVisible(true);
+    		panelInventario.setVisible(false);
+    	}
+    }
+    public void actualizarTurno(Personaje personaje) {
+    	actualizarManaPersonaje(personaje);
+    	botonAtacar.setEnabled(true);
+    	botonHabilidad.setEnabled(true);
+    	botonInventario.setEnabled(true);
+    	botonUsarItem.setEnabled(true);
+    	botonBorrarItem.setEnabled(true);
+    	botonTurno.setEnabled(true);
+    }
+    public void actualizarVidaPersonaje(Personaje personaje) {
+    	vidaPersonaje.setValue(personaje.getVida());
+    }
+    public void actualizarManaPersonaje(Personaje personaje) {
+    	manaPersonaje.setValue(personaje.getMana());
+    }
+    public void actualizarVidaEnemigo(Enemigo enemigo) {
+		vidaEnemigo.setValue(enemigo.getVida());
+    }
+    public void actualizarPanelInformacion(String mensaje) {
+    	informacionCombate.setText("");
+    	panelInventario.setVisible(false);
+    	panelInformacion.setVisible(true);
+    	if (timer != null) {
+            timer.stop();
+        }
+        indiceTexto = 0;
+        
+    	timer = new Timer(25, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (indiceTexto < mensaje.length()) {
+                    informacionCombate.setText(informacionCombate.getText() + mensaje.charAt(indiceTexto));
+                    indiceTexto++;
+                } else {
+                    ((Timer) e.getSource()).stop();
+                }
+            }
+        });   
+        timer.start();
+    }
+    public void actualizarInventario() {
+    	
+    }
+    public void terminarCombate(String mensaje) {
+    	mostrarMensaje(mensaje);
+    	System.exit(0);
+    }
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(panelInventario, mensaje);
+    }
+}
