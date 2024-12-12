@@ -1,0 +1,132 @@
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+
+public class Inventario {
+	private List<Item> items;
+	
+	public Inventario() {
+		this.items = new ArrayList<>();
+	}
+	
+	public Item buscarItem(int id_item) {
+		for(Item item : items) {
+			if(item.getIdItem() == id_item) {
+				return item;
+			}
+		}
+		return null;
+    }
+	public void insertarItem(Item item) {
+        for (Item itemExistente : items) {
+            if (itemExistente.getNombre().equals(item.getNombre()) && itemExistente.getTier() == item.getTier()) {
+            	itemExistente.aumentarCantidad();
+                return;
+            }
+        }
+        items.add(item);
+    }
+	
+	public void usarItem(Personaje personaje, Item item) {
+		switch (personaje.getNombre()) {
+	        case "Caballero": {
+	            Caballero caballero = (Caballero) personaje;
+	            switch (item.getNombre()) {
+	                case "Espada":
+	                    caballero.equiparEspada((Espada) item);
+	                    break;
+	                case "Escudo":
+	                    caballero.equiparEscudo((Escudo) item);
+	                    break;
+	                case "Poción de Salud":
+	                    caballero.tomarPocionSalud((PocionSalud) item);
+	                    borrarItem(caballero, item);
+	                    break;
+	            }
+	            break;
+	        }
+	        case "Arquero": {
+	            Arquero arquero = (Arquero) personaje;
+	            switch (item.getNombre()) {
+	                case "Arco":
+	                    arquero.equiparArco((Arco) item);
+	                    break;
+	                case "Carcaj":
+	                    arquero.equiparCarcaj((Carcaj) item);
+	                    break;
+	                case "Poción de Salud":
+	                    arquero.tomarPocionSalud((PocionSalud) item);
+	                    borrarItem(arquero, item);
+	                    break;
+	            }
+	            break;
+	        }
+		}
+    }
+	public void borrarItem(Personaje personaje, Item item) {
+		item.setCantidad(item.getCantidad() - 1);
+        if (item.getCantidad() <= 0) {
+        	switch (personaje.getNombre()) {
+	        	case "Caballero": {
+		            Caballero caballero = (Caballero) personaje;
+		            switch (item.getNombre()) {
+		                case "Espada":
+		                    caballero.desequiparEspada();
+		                    break;
+		                case "Escudo":
+		                    caballero.desequiparEscudo();
+		                    break;
+		            }
+		            break;
+		        }
+		        case "Arquero": {
+		            Arquero arquero = (Arquero) personaje;
+		            switch (item.getNombre()) {
+		                case "Arco":
+		                    arquero.desequiparArco();
+		                    break;
+		                case "Carcaj":
+		                    arquero.desequiparCarcaj();
+		                    break;
+		            }
+		            break;
+		        }
+        	}
+        	items.remove(item);
+        }
+    }
+	
+	public DefaultListModel<String> mostrarItem() {
+        DefaultListModel<String> modeloLista = new DefaultListModel<>();
+        for (Item item : items) {
+            switch(item.getNombre()) {
+	            case "Espada": {
+	            	Espada espada = (Espada) item;
+	            	modeloLista.addElement(espada.toString());
+	            	break;
+	            }
+	            case "Escudo": {
+	            	Escudo escudo = (Escudo) item;
+	            	modeloLista.addElement(escudo.toString());
+	            	break;
+	            }
+	            case "Arco": {
+	            	Arco arco = (Arco) item;
+	            	modeloLista.addElement(arco.toString());
+	            	break;
+	            }
+	            case "Carcaj": {
+	            	Carcaj carcaj = (Carcaj) item;
+	            	modeloLista.addElement(carcaj.toString());
+	            	break;
+	            }
+	            case "Poción de Salud": {
+	            	PocionSalud pocionSalud = (PocionSalud) item;
+	            	modeloLista.addElement(pocionSalud.toString());
+	            	break;
+	            }
+            }
+        }
+        return modeloLista;
+    }
+}
