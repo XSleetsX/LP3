@@ -1,0 +1,40 @@
+public class Espada extends Item{
+    private int ataque;
+    private boolean equipado;
+
+    public Espada(int tier) {
+        super("Espada", "Tier 0. Ataque alto y Alcance bajo.", tier);
+        this.equipado = false;
+        switch(tier) {
+	    	case 0: {
+	    		this.ataque = 45;
+	            break;
+	    	}
+	    	case 1: {
+	    		this.ataque = 60;
+	            break;
+	    	}
+	    	case 2: {
+	    		this.ataque = 75;
+	            break;
+	    	}
+	    	case 3: {
+	    		this.ataque = 90;
+	            break;
+	    	}
+	    }
+    }
+
+    public int getAtaque() { return ataque; }
+    public boolean estaEquipado() { return equipado; }
+    
+    public void equipar() { this.equipado = true; }
+    public void desequipar() { this.equipado = false; }
+    
+    @Override
+    public String toString() {
+    	return "Id: " + id_item + " || Nombre: " + nombre + " || Cantidad: " + cantidad + 
+    			" || Descripción: " + descripcion + " || Tier: " + tier + 
+    			" || Ataque: " + ataque + " || Equipado: " + equipado;
+    }
+}
