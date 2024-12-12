@@ -1,0 +1,108 @@
+public class CombateControlador {
+	private Personaje personaje;
+	private Inventario inventario;
+	private Enemigo enemigo;
+    private CombateModelo modelo;
+    private CombateVista vista;
+
+    public CombateControlador(Personaje personaje, Enemigo enemigo, CombateModelo modelo, CombateVista vista) {
+    	this.personaje = personaje;
+    	this.inventario = personaje.getInventario();
+    	this.enemigo = enemigo;
+        this.modelo = modelo;
+        this.vista = vista;
+    }
+    
+    public void atacarEnemigo() {
+        modelo.atacarEnemigo(personaje, enemigo);
+        terminarCombate();
+        vista.actualizarVidaEnemigo(enemigo);
+        vista.actualizarPanelInformacion("Atacaste al enemigo: " + personaje.getAtaque() + " daño.");
+    }
+    public boolean usarHabilidad() {
+    	switch(personaje.getNombre()) {
+	    	case "Caballero": {
+	    		Caballero caballero = (Caballero) personaje;
+	    		if (caballero.getEscudo() != null && caballero.getEscudo().estaEquipado()) {
+	                if (caballero.getMana() >= caballero.getEscudo().getCosto()) {
+	                	caballero.usarEscudo();
+	                	modelo.usarEscudo(caballero, enemigo);
+	                	vista.actualizarManaPersonaje(caballero);
+	                	vista.actualizarPanelInformacion("Usaste el escudo. Enemigo aturdido.");
+	                	return true;
+	                } else {
+	                    vista.mostrarMensaje("No tienes suficiente maná para usar el escudo.");
+	                    return false;
+	                }
+	            } else {
+	            	vista.mostrarMensaje("No tienes un escudo equipado.");
+	            	return false;
+	            }	
+	    	}
+	    	case "Arquero": {
+	    		Arquero arquero = (Arquero) personaje;
+	    		if (arquero.getCarcaj() != null && arquero.getCarcaj().estaEquipado()) {
+	                if (arquero.getMana() >= arquero.getCarcaj().getCosto()) {
+	                	arquero.usarCarcaj();
+	                	modelo.usarCarcaj(arquero, enemigo);
+	                	vista.actualizarManaPersonaje(arquero);
+	                	vista.actualizarVidaEnemigo(enemigo);
+	                	vista.actualizarPanelInformacion("Usaste el carcaj. El enemigo recibió un gran daño.");
+	                	return true;
+	                } else {
+	                    vista.mostrarMensaje("No tienes suficiente maná para usar el carcaj.");
+	                    return false;
+	                }
+	            } else {
+	            	vista.mostrarMensaje("No tienes un carcaj equipado.");
+	            	return false;
+	            }	
+	    	}
+    	}
+    	return false;
+    }
+    
+    public Item usarItem(int id_item) {
+    	Item item = null;
+        item = inventario.buscarItem(id_item);
+        inventario.usarItem(personaje, item);    
+        return item; 
+    }
+    
+    public Item borrarItem(int id_item) {
+    	Item item = null;
+        item = inventario.buscarItem(id_item);
+        inventario.borrarItem(personaje, item);
+        System.out.println(item);
+        return item; 
+    }
+    
+    public void nuevoTurno() {
+    	accionEnemigo();
+    	modelo.nuevoTurno(personaje, enemigo);
+    	vista.actualizarTurno(personaje);
+    }
+    public void accionEnemigo() {
+    	if(enemigo.estaAturdido() == false) {
+    		int decisionEnemigo = modelo.accionEnemigo(personaje, enemigo);
+    		terminarCombate();
+    		if(decisionEnemigo == 1) {
+    			vista.actualizarVidaPersonaje(personaje);
+    			vista.actualizarPanelInformacion(enemigo.getNombre() + " ataca: " + enemigo.getAtaque() + " daño.");
+    		} if(decisionEnemigo == 2) {
+    			vista.actualizarVidaEnemigo(enemigo);
+    			vista.actualizarPanelInformacion(enemigo.getNombre() + " se cura: 50 vida.");
+    		}
+    	} else {
+    		vista.actualizarPanelInformacion("Enemigo aturdido. No ataca este TURNO.");
+    	}
+    }
+    public void terminarCombate() {
+    	if(personaje.getVida() <= 0) {
+    		vista.terminarCombate("PERDISTE :(\nBuen intento. Recuerda que puedes utilizar pociones de curación para curarte.");
+    	}
+    	if(enemigo.getVida() <= 0) {
+    		vista.terminarCombate("GANASTE :D\nBuen trabajo. Ahora intentalo con otros personajes.");
+    	}
+    }
+}
