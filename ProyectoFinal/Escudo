@@ -1,0 +1,46 @@
+public class Escudo extends Item{
+    private int ataque;
+    private int costo;
+    private boolean equipado;
+
+    public Escudo(int tier) {
+        super("Escudo", "Aturde al enemigo por 1 turno. Costo: 75 maná", tier);
+        this.equipado = false;
+        switch(tier) {
+	    	case 0: {
+	            this.ataque = 60;
+	            this.costo = 75;
+	            break;
+	    	}
+	    	case 1: {
+	            this.ataque = 65;
+	            this.costo = 75;
+	            break;
+	    	}
+	    	case 2: {
+	            this.ataque = 70;
+	            this.costo = 100;
+	            break;
+	    	}
+	    	case 3: {
+	            this.ataque = 75;
+	            this.costo = 125;
+	            break;
+	    	}
+	    }
+    }
+
+    public int getAtaque() { return ataque; }
+    public int getCosto() { return costo; }
+    public boolean estaEquipado() { return equipado; }
+    
+    public void equipar() { this.equipado = true; }
+    public void desequipar() { this.equipado = false; }
+    
+    @Override
+    public String toString() {
+    	return "Id: " + id_item + " || Nombre: " + nombre + " || Cantidad: " + cantidad + 
+    			" || Descripción: " + descripcion + " || Tier: " + tier + 
+    			" || Ataque: " + ataque + " || Costo: " + costo + " || Equipado: " + equipado;
+    }
+}
